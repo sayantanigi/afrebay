@@ -8,6 +8,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 .text-success {display: none;}
 .text-danger {display: none;}
 .text-error {display: none;}
+#forgotpass_message {text-align: center; margin-top: 10px;}
 </style>
 <section class="overlape">
     <div class="block no-padding">
@@ -101,9 +102,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                 <div class="Forgot_Modal_Header">
                     <img src="https://cdn-icons-png.flaticon.com/512/6357/6357042.png">
                     <h3>Forgot Password</h3>
-                    <span class="text-success f-20">Please check your email !</span>
-                    <span class="text-danger f-20">Invalid Email ID !</span>
-                    <span class="text-error f-20">Invalid Email ID !</span>
+                    <span class="text-success f-20">Message has been sent to your email id. Please check your inbox/spam folder for reset password link!</span>
+                    <span class="text-danger f-20">Message could not be sent. Please try again later.</span>
+                    <span class="text-error f-20">Email ID you have entered is not registered. Please register youself.</span>
                 </div>
                 <form action="" method="post">
                     <div class="row m-0">
@@ -137,23 +138,28 @@ function forgotPass() {
         method:"POST",
         data:{email: email},
         success:function(data) {
-            alert(data);
-            // if (data == 'pass'){
-            //     $('.text-success').show();
-            //     setTimeout(function () {
-            //         $('.text-success').hide();
-            //     }, 2500);
-            // } else if (data == 'fail') {
-            //     $('.text-danger').show();
-            //     setTimeout(function () {
-            //         $('.text-danger').hide();
-            //     }, 2500);
-            // } else {
-            //     $('.text-error').show();
-            //     setTimeout(function () {
-            //         $('.text-error').hide();
-            //     }, 2500);
-            // }
+            //alert(data);
+            if (data == '1'){
+                $('.text-success').show();
+                setTimeout(function () {
+                    $('.text-success').hide();
+                }, 2500);
+            } else if (data == '2') {
+                $('.text-error').show();
+                setTimeout(function () {
+                    $('.text-error').hide();
+                }, 2500);
+            } else if (data == '3') {
+                $('.text-danger').show();
+                setTimeout(function () {
+                    $('.text-danger').hide();
+                }, 2500);
+            } else {
+                $('.text-danger').show();
+                setTimeout(function () {
+                    $('.text-danger').hide();
+                }, 2500);
+            }
         }
 
     })

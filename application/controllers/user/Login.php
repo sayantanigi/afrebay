@@ -296,16 +296,15 @@ class Login extends CI_Controller {
 					$mail->Username   = "no-reply@goigi.com";
 					$mail->Password   = "wj8jeml3eu0z";
 					$mail->send();
-					// echo 'Message has been sent';
+					echo $msg = '1';
 				} catch (Exception $e) {
-					$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+					//$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+					echo $msg = '2';
 				}
-				$msg = 'pass';
          	} else {
-   				$msg = 'fail';
+   				echo $msg = '3';
    			}
 		}
-
 	}
 
 
