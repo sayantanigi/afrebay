@@ -18254,6 +18254,13 @@ footer .bottom-line span {
    text-align: left !important;
 }
 
+.Worker_Detail .worker_cand-single-user .can-detail-s .cst img {
+   width: 175px !important;
+   height: 175px !important;
+   border-radius: 50% !important;
+   object-fit: cover !important;
+}
+
 .Worker_Detail .worker_cand-single-user .can-detail-s .cst {
    border: 0 !important;
    margin: 0 !important;
@@ -19277,3 +19284,10 @@ footer .social {
 }
 
 /********************* Login Dashboard Page *********************/
+
+.Employees_Search_List .Employees_Search_Result .emply-resume-list .emply-resume-thumb img {
+   width: 100px !important;
+   height: 100px !important;
+   border-radius: 50% !important;
+   object-fit: cover !important;
+}
