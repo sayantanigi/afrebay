@@ -258,31 +258,53 @@ class Login extends CI_Controller {
 					'email'=>$get_email->email
 				);
 				$htmlContent = $this->load->view('email_template/forgot_password',$data,TRUE);
-				$config = array(
-					'protocol' => 'ssmtp',
-					'smtp_host' => 'ssl://ssmtp.googlemail.com',
-					'smtp_port' => 587,
-					'smtp_user' => 'mediaadgroup',
-					'smtp_pass' => 'Kade2000',
-					'smtp_crypto' => 'security',
-					'mailtype' => 'html',
-					'smtp_timeout' => '4',
-					'charset' => 'iso-8859-1',
-					'wordwrap' => TRUE
-				);
-				$this->email->initialize($config);
-				$this->email->from('info@afrebay.pro','AFREBAY PRO');
-				$this->email->to($get_email->email);
-				$this->email->subject('Forgot Password Confirmation message from AFREBAY PRO');
-				$this->email->message($htmlContent);
-				$this->email->send();
-				print_r($this->email->send());
-				//$msg = 'pass';
+				// $config = array(
+				// 	'protocol' => 'ssmtp',
+				// 	'smtp_host' => 'ssl://ssmtp.googlemail.com',
+				// 	'smtp_port' => 587,
+				// 	'smtp_user' => 'mediaadgroup',
+				// 	'smtp_pass' => 'Kade2000',
+				// 	'smtp_crypto' => 'security',
+				// 	'mailtype' => 'html',
+				// 	'smtp_timeout' => '4',
+				// 	'charset' => 'iso-8859-1',
+				// 	'wordwrap' => TRUE
+				// );
+				// $this->email->initialize($config);
+				// $this->email->from('info@afrebay.pro','AFREBAY PRO');
+				// $this->email->to($get_email->email);
+				// $this->email->subject('Forgot Password Confirmation message from AFREBAY PRO');
+				// $this->email->message($htmlContent);
+				// $this->email->send();
+				// print_r($this->email->send());
+				require 'vendor/autoload.php';
+				$mail = new PHPMailer(true);
+				try {
+					//Server settings
+					$mail->CharSet = 'UTF-8';
+					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+					$mail->AddAddress($_POST['email']);
+					$mail->IsHTML(true);
+					$mail->Subject = "Forgot Password Confirmation message from AFREBAY";
+					$mail->Body = $htmlContent;
+					//Send email via SMTP
+					$mail->IsSMTP();
+					$mail->SMTPAuth   = true;
+					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					$mail->Host       = "smtp.gmail.com";
+					$mail->Port       = 587; //587 465
+					$mail->Username   = "no-reply@goigi.com";
+					$mail->Password   = "wj8jeml3eu0z";
+					$mail->send();
+					// echo 'Message has been sent';
+				} catch (Exception $e) {
+					$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				}
+				$msg = 'pass';
          	} else {
-   				//$msg = 'fail';
+   				$msg = 'fail';
    			}
-			//echo
-      	}
+		}
 
 	}
 

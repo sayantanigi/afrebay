@@ -22,20 +22,20 @@
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
                             <h3>Forgot Password</h3>
-                            
+
                             <span class="text-success f-20"><?=$this->session->flashdata('success');  ?></span>
                             <span class="text-danger f-20"><?=$this->session->flashdata('error');  ?></span>
                             <form action="<?= base_url('user/login/send_forget_password')?>" method="post">
-                               
+
                                 <div class="error text-left">Email</div>
                                 <div class="cfield">
                                     <input type="email" placeholder="Registered Email Id" name="email" id="forget_email" required/>
                                     <i class="la la-user"></i>
                                 </div>
-                                
+
                                 <button type="submit">Submit</button>
                             </form>
-                           
+
                         </div>
                     </div>
                     <!-- LOGIN POPUP -->
@@ -46,4 +46,3 @@
 </section>
 
 
-            
