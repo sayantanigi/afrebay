@@ -23,9 +23,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 <section>
     <div class="container Product-Details-Page">
         <div class="row">
-            <div class="col-lg-12 column">
+            <div class="col-lg-12 col-md-12 col-sm-12 column">
                 <div class="row Product-Block">
-                    <div class="col-lg-4 column Product-Img">
+                    <div class="col-lg-4 col-md-12 col-sm-12 column Product-Img">
                         <div class="Product-Img-Container">
                             <div class="imgSlides">
                                 <img src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651" style="width:100%">
@@ -70,7 +70,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 column Product-Data">
+                    <div class="col-lg-4 col-md-12 col-sm-12 column Product-Data">
                         <p><span>Test Product</span></p>
                         <p><span>Vendor:</span><span>Jeff's test vendor</span></p>
                         <p><span>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</span></p>

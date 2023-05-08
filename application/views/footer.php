@@ -9,7 +9,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     <div class="blocknwe">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 column">
+                <div class="col-lg-3 col-md-6 col-sm-12 column">
                     <div class="widget">
                         <div class="about_widget">
                             <div class="logo">
@@ -23,7 +23,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 column">
+                <div class="col-lg-3 col-md-6 col-sm-12 column">
                     <div class="widget">
                         <h3 class="footer-title">Quick Links</h3>
                         <div class="link_widgets">
@@ -37,7 +37,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 column">
+                <div class="col-lg-3 col-md-6 col-sm-12 column">
                     <div class="widget">
                         <h3 class="footer-title">Support Link</h3>
                         <div class="link_widgets">
@@ -52,7 +52,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 column">
+                <div class="col-lg-3 col-md-6 col-sm-12 column">
                     <div class="about_widget">
                         <h3 class="footer-title">Contact Us</h3>
                         <span><?= $get_setting->address?></span>

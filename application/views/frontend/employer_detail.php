@@ -28,7 +28,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     <div class="job-single-sec style3">
                         <div class="job-head-wide">
                             <div class="row">
-                                <div class="col-lg-10">
+                                <div class="col-lg-10 col-md-12 col-sm-12">
                                     <div class="job-single-head3 emplye">
                                         <div class="job-thumb">
                                             <?php if (@$userdata->profilePic && file_exists('uploads/users/'.@$userdata->profilePic)) { ?>
@@ -59,7 +59,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <!-- Job Head -->
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-2 col-md-12 col-sm-12">
                                     <div class="share-bar">
                                         <!--<a href="javascript:void(0)" title="" class="share-google"><i class="la la-google"></i></a><a href="javascript:void(0)" title="" class="share-fb"><i class="fa fa-facebook"></i></a>-->
                                         <!--<a href="javascript:void(0)" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>-->
@@ -83,7 +83,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                         </div>
                         <div class="job-wide-devider">
                             <div class="row">
-                                <div class="col-lg-8 column">
+                                <div class="col-lg-8 col-md-12 col-sm-12 column">
                                     <div class="job-details">
                                         <h3>About Business Network</h3>
                                         <p><?= @$userdata->short_bio;?></p>
@@ -122,7 +122,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 column">
+                                <div class="col-lg-4 col-md-12 col-sm-12 column">
                                     <div class="job-overview">
                                         <h3>Company Information</h3>
                                         <ul>
@@ -158,11 +158,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 column">
+                                <div class="col-lg-12 col-md-12 col-sm-12 column">
                                     <div class="Product_Details">
                                         <h3 class="mt-5 mb-5">Products</h3>
                                         <div class="row">
-                                            <div class="col-lg-4 column">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="Product">
                                                     <div class="Product_Img">
                                                         <img src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651">
@@ -176,7 +176,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 column">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="Product">
                                                     <div class="Product_Img">
                                                         <img
@@ -191,7 +191,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 column">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="Product">
                                                     <div class="Product_Img">
                                                         <img src="https://queue-it.com/media/ppcp1twv/product-drop.jpg">

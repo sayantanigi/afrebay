@@ -49,7 +49,7 @@
                     <!-- <div class="cand-single-user"> -->
                     <div class="worker_cand-single-user">
                         <div class="row m-0">
-                            <div class="col-lg-2 col-md-12 col-sm-12">
+                            <div class="col-lg-2 col-md-4 col-sm-12">
                                 <div class="can-detail-s">
                                     <div class="cst">
                                         <?php if(!empty($user_detail->profilePic)&& file_exists('uploads/users/'.@$user_detail->profilePic)){?>
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 Worker_Head_Text">
+                            <div class="col-lg-6 col-md-4 col-sm-12 Worker_Head_Text">
                                 <div class="Worker_Head_Text_Data">
                                     <h3><?php if(!empty($user_detail->firstname)){ echo $user_detail->firstname.' '.$user_detail->lastname;} else { echo $user_detail->username; }?>
                                     </h3>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-12 col-sm-12 Worker_Head_Social">
+                            <div class="col-lg-4 col-md-4 col-sm-12 Worker_Head_Social">
                                 <div class="Worker_Head_Social_Data">
                                     <div class="share-bar circle">
                                         <a href="javascript:void(0)" title="" class="share-google">

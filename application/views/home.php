@@ -75,7 +75,7 @@
                                 $desc=$row->description;
                             }
                             ?>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="my-blog" onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
                                     <div class="blog-details">
                                         <h3 class="resk">
@@ -123,7 +123,7 @@
                                     $shortbio=$user->short_bio;
                                 }
                                 ?>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-thumbak">
                                         <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
@@ -215,7 +215,7 @@
                                         $description=$item->description;
                                     }
                                 ?>
-                            <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="p-category">
                                     <a href="javascript:void(0)" title="">
                                         <i class="<?= $item->icon?>"></i>
@@ -275,7 +275,7 @@
                                 $description=$post->description;
                             }
                             ?>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-details">
                                         <h3><?= ucfirst($post->post_title)?> </h3>
@@ -349,7 +349,7 @@
                                 $desc=$career->description;
                             }
                             ?>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-thumb">
                                         <a href="<?= base_url('career-tip/'.base64_encode($career->id))?>" title="">
