@@ -76,7 +76,7 @@ function btn_register() {
 			if(returndata.result==1) {
 				$('#register-messages').append("Registration Successfull !");
 				setTimeout(function () {
-                 	window.location.href=base_url+'login';
+                 	window.location.href=base_url+'register';
              	}, 2500);
 			}
 			if(returndata.result=='0') {

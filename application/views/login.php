@@ -37,8 +37,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at
                                         lobortis
                                         ullamcorper</span>
-                                    <!-- <span class="text-success f-15"><?=$this->session->flashdata('success');  ?></span>
-                                    <span class="text-danger f-15"><?=$this->session->flashdata('error');  ?></span> -->
+                                    <span class="text-success f-15"><?=$this->session->flashdata('success');  ?></span>
+                                    <span class="text-danger f-15"><?=$this->session->flashdata('error');  ?></span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">
                                     <form action="<?=base_url(); ?>validate" method="post">
