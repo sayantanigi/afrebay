@@ -76,10 +76,10 @@
                             }
                             ?>
                             <div class="col-lg-4">
-                                <div class="my-blog">
+                                <div class="my-blog" onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
                                     <div class="blog-details">
                                         <h3 class="resk">
-                                            <a href="<?= base_url('postdetail/'.base64_encode($row->id))?>" title=""><?= ucfirst($row->post_title)?></a>
+                                            <a title=""><?= ucfirst($row->post_title)?></a>
                                         </h3>
                                         <h3 class="nkash"><a href="javascript:void(0)" title="">Description</a></h3>
                                         <p><?= ucfirst($desc)?></p>
