@@ -72,6 +72,7 @@ function btn_register() {
 		data: {user_type:user_type,username:username,email:email,password:password,service:service,mobile:mobile},
 		dataType:'json',
 		success:function(returndata) {
+			//console.log(returndata);
 			if(returndata.result==1) {
 				$('#register-messages').append("Registration Successfull !");
 				setTimeout(function () {

@@ -53,6 +53,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['register'] = "home/signup";
+$route['email-verification/(:any)'] = "user/login/emailVerification/$1";
 $route['login'] = "home/login_page";
 $route['forgot-password'] = "user/login/forgot_password";
 $route['new-password/(:any)'] = "user/login/new_password/$1";

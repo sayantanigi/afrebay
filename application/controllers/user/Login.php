@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Login extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
@@ -26,7 +30,7 @@ class Login extends CI_Controller {
 				'serviceType' => implode(", ", $_POST['service']),
 				'password' => md5($_POST['password']),
 				'created'=>date('Y-m-d H:i:s'),
-				'status'=>1
+				'status'=>0
 			);
 			// if($this->Mymodel->insert('users',$data)) {
 			// 	$email=$_POST['email'];
@@ -61,7 +65,7 @@ class Login extends CI_Controller {
 			$insert_id = $this->db->insert_id();
 			if(!empty($insert_id)) {
 				$subject = 'Verify Your Email Address From Afrebay';
-				$activationURL = base_url() . "email-verification/" . urlencode(base64_encode($otp));
+				$activationURL = base_url() . "email-verification/" . urlencode(base64_encode($insert_id));
 				$imagePath = base_url() . 'assets/images/logo.png';
 				$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'>
 				<tbody>
@@ -86,7 +90,7 @@ class Login extends CI_Controller {
 				</tr>
 				<tr>
 				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'>
-				Thank you for registration on <strong style='font-weight:bold;'>ConceptToCreation</strong>.
+				Thank you for registration on <strong style='font-weight:bold;'>Afrebay</strong>.
 				</td>
 				</tr>
 				</tbody>
@@ -118,7 +122,7 @@ class Login extends CI_Controller {
 				</tr>
 				<tr>
 				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'>
-				Email: " . $email . "<br/>
+				Email: " . $_POST['email'] . "<br/>
 				</td>
 				</tr>
 				<tr>
@@ -136,7 +140,7 @@ class Login extends CI_Controller {
 				</tr>
 				<tr>
 				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>
-				Team ConceptToCreation
+				Team Afrebay
 				</td>
 				</tr>
 				</tbody>
@@ -145,12 +149,13 @@ class Login extends CI_Controller {
 				</tr>
 				</tbody>
 				</table>";
+				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
 					//Server settings
 					$mail->CharSet = 'UTF-8';
-					$mail->SetFrom('no-reply@goigi.com', 'Localfood-joints');
-					$mail->AddAddress($email);
+					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+					$mail->AddAddress($_POST['email']);
 					$mail->IsHTML(true);
 					$mail->Subject = $subject;
 					$mail->Body = $message;
@@ -168,12 +173,48 @@ class Login extends CI_Controller {
 					$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
 				}
 				//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
-				echo $msg = '1';
+				$data=array('result'=>1,'data'=>1);
 			} else {
-				echo $msg = '2';
+				$data=array('result'=>2,'data'=>2);
 			}
 		}
-		echo $msg;
+		echo json_encode($data); exit;
+    }
+
+    public function emailVerification($otp=null) {
+		if(empty($otp)) {
+			$this->session->set_flashdata('error', 'You have not permission to access this page!');
+			redirect(base_url('register'), 'refresh');
+		}
+        // $otp = $this->uri->segment(3);
+        $givenotp = base64_decode(urldecode($otp));
+        $sql = "SELECT * FROM `users` WHERE userId = '".$givenotp."' AND status = '0' AND `email_verified` = '0'";
+        $check = $this->db->query($sql)->num_rows();
+        $data = array(
+            'title' => 'Account Activation',
+        );
+        if ($check > 0) {
+            $usr = $this->db->query($sql)->row();
+            // $field_data = array(
+            //     'email_verified' => '1',
+            //     'status' => '1'
+            // );
+            // $where = array(
+            //     'id'=>$usr->id
+            // );
+            $result = $this->db->query("UPDATE `users` SET `email_verified` = 1, `status` = 1 where `userId` = $usr->userId");
+            if ($result) {
+                $this->session->set_flashdata('success', 'Your Email Address is successfully verified! Your account has been activated successfully. You can now login.');
+                // $this->load->view('email-activation', $data);
+				redirect(base_url('login'), 'refresh');
+            } else {
+                $this->session->set_flashdata('error', 'Sorry! There is error verifying your Email Address!');
+                redirect(base_url('login'), 'refresh');
+            }
+        } else {
+            $this->session->set_flashdata('error', 'Sorry! Activation link is expired!');
+            redirect(base_url('login'), 'refresh');
+        }
     }
 
 	public function validate_user($pId = null) {
