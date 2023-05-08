@@ -19181,14 +19181,78 @@ footer .social {
 
 .showsticky,
 .hidesticky {
-    width: 258px;
-    height: auto;
-    background-repeat: no-repeat;
-    object-fit: cover;
+   width: 258px;
+   height: auto;
+   background-repeat: no-repeat;
+   object-fit: cover;
 }
 
 .Header_Menu_Nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
+
+/********************* Login Dashboard Page *********************/
+
+.dashboardhak .dashboardhak .breadcrumb-title {
+   font-size: 25px !important;
+}
+
+.dashboard-gig {
+   padding: 15px 0 !important;
+}
+
+.dashboard-gig .display-table .display-table-row {
+   box-shadow: 0 0 10px #dbdbdb;
+}
+
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align {
+   padding-right: 0 !important;
+}
+
+.dashboard-gig .display-table .hidden-xs.display-table-cell .navi ul {
+   margin-bottom: 0 !important;
+}
+
+.dashboard-gig .display-table .hidden-xs.display-table-cell .navi ul li a {
+   border-left: 5px solid #f67a49 !important;
+}
+
+.dashboard-gig .display-table .hidden-xs.display-table-cell .navi ul li a i {
+   color: #f67a49 !important;
+}
+
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak #frame {
+   width: 100% !important;
+   min-width: 100% !important;
+   max-width: 100% !important;
+}
+
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak .aksek .post-job-btn,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Work_Btn,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Education_Btn {
+   background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
+   border: 0 !important;
+}
+
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak .aksek .post-job-btn:hover,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Work_Btn:hover,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Education_Btn:hover {
+   background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+}
+
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak #profile div {
+   display: flex;
+   align-items: center;
+}
+
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak #profile div p {
+   margin-bottom: 0 !important;
+}
+
+.User_Chng_Pass .cardak .form-group input {
+   padding: 10px !important;
+}
+
+/********************* Login Dashboard Page *********************/
