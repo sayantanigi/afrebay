@@ -14,14 +14,14 @@ function btn_register() {
 		$("#user_type").focus();
 		return false;
 	}
-	
+
 	if(username=='') {
 		$('#err_username').fadeIn().html('Please enter username').css('color','red');
 		setTimeout(function(){$("#err_username").html("&nbsp;");},3000);
 		$("#username").focus();
 		return false;
 	}
-	
+
 	if(password=='') {
 		$('#err_password').fadeIn().html('Please enter password').css('color','red');
 		setTimeout(function(){$("#err_password").html("&nbsp;");},3000);
@@ -54,7 +54,7 @@ function btn_register() {
 		$("#service").focus();
 		return false;
 	}
-	
+
 	if(mobile=='') {
 		$('#err_mobile').fadeIn().html('Please enter mobile').css('color','red');
 		setTimeout(function(){$("#err_mobile").html("&nbsp;");},3000);
@@ -73,7 +73,10 @@ function btn_register() {
 		dataType:'json',
 		success:function(returndata) {
 			if(returndata.result==1) {
-				window.location.href=base_url+'login';
+				$('#register-messages').append("Registration Successfull !");
+				setTimeout(function () {
+                 	window.location.href=base_url+'login';
+             	}, 2500);
 			}
 			if(returndata.result=='0') {
 				if(returndata.data=='phone') {
@@ -90,7 +93,7 @@ function btn_register() {
 				}
 			}
 			if(returndata.result==2) {
-				//window.location.href=base_url+'register';
+				window.location.href=base_url+'register';
 			}
 		}
 	});

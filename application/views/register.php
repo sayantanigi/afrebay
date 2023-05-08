@@ -1,9 +1,12 @@
-<?php 
+<?php
 if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)) {
     $banner_img=base_url("uploads/banner/".$get_banner->image);
 } else {
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
+<style>
+#register-messages {text-align: center; margin-top: 10px;}
+</style>
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"
@@ -47,8 +50,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">User Name</label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="User Name" name="username"
-                                                            id="username" onkeypress="only_alphabets(event)" />
+                                                        <input type="text" placeholder="User Name" name="username" id="username" onkeypress="only_alphabets(event)" />
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
@@ -58,8 +60,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Password</label>
                                                     <div class="cfield_Input">
-                                                        <input type="password" placeholder="********" name="password"
-                                                            id="password" />
+                                                        <input type="password" placeholder="********" name="password" id="password" />
                                                         <i class="la la-key"></i>
                                                     </div>
                                                 </div>
@@ -69,8 +70,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield">
                                                     <label for="" class="form-label">Email</label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="Email" name="email"
-                                                            id="email" />
+                                                        <input type="text" placeholder="Email" name="email" id="email" />
                                                         <i class="la la-envelope-o"></i>
                                                     </div>
                                                 </div>
@@ -80,9 +80,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield">
                                                     <label for="" class="form-label">Phone Number</label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="Phone Number" name="mobile"
-                                                            maxlength="10" id="mobile"
-                                                            onkeypress="only_number(event)" />
+                                                        <input type="text" placeholder="Phone Number" name="mobile" maxlength="10" id="mobile" onkeypress="only_number(event)" />
                                                         <i class="la la-phone"></i>
                                                     </div>
                                                 </div>
@@ -96,9 +94,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                             <select name="service" class="chosen" id="service" multiple>
                                                                 <option value="">Please Select Specialization</option>
                                                                 <?php if(!empty($get_category)){
-                                        foreach ($get_category as $key) {?>
-                                                                <option value="<?= $key->id?>"><?= $key->category_name?>
-                                                                </option>
+                                                                foreach ($get_category as $key) {?>
+                                                                <option value="<?= $key->id?>"><?= $key->category_name?></option>
                                                                 <?php  } } ?>
                                                             </select>
                                                         </div>
@@ -109,17 +106,15 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignUp_Btn">
                                                 <input type="hidden" name="user_type" id="user_type">
-                                                <button type="button" class="btn btn-info"
-                                                    onclick="return btn_register();">Signup</button>
+                                                <button type="button" class="btn btn-info" onclick="return btn_register();">Signup</button>
                                             </div>
+                                            <div id="register-messages"></div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="extra-login">
                                                     <span>OR</span>
                                                     <div class="login-social">
-                                                        <a class="fb-login" href="#" title=""><i
-                                                                class="fa fa-facebook"></i></a>
-                                                        <a class="tw-login" href="#" title=""><i
-                                                                class="fa fa-twitter"></i></a>
+                                                        <a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
+                                                        <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +124,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             </div>
                         </div>
                     </div>
-                    <!-- SIGNUP POPUP -->
                 </div>
             </div>
         </div>
