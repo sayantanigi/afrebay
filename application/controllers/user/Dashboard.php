@@ -111,7 +111,7 @@ class Dashboard extends CI_Controller
 			} else {
 				$video  = '';
 			}
-
+			
 		}
 
 		if ($_FILES['resume']['name'] != '') {
@@ -131,7 +131,7 @@ class Dashboard extends CI_Controller
 			} else {
 				$resume  = '';
 			}
-
+			
 		}
 		$data = array(
 			'firstname' => $_POST['firstname'],
@@ -343,16 +343,20 @@ class Dashboard extends CI_Controller
 	}
 
 	////////////////////////////////// start chat functionality////////////////
-	function chat() {
+	function chat()
+	{
 		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='" . $_SESSION['afrebay']['userId'] . "'");
+
 		$cond = "job_bid.bidding_status='Accept'";
 		$data['get_jobbid'] = $this->Users_model->get_jobbidding($cond);
+
 		$this->load->view('header');
 		$this->load->view('user_dashboard/chat', $data);
 		$this->load->view('footer');
 	}
 
-	function showmessage_list() {
+	function showmessage_list()
+	{
 		$user_id = $this->input->post('user_id');
 		$get_data = $this->Users_model->getChat();
 		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
@@ -366,7 +370,17 @@ class Dashboard extends CI_Controller
 		} else {
 			$userpic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 		}
-		$html_data = '<div class="contact-profile">'. $userpic.'<p>'.ucfirst($name).'</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
+
+		$html_data = '<div class="contact-profile">
+                            ' . $userpic . '
+                                   <p>' . ucfirst($name) . '</p>
+                                    <div class="social-media">
+                                      <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                                       <a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
+                                          <a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                                            </div>
+                                            </div><div class="messages">
+                                               <ul>';
 		if (!empty($get_data)) {
 			foreach ($get_data as $key) {
 				if (@$key->profilePic && file_exists('uploads/profile/' . @$key->profilePic)) {
@@ -380,19 +394,27 @@ class Dashboard extends CI_Controller
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
 				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id']) {
-					$sent = '<li class="sent">'.$from_pic.'<p>'.$key->message.'</p></li>';
+					$sent = '<li class="sent">
+                                    ' . $from_pic . '
+                                     <p>' . $key->message . '</p>
+                                         </li>';
 				} else {
 					$sent = '';
 				}
 				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id']) {
-					$reply = '<li class="replies">'.$to_pic.'<p>'.$key->message.'</p></li>';
+					$reply = '<li class="replies">
+                                ' . $to_pic . '
+                                  <p>' . $key->message . '</p>
+                                    </li>';
 				} else {
 					$reply = '';
 				}
 				$html_data .= $sent . $reply;
 			}
 		} else {
-			$html_data .= '<li class="sent"><center>No Messages</center></li>';
+			$html_data .= '<li class="sent">
+                                    <center>No Messages</center>
+                                          </li>';
 		}
 
 		echo json_encode($html_data);

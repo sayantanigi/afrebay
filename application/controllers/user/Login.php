@@ -28,37 +28,152 @@ class Login extends CI_Controller {
 				'created'=>date('Y-m-d H:i:s'),
 				'status'=>1
 			);
-			if($this->Mymodel->insert('users',$data)) {
-				$email=$_POST['email'];
-			    $this->load->library('email');
-				$data=array('email'=>$email,'password'=>$_POST['password']);
-				$htmlContent = $this->load->view('email_template/signup',$data,TRUE);
-				$config = array(
-					'protocol' => 'ssmtp',
-					'smtp_host' => 'ssl://ssmtp.googlemail.com',
-					'smtp_port' => 587,
-					'smtp_user' => 'mediaadgroup',
-					'smtp_pass' => 'Kade2000',
-					'smtp_crypto' => 'security',
-					'mailtype' => 'html',
-					'smtp_timeout' => '4',
-					'charset' => 'iso-8859-1',
-					'wordwrap' => TRUE
-				);
-				$this->email->initialize($config);
-				$this->email->from('info@afrebay.pro','AFREBAY PRO');
-				$this->email->to($email);
-				$this->email->subject('Registration Confirmation message from AFREBAY PRO');
-				$this->email->message($htmlContent);
-				$this->email->send();
-				$this->session->set_flashdata('success', 'Registration Successfull !');
-				$data=array('result'=>1,'data'=>1);
+			// if($this->Mymodel->insert('users',$data)) {
+			// 	$email=$_POST['email'];
+			//     $this->load->library('email');
+			// 	$data=array('email'=>$email,'password'=>$_POST['password']);
+			// 	$htmlContent = $this->load->view('email_template/signup',$data,TRUE);
+			// 	$config = array(
+			// 		'protocol' => 'ssmtp',
+			// 		'smtp_host' => 'ssl://ssmtp.googlemail.com',
+			// 		'smtp_port' => 587,
+			// 		'smtp_user' => 'mediaadgroup',
+			// 		'smtp_pass' => 'Kade2000',
+			// 		'smtp_crypto' => 'security',
+			// 		'mailtype' => 'html',
+			// 		'smtp_timeout' => '4',
+			// 		'charset' => 'iso-8859-1',
+			// 		'wordwrap' => TRUE
+			// 	);
+			// 	$this->email->initialize($config);
+			// 	$this->email->from('info@afrebay.pro','AFREBAY PRO');
+			// 	$this->email->to($email);
+			// 	$this->email->subject('Registration Confirmation message from AFREBAY PRO');
+			// 	$this->email->message($htmlContent);
+			// 	$this->email->send();
+			// 	$this->session->set_flashdata('success', 'Registration Successfull !');
+			// 	$data=array('result'=>1,'data'=>1);
+			// } else {
+			// 	$this->session->set_flashdata('error', 'Failed to Register !');
+			// 	$data=array('result'=>2,'data'=>2);
+			// }
+			$result = $this->Mymodel->insert('users',$data);
+			$insert_id = $this->db->insert_id();
+			if(!empty($insert_id)) {
+				$subject = 'Verify Your Email Address From Afrebay';
+				$activationURL = base_url() . "email-verification/" . urlencode(base64_encode($otp));
+				$imagePath = base_url() . 'assets/images/logo.png';
+				$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'>
+				<tbody>
+				<tr>
+				<td align='center'>
+				<table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'>
+				<tbody>
+				<tr>
+				<td height='35'></td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'><img src='" . $imagePath . "'/></td>
+				</tr>
+				<tr>
+				<td height='35'></td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello ".$_POST['username'].",</td>
+				</tr>
+				<tr>
+				<td height='10'></td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'>
+				Thank you for registration on <strong style='font-weight:bold;'>ConceptToCreation</strong>.
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</td>
+				</tr>
+				<tr>
+				<td align='center'>
+				<table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'>
+				<tbody>
+				<tr>
+				<td height='10'></td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'>
+				Please click on the below activation link to verify your email address.
+				</td>
+				</tr>
+				<tr>
+				<td height='10'></td>
+				</tr>
+				<tr>
+				<td align='left' style='text-align:center;padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'>
+				<a href=" . $activationURL . " target='_blank' style='background:#232323;color:#fff;padding:10px;text-decoration:none;line-height:24px;'>click here</a>
+				</td>
+				</tr>
+				<tr>
+				<td height='10'></td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'>
+				Email: " . $email . "<br/>
+				</td>
+				</tr>
+				<tr>
+				<td height='30'></td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:16px; color:#232323; line-height:24px; font-weight: 700;'>
+				Thank you!
+				</td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>
+				Sincerely
+				</td>
+				</tr>
+				<tr>
+				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>
+				Team ConceptToCreation
+				</td>
+				</tr>
+				</tbody>
+				</table>
+				</td>
+				</tr>
+				</tbody>
+				</table>";
+				$mail = new PHPMailer(true);
+				try {
+					//Server settings
+					$mail->CharSet = 'UTF-8';
+					$mail->SetFrom('no-reply@goigi.com', 'Localfood-joints');
+					$mail->AddAddress($email);
+					$mail->IsHTML(true);
+					$mail->Subject = $subject;
+					$mail->Body = $message;
+					//Send email via SMTP
+					$mail->IsSMTP();
+					$mail->SMTPAuth   = true;
+					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					$mail->Host       = "smtp.gmail.com";
+					$mail->Port       = 587; //587 465
+					$mail->Username   = "no-reply@goigi.com";
+					$mail->Password   = "wj8jeml3eu0z";
+					$mail->send();
+					// echo 'Message has been sent';
+				} catch (Exception $e) {
+					$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				}
+				//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
+				echo $msg = '1';
 			} else {
-				$this->session->set_flashdata('error', 'Failed to Register !');
-				$data=array('result'=>2,'data'=>2);
+				echo $msg = '2';
 			}
 		}
-		echo json_encode($data); exit;
+		echo $msg;
     }
 
 	public function validate_user($pId = null) {
