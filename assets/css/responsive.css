@@ -1716,6 +1716,13 @@
     .Product-Details-Page .Product-Img-Container .Slider-All-Img .column {
         margin-top: 0 !important;
     }
+
+    .Worker_Detail .worker_cand-single-user .can-detail-s .cst img {
+        width: 175px !important;
+        height: 175px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+     }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1015px) {
@@ -1773,4 +1780,11 @@
     .Product-Details-Page .Product-Img-Container .Slider-All-Img .column {
         margin-top: 0 !important;
     }
+
+    .Worker_Detail .worker_cand-single-user .can-detail-s .cst img {
+        width: 175px !important;
+        height: 175px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+     }
 }
