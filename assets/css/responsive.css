@@ -1722,7 +1722,14 @@
         height: 175px !important;
         border-radius: 50% !important;
         object-fit: cover !important;
-     }
+    }
+
+    .Employees_Search_List .Employees_Search_Result .emply-resume-list .emply-resume-thumb img {
+        width: 100px !important;
+        height: 100px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+    }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1015px) {
@@ -1786,5 +1793,12 @@
         height: 175px !important;
         border-radius: 50% !important;
         object-fit: cover !important;
-     }
+    }
+
+    .Employees_Search_List .Employees_Search_Result .emply-resume-list .emply-resume-thumb img {
+        width: 100px !important;
+        height: 100px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+    }
 }
