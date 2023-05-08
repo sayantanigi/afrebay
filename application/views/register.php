@@ -44,6 +44,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <div class="error" id="err_usertype"></div>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignUp_Right">
+                                    <div id="register-messages" class="text-success f-20"></div>
                                     <form action="#" method="post">
                                         <div class="row m-0">
                                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -108,7 +109,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <input type="hidden" name="user_type" id="user_type">
                                                 <button type="button" class="btn btn-info" onclick="return btn_register();">Signup</button>
                                             </div>
-                                            <div id="register-messages"></div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="extra-login">
                                                     <span>OR</span>
