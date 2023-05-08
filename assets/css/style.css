@@ -19231,14 +19231,18 @@ footer .social {
 
 .dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak .aksek .post-job-btn,
 .dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Work_Btn,
-.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Education_Btn {
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Education_Btn,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align #calendar .fc-header-toolbar .fc-center .btn,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align #calendar .fc-header-toolbar .fc-right .btn {
    background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
    border: 0 !important;
 }
 
 .dashboard-gig .display-table .display-table-row .display-table-cell.v-align .cardak .aksek .post-job-btn:hover,
 .dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Work_Btn:hover,
-.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Education_Btn:hover {
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align .Education_Btn:hover,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align #calendar .fc-header-toolbar .fc-center .btn:hover,
+.dashboard-gig .display-table .display-table-row .display-table-cell.v-align #calendar .fc-header-toolbar .fc-right .btn:hover {
    background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
 }
 
@@ -19253,6 +19257,23 @@ footer .social {
 
 .User_Chng_Pass .cardak .form-group input {
    padding: 10px !important;
+}
+
+.Admin_Profile .profile-dsd label {
+   margin-bottom: 15px !important;
+}
+
+.Admin_Profile .profile-dsd input {
+   padding: 10px !important;
+   height: auto !important;
+}
+
+.Admin_Profile .profile-dsd select {
+   height: 44px !important;
+}
+
+.Admin_Profile .profile-dsd .bootstrap-tagsinput {
+   width: 100% !important;
 }
 
 /********************* Login Dashboard Page *********************/
