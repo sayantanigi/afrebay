@@ -19,6 +19,9 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/css/bootstrap-datepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+
     <script src="<?=base_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/rating_css.css" />
     <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>

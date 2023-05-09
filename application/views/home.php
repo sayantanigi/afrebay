@@ -57,7 +57,7 @@
 </section>
 
 <section>
-    <div class="block">
+    <div class="block Opp_Block">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -78,9 +78,15 @@
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="my-blog" onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
                                     <div class="blog-details">
-                                        <h3 class="resk">
-                                            <a title=""><?= ucfirst($row->post_title)?></a>
-                                        </h3>
+                                        <div class="Blog-Emp-Details">
+                                            <div class="Blog-Emp-Img">
+                                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=688&amp;q=80">
+                                            </div>
+                                            <div class="Blog-Emp-Data">
+                                                <p><?= ucfirst($row->post_title)?></p>
+                                                <p>By Adrain Balistreri</p>
+                                            </div>
+                                        </div>
                                         <h3 class="nkash"><a href="javascript:void(0)" title="">Description</a></h3>
                                         <p><?= ucfirst($desc)?></p>
 
@@ -123,7 +129,7 @@
                                     $shortbio=$user->short_bio;
                                 }
                                 ?>
-                            <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-thumbak">
                                         <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
