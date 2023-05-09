@@ -19294,3 +19294,15 @@ footer .social {
    border-radius: 50% !important;
    object-fit: cover !important;
 }
+
+/********************* Header Menu Selection *********************/
+
+.menu-sec nav>ul>li>a {
+   padding: 5px 25px !important;
+}
+
+.menu-sec nav > ul > li > ul li:hover > a {
+   color: #f4794f !important;
+}
+
+/********************* Header Menu Selection *********************/
