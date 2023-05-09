@@ -54,10 +54,10 @@ class Usermodel extends My_Model {
 			$msg = "Invalid Email.";
 
 		} else {
-			
+
 			$sql = "SELECT u.*, r.referBy FROM users AS u JOIN referal AS r ON r.referTo = u.userId WHERE $where";
 			$user = $this->get_by('users', true, $where);
-			
+
 			if (password_verify($password, @$user->password) == 0) {
 
 				$msg = "Invalid Password";
