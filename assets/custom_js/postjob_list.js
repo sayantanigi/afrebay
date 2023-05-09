@@ -11,6 +11,7 @@ function getsubcategory(val) {
         beforeSend:function(){},
         success:function(returndata) {
             // console.log(returndata); return false;
+            $('.sub_cat').show();
             $('#subcategory_list').html(returndata);
         }
     });

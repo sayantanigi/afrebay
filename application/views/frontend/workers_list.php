@@ -39,19 +39,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Last Activity</h3>
-                                <div class="specialism_widget">
-                                    <div class="simple-checkbox">
-                                        <p><input type="radio" name="days" id="22"  onclick="filter_job()" value="one"/><label for="22">Last Hour</label></p>
-                                        <p><input type="radio" name="days" id="23" onclick="filter_job()" value="1"/><label for="23">Last 24 hours</label></p>
-                                        <p><input type="radio" name="days" id="24" onclick="filter_job()" value="7"/><label for="24">Last 7 days</label></p>
-                                        <p><input type="radio" name="days" id="25" onclick="filter_job()" value="14"/><label for="25">Last 14 days</label></p>
-                                        <p><input type="radio" name="days" id="26" onclick="filter_job()" value="30"/><label for="26">Last 30 days</label></p>
-                                        <p><input type="radio" name="days" id="27" onclick="filter_job()" value="All"/><label for="27">All</label></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="widget">
                                 <h3 class="sb-title open">Category</h3>
                                 <div class="specialism_widget">
                                     <select class="chosen" name="category_id" id="category_id" onchange="getsubcategory(this.value);filter_job();">
@@ -62,14 +49,24 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </select>
                                 </div>
                             </div>
-                             <div class="widget">
-                                <h3 class="sb-title open">Subcategory</h3>
+                            <div class="widget">
+                                <h3 class="sb-title open sub_cat">Subcategory</h3>
                                 <div class="specialism_widget" >
                                     <div class="simple-checkbox scrollbar" >
-                                <div id="subcategory_list">
-
+                                        <div id="subcategory_list"></div>
+                                    </div>
                                 </div>
-
+                            </div>
+                            <div class="widget">
+                                <h3 class="sb-title open">Last Activity</h3>
+                                <div class="specialism_widget">
+                                    <div class="simple-checkbox">
+                                        <p><input type="radio" name="days" id="22"  onclick="filter_job()" value="one"/><label for="22">Last Hour</label></p>
+                                        <p><input type="radio" name="days" id="23" onclick="filter_job()" value="1"/><label for="23">Last 24 hours</label></p>
+                                        <p><input type="radio" name="days" id="24" onclick="filter_job()" value="7"/><label for="24">Last 7 days</label></p>
+                                        <p><input type="radio" name="days" id="25" onclick="filter_job()" value="14"/><label for="25">Last 14 days</label></p>
+                                        <p><input type="radio" name="days" id="26" onclick="filter_job()" value="30"/><label for="26">Last 30 days</label></p>
+                                        <p><input type="radio" name="days" id="27" onclick="filter_job()" value="All"/><label for="27">All</label></p>
                                     </div>
                                 </div>
                             </div>

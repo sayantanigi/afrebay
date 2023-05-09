@@ -34,19 +34,6 @@
                                     </div>
                                 </div>
                                 <div class="widget">
-                                    <h3 class="sb-title open">Last Activity</h3>
-                                    <div class="specialism_widget">
-                                        <div class="simple-checkbox">
-                                            <p><input type="checkbox" name="smplechk" id="22" /><label for="22">Last Hour</label></p>
-                                            <p><input type="checkbox" name="smplechk" id="23" /><label for="23">Last 24 hours</label></p>
-                                            <p><input type="checkbox" name="smplechk" id="24" /><label for="24">Last 7 days</label></p>
-                                            <p><input type="checkbox" name="smplechk" id="25" /><label for="25">Last 14 days</label></p>
-                                            <p><input type="checkbox" name="smplechk" id="26" /><label for="26">Last 30 days</label></p>
-                                            <p><input type="checkbox" name="smplechk" id="27" /><label for="27">All</label></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget">
                                     <h3 class="sb-title open">Specialism</h3>
                                     <div class="specialism_widget">
                                         <div class="simple-checkbox scrollbar">
@@ -107,6 +94,19 @@
                                             <p><input type="checkbox" name="smplechk" id="13" /><label for="13">Male</label></p>
                                             <p><input type="checkbox" name="smplechk" id="14" /><label for="14">Female</label></p>
                                             <p><input type="checkbox" name="smplechk" id="15" /><label for="15">Others</label></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget">
+                                    <h3 class="sb-title open">Last Activity</h3>
+                                    <div class="specialism_widget">
+                                        <div class="simple-checkbox">
+                                            <p><input type="checkbox" name="smplechk" id="22" /><label for="22">Last Hour</label></p>
+                                            <p><input type="checkbox" name="smplechk" id="23" /><label for="23">Last 24 hours</label></p>
+                                            <p><input type="checkbox" name="smplechk" id="24" /><label for="24">Last 7 days</label></p>
+                                            <p><input type="checkbox" name="smplechk" id="25" /><label for="25">Last 14 days</label></p>
+                                            <p><input type="checkbox" name="smplechk" id="26" /><label for="26">Last 30 days</label></p>
+                                            <p><input type="checkbox" name="smplechk" id="27" /><label for="27">All</label></p>
                                         </div>
                                     </div>
                                 </div>
