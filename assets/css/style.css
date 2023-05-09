@@ -16943,6 +16943,10 @@ footer .bottom-line span {
 
 .Employer_Details .job-thumb #profile-img {
    border: none;
+   width: 180px !important;
+   height: 180px !important;
+   border-radius: 50% !important;
+   object-fit: cover;
 }
 
 .Employer_Details .job-single-info3>span i,
@@ -17424,8 +17428,9 @@ footer .bottom-line span {
 .Worker-Block .blog-sec .my-blog .blog-details p {
    margin-bottom: 10px !important;
    float: inherit !important;
-   text-align: left;
+   text-align: justify;
    line-height: 20px;
+   margin-top: 10px;
 }
 
 /********************* Post details page *********************/
@@ -19210,11 +19215,7 @@ footer .social {
 }
 
 .dashboard-gig {
-   padding: 15px 0 !important;
-}
-
-.dashboard-gig .display-table .display-table-row {
-   box-shadow: 0 0 10px #dbdbdb;
+   padding: 35px 0 !important;
 }
 
 .dashboard-gig .display-table .display-table-row .display-table-cell.v-align {
