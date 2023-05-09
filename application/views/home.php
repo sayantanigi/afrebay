@@ -253,49 +253,6 @@
     </div>
 </section>
 
-<!-- <section>
-    <div class="block">
-        <div data-velocity="-.1" style="background: url('<?=base_url(); ?>assets/images/resource/parallax3.jpg') 50% -62.7px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <div class="container Job">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="heading">
-                        <h2>Hire the best freelancers for any job</h2>
-                        <span>Found by employers communicate directly with hiring managers and recruiters.</span>
-                    </div>
-                    <div class="blog-sec">
-                        <div class="row">
-                            <?php //if(!empty($get_freelancerspost)){
-                            //foreach($get_freelancerspost as $post){
-                            //if(strlen($post->description)>200) {
-                                //$description=substr($post->description,0,200).'...';
-                            //} else {
-                                //$description=$post->description;
-                            //}
-                            ?>
-                            <div class="col-lg-3 col-md-6 col-sm-12">
-                                <div class="my-blog">
-                                    <div class="blog-details">
-                                        <h3><?= ucfirst($post->post_title)?> </h3>
-                                        <p><?= $description?></p>
-                                        <a href="<?= base_url('postdetail/'.base64_encode($post->id))?>" title=""><span>View Details</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php// } }?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="browse-all-cat">
-                        <a href="<?= base_url('ourjobs')?>" title="">View More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
 <section>
     <div class="block">
         <div class="container">
