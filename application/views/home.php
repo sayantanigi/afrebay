@@ -42,7 +42,7 @@
                                 </form>
                                 <div class="or-browser">
                                     <span>Browse job offers by</span>
-                                    <a href="javascript:void(0)" title="">Category</a>
+                                    <a href="<?php echo base_url('ourjobs')?>" title="">All Category</a>
                                 </div>
                             </div>
                         </div>
