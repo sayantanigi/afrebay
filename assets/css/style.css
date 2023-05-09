@@ -18687,6 +18687,9 @@ footer .bottom-line span {
 
 .List_Of_Emp .emply-resume-sec .emply-resume-list .emply-resume-thumb img {
    border-radius: 50% !important;
+   width: 100px !important;
+   height: 100px !important;
+   object-fit: cover !important;
 }
 
 .List_Of_Emp .emply-resume-sec .emply-resume-list .emply-resume-info {
