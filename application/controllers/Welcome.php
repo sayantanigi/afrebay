@@ -36,9 +36,11 @@ class Welcome extends CI_Controller {
         $search_location = $this->input->post('search_location');
         if(isset($category_id)&& !empty($category_id) || isset($title)&& !empty($title)|| isset($days)&& !empty($days)||isset($subcategory_id)&& !empty($subcategory_id)|| isset($location)&& !empty($location)|| isset($search_title)&& !empty($search_title) || isset($search_location)&& !empty($search_location)) {
             $total_count=$this->post_job_model->subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location);
+			//print_r($total_count);
         } else {
-            $get_product=$this->Crud_model->GetData('postjob','',"subcategory_id='".$post_id."' and is_delete='0'");
+			$get_product=$this->Crud_model->GetData('postjob','',"subcategory_id='".$post_id."' and is_delete='0'");
             $total_count=count($get_product);
+			//print_r($get_product);
         }
 
         $this->load->library('pagination');
@@ -67,13 +69,18 @@ class Welcome extends CI_Controller {
         $config['num_links'] = 3;
         $this->pagination->initialize($config);
         $page = $this->uri->segment(3);
-        $start = ($page - 1) * $config['per_page'];
+		if (!empty($page)){
+			$start = ($page - 1) * $config['per_page'];
+		} else {
+			$start = '0';
+		}
+
         if(isset($category_id) || isset($title)|| isset($days)||isset($subcategory_id)|| isset($location)|| isset($search_title)|| isset($search_location)) {
-            $getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location);
-            //print_r($this->db->last_query()); exit;
+			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location);
         } else {
             $getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location);
         }
+
         $output = array(
             'pagination_link'  => $this->pagination->create_links(),
             'postlist'   =>$getdata,

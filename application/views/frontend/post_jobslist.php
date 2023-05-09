@@ -23,60 +23,58 @@
 </section>
 
 <section>
-    <div class="block no-padding Our_Jobs Employees_Search_List">
+    <!-- <div class="block no-padding Our_Jobs Employees_Search_List"> -->
+    <div class="block no-padding Employees_Search_List">
         <div class="container">
             <div class="row no-gape">
                 <aside class="col-lg-3 column border-right Employees_Search_Panel">
                     <div class="Employees_Search_Panel_Data">
                         <form method="post" id="filter_form">
-                    <div class="widget">
-                        <div class="search_widget_job">
-                            <div class="field_w_search">
-                                <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords"  onkeydown="filter_job();"  value="" />
-                                <i class="la la-search"></i>
+                            <div class="widget">
+                                <div class="search_widget_job">
+                                    <div class="field_w_search">
+                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords" value="" />
+                                        <i class="la la-search"></i>
+                                    </div>
+                                    <div class="field_w_search">
+                                        <input type="text" name="search_location" id="location" placeholder="All Locations" oninput="getsourceaddress()" value="" />
+                                        <i class="la la-map-marker"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="field_w_search">
-                                <input type="text" name="search_location" id="location" placeholder="All Locations" onchange="filter_job();" value="" autocomplete="off"/>
-                                <i class="la la-map-marker"></i>
+                            <div class="widget">
+                                <h3 class="sb-title open">Last Activity</h3>
+                                <div class="specialism_widget">
+                                    <div class="simple-checkbox">
+                                        <p><input type="radio" name="days" id="22"  onclick="filter_job()" value="one"/><label for="22">Last Hour</label></p>
+                                        <p><input type="radio" name="days" id="23" onclick="filter_job()" value="1"/><label for="23">Last 24 hours</label></p>
+                                        <p><input type="radio" name="days" id="24" onclick="filter_job()" value="7"/><label for="24">Last 7 days</label></p>
+                                        <p><input type="radio" name="days" id="25" onclick="filter_job()" value="14"/><label for="25">Last 14 days</label></p>
+                                        <p><input type="radio" name="days" id="26" onclick="filter_job()" value="30"/><label for="26">Last 30 days</label></p>
+                                        <p><input type="radio" name="days" id="27" onclick="filter_job()" value="All"/><label for="27">All</label></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="widget">
-                        <h3 class="sb-title open">Last Activity</h3>
-                        <div class="specialism_widget">
-                            <div class="simple-checkbox">
-                                <p><input type="radio" name="days" id="22"  onclick="filter_job()" value="one"/><label for="22">Last Hour</label></p>
-                                <p><input type="radio" name="days" id="23" onclick="filter_job()" value="1"/><label for="23">Last 24 hours</label></p>
-                                <p><input type="radio" name="days" id="24" onclick="filter_job()" value="7"/><label for="24">Last 7 days</label></p>
-                                <p><input type="radio" name="days" id="25" onclick="filter_job()" value="14"/><label for="25">Last 14 days</label></p>
-                                <p><input type="radio" name="days" id="26" onclick="filter_job()" value="30"/><label for="26">Last 30 days</label></p>
-                                <p><input type="radio" name="days" id="27" onclick="filter_job()" value="All"/><label for="27">All</label></p>
+                            <div class="widget">
+                                <h3 class="sb-title open">Category</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen" name="category_id" id="category_id" onchange="getsubcategory(this.value);filter_job();">
+                                        <option value="">Select Category</option>
+                                        <?php if(!empty($getcategory)){ foreach($getcategory as $item){?>
+                                        <option value="<?= $item->id ?>"><?= ucfirst($item->category_name)?></option>
+                                        <?php } }?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="widget">
-                        <h3 class="sb-title open">Category</h3>
-                        <div class="specialism_widget">
-                            <select class="chosen" name="category_id" id="category_id" onchange="getsubcategory(this.value);filter_job();">
-                                <option value="">Select Category</option>
-                                <?php if(!empty($getcategory)){ foreach($getcategory as $item){?>
-                                <option value="<?= $item->id ?>"><?= ucfirst($item->category_name)?></option>
-                                <?php } }?>
-                            </select>
-                        </div>
-                    </div>
-                     <div class="widget">
-                        <h3 class="sb-title open">Subcategory</h3>
-                        <div class="specialism_widget" >
-                            <div class="simple-checkbox scrollbar" >
-                        <div id="subcategory_list">
-
-                        </div>
-
+                            <div class="widget">
+                                <h3 class="sb-title open">Subcategory</h3>
+                                <div class="specialism_widget" >
+                                    <div class="simple-checkbox scrollbar" >
+                                        <div id="subcategory_list"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </form>
+                        </form>
                     </div>
                 </aside>
                 <div class="col-lg-9 column Employees_Search_Result">
@@ -94,57 +92,110 @@
 </section>
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
+    filter_data(1);
 
-        filter_data(1);
-        //alert('hii'); return false;
-        function filter_data(page) {
-            var base_url = $("#base_url").val();
-            var displayProduct = 5;
-            $('#post_list').html(createSkeleton(displayProduct));
-
-            function createSkeleton(limit) {
-                var skeletonHTML = '';
-                for (var i = 0; i < limit; i++) {
-                    skeletonHTML += '<div class="ph-item">';
-                    skeletonHTML += '<div class="ph-col-4">';
-                    skeletonHTML += '<div class="ph-picture"></div>';
-                    skeletonHTML += '</div>';
-                    skeletonHTML += '<div>';
-                    skeletonHTML += '<div class="ph-row">';
-                    skeletonHTML += '<div class="ph-col-12 big"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '</div>';
-                    skeletonHTML += '</div>';
-                    skeletonHTML += '</div>';
-                }
-                return skeletonHTML;
+    function filter_data(page) {
+        var base_url = $("#base_url").val();
+        var displayProduct = 5;
+        $('#post_list').html(createSkeleton(displayProduct));
+        function createSkeleton(limit) {
+            var skeletonHTML = '';
+            for (var i = 0; i < limit; i++) {
+                skeletonHTML += '<div class="ph-item">';
+                skeletonHTML += '<div class="ph-col-4">';
+                skeletonHTML += '<div class="ph-picture"></div>';
+                skeletonHTML += '</div>';
+                skeletonHTML += '<div>';
+                skeletonHTML += '<div class="ph-row">';
+                skeletonHTML += '<div class="ph-col-12 big"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '</div>';
+                skeletonHTML += '</div>';
+                skeletonHTML += '</div>';
             }
-            var action = 'fetch_data';
-            $.ajax({
-                url: base_url + "home/ourjob_fetchdata/" + page,
-                method: "POST",
-                dataType: "JSON",
-                data: {
-                    action: action
-                },
-                success: function (data) {
-                    $('#post_list').html(data.product_list);
-                    $('#pagination_link').html(data.pagination_link);
-                }
-            })
+            return skeletonHTML;
         }
+        var action = 'fetch_data';
+        var title_keyword = $('#title_keyword').val();
+        var category_id = $('#category_id').val();
+        var subcategory_id = get_filter('storage');
 
+        var days = $('input:radio[name=days]:checked').val();
 
-        $(document).on('click', '.pagination li a', function (event) {
-            event.preventDefault();
-            var page = $(this).data('ci-pagination-page');
-            filter_data(page);
+        var post_id = $('#post_id').val();
+        var location = $('#location').val();
+        var search_title = $('#search_title').val();
+        var search_location = $('#search_location').val();
+        $.ajax({
+            url: base_url + "welcome/fetch_data/" + page,
+            method: "POST",
+            dataType: "JSON",
+            data: {
+                action: action,
+                title_keyword: title_keyword,
+                category_id: category_id,
+                post_id: post_id,
+                subcategory_id: subcategory_id,
+                days: days,
+                location: location,
+                search_title: search_title,
+                search_location: search_location
+            },
+            success: function (data) {
+                $('#title_keyword').val(data.keyword);
+                $('#location').val(data.keyword_location);
+                $('#post_list').html(data.postlist);
+                $('#pagination_link').html(data.pagination_link);
+            }
+        })
+    }
+
+    function get_filter(class_name) {
+        var filter = [];
+        $('.' + class_name + ':checked').each(function () {
+            filter.push($(this).val());
         });
+        return filter;
+    }
 
-
+    $(document).on('click', '.pagination li a', function (event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        filter_data(page);
     });
+
+    $('.common_selector').click(function () {
+        filter_data(1);
+    });
+
+    $('#title_keyword').keydown(function () {
+        filter_data(1);
+    });
+
+    $('#location').on('change', function () {
+        filter_data(1);
+    });
+
+    $('input:radio').click(function () {
+        filter_data(1);
+    });
+
+    $('#category_id').on('change', function () {
+        filter_data(1);
+    });
+});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="<?= base_url('assets/custom_js/postjob_list.js')?>"></script>
+
+<script>
+    function MoreDetailsTxt(id) {
+    //$(".MoreTxt_"+id).toggle();
+    $(".MoreDetailsTxt_"+id).toggleClass('MoreDetailsTxtShow');
+}
 </script>

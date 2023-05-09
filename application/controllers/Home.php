@@ -96,6 +96,7 @@ class Home extends MY_Controller {
 	}
 
 	function our_jobs() {
+		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='7'");
 		$this->load->view('header');
 		$this->load->view('frontend/post_jobslist', $data);

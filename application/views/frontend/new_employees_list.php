@@ -34,17 +34,13 @@ $postid=base64_decode($subcategory_id);
                             <div class="widget">
                                 <div class="search_widget_job">
                                     <div class="field_w_search">
-                                        <input type="text" id="title_keyword" name="title_keyword"
-                                            placeholder="Search Keywords" value="" />
+                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords" value="" />
                                         <i class="la la-search"></i>
                                     </div>
-                                    <!-- Search Widget -->
                                     <div class="field_w_search">
-                                        <input type="text" name="search_location" id="location"
-                                            placeholder="All Locations" oninput="getsourceaddress()" value="" />
+                                        <input type="text" name="search_location" id="location" placeholder="All Locations" oninput="getsourceaddress()" value="" />
                                         <i class="la la-map-marker"></i>
                                     </div>
-                                    <!-- Search Widget -->
                                 </div>
                             </div>
                             <div class="widget">
@@ -115,6 +111,7 @@ $postid=base64_decode($subcategory_id);
 <script>
 $(document).ready(function () {
     filter_data(1);
+
     function filter_data(page) {
         var base_url = $("#base_url").val();
         var displayProduct = 5;
@@ -189,7 +186,6 @@ $(document).ready(function () {
     });
 
     $('.common_selector').click(function () {
-
         filter_data(1);
     });
 
@@ -202,7 +198,6 @@ $(document).ready(function () {
     });
 
     $('input:radio').click(function () {
-
         filter_data(1);
     });
 
