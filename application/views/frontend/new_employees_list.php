@@ -246,7 +246,7 @@
 
 <script>
     function MoreDetailsTxt(id) {
-    //$(".MoreTxt_"+id).toggle(); 
+    //$(".MoreTxt_"+id).toggle();
     $(".MoreDetailsTxt_"+id).toggleClass('MoreDetailsTxtShow');
 }
 </script>

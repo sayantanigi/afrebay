@@ -63,7 +63,7 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label>Footer About</label>
-															<textarea placeholder="Footer About" name="fabout" class="form-control" style="resize:none;" rows="4" cols="4" required><?php if(!empty($row->fabout)) { echo $row->fabout;} ?></textarea>
+															<textarea placeholder="Footer About" name="fabout" class="form-control" style="resize:none;" rows="4" cols="4"><?php if(!empty($row->fabout)) { echo $row->fabout;} ?></textarea>
 														</div>
 													</div>
 													<div class="col-md-4">

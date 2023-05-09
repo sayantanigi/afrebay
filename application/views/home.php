@@ -253,10 +253,9 @@
     </div>
 </section>
 
-<section>
+<!-- <section>
     <div class="block">
         <div data-velocity="-.1" style="background: url('<?=base_url(); ?>assets/images/resource/parallax3.jpg') 50% -62.7px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container Job">
             <div class="row">
                 <div class="col-lg-12">
@@ -264,16 +263,15 @@
                         <h2>Hire the best freelancers for any job</h2>
                         <span>Found by employers communicate directly with hiring managers and recruiters.</span>
                     </div>
-                    <!-- Heading -->
                     <div class="blog-sec">
                         <div class="row">
-                            <?php if(!empty($get_freelancerspost)){
-                            foreach($get_freelancerspost as $post){
-                            if(strlen($post->description)>200) {
-                                $description=substr($post->description,0,200).'...';
-                            } else {
-                                $description=$post->description;
-                            }
+                            <?php //if(!empty($get_freelancerspost)){
+                            //foreach($get_freelancerspost as $post){
+                            //if(strlen($post->description)>200) {
+                                //$description=substr($post->description,0,200).'...';
+                            //} else {
+                                //$description=$post->description;
+                            //}
                             ?>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="my-blog">
@@ -284,7 +282,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php } }?>
+                            <?php// } }?>
                         </div>
                     </div>
                 </div>
@@ -296,7 +294,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section>
     <div class="block">
