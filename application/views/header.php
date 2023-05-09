@@ -121,6 +121,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                         <a href="<?=base_url(); ?>" title="">
                             <img class="hidesticky" src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" />
                             <img class="showsticky" src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" />
+                            <input type="hidden" class="hidden-logo" value="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>">
                         </a>
                     </div>
                     <nav>

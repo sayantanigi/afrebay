@@ -214,10 +214,10 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 Form_Btn">
                                                 <?php if(!empty($_SESSION['afrebay']['userId'])&& $_SESSION['afrebay']['userType']==2){?>
-                                                <button class="submit" class="btn btn-info">Submit</button>
-                                                <?php } else{?>
-                                                <button type="button" class="submit btn btn-info"
-                                                    style=" pointer-events:none;">Submit</button>
+                                                <button class="submit btn btn-info">Submit</button>
+                                                <?php } else {?>
+                                                <!-- <button type="button" class="submit btn btn-info" style=" pointer-events:none;">Submit</button> -->
+                                                <a href="<?php echo base_url('login')?>" class="submit btn btn-info" style=" pointer-events:none;">Submit</a>
                                                 <?php } ?>
                                             </div>
                                         </div>

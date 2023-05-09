@@ -118,6 +118,21 @@ if(!empty($_SESSION['afrebay']['userId'])){
         var sessionMessage = '<?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>';
         if(sessionMessage==null || sessionMessage=="" ){ return false;}
         $.notify(sessionMessage,{ position:"top right",className: 'success' });//session msg
+
+        var targetDiv =  $('.about_widget img').attr('src');
+        var targetDiv1 =  $('.hidden-logo').val();
+
+        $(window).scroll(function() {
+            var windowpos = $(window).scrollTop();
+            if( windowpos >= 50 ) {
+                $(".Header_Menu_Nav img").attr("src",targetDiv);
+                $(".Header_Menu_Nav img").attr("src",targetDiv);
+            } else {
+                $(".Header_Menu_Nav img").attr("src",targetDiv1);
+                $(".Header_Menu_Nav img").attr("src",targetDiv1);
+            }
+
+        });
     });
     setInterval(function () {
         $('#video_modal').modal('show');
