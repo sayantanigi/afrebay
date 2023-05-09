@@ -1019,7 +1019,7 @@ label::after {
 .account-btns>li a i {
    font-size: 18px;
    float: left;
-   line-height: 25px;
+   /* line-height: 25px; */
    margin-right: 6px;
 }
 
@@ -1466,7 +1466,7 @@ label::after {
    font-family: Open Sans;
    font-size: 15px;
    font-weight: 400;
-   color: #d5d8f3;
+   color: #fff;
    text-align: center;
    margin-top: 10px;
 }
@@ -19297,11 +19297,7 @@ footer .social {
 
 /********************* Header Menu Selection *********************/
 
-.menu-sec nav>ul>li>a {
-   padding: 5px 25px !important;
-}
-
-.menu-sec nav > ul > li > ul li:hover > a {
+.menu-sec nav>ul>li>ul li:hover>a {
    color: #f4794f !important;
 }
 
@@ -19316,3 +19312,87 @@ footer .social {
 }
 
 /********************* Pagination *********************/
+
+/********************* Home Page Opp Block Section *********************/
+
+.Opp_Block .blog-details {
+   padding: 15px 25px !important;
+}
+
+.Opp_Block .blog-details .Blog-Emp-Details {
+   display: flex;
+   align-items: center;
+}
+
+.Opp_Block .blog-details .Blog-Emp-Details .Blog-Emp-Img {
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   width: 25%;
+}
+
+.Opp_Block .blog-details .Blog-Emp-Details .Blog-Emp-Img img {
+   width: 60px !important;
+   height: 60px !important;
+   object-fit: cover;
+   background-repeat: no-repeat;
+   border-radius: 50%;
+}
+
+.Opp_Block .blog-details .Blog-Emp-Details .Blog-Emp-Data {
+   width: 75%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   height: 60px !important;
+}
+
+.Opp_Block .blog-details .Blog-Emp-Details .Blog-Emp-Data p {
+   margin-bottom: 0 !important;
+   font-size: 20px;
+   font-weight: 600;
+   color: #f67a49 !important;
+   text-align: left;
+   text-transform: uppercase;
+}
+
+.Opp_Block .blog-details .Blog-Emp-Details .Blog-Emp-Data p:nth-last-child(1) {
+   text-align: left !important;
+   margin-bottom: 0 !important;
+   font-size: 13px;
+   color: #878787 !important;
+   font-weight: 100 !important;
+   text-transform: capitalize !important;
+}
+
+.Opp_Block .blog-details .nkash {
+   margin-top: 15px !important;
+   margin-bottom: 5px !important;
+   text-align: left !important;
+}
+
+.Opp_Block .blog-details .nkash a {
+   font-size: 13px !important;
+}
+
+.Opp_Block .blog-details p {
+   margin-bottom: 0px !important;
+   text-align: left !important;
+   word-break: break-all !important;
+}
+
+/********************* Home Page Opp Block Section *********************/
+
+/********************* Home Page Worker Block Section *********************/
+
+.Worker-Block .my-blog .blog-thumbak img {
+   object-fit: cover !important;
+   background-repeat: no-repeat;
+}
+
+.Worker-Block .my-blog .blog-details .nkash a {
+   width: 100% !important;
+}
+
+/********************* Home Page Worker Block Section *********************/
