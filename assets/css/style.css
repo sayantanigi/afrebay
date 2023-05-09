@@ -19306,3 +19306,13 @@ footer .social {
 }
 
 /********************* Header Menu Selection *********************/
+
+/********************* Pagination *********************/
+
+.pagination li.active a,
+.pagination li a:hover {
+   background-color: #f4794f !important;
+   border-color: #f4794f !important;
+}
+
+/********************* Pagination *********************/
