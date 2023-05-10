@@ -125,8 +125,51 @@ if(!empty($_SESSION['afrebay']['userId'])){
     async defer></script>
 <script type="text/javascript" src="<?= base_url('assets/custom_js/validation.js')?>"></script>
 <script src="<?= base_url();?>dist/assets/notify/notify.min.js"></script>
+<!-- multi Select option for worker list page-->
+<!-- Default Themes -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-dark-feather.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-dark.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-light-feather.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-light.min.css" />
+<!-- Modern Themes -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-dark-feather.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-dark.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-light-feather.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-light.min.css" />
+<!-- Bootstrap themes -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap4/tail.select-THEME-NAME.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap3/tail.select-THEME-NAME.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap2/tail.select-THEME-NAME.min.css" />
+<!-- Core JavaScript -->
+<script src="<?php echo base_url()?>assets/multi_select/js/tail.select.min.js"></script>
+<!-- Languages -->
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-de.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-es.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-fi.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-fr.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-it.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-no.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-pt_BR.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-ru.js"></script>
+<script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-tr.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        tail.select('select',{
+            startOpen: true,
+            multiple: true,
+            stayOpen: true,
+            multiPinSelected: true,
+            multiShowCount: false,
+            multiShowLimit: true,
+            multiContainer: true,
+            search: true,
+            searcgConfig: [
+                "text", "value"
+            ],
+            searchFocus: true,
+            searchMarked: true,
+            searchMinLength: 1,
+        });
         var sessionMessage = '<?php echo $this->session->userdata('
         message ') <> '
         ' ? $this->session->userdata('
