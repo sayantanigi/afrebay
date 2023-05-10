@@ -14222,6 +14222,7 @@ h2.job-bid {
 
 #frame #sidepanel #profile .wrap img {
    width: 50px;
+   height: 50px !important;
    border-radius: 50%;
    padding: 3px;
    border: 2px solid #e74c3c;
@@ -14601,7 +14602,8 @@ h2.job-bid {
 }
 
 #frame #sidepanel #contacts ul li.contact .wrap img {
-   width: 40px;
+   width: 45px;
+   height: 45px !important;
    border-radius: 50%;
    float: left;
    margin-right: 10px;
@@ -14746,7 +14748,8 @@ h2.job-bid {
 }
 
 #frame .content .contact-profile img {
-   width: 40px;
+   width: 45px;
+   height: 45px;
    border-radius: 50%;
    float: left;
    margin: 9px 12px 0 9px;
@@ -14829,7 +14832,8 @@ h2.job-bid {
 }
 
 #frame .content .messages ul li img {
-   width: 22px;
+   width: 40px;
+   height: 40px;
    border-radius: 50%;
    float: left;
 }

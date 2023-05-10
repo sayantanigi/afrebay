@@ -55,25 +55,16 @@ class Users_model extends My_Model {
         return $query->num_rows();
     }
 
-    function getChat()
-
-   {
-
-        $this->db->select('chat.*,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,to_user.username as to_username,CONCAT(to_user.firstname," ",to_user.lastname) as to_fullname,to_user.profilePic as to_profile');
-
-       $this->db->from('chat');
-
-       $this->db->join('users','users.userId=chat.userfrom_id');
-
-       $this->db->join('users to_user','to_user.userId=chat.userto_id');
-
-       //$this->db->where();
-
+    function getChat() {
+        //$this->db->select('chat.*,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,to_user.username as to_username,CONCAT(to_user.firstname," ",to_user.lastname) as to_fullname,to_user.profilePic as to_profile');
+        $this->db->select('chat.*,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,to_user.username as to_username,CONCAT(to_user.firstname," ",to_user.lastname) as to_fullname');
+        $this->db->from('chat');
+        $this->db->join('users','users.userId=chat.userfrom_id');
+        $this->db->join('users to_user','to_user.userId=chat.userto_id');
         $query = $this->db->get();
-
-       return $query->result();
-
-   }
+        //print_r($this->db->last_query());
+        return $query->result();
+    }
 
    function getmessage($con)
 

@@ -225,8 +225,16 @@
                                 <div class="p-category">
                                     <a href="javascript:void(0)" title="">
                                         <i class="<?= $item->icon?>"></i>
+                                        <?php if(!empty($get_category->category_name)) { ?>
                                         <span><?= ucfirst($get_category->category_name)?></span>
+                                        <?php } else { ?>
+                                        <span></span>
+                                        <?php } ?>
+                                        <?php if(!empty($description)) { ?>
                                         <p><?= ucfirst($description);?></p>
+                                        <?php } else { ?>
+                                        <p></p>
+                                        <?php } ?>
                                     </a>
                                 </div>
                             </div>

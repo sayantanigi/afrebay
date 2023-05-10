@@ -1,41 +1,41 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Commonmodel extends CI_Model 
+class Commonmodel extends CI_Model
 {
-	function __construct() 
-	{ 
-		parent::__construct(); 
+	function __construct()
+	{
+		parent::__construct();
 
 	}
 	public function add_details($tbl, $data)
 	{
 		$this->db->insert($tbl, $data);
 		$lastid = $this->db->insert_id();
-		
+
 		return $lastid;
 	}
 
-	/* 
-     * Insert file data into the database 
-     * @param array the data for inserting into the table 
-     */ 
-    public function insertBatch($tbl, $data = array()){ 
-        $insert = $this->db->insert_batch($tbl, $data); 
-        return $insert?true:false; 
-    } 
+	/*
+     * Insert file data into the database
+     * @param array the data for inserting into the table
+     */
+    public function insertBatch($tbl, $data = array()){
+        $insert = $this->db->insert_batch($tbl, $data);
+        return $insert?true:false;
+    }
 
 	public function fetch_all_join($query)
 	{
 		$query = $this->db->query($query);
-		return $query->result();   
+		return $query->result();
 
 	}
 
 	public function fetch_single_join($query)
 	{
 		$query = $this->db->query($query);
-		return $query->row();        
+		return $query->row();
 	}
 
 	public function fetch_row($tbl, $where)
@@ -46,7 +46,7 @@ class Commonmodel extends CI_Model
 		$query=$this->db->get($tbl);
 		return $query->row();
 
-	} 
+	}
 
 	public function fetch_all_rows($tbl, $where)
 	{
@@ -60,7 +60,7 @@ class Commonmodel extends CI_Model
 	public function delete_single_con($tbl, $where)
 	{
 		$this->db->where($where);
-		$delete = $this->db->delete($tbl); 
+		$delete = $this->db->delete($tbl);
 		return $delete;
 
 	}
@@ -76,17 +76,17 @@ class Commonmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->where($where);
-		$this->db->limit($limit, $offset); 
+		$this->db->limit($limit, $offset);
 		$query=$this->db->get($tbl);
 		return $query->result();
 
 	}
-	public function count_all($tbl, $where) 
+	public function count_all($tbl, $where)
 	{
 		$this->db->select('*');
 		$this->db->where($where);
 		return $this->db->count_all_results($tbl);
-	} 
+	}
 
 
 	public function getAll_where($table,$key, $value)
@@ -106,13 +106,13 @@ class Commonmodel extends CI_Model
 		$this->db->or_where('receiverId', $userId);
 		$query= $this->db->get();
 		return $query->result();
-	} 
+	}
 
 	public function getFriendlist($userId)
 	{
 		$this->db->select('*');
 		$this->db->from('users');
-		$this->db->where('userId!=', $userId);	
+		$this->db->where('userId!=', $userId);
 		$query= $this->db->get();
 		return $query->result();
 
@@ -121,7 +121,7 @@ class Commonmodel extends CI_Model
 	function make_query($userId, $keyword)
 	{
 		$query = "
-		SELECT * from users WHERE userId IN( SELECT senderId FROM friend_list WHERE receiverId='".$userId."' AND friendstatus=1 UNION SELECT receiverId FROM friend_list WHERE senderId='".$userId."' AND friendstatus=1) 
+		SELECT * from users WHERE userId IN( SELECT senderId FROM friend_list WHERE receiverId='".$userId."' AND friendstatus=1 UNION SELECT receiverId FROM friend_list WHERE senderId='".$userId."' AND friendstatus=1)
 		";
 
 		if(isset($keyword))
@@ -154,7 +154,7 @@ class Commonmodel extends CI_Model
   	}elseif ($sorting=='oldest') {
   		$query  .= "  ORDER BY userId ASC";
   	}
-  
+
   }
 
   $query .= ' LIMIT '.$start.', ' . $limit;
@@ -167,19 +167,19 @@ class Commonmodel extends CI_Model
    foreach($data->result() as $friend)
    {
 	   	if (@$friend->coverPic && file_exists('./uploads/users/'.@$friend->coverPic))
-	   	{ 
+	   	{
 	   		$coverPic = base_url().'uploads/users/'.@$friend->coverPic;
 
-	   	} else { 
+	   	} else {
 	   		$coverPic = base_url('uploads/no-photo.png');
 	   	}
 
 	   	if (@$friend->profilePic && file_exists('./uploads/users/'.@$friend->profilePic))
-	   	{ 
+	   	{
 	   		$profilePic = base_url().'uploads/users/'. @$friend->profilePic;
 	   	} else {
 	   		$profilePic = base_url('uploads/noimg.png');
-	   	} 
+	   	}
 	   	$countryInfo = $this->mymodel->get('countries', true, 'id', @$friend->country);
 
 	   	@$myfriends=$this->mymodel->friendlist($friend->userId);
@@ -190,7 +190,7 @@ class Commonmodel extends CI_Model
 	   	$output .= '<div class="col-lg-3 col-md-6 col-sm-6"><div class="friend-box frindscover">
 	   	<figure><img src="'.$coverPic.'" alt="" ><span>Followers: 1</span></figure>
 	   	<div class="frnd-meta">
-	   	<img src="'.$profilePic.'" style="width: 80px; height: 80px;" alt="">		
+	   	<img src="'.$profilePic.'" style="width: 80px; height: 80px;" alt="">
 	   	<div class="frnd-name">
 	   	<a href="'.base_url('profile/details/'.@$friend->link).'" title="">'.@$friend->name.'</a>
 	   	<span>  '. @$countryInfo->name .'</span>
@@ -225,7 +225,7 @@ class Commonmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('friend_list');
 		$this->db->where("(senderId = '$userId' AND receiverId = '$loginUserId')
-    	 OR(senderId = '$loginUserId' AND receiverId = '$userId')");		
+    	 OR(senderId = '$loginUserId' AND receiverId = '$userId')");
 		$query= $this->db->get();
 		return $query->result();
 	}
@@ -248,8 +248,8 @@ class Commonmodel extends CI_Model
 		$this->db->join('users', 'users.userId=chat.senderId');
 		$this->db->where('chat.receiverId', $userId);
 		$this->db->where('chat.seen', 0);
-		$this->db->group_by('chat.senderId'); 
-		$this->db->order_by('chat.chatId', 'DESC');  
+		$this->db->group_by('chat.senderId');
+		$this->db->order_by('chat.chatId', 'DESC');
 		$query= $this->db->get();
 		return $query->result();
 	}
@@ -259,7 +259,7 @@ class Commonmodel extends CI_Model
 		$data=array(
 			'friendStatus'=>1,
 		);
-		$this->db->where("(receiverId = '$userId' AND senderId = '$senderId')");		
+		$this->db->where("(receiverId = '$userId' AND senderId = '$senderId')");
 		$this->db->update('friend_list', $data);
 		$notificationData=array(
 			'seen'=>1,
@@ -270,8 +270,8 @@ class Commonmodel extends CI_Model
 	}
 
 	public function deleteRequest($userId, $senderId)
-	{	
-		$this->db->where("(receiverId = '$userId' AND senderId = '$senderId')");		
+	{
+		$this->db->where("(receiverId = '$userId' AND senderId = '$senderId')");
 		$this->db->delete('friend_list');
 		$this->db->where("(receiverId = '$userId' AND senderId = '$senderId')");
 		$this->db->delete('frnd_notification');
@@ -308,7 +308,7 @@ class Commonmodel extends CI_Model
 		$this->db->join('users', 'users.userId=post_comments.userId');
 		$this->db->where('post_comments.postId', $postId);
 		$this->db->where('post_comments.imgId', $imageId);
-		return $this->db->count_all_results();		
+		return $this->db->count_all_results();
 	}
 
 	public function fetchusrImg($userId)
@@ -345,6 +345,11 @@ class Commonmodel extends CI_Model
 		$this->db->where('user_videos_comments.videoId', $vId);
 		$this->db->limit(4, 0);
 		$query= $this->db->get();
+		return $query->result();
+	}
+
+	function getChat($fromId,$toId) {
+		$query = $this->db->query('SELECT `chat`.*, `users`.`username`, CONCAT(users.firstname, " ", users.lastname) as full_name, `users`.`profilePic`, `to_user`.`username` as `to_username`, CONCAT(to_user.firstname, " ", to_user.lastname) as to_fullname FROM `chat` JOIN `users` ON `users`.`userId`=`chat`.`userfrom_id` JOIN `users` `to_user` ON `to_user`.`userId`=`chat`.`userto_id` where userfrom_id IN ("'.$fromId.'","'.$toId.'") and userto_id IN ("'.$fromId.'","'.$toId.'")');
 		return $query->result();
 	}
 

@@ -43,8 +43,8 @@
                                             <div id="sidepanel">
                                                 <div id="profile">
                                                     <div class="wrap">
-                                                        <?php if (@$get_user->profilePic && file_exists('uploads/profile/' . @$get_user->profilePic)) { ?>
-                                                        <img id="profile-img" src="<?= base_url('uploads/profile/' . @$get_user->profilePic) ?>" class="online" alt="" />
+                                                        <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
+                                                        <img id="profile-img" src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>" class="online" alt="" />
                                                         <?php } else { ?>
                                                         <img id="profile-img" src="<?= base_url('uploads/users/user.png') ?>" class="online" alt="" />
                                                         <?php } ?>
@@ -98,8 +98,8 @@
                                                     <li class="contact" onclick="return getuser('<?= $user->userid ?>');">
                                                         <div class="wrap">
                                                             <span class="contact-status online"></span>
-                                                            <?php if (@$user->profilePic && file_exists('uploads/profile/' . @$user->profilePic)) { ?>
-                                                            <img src="<?= base_url('uploads/profile/' . @$user->profilePic) ?>" alt="" />
+                                                            <?php if (@$user->profilePic && file_exists('uploads/users/' . @$user->profilePic)) { ?>
+                                                            <img src="<?= base_url('uploads/users/' . @$user->profilePic) ?>" alt="" />
                                                             <?php } else { ?>
                                                             <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
                                                             <?php } ?>
@@ -122,8 +122,8 @@
                                                     <li class="contact" onclick="return getuser('<?= $get_user->userId ?>');">
                                                         <div class="wrap">
                                                             <span class="contact-status online"></span>
-                                                            <?php if (@$get_user->profilePic && file_exists('uploads/profile/' . @$get_user->profilePic)) { ?>
-                                                            <img src="<?= base_url('uploads/profile/' . @$get_user->profilePic) ?>" alt="" />
+                                                            <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
+                                                            <img src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>" alt="" />
                                                          <?php } else { ?>
                                                             <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
                                                          <?php } ?>

@@ -111,7 +111,7 @@ class Dashboard extends CI_Controller
 			} else {
 				$video  = '';
 			}
-			
+
 		}
 
 		if ($_FILES['resume']['name'] != '') {
@@ -131,7 +131,7 @@ class Dashboard extends CI_Controller
 			} else {
 				$resume  = '';
 			}
-			
+
 		}
 		$data = array(
 			'firstname' => $_POST['firstname'],
@@ -359,18 +359,18 @@ class Dashboard extends CI_Controller
 	{
 		$user_id = $this->input->post('user_id');
 		$get_data = $this->Users_model->getChat();
+		//print_r($get_data);
 		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;
 		} else {
 			$name = $get_chatuser->username;
 		}
-		if (@$get_chatuser->profilePic && file_exists('uploads/profile/' . @$get_chatuser->profilePic)) {
-			$userpic = '<img src="' . base_url('uploads/profile/' . @$get_chatuser->profilePic) . '" alt="" />';
+		if (@$get_chatuser->profilePic && file_exists('uploads/users/' . @$get_chatuser->profilePic)) {
+			$userpic = '<img src="' . base_url('uploads/users/' . @$get_chatuser->profilePic) . '" alt="" />';
 		} else {
 			$userpic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 		}
-
 		$html_data = '<div class="contact-profile">
                             ' . $userpic . '
                                    <p>' . ucfirst($name) . '</p>
@@ -383,29 +383,23 @@ class Dashboard extends CI_Controller
                                                <ul>';
 		if (!empty($get_data)) {
 			foreach ($get_data as $key) {
-				if (@$key->profilePic && file_exists('uploads/profile/' . @$key->profilePic)) {
-					$from_pic = '<img src="' . base_url('uploads/profile/' . @$key->profilePic) . '" alt="" />';
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
+					$from_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$from_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
-				if (@$key->to_profile && file_exists('uploads/profile/' . @$key->to_profile)) {
-					$to_pic = '<img src="' . base_url('uploads/profile/' . @$key->to_profile) . '" alt="" />';
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
+					$to_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
 				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id']) {
-					$sent = '<li class="sent">
-                                    ' . $from_pic . '
-                                     <p>' . $key->message . '</p>
-                                         </li>';
+					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p></li>';
 				} else {
 					$sent = '';
 				}
 				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id']) {
-					$reply = '<li class="replies">
-                                ' . $to_pic . '
-                                  <p>' . $key->message . '</p>
-                                    </li>';
+					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p></li>';
 				} else {
 					$reply = '';
 				}
@@ -434,8 +428,8 @@ class Dashboard extends CI_Controller
 			$lastid = $this->db->insert_id();
 			$con = "id='" . $lastid . "'";
 			$getdata = $this->Users_model->getmessage($con);
-			if (@$getdata->profilePic && file_exists('uploads/profile/' . @$getdata->profilePic)) {
-				$from_pic = '<img src="' . base_url('uploads/profile/' . @$getdata->profilePic) . '" alt="" />';
+			if (@$getdata->profilePic && file_exists('uploads/users/' . @$getdata->profilePic)) {
+				$from_pic = '<img src="' . base_url('uploads/users/' . @$getdata->profilePic) . '" alt="" />';
 			} else {
 				$from_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 			}
