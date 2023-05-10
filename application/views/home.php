@@ -22,13 +22,15 @@
                                         <div class="col-lg-7 col-md-5 col-sm-12 col-xs-12">
                                             <div class="job-field">
                                                 <input type="text" name="search_title"
-                                                    placeholder="Job title, keywords or company name" value="" required />
-                                                    <i class="la la-keyboard-o"></i>
+                                                    placeholder="Job title, keywords or company name" value=""
+                                                    required />
+                                                <i class="la la-search"></i>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
                                             <div class="job-field">
-                                                <input type="text" name="search_location" id="location" required autocomplete="off" />
+                                                <input type="text" name="search_location" id="location" required
+                                                    autocomplete="off" />
                                                 <input type="hidden" name="search_lat" id="search_lat">
                                                 <input type="hidden" name="search_lon" id="search_lon">
                                                 <i class="la la-close" onclick="return reset_location()"></i>
@@ -41,8 +43,10 @@
                                     </div>
                                 </form>
                                 <div class="or-browser">
-                                    <span>Browse job offers by</span>
-                                    <a href="<?php echo base_url('ourjobs')?>" title="">All Category</a>
+                                    <span>Browse job posts by</span>
+                                    <a href="<?php echo base_url('ourjobs')?>" title="">
+                                        <span>All Categories</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +67,7 @@
                 <div class="col-lg-12">
                     <div class="heading">
                         <h2>AfreBay Opportunities</h2>
-                        <span>Found by employers communicate directly with hiring managers and recruiters.</span>
+                        <span>Found by vendors communicate directly with hiring managers and recruiters.</span>
                     </div>
                     <div class="blog-sec">
                         <div class="row">
@@ -76,11 +80,13 @@
                             }
                             ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="my-blog" onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
+                                <div class="my-blog"
+                                    onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
                                     <div class="blog-details">
                                         <div class="Blog-Emp-Details">
                                             <div class="Blog-Emp-Img">
-                                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=688&amp;q=80">
+                                                <img
+                                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=688&amp;q=80">
                                             </div>
                                             <div class="Blog-Emp-Data">
                                                 <p><?= ucfirst($row->post_title)?></p>
@@ -109,14 +115,17 @@
 
 <section>
     <div class="block Worker-Block">
-        <div data-velocity="-.1" style="background: url('<?=base_url(); ?>assets/images/resource/parallax3.jpg') 50% -62.7px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div>
+        <!-- <div data-velocity="-.1"
+            style="background: url('<?=base_url(); ?>assets/images/resource/parallax3.jpg') 50% -62.7px repeat scroll transparent;"
+            class="parallax scrolly-invisible no-parallax"></div> -->
+        <div data-velocity="-.1" style="background: #F9FAFC" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading">
-                        <h2>Available AfreBay Workers</h2>
-                        <span>Found by employers communicate directly with hiring managers and recruiters.</span>
+                        <h2>Available AfreBay Freelancers</h2>
+                        <span>Found by vendors communicate directly with hiring managers and recruiters.</span>
                     </div>
                     <div class="blog-sec">
                         <div class="row">
@@ -132,29 +141,33 @@
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-thumbak">
-                                        <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
+                                        <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
+                                            title="">
                                             <?php if(!empty($user->profilePic)&& file_exists('uploads/users/'.$user->profilePic)){?>
-                                            <img src="<?=base_url('uploads/users/'.$user->profilePic); ?>" alt="" style="height: 300px;" />
+                                            <img src="<?=base_url('uploads/users/'.$user->profilePic); ?>" alt=""
+                                                style="height: 300px;" />
                                             <?php } else{?>
-                                            <img src="<?=base_url('uploads/no_image.png'); ?>" alt="" style="height: 300px;" />
+                                            <img src="<?=base_url('uploads/no_image.png'); ?>" alt=""
+                                                style="height: 300px;" />
                                             <?php } ?>
                                         </a>
                                     </div>
                                     <div class="blog-details">
                                         <div class="blog-head">
                                             <h3 class="resk">
-                                                <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title=""><?= $user->category_name?></a>
+                                                <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
+                                                    title=""><?= $user->category_name?></a>
                                             </h3>
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <ul class="gigasjh">
-                                                        <li>Date Start</li>
+                                                        <li>Start Date</li>
                                                         <li><?php echo date('m/d/Y', strtotime(@$user->created));?></li>
                                                     </ul>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <ul class="gigasjh">
-                                                        <li>Zipcode</li>
+                                                        <li>Zip Code</li>
                                                         <li><?php echo @$user->zip;?></li>
                                                     </ul>
                                                 </div>
@@ -177,7 +190,9 @@
                                             <?php } ?>
                                         </div>
                                         <h3 class="nkash">
-                                            <a type="button" class="btn" href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
+                                            <a type="button" class="btn"
+                                                href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
+                                                title="">
                                                 <?php if(!empty($user->firstname)){ echo $user->firstname.' '.$user->lastname; } else{ echo ucfirst($user->username);}?>
                                             </a>
                                         </h3>
@@ -206,7 +221,9 @@
                     <div class="heading">
                         <h2>Our Services</h2>
                         <span>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy <br /> text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industry's standard dummy <br /> text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a type specimen book.
                         </span>
                     </div>
                     <!-- Heading -->
@@ -249,7 +266,9 @@
 
 <section>
     <div class="block double-gap-top double-gap-bottom">
-        <div data-velocity="-.1" style="background: url(<?=base_url(); ?>assets/images/resource/parallax1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color"></div>
+        <div data-velocity="-.1"
+            style="background: url(<?=base_url(); ?>assets/images/resource/parallax1.jpg) repeat scroll 50% 422.28px transparent;"
+            class="parallax scrolly-invisible layer color"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container">
             <div class="row">
@@ -299,14 +318,17 @@
 
 <section>
     <div class="block Career">
-        <div data-velocity="-.1" style="background: url(<?=base_url(); ?>assets/images/resource/parallax3.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
+        <!-- <div data-velocity="-.1"
+            style="background: url(<?=base_url(); ?>assets/images/resource/parallax3.jpg) repeat scroll 50% 422.28px transparent;"
+            class="parallax scrolly-invisible no-parallax"></div> -->
+        <div data-velocity="-.1" style="background: #F9FAFC" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading">
                         <h2>Quick Career Tips</h2>
-                        <span>Found by employers communicate directly with hiring managers and recruiters.</span>
+                        <span>Found by vendors communicate directly with hiring managers and recruiters.</span>
                     </div>
                     <!-- Heading -->
                     <div class="blog-sec">
@@ -329,14 +351,17 @@
                                             <?php } ?>
                                         </a>
                                         <div class="blog-metas">
-                                            <a href="javascript:void(0)" title=""><?= date('M d,Y',strtotime($career->update_date))?></a>
+                                            <a href="javascript:void(0)"
+                                                title=""><?= date('M d,Y',strtotime($career->update_date))?></a>
                                             <a href="javascript:void(0)" title="">0 Comments</a>
                                         </div>
                                     </div>
                                     <div class="blog-details">
-                                        <h3><a href="<?= base_url('career-tip/'.base64_encode($career->id))?>" title=""><?= ucfirst($career->title)?></a></h3>
+                                        <h3><a href="<?= base_url('career-tip/'.base64_encode($career->id))?>"
+                                                title=""><?= ucfirst($career->title)?></a></h3>
                                         <p><?= ucfirst($desc)?></p>
-                                        <a href="<?= base_url('career-tip/'.base64_encode($career->id))?>" title=""><span>Read More</span></a>
+                                        <a href="<?= base_url('career-tip/'.base64_encode($career->id))?>"
+                                            title=""><span>Read More</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +392,9 @@
         var geocoder;
         geocoder = new google.maps.Geocoder();
         var latlng = new google.maps.LatLng(latitude, longitude);
-        geocoder.geocode({'latLng': latlng},
+        geocoder.geocode({
+                'latLng': latlng
+            },
             function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[0]) {
