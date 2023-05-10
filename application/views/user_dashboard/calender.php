@@ -122,16 +122,16 @@
                 </div>
               </div>
             </div>
-
-
+            
+            
             <!--footer-->
-
-
+            
+            
 <?php
 $get_setting=$this->Crud_model->get_single('setting');
-if(!empty($_SESSION['afrebay']['userId']))
+if(!empty($_SESSION['gigwork']['userId']))
 {
-  $userid=$_SESSION['afrebay']['userId'];
+  $userid=$_SESSION['gigwork']['userId'];
   $get_video=$this->Crud_model->GetData('friends_video','',"subscription_id='".$userid."' and status='0'",'','(video_id)desc','','1');
 
 }
@@ -220,9 +220,9 @@ if(!empty($_SESSION['afrebay']['userId']))
         <input type="hidden" name="base_url" id="base_url" value="<?= base_url()?>">
 
         <!--  start modal -->
-     <?php if(!empty($_SESSION['afrebay']['userId'])){
+     <?php if(!empty($_SESSION['gigwork']['userId'])){
       $date=date('Y-m-d',strtotime(@$get_video->created_date));
-      if(@$_SESSION['afrebay']['userId']==@$get_video->subscription_id && $date==date('Y-m-d') && @$get_video->status=='0'){
+      if(@$_SESSION['gigwork']['userId']==@$get_video->subscription_id && $date==date('Y-m-d') && @$get_video->status=='0'){
       ?>
       <div id="video_modal" class="modal modal-top fade calendar-modal">
             <div class="modal-dialog modal-dialog-centered">
@@ -242,10 +242,10 @@ if(!empty($_SESSION['afrebay']['userId']))
           </div>
         <?php } }?>
     <!--  end modal -->
-
+     
            <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script> -->
-
-          <script src="<?= base_url('assets/js/jquery_min.js')?>" type="text/javascript"></script>
+       
+          <script src="<?= base_url('assets/js/jquery_min.js')?>" type="text/javascript"></script> 
        <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js" type="text/javascript"></script>  -->
         <script src="<?= base_url('assets/js/moment.js')?>" type="text/javascript"></script>
@@ -261,9 +261,9 @@ if(!empty($_SESSION['afrebay']['userId']))
         <script src="<?= base_url('assets/js/jquery.scrollbar.min.js')?>" type="text/javascript"></script>
         <script src="<?= base_url('assets/js/maps2.js')?>" type="text/javascript"></script>
         <script src="<?= base_url('assets/js/bootstrap-datepicker.js')?>" type="text/javascript"></script>
-
-
-
+    
+    
+    
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places&callback=initMap"
   async defer></script>
       <script type="text/javascript" src="<?= base_url('assets/custom_js/validation.js')?>"></script>
@@ -295,12 +295,12 @@ if(!empty($_SESSION['afrebay']['userId']))
      </body>
   </html>
 
-
-
+            
+            
             <!--end footer-->
-
-
-
+            
+            
+            
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
             <!-- timepicker -->
@@ -333,14 +333,14 @@ if(!empty($_SESSION['afrebay']['userId']))
                     format : "HH:mm"
                 });
   </script>
-
+  
      <script>
            $(document).ready(function(){
               $('[data-toggle="offcanvas"]').click(function(){
                   $("#navigation").toggleClass("hidden-xs");
               });
            });
-        </script>
+        </script> 
    <script type="text/javascript">
             jQuery(document).ready(function(){
     // jQuery('.datetimepicker').datepicker({

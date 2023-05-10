@@ -118,11 +118,14 @@ if(!empty($_SESSION['afrebay']['userId'])){
         var sessionMessage = '<?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>';
         if(sessionMessage==null || sessionMessage=="" ){ return false;}
         $.notify(sessionMessage,{ position:"top right",className: 'success' });//session msg
+    });
+    setInterval(function () {
+        $('#video_modal').modal('show');
+    }, 5000);
 
-        var targetDiv =  $('.about_widget img').attr('src');
-        var targetDiv1 =  $('.hidden-logo').val();
-
-        $(window).scroll(function() {
+    var targetDiv =  $('.about_widget img').attr('src');
+    var targetDiv1 =  $('.hidden-logo').val();
+    $(window).scroll(function() {
             var windowpos = $(window).scrollTop();
             if( windowpos >= 50 ) {
                 $(".Header_Menu_Nav img").attr("src",targetDiv);
@@ -133,11 +136,6 @@ if(!empty($_SESSION['afrebay']['userId'])){
             }
 
         });
-    });
-    setInterval(function () {
-        $('#video_modal').modal('show');
-    }, 5000);
-
     function receiveVideoCallWindow(fid) {
         $('#video_modal').css('display','none');
         var callPath = "<?php echo base_url('livevideo/video/');?>"+fid;

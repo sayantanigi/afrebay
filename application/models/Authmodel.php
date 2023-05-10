@@ -19,7 +19,7 @@ class Authmodel extends My_Model {
 
 				$msg = "Login";
 
-			$value['afrebay_admin'] = array(
+			$value['gigwork_admin'] = array(
               'id'=>$user->userId,
               'email'=>$user->email,
               'type' => $user->userType

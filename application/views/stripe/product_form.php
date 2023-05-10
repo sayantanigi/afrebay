@@ -35,35 +35,35 @@
                                 </div>
                                 <div class="error text-left">Email</div>
                                 <div class="cfield">
-                                    <input type="email" placeholder="Email" name="email" id="email" value="<?= @$_SESSION['afrebay']['userEmail']; ?>"required autocomplete="off"/>
+                                    <input type="email" placeholder="Email" name="email" id="email" value="<?= @$_SESSION['gigwork']['userEmail']; ?>"required autocomplete="off"/>
                                     <i class="la la-envelope-o"></i>
                                 </div>
                                  <div class="error text-left">Card Number</div>
                                 <div class="cfield">
                                     <input type="text" placeholder="card Number" name="card_num" id="card_num" onkeypress="only_number(event)" autocomplete="off" />
-
+                                   
                                 </div>
                                 <div class="error text-left">Card Month</div>
                                 <div class="cfield">
                                     <input type="text" placeholder="MM" name="exp_month" id="card-expiry-month" onkeypress="only_number(event)" maxlength="2" required autocomplete="off"/>
-
+                                   
                                 </div>
                                 <div class="error text-left">Card Year</div>
                                 <div class="cfield">
                                     <input type="text" placeholder="YYYY" name="exp_year" id="card-expiry-year" maxlength="4" onkeypress="only_number(event)" required autocomplete="off"/>
-
+                                   
                                 </div>
                                 <div class="error text-left">CVC</div>
                                 <div class="cfield">
                                     <input type="text" placeholder="CVC" name="cvc" id="card-cvc" maxlength="3" onkeypress="only_number(event)" required autocomplete="off"/>
-
+                                   
                                 </div>
-
+                               
                                  <input type="hidden" name="subscription_id" value="<?php if(!empty($get_data->id)){ echo $get_data->id;}?>">
                         <input type="hidden" name="subscription_amount" value="<?php if(!empty($get_data->subscription_amount)){ echo $get_data->subscription_amount;}?>">
                                 <button type="submit" id="payBtn">Pay ($<?php if(!empty($get_data->subscription_amount)){ echo $get_data->subscription_amount;}?>)</button>
                             </form>
-
+                           
                         </div>
                     </div>
                     <!-- SIGNUP POPUP -->
@@ -120,3 +120,5 @@
             });
         });
     </script>
+
+

@@ -12227,20 +12227,6 @@ footer.ft .scrollup {
    opacity: 0;
 }
 
-.showsticky,
-.hidesticky {
-    width: 258px;
-    height: auto;
-    background-repeat: no-repeat;
-    object-fit: cover;
-}
-
-.Header_Menu_Nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;    
-}
-
 *:focus {
    outline: 0;
 }

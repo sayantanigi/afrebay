@@ -49,8 +49,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </select>
                                 </div>
                             </div>
-                            <div class="widget">
-                                <h3 class="sb-title open sub_cat">Subcategory</h3>
+                            <div class="widget sub_cat">
+                                <h3 class="sb-title open">Subcategory</h3>
                                 <div class="specialism_widget" >
                                     <div class="simple-checkbox scrollbar" >
                                         <div id="subcategory_list"></div>

@@ -190,7 +190,7 @@ class Post_job_model extends My_Model {
             return $query;
         }
     }
-
+    
     function subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location) {
         $query = $this->make_query($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location);
         $data = $this->db->query($query);
