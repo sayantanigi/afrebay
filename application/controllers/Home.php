@@ -149,6 +149,7 @@ class Home extends MY_Controller {
 	}
 
 	function workers_list() {
+		$data['get_category'] = $this->Crud_model->GetData('category');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='6'");
 		$this->load->view('header');
 		$this->load->view('frontend/workers_list', $data);
