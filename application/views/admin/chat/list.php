@@ -76,7 +76,7 @@
                                             <span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#viewModal" onclick="view_data(3)" data-placement="right"><i class="far fa-eye mr-1"></i><a href="<?=admin_url(); ?>chat_details/<?php echo $value['userfrom_id']?>/<?php echo $value['userto_id']?>">View Chat</a></span>
                                         </td>
                                     </tr>
-                                <?php echo $i++; } } ?>
+                                <?php $i++; } } ?>
                                 </tbody>
                             </table>
                         </div>
