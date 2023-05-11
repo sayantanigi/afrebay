@@ -154,7 +154,7 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-tr.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        tail.select('select',{
+        tail.select('#example',{
             startOpen: true,
             multiple: true,
             stayOpen: true,
@@ -182,6 +182,11 @@ if(!empty($_SESSION['afrebay']['userId'])){
             position: "top right",
             className: 'success'
         }); //session msg
+
+        $('.dropdown-optgroup').click(function() {
+            var selected = $(".dropdown-optgroup :selected").map((_,e) => e.value).get();
+            alert(selected);
+      });
     });
     setInterval(function () {
         $('#video_modal').modal('show');

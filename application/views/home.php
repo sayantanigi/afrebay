@@ -89,7 +89,20 @@
                                                     src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=688&amp;q=80">
                                             </div>
                                             <div class="Blog-Emp-Data">
-                                                <p><?= ucfirst($row->post_title)?></p>
+                                                <?php
+                                                if(!empty($row->post_title)) {
+                                                    if(strlen($row->post_title)>30) {
+                                                        $title = substr($row->post_title,0,30).'...';
+                                                    } else {
+                                                        $title = $row->post_title;
+                                                    }
+                                                } else {
+                                                    $title = '';
+                                                }
+                                                ?>
+                                                <p>
+                                                    <?= ucfirst($title)?>
+                                                </p>
                                                 <p>By Adrain Balistreri</p>
                                             </div>
                                         </div>
