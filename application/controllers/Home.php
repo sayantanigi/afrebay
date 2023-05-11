@@ -11,7 +11,7 @@ class Home extends MY_Controller {
 	}
 
 	public function index() {
-		$data['get_post'] = $this->Crud_model->GetData('postjob', 'id,post_title,description', "is_delete='0'", '', '(id)desc', '6');
+		$data['get_post'] = $this->Crud_model->GetData('postjob', 'id,post_title,description,user_id', "is_delete='0'", '', '(id)desc', '6');
 		$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
 		$data['get_career'] = $this->Crud_model->GetData('career_tips', '', "status='Active'", '', '', '3');
 		$data['get_company'] = $this->Crud_model->GetData('company_logo', '', "status='Active'", '', '', '');

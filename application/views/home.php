@@ -103,7 +103,8 @@
                                                 <p>
                                                     <?= ucfirst($title)?>
                                                 </p>
-                                                <p>By Adrain Balistreri</p>
+                                                <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array();?>
+                                                <p>By <?php echo $get_user[0]['firstname'].' '.$get_user[0]['lastname']?></p>
                                             </div>
                                         </div>
                                         <h3 class="nkash"><a href="javascript:void(0)" title="">Description</a></h3>
