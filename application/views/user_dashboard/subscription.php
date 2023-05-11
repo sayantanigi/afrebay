@@ -38,11 +38,11 @@
                             <div class="container-fluid">
                                 <div class="row text-center align-items-end">
                                 <!-- Pricing Table-->
-                                <?php if(!empty($subcriber_pack)) { foreach ($subcriber_pack as $key) {
-                                    $subcripe_pack=$this->Crud_model->get_single('subscription',"id='".$key->subscription_id."'");
-                                    $get_service=$this->Crud_model->GetData('subscription_service','',"subscription_id='".$subcripe_pack->id."'"); ?>
+                                <?php //if(!empty($subcriber_pack)) { foreach ($subcriber_pack as $key) {
+                                    //$subcripe_pack=$this->Crud_model->get_single('subscription',"id='".$key->subscription_id."'");
+                                    //$get_service=$this->Crud_model->GetData('subscription_service','',"subscription_id='".$subcripe_pack->id."'"); ?>
                                     <div class="col-lg-4 mb-5 mb-lg-0">
-                                        <div class="bg-white p-5 rounded-lg shadow" style="height: 500px;">
+                                        <!-- <div class="bg-white p-5 rounded-lg shadow" style="height: 500px;">
                                             <h1 class="h6 text-uppercase font-weight-bold mb-4"><?= $subcripe_pack->subscription_name; ?></h1>
                                             <h2 class="h1 font-weight-bold">$<?= ' '.$subcripe_pack->subscription_amount; ?><span class="text-small font-weight-normal ml-2">/ month</span></h2>
                                             <div class="custom-separator my-4 mx-auto bg-primary"></div>
@@ -50,25 +50,30 @@
                                                 <?php if(!empty($get_service)){ foreach ($get_service as $row) {?>
                                                 <li class="mb-3"><i class="fa fa-check mr-2 text-primary"></i> <?= $row->service; ?></li>
                                                 <?php } } ?>
-                                                <!-- <li class="mb-3 text-muted">
-                                                    <i class="fa fa-times mr-2"></i>
-                                                    <del>Nam libero tempore</del>
-                                                </li>
-                                                <li class="mb-3 text-muted">
-                                                    <i class="fa fa-times mr-2"></i>
-                                                    <del>Sed ut perspiciatis</del>
-                                                </li> -->
+                                            </ul>
+                                            <a href="#" class="btn btn-primary btn-block p-2 shadow rounded-pill">Subscribe</a>
+                                        </div> -->
+                                        <div class="bg-white p-5 rounded-lg shadow" style="height: 500px;">
+                                            <h1 class="h6 text-uppercase font-weight-bold mb-4">test</h1>
+                                            <h2 class="h1 font-weight-bold">$211<span class="text-small font-weight-normal ml-2">/ month</span></h2>
+                                            <div class="custom-separator my-4 mx-auto bg-primary"></div>
+                                            <ul class="list-unstyled my-5 text-small text-left" style="height: 100px;">
+                                                <li class="mb-3"><i class="fa fa-check mr-2 text-primary"></i> test</li>
+                                                <li class="mb-3"><i class="fa fa-check mr-2 text-primary"></i> test</li>
+                                                <li class="mb-3"><i class="fa fa-check mr-2 text-primary"></i> test</li>
+                                                <li class="mb-3"><i class="fa fa-check mr-2 text-primary"></i> test</li>
+                                                <li class="mb-3"><i class="fa fa-check mr-2 text-primary"></i> test</li>
                                             </ul>
                                             <a href="#" class="btn btn-primary btn-block p-2 shadow rounded-pill">Subscribe</a>
                                         </div>
                                     </div>
-                                <?php }} else { ?>
-                                    <div class="col-lg-4 mb-5 mb-lg-0">
+                                <?php //}} else { ?>
+                                    <!-- <div class="col-lg-4 mb-5 mb-lg-0">
                                         <div class="bg-white p-5 rounded-lg shadow" style="height: 500px;">
                                             <h1 class="h6 text-uppercase font-weight-bold mb-4">No Data Found</h1>
                                         </div>
-                                    </div>
-                                <?php } ?>
+                                    </div> -->
+                                <?php //} ?>
                                 </div>
                             </div>
                         </div>
