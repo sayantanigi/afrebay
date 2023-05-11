@@ -60,8 +60,8 @@
 
                 <!-- employer list -->
                 <?php if($_SESSION['afrebay']['userType']==2){?>
-                <div class="row">
-                    <div class="col-sm-3">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-3 col-sm-12">
                         <a href="<?= base_url('myservice')?>">
                             <div class="dashboard">
                                 <h4>
@@ -73,7 +73,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-3 col-sm-12">
                         <a href="<?= base_url('myjob')?>">
                             <div class="dashboard">
                                 <h4>
@@ -85,7 +85,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-3 col-sm-12">
                         <a href="<?= base_url('subscription')?>">
                             <div class="dashboard">
                                 <h4>

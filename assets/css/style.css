@@ -19061,7 +19061,7 @@ footer .bottom-line span {
 
 .Pricing_Data .plans-sec .pricetable {
    position: relative;
-   height: 350px;
+   height: auto;
    margin-top: 50px !important;
    padding: 15px !important;
    border-radius: 20px !important;
@@ -19194,6 +19194,13 @@ footer .bottom-line span {
 
 .Pricing_Data .plans-sec .pricetable a.btn:hover {
    background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+}
+
+.pricetable .pricing-options ul li {
+    text-align: left;
+    line-height: 25px !important;
+    color: #000000 !important;
+    padding-left: 15px;
 }
 
 /********************* Pricing Data Page *********************/
@@ -19502,6 +19509,7 @@ footer .social {
 
 .User_Sidemenu .hidden-xs.display-table-cell .navi ul {
    display: flex;
+   justify-content: center;
    flex-wrap: wrap;
 }
 
@@ -19632,6 +19640,26 @@ footer .social {
 .User_Dashboard_Menu:hover ul {
    opacity: 1;
    visibility: visible;
+}
+
+.user-dashboard .dashboard {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-dashboard .dashboard h4 {
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0 !important;
+}
+
+.user-dashboard .dashboard h3 {
+    font-weight: 500;
+    font-size: 35px;
+    margin: 0 !important;
 }
 
 /********************* User Dashboard *********************/

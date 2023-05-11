@@ -6019,3 +6019,15 @@ small.help-block {
 #frame .content .message-input .wrap button:focus {
    outline: none;
 }
+
+/********************* Admin Dashboard *********************/
+
+.pricing-box .card {
+    height: auto !important;
+}
+
+.pricing-box .card .card-body .pricing-options {
+    height: auto !important;
+}
+
+/********************* Admin Dashboard *********************/
