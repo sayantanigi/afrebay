@@ -19197,10 +19197,10 @@ footer .bottom-line span {
 }
 
 .pricetable .pricing-options ul li {
-    text-align: left;
-    line-height: 25px !important;
-    color: #000000 !important;
-    padding-left: 15px;
+   text-align: left;
+   line-height: 25px !important;
+   color: #000000 !important;
+   padding-left: 15px;
 }
 
 /********************* Pricing Data Page *********************/
@@ -19644,27 +19644,104 @@ footer .social {
 }
 
 .user-dashboard .dashboard {
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+   border-radius: 10px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
 }
 
 .user-dashboard .dashboard h4 {
-    font-weight: 400;
-    font-size: 20px;
-    margin: 0 !important;
+   font-weight: 400;
+   font-size: 20px;
+   margin: 0 !important;
 }
 
 .user-dashboard .dashboard h3 {
-    font-weight: 500;
-    font-size: 35px;
-    margin: 0 !important;
+   font-weight: 500;
+   font-size: 35px;
+   margin: 0 !important;
 }
 
-.User_Sub {
-   
+.User_Sub .Sub_Block {
+   box-shadow: 1.875rem 1.5625rem 1.375rem rgba(21, 22, 24, 0.24), -4px -4px 15px rgba(195, 200, 205, 0.04);
+   border: 1px solid transparent;
+   border-radius: 20px;
+   background: #fff;
+   padding: 1.875rem;
+}
+
+.User_Sub .Sub_Block .Sub_Head {
+   display: flex;
+   align-items: center;
+}
+
+.User_Sub .Sub_Block .Sub_Head .Heading {
+   width: 50%;
+}
+
+.User_Sub .Sub_Block .Sub_Head .Icon {
+   width: 50%;
+   display: flex;
+   justify-content: end;
+   align-items: center;
+}
+
+.User_Sub .Sub_Block .Sub_Head .Icon span {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   background: #ffffff;
+   box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+   display: block;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.User_Sub .Sub_Block .Sub_Head .Icon span img {
+   width: 45px;
+   height: auto;
+   object-fit: contain;
+   background-repeat: no-repeat;
+}
+
+.User_Sub .Sub_Block h1 {
+   padding: 0;
+   text-align: left;
+   font-size: 15px;
+}
+
+.User_Sub .Sub_Block h2 {
+   font-size: 20px;
+   text-align: left;
+   margin: 0;
+   padding: 10px 0 20px;
+   font-weight: 600;
+}
+
+.User_Sub .Sub_Block ul li {
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   font-weight: 500;
+}
+
+.User_Sub .Sub_Block ul li i {
+   padding-right: 10px;
+   color: #f4794f;
+}
+
+.User_Sub .Sub_Block a.btn {
+   background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+   border: 0;
+   border-radius: 35px;
+   letter-spacing: 0;
+   font-weight: 600;
+}
+
+.User_Sub .Sub_Block a.btn:hover {
+   background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
 }
 
 /********************* User Dashboard *********************/
