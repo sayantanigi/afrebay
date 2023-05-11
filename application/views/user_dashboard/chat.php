@@ -53,12 +53,11 @@
                                           <img id="profile-img" src="<?= base_url('uploads/users/user.png') ?>"
                                              class="online" alt="" />
                                           <?php } ?>
-                                          <p>
-                                             <?php if (!empty($get_user->firstname)) {
-                                                            echo $get_user->firstname . ' ' . $get_user->lastname;
-                                                        } else {
-                                                            echo $get_user->username;
-                                                        } ?></p>
+                                          <p><?php if (!empty($get_user->firstname)) {
+                                                echo $get_user->firstname . ' ' . $get_user->lastname;
+                                            } else {
+                                                echo $get_user->username;
+                                            } ?></p>
                                           <div id="status-options">
                                              <ul>
                                                 <li id="status-online" class="active">
@@ -428,7 +427,7 @@
    //# sourceURL=pen.js
 
    function getuser(user_id) {
-
+       alert();
       var displayProduct = 3;
 
       $('#message_list').html(createSkeleton(displayProduct));

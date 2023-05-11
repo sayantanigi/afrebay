@@ -16,10 +16,10 @@ $seg1=$this->uri->segment(1);
                                     class="hidden-xs hidden-sm">Dashboard</span></a>
                         </li> -->
                         <?php if(@$_SESSION['afrebay']['userType']=='2'){?>
-                        <li <?php if($seg1=='myservice'){?>class="active" <?php } ?>>
+                        <!-- <li <?php if($seg1=='myservice'){?>class="active" <?php } ?>>
                             <a href="<?= base_url('myservice')?>"><i class="fa fa-tasks" aria-hidden="true"></i><span
                                     class="hidden-xs hidden-sm">My Services</span></a>
-                        </li>
+                        </li> -->
 
                         <li <?php if($seg1=='myjob'){?>class="active" <?php } ?>>
                             <a href="<?= base_url('myjob')?>"><i class="fa fa-joomla" aria-hidden="true"></i><span
@@ -41,7 +41,7 @@ $seg1=$this->uri->segment(1);
                         </li>
 
                         <?php }?>
-                        <li <?php if($seg1=='profile'){?>class="active" <?php } ?>>
+                        <!-- <li <?php if($seg1=='profile'){?>class="active" <?php } ?>>
                             <a href="<?= base_url('profile')?>"><i class="fa fa-image" aria-hidden="true"></i><span
                                     class="hidden-xs hidden-sm">Profile Settings</span></a>
                         </li>
@@ -56,7 +56,7 @@ $seg1=$this->uri->segment(1);
                         <li <?php if($seg1=='password-reset'){?>class="active" <?php } ?>>
                             <a href="<?= base_url('password-reset')?>"><i class="fa fa-lock"
                                     aria-hidden="true"></i><span class="hidden-xs hidden-sm">Change Password</span></a>
-                        </li>
+                        </li> -->
                         <?php if(@$_SESSION['afrebay']['userType']=='1'){?>
                         <li <?php if($seg1=='education-list'){?>class="active" <?php } ?>>
                             <a href="<?= base_url('education-list')?>"><i class="la la-graduation-cap"
