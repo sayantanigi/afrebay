@@ -30,7 +30,7 @@
 				<a href="<?=admin_url(); ?>post_job"><i class="fas fa-star"></i> <span>Post Job</span></a>
 			</li>
 			<li <?php if ($seg2 =='chat') {?>class="active"<?php }?>>
-				<a href="<?=admin_url(); ?>chat"><i class="fas fa-star"></i> <span>Chat Details</span></a>
+				<a href="<?=admin_url(); ?>chat"><i class="fab fa-rocketchat"></i> <span>Chat Details</span></a>
 			</li>
 			<li <?php if ($seg2 =='services') {?>class="active"<?php }?>>
 				<a href="<?=admin_url('services'); ?>"><i class="fas fa-bullhorn"></i> <span> Services</span></a>
