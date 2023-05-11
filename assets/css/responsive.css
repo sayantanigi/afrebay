@@ -1755,6 +1755,10 @@
     .responsive-header .responsive-opensec .responsivemenu .menu-item-has-children ul li a:hover {
         color: #f4794f !important;
     }
+
+    .main-slider-sec img {
+        height: 100% !important;
+    }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1015px) {
