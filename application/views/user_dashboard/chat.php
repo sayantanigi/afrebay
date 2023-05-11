@@ -1,11 +1,13 @@
 <section class="overlape">
-    <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= base_url('assets/images/resource/mslider1.jpg') ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
-        <div class="container fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="inner-header" style="padding-top: 90px;"></div>
+   <div class="block no-padding">
+      <div data-velocity="-.1"
+         style="background: url('<?= base_url('assets/images/resource/mslider1.jpg') ?>') repeat scroll 50% 422.28px transparent;"
+         class="parallax scrolly-invisible no-parallax"></div>
+      <!-- PARALLAX BACKGROUND IMAGE -->
+      <div class="container fluid">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="inner-header" style="padding-top: 90px;"></div>
             </div>
          </div>
       </div>
@@ -13,68 +15,71 @@
 </section>
 
 <section class="dashboardhak">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
+   <div class="container-fluid">
+      <div class="row align-items-center">
+         <div class="col-md-12 col-12">
+            <h2 class="breadcrumb-title">Dashboard</h2>
+            <nav aria-label="breadcrumb" class="page-breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+               </ol>
+            </nav>
+         </div>
+      </div>
+   </div>
 </section>
 
-<section class="dashboard-gig">
-    <div class="container-fluid display-table">
-        <div class="row display-table-row">
-            <?php $this->load->view('sidebar'); ?>
-            <div class="col-md-10 col-sm-11 display-table-cell v-align">
-                <div class="user-dashboard">
-                    <div class="row row-sm">
-                        <div class="col-xl-12 col-lg-12 col-md-12">
-                            <div class="cardak">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-                                        <div id="frame">
-                                            <div id="sidepanel">
-                                                <div id="profile">
-                                                    <div class="wrap">
-                                                        <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
-                                                        <img id="profile-img" src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>" class="online" alt="" />
-                                                        <?php } else { ?>
-                                                        <img id="profile-img" src="<?= base_url('uploads/users/user.png') ?>" class="online" alt="" />
-                                                        <?php } ?>
-                                                        <p>
-                                                        <?php if (!empty($get_user->firstname)) {
+<section class="dashboard-gig User_Sidemenu">
+   <div class="container-fluid display-table">
+      <div class="row display-table-row">
+         <?php $this->load->view('sidebar'); ?>
+         <div class="col-xl-12 col-lg-12 col-md-12 display-table-cell v-align">
+            <div class="user-dashboard">
+               <div class="row row-sm">
+                  <div class="col-xl-12 col-lg-12 col-md-12">
+                     <div class="cardak">
+                        <div class="row">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                              <div id="frame">
+                                 <div id="sidepanel">
+                                    <div id="profile">
+                                       <div class="wrap">
+                                          <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
+                                          <img id="profile-img"
+                                             src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>"
+                                             class="online" alt="" />
+                                          <?php } else { ?>
+                                          <img id="profile-img" src="<?= base_url('uploads/users/user.png') ?>"
+                                             class="online" alt="" />
+                                          <?php } ?>
+                                          <p>
+                                             <?php if (!empty($get_user->firstname)) {
                                                             echo $get_user->firstname . ' ' . $get_user->lastname;
                                                         } else {
                                                             echo $get_user->username;
                                                         } ?></p>
-                                                        <div id="status-options">
-                                                            <ul>
-                                                                <li id="status-online" class="active">
-                                                                    <span class="status-circle"></span>
-                                                                    <p>Online</p>
-                                                                </li>
-                                                                <li id="status-away">
-                                                                    <span class="status-circle"></span>
-                                                                    <p>Away</p>
-                                                                </li>
-                                                                <li id="status-busy">
-                                                                    <span class="status-circle"></span>
-                                                                    <p>Busy</p>
-                                                                </li>
-                                                                <li id="status-offline">
-                                                                    <span class="status-circle"></span>
-                                                                    <p>Offline</p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!--  <div id="expanded">
+                                          <div id="status-options">
+                                             <ul>
+                                                <li id="status-online" class="active">
+                                                   <span class="status-circle"></span>
+                                                   <p>Online</p>
+                                                </li>
+                                                <li id="status-away">
+                                                   <span class="status-circle"></span>
+                                                   <p>Away</p>
+                                                </li>
+                                                <li id="status-busy">
+                                                   <span class="status-circle"></span>
+                                                   <p>Busy</p>
+                                                </li>
+                                                <li id="status-offline">
+                                                   <span class="status-circle"></span>
+                                                   <p>Offline</p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          <!--  <div id="expanded">
                                                             <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
                                                             <input name="twitter" type="text" value="mikeross" />
                                                             <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
@@ -82,67 +87,71 @@
                                                             <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
                                                             <input name="twitter" type="text" value="mike.ross" />
                                                         </div> -->
-                                                    </div>
-                                                </div>
-                                                <div id="search">
-                                                   <!--  <span class="char-sea"><i class="fa fa-search" aria-hidden="true"></i></span> -->
-                                                   <input type="text" placeholder="Search contacts..." />
-                                                </div>
-                                                <div id="contacts">
-                                                    <ul>
-                                                    <?php if (!empty($get_jobbid)) {
+                                       </div>
+                                    </div>
+                                    <div id="search">
+                                       <!--  <span class="char-sea"><i class="fa fa-search" aria-hidden="true"></i></span> -->
+                                       <input type="text" placeholder="Search contacts..." />
+                                    </div>
+                                    <div id="contacts">
+                                       <ul>
+                                          <?php if (!empty($get_jobbid)) {
                                                     foreach ($get_jobbid as $user) {
                                                         if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
                                                             $get_msg = $this->Crud_model->GetData('chat', '', "userto_id='" . $user->userid . "' and userfrom_id='" . $user->user_id . "'", '', 'id desc', '', '1');
                                                     ?>
-                                                    <li class="contact" onclick="return getuser('<?= $user->userid ?>');">
-                                                        <div class="wrap">
-                                                            <span class="contact-status online"></span>
-                                                            <?php if (@$user->profilePic && file_exists('uploads/users/' . @$user->profilePic)) { ?>
-                                                            <img src="<?= base_url('uploads/users/' . @$user->profilePic) ?>" alt="" />
-                                                            <?php } else { ?>
-                                                            <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
-                                                            <?php } ?>
-                                                            <div class="meta">
-                                                                <p class="name">
-                                                                <?php if (!empty($user->username)) {
+                                          <li class="contact" onclick="return getuser('<?= $user->userid ?>');">
+                                             <div class="wrap">
+                                                <span class="contact-status online"></span>
+                                                <?php if (@$user->profilePic && file_exists('uploads/users/' . @$user->profilePic)) { ?>
+                                                <img src="<?= base_url('uploads/users/' . @$user->profilePic) ?>"
+                                                   alt="" />
+                                                <?php } else { ?>
+                                                <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
+                                                <?php } ?>
+                                                <div class="meta">
+                                                   <p class="name">
+                                                      <?php if (!empty($user->username)) {
                                                                     echo ucfirst($user->username);
                                                                 } else {
                                                                     echo ucfirst($user->full_name);
                                                                 } ?>
-                                                                </p>
-                                                                <p class="preview"><?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <?php } else if ($user->postjob_id == $user->post_id && $user->userid == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
+                                                   </p>
+                                                   <p class="preview">
+                                                      <?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p>
+                                                </div>
+                                             </div>
+                                          </li>
+                                          <?php } else if ($user->postjob_id == $user->post_id && $user->userid == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
                                                         $get_user = $this->Crud_model->get_single('users', "userId='" . $user->user_id . "'");
                                                         $get_msg1 = $this->Crud_model->GetData('chat', '', "userfrom_id='" . $user->user_id . "' and userto_id='" . $user->userid . "'", '', 'id desc', '', '1');
                                                     ?>
-                                                    <li class="contact" onclick="return getuser('<?= $get_user->userId ?>');">
-                                                        <div class="wrap">
-                                                            <span class="contact-status online"></span>
-                                                            <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
-                                                            <img src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>" alt="" />
-                                                         <?php } else { ?>
-                                                            <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
-                                                         <?php } ?>
-                                                         <div class="meta">
-                                                            <p class="name">
-                                                                <?php if (!empty($get_user->username)) {
+                                          <li class="contact" onclick="return getuser('<?= $get_user->userId ?>');">
+                                             <div class="wrap">
+                                                <span class="contact-status online"></span>
+                                                <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
+                                                <img src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>"
+                                                   alt="" />
+                                                <?php } else { ?>
+                                                <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
+                                                <?php } ?>
+                                                <div class="meta">
+                                                   <p class="name">
+                                                      <?php if (!empty($get_user->username)) {
                                                                     echo ucfirst($get_user->username);
                                                                               } else {
                                                                                  echo ucfirst($get_user->firstname);
                                                                               } ?></p>
-                                                            <p class="preview"><?= !empty($get_msg1->message) ? $get_msg1->message : ''; ?></p>
+                                                   <p class="preview">
+                                                      <?= !empty($get_msg1->message) ? $get_msg1->message : ''; ?></p>
 
-                                                         </div>
+                                                </div>
 
-                                                      </div>
+                                             </div>
 
-                                                   </li>
+                                          </li>
 
-                                                <?php } ?>
+                                          <?php } ?>
 
 
 
@@ -172,7 +181,8 @@
 
 
 
-                                    <div id="message_list" style="height:650px;  overflow-y: scroll;overflow-y: hidden;">
+                                    <div id="message_list"
+                                       style="height:650px;  overflow-y: scroll;overflow-y: hidden;">
 
 
 
@@ -192,11 +202,13 @@
 
                                           <input type="hidden" name="userto_id" id="userto_id" value="" />
 
-                                          <input type="text" name="message" id="message" placeholder="Write your message..." />
+                                          <input type="text" name="message" id="message"
+                                             placeholder="Write your message..." />
 
                                           <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 
-                                          <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                          <button class="submit"><i class="fa fa-paper-plane"
+                                                aria-hidden="true"></i></button>
 
                                        </div>
 
@@ -241,7 +253,6 @@
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
 
 <script>
-
    try {
 
       Typekit.load({
@@ -251,22 +262,22 @@
       });
 
    } catch (e) {}
-
 </script>
 
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script
+   src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'>
+</script>
 
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 
 <script>
-
    $(".messages").animate({
 
       scrollTop: $(document).height()
 
    }, "fast");
 
-   $("#profile-img").click(function() {
+   $("#profile-img").click(function () {
 
       $("#status-options").toggleClass("active");
 
@@ -274,7 +285,7 @@
 
 
 
-   $(".expand-button").click(function() {
+   $(".expand-button").click(function () {
 
       $("#profile").toggleClass("expanded");
 
@@ -284,7 +295,7 @@
 
 
 
-   $("#status-options ul li").click(function() {
+   $("#status-options ul li").click(function () {
 
       $("#profile-img").removeClass();
 
@@ -348,7 +359,8 @@
 
       $.ajax({
 
-         url: '<?= base_url('user/dashboard/sent_message') ?>',
+         url: '<?= base_url('
+         user / dashboard / sent_message ') ?>',
 
          type: 'POST',
 
@@ -362,13 +374,14 @@
 
          dataType: 'json',
 
-         success: function(returndata) {
+         success: function (returndata) {
 
 
 
             if (returndata.result == 1) {
 
-               $('<li class="sent">' + returndata.userpic + '<p>' + message + '</p></li>').appendTo($('.messages ul'));
+               $('<li class="sent">' + returndata.userpic + '<p>' + message + '</p></li>').appendTo($(
+                  '.messages ul'));
 
                $('#message').val(null);
 
@@ -392,7 +405,7 @@
 
 
 
-   $('.submit').click(function() {
+   $('.submit').click(function () {
 
       newMessage();
 
@@ -400,7 +413,7 @@
 
 
 
-   $(window).on('keydown', function(e) {
+   $(window).on('keydown', function (e) {
 
       if (e.which == 13) {
 
@@ -466,7 +479,8 @@
 
       $.ajax({
 
-         url: '<?= base_url('user/dashboard/showmessage_list') ?>',
+         url: '<?= base_url('
+         user / dashboard / showmessage_list ') ?>',
 
          type: 'POST',
 
@@ -478,7 +492,7 @@
 
          dataType: 'json',
 
-         success: function(result) {
+         success: function (result) {
 
             $('#message_list').html(result);
 
@@ -494,10 +508,9 @@
 
    function openVideoCallWindow(fid) {
 
-		var callPath = "<?php echo base_url('livevideo/video/');?>"+fid;
+      var callPath = "<?php echo base_url('livevideo/video/');?>" + fid;
 
-		  window.open(callPath, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=250,left=20,width=600,height=450");
+      window.open(callPath, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=250,left=20,width=600,height=450");
 
-	}
-
+   }
 </script>
