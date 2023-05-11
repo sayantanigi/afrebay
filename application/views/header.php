@@ -182,11 +182,11 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                             Jobs</a>
                         <?php } ?>
                         <ul class="account-btns">
+                            <?php if(!empty($_SESSION['afrebay']['userId'])) { ?>
                             <li class="menu-item-has-children User_Dashboard_Menu">
                                 <a class="Profile_dashboard_btn" href="#" title="">Hi, IGI</a>
                                 <ul>
                                     <li>
-                                        <?php if(!empty($_SESSION['afrebay']['userId'])){?>
                                         <a href="<?=base_url(); ?>dashboard" title="">Dashboard</a>
                                     </li>
                                     <li>
@@ -198,7 +198,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                                     <li><a href="<?=base_url(); ?>logout">Logout</a></li>
                                 </ul>
                             </li>
-                            <?php } else{?>
+                            <?php } else {?>
                             <li class="">
                                 <a href="<?=base_url(); ?>register"><i class="la la-key"></i> Sign Up</a>
                             </li>
