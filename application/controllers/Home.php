@@ -247,7 +247,7 @@ class Home extends MY_Controller {
 	}
 
 	function career_tip($id) {
-		$data['get_career'] = $this->Crud_model->get_single('career_tips', "id='" . base64_decode($id) . "'");
+		$data['get_career'] = $this->Crud_model->get_single('career_tips', "id='".base64_decode($id)."'");
 		$this->load->view('header');
 		$this->load->view('frontend/career_tip', $data);
 		$this->load->view('footer');

@@ -134,7 +134,6 @@ class Crud_model extends CI_Model {
         $result = implode('', $str);
         $points = ($point) ? "." . $words[$point / 10] . " " . $words[$point = $point % 10] : '';
         // echo $result . "Rupees  " . $points . " Paise";
-        // echo $result . "Rupees  " . $points . " Paise";
         return ucwords($result) . "Rupees  Only";
     }
 }

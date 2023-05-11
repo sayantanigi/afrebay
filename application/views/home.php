@@ -100,9 +100,7 @@
                                                     $title = '';
                                                 }
                                                 ?>
-                                                <p>
-                                                    <?= ucfirst($title)?>
-                                                </p>
+                                                <p><?= ucfirst($title)?></p>
                                                 <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array();?>
                                                 <p>By <?php echo $get_user[0]['firstname'].' '.$get_user[0]['lastname']?></p>
                                             </div>
