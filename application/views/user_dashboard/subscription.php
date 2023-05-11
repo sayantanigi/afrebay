@@ -30,12 +30,12 @@
 </section>
 
 <?php $this->load->view('sidebar');?>
-        <div class="col-md-12 col-sm-12 display-table-cell v-align">
+        <div class="col-md-12 col-sm-12 display-table-cell v-align User_Sub">
             <div class="user-dashboard">
                 <div class="row row-sm">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="cardak" style="background: #f2f2f2 !important;">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row text-center align-items-end">
                                 <!-- Pricing Table-->
                                 <?php if(!empty($subcriber_pack)) { foreach ($subcriber_pack as $key) {

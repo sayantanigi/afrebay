@@ -19561,8 +19561,9 @@ footer .social {
    color: #888 !important;
 }
 
-.btn-extars .post-job-btn {
-   margin-top: 15px;
+.btn-extars {
+   display: flex;
+   align-items: center;
 }
 
 .User_Dashboard_Menu ul {
@@ -19660,6 +19661,10 @@ footer .social {
     font-weight: 500;
     font-size: 35px;
     margin: 0 !important;
+}
+
+.User_Sub {
+   
 }
 
 /********************* User Dashboard *********************/
