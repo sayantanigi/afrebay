@@ -9,7 +9,7 @@
             </div>
          </div>
       </div>
-     
+
       <div class="row">
          <div class="col-xl-3 col-lg-4 col-md-4 settings-tab">
             <div class="card">
@@ -49,15 +49,15 @@
                                  </div>
                               </div>
                              <input type="hidden" name="emailid" id="emailid" value="<?= @$get_email[0]->id ?>">
-                           </div> 
+                           </div>
                            <div class="card-body pt-0">
                            <button type="button" class="btn btn-primary" onclick="return update_email()">Save Changes</button>
                         </div>
                         <!--  <div id="terms" class="tab-pane" >
-                           
+
                         </div>  -->
-                       
-                       
+
+
                      </div>
                   </form>
                </div>
@@ -71,7 +71,7 @@
  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
  <script>
        CKEDITOR.replace('description');
-      
+
     </script>
 
  <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
@@ -104,9 +104,9 @@
 			url: "<?= admin_url('email_template/get_emaildata')?>",
 			type: 'POST',
 			data: {email_id:email_id},
-			
+
 			success: function(result)
-			{	 
+			{
         var obj=$.parseJSON(result);
 			 $('#email_title').html(obj.title);
        $('#emailid').val(obj.id);
@@ -120,7 +120,7 @@
   {
     var email_id=$('#emailid').val();
     var signature=$('#signature').val();
-    
+
     var description=CKEDITOR.instances['description'].getData();
     $.ajax({
       url:"<?= admin_url('email_template/update_action')?>",
@@ -136,8 +136,5 @@
       }
   });
   }
- 
- </script>
- 
 
- 
+ </script>

@@ -27,10 +27,10 @@ class Email_template extends MY_Controller {
   function get_emaildata()
   {
     $get_data=$this->Crud_model->GetData('email_template','',"id='".$_POST['email_id']."'",'','','','1');
-   
+
     if(!empty($get_data))
     {
-      
+
         $html_data=array(
           'id'=>$get_data->id,
           'title'=>$get_data->title,
@@ -38,15 +38,15 @@ class Email_template extends MY_Controller {
           'signature'=>$get_data->signature,
         );
     }
-    
-    
+
+
     echo json_encode($html_data); exit;
   }
 
 
 
   public function update_action()
-{  
+{
     $data = array(
           'signature' => $this->input->post('signature',TRUE),
           'description' => $this->input->post('description',TRUE),

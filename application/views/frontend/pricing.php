@@ -1,13 +1,12 @@
-<?php 
- if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
-     $banner_img=base_url("uploads/banner/".$get_banner->image);
-            } else{
-       $banner_img=base_url("assets/images/resource/mslider1.jpg");
-        } ?>
+<?php
+if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
+    $banner_img=base_url("uploads/banner/".$get_banner->image);
+} else{
+    $banner_img=base_url("assets/images/resource/mslider1.jpg");
+} ?>
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"
-            class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
@@ -23,17 +22,14 @@
 
 <section>
     <div class="block Pricing_Data">
-        <div data-velocity="-.2"
-            style="background: url('<?= base_url('assets/images/resource/parallax5.jpg')?>') repeat scroll 50% 422.28px transparent;"
-            class="parallax scrolly-invisible"></div>
+        <div data-velocity="-.2" style="background: url('<?= base_url('assets/images/resource/parallax5.jpg')?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading">
                         <h2>Become A AfreBay Partner Today!</h2>
-                        <span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time
-                            schedule or a flexible or flextime schedule.</span>
+                        <span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
                     </div>
                     <!-- Heading -->
                     <div class="plans-sec">
@@ -41,15 +37,15 @@
                             <?php if(!empty($get_subscription)){
                                    foreach ($get_subscription as $key) {
                                    $get_service=$this->Crud_model->GetData('subscription_service','',"subscription_id='".$key->id."'");
-
                                    ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                                 <div class="pricetable style2">
                                     <div class="Price_Shadow"></div>
                                     <div class="Price_Tag">
                                         <div class="Price_Tag_data">
-                                            <h2><?= number_format($key->subscription_amount)?>$</h2>
-                                            <span><?= $key->subscription_duration?> Month</span>
+                                            <h2><?= ucfirst($key->subscription_type)?></h2>
+                                            <h2><?= $key->subscription_amount?>$</h2>
+                                            <span><?= $key->subscription_duration?></span>
                                         </div>
                                     </div>
                                     <div class="pricetable-head">
@@ -57,18 +53,13 @@
                                         <h3><?= ucfirst($key->subscription_name)?></h3>
                                     </div>
                                     <!--  <input type="text" name="subscription_id" id="subscription_id<?= $key->id; ?>" value="<?= $key->id; ?>"> -->
-                                    <input type="hidden" name="amount" id="amount<?= $key->id; ?>"
-                                        value="<?= $key->subscription_amount; ?>">
-
-                                    <!-- Price Table -->
-                                    <ul class="Price_Details">
-                                        <?php if(!empty($get_service)){ foreach($get_service as $row){?>
-                                        <li><?= ucfirst($row->service)?></li>
-                                        <?php } }?>
-                                    </ul>
+                                    <input type="hidden" name="amount" id="amount<?= $key->id; ?>" value="<?= $key->subscription_amount; ?>">
+                                    <div class="pricing-options">
+            							<?php echo $key->subscription_description;?>
+            						</div>
                                     <?php
-                                               if(!empty($_SESSION['gigwork']['userType'])){
-                                               if($_SESSION['gigwork']['userType']=='2'){?>
+                                    if(!empty($_SESSION['gigwork']['userType'])){
+                                    if($_SESSION['gigwork']['userType']=='2'){?>
                                     <!-- <a href="#" onclick="return buy_subscription(<?= $key->id; ?>);" >Buy</a>  -->
                                     <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($key->id))?>">Buy</a>
                                     <?php } else{?>
