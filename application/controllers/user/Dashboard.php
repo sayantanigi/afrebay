@@ -99,7 +99,6 @@ class Dashboard extends CI_Controller {
 			} else {
 				$video  = '';
 			}
-
 		}
 
 		if ($_FILES['resume']['name'] != '') {
@@ -148,6 +147,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function subscription() {
+		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/subscription', $data);
@@ -328,8 +328,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	function showmessage_list()
-	{
+	function showmessage_list() {
 		$user_id = $this->input->post('user_id');
 		$get_data = $this->Users_model->getChat();
 		//print_r($get_data);
@@ -344,16 +343,7 @@ class Dashboard extends CI_Controller {
 		} else {
 			$userpic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 		}
-		$html_data = '<div class="contact-profile">
-                            ' . $userpic . '
-                                   <p>' . ucfirst($name) . '</p>
-                                    <div class="social-media">
-                                      <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                                       <a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                                          <a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a>
-                                            </div>
-                                            </div><div class="messages">
-                                               <ul>';
+		$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
 		if (!empty($get_data)) {
 			foreach ($get_data as $key) {
 				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
@@ -379,17 +369,13 @@ class Dashboard extends CI_Controller {
 				$html_data .= $sent . $reply;
 			}
 		} else {
-			$html_data .= '<li class="sent">
-                                    <center>No Messages</center>
-                                          </li>';
+			$html_data .= '<li class="sent"><center>No Messages</center></li>';
 		}
-
 		echo json_encode($html_data);
 		exit;
 	}
 
-	function sent_message()
-	{
+	function sent_message() {
 		if (!empty($this->input->post('userto_id'))) {
 			$data = array(
 				'userfrom_id' => $_SESSION['afrebay']['userId'],
@@ -415,15 +401,13 @@ class Dashboard extends CI_Controller {
 		}
 	}
 	///////////////////////////////////// end chat/////////////////////////////////
-	function video_call()
-	{
+	function video_call() {
 		$this->load->view('header');
 		$this->load->view('user_dashboard/video_call');
 		$this->load->view('footer');
 	}
 
-	public function save_event()
-	{
+	public function save_event() {
 		// $starttime=$_POST['starthours'].':'.$_POST['startminute'].' '.$_POST['starttype'];
 		// $endtime=$_POST['endhours'].':'.$_POST['endminute'].' '.$_POST['endtype'];
 		$data = array(
@@ -437,19 +421,16 @@ class Dashboard extends CI_Controller {
 			'event_icon' => $_POST['event_icon'],
 			'created_date' => date('Y-m-d H:i:s'),
 		);
-
 		$this->Crud_model->SaveData('appointment_scheduling', $data);
 		$this->session->set_flashdata('message', 'Appointment Created Successfully !');
 		redirect(base_url('calender'));
 	}
 
-	public function get_events()
-	{
+	public function get_events() {
 		$events = $this->db->query("select * from appointment_scheduling where user_id='" . $_SESSION['afrebay']['userId'] . "'")->result();
 		$data_events = array();
 
 		foreach ($events as $r) {
-
 			$data_events[] = array(
 				"id" => $r->id,
 				"title" => $r->event_name,
@@ -459,23 +440,18 @@ class Dashboard extends CI_Controller {
 				"icon" => $r->event_icon,
 			);
 		}
-
-
 		echo json_encode($data_events);
 		exit();
 	}
 
-	function change_password()
-	{
+	function change_password() {
 		$this->load->view('header');
 		$this->load->view('user_dashboard/change_password');
 		$this->load->view('footer');
 	}
 
-	function update_password()
-	{
+	function update_password() {
 		$get_user = $this->Crud_model->get_single('users', "userId='" . $_SESSION['afrebay']['userId'] . "'");
-
 		if ($get_user->password == md5($_POST['cur_password'])) {
 			$data = array(
 				'password' => md5($_POST['new_password']),
@@ -489,9 +465,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	////////////////////////////////// start rating /////////////////////////////////////
-
-	function save_employer_rating()
-	{
+	function save_employer_rating() {
 		if (!empty($this->input->post('rating'))) {
 			$data = array(
 				'employer_id' => $_SESSION['afrebay']['userId'],
@@ -510,9 +484,7 @@ class Dashboard extends CI_Controller {
 	}
 	////////////////////////////////// end rating /////////////////////////////////////
 
-
 	//////////////////////////////// start education ///////////////////////////
-
 	function education_list()
 	{
 		$data['education_list'] = $this->Crud_model->GetData('user_education', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
@@ -730,8 +702,28 @@ class Dashboard extends CI_Controller {
 		$this->session->set_flashdata('message', 'Item deleted successfully !');
 		redirect(base_url('workexperience-list'));
 	}
-
-
 	///////////////// end work experience //////////////////////////
 
+	///////////////// User Subscription //////////////////////////
+	function userSubscription(){
+		//print_r($this->input->post()); die;
+		// $duration = $this->input->post('sub_duration');
+		// $intDuration = preg_replace('/\D/', '', $duration);
+		$paymentDate = date('Y-m-d H:i:s');
+		$data = array(
+			'employer_id' => $this->input->post('user_id'),
+			'subscription_id' => $this->input->post('sub_id'),
+			'name_of_card' => $this->input->post('sub_name'),
+			'email' => $this->input->post('user_email'),
+			'amount' => $this->input->post('sub_price'),
+			'duration' => $this->input->post('sub_duration'),
+			'transaction_id' => 'transaction_001',
+			'payment_date' => $paymentDate,
+			'created_date' => $paymentDate,
+			'duration' => $this->input->post('sub_duration'),
+			'expiry_date' => date("Y-m-d", strtotime($this->input->post('sub_duration'), $paymentDate))
+		);
+		print_r($data); die;
+		$this->Crud_model->SaveData('employer_subscription', $data);
+	}
 }
