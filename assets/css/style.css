@@ -19744,4 +19744,10 @@ footer .social {
    background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
 }
 
+.User_Sub #navigation .navi ul li a i.fa-joomla:before,
+.User_Sub #navigation .navi ul li a i.fa-commenting-o:before {
+   font-family: 'FontAwesome';
+   font-weight: 100;
+}
+
 /********************* User Dashboard *********************/
