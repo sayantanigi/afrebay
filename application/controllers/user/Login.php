@@ -27,40 +27,11 @@ class Login extends CI_Controller {
 				'userType' =>$_POST['user_type'],
 				'email' =>$_POST['email'],
 				'mobile' =>$_POST['mobile'],
-				'serviceType' => implode(", ", $_POST['service']),
+				//'serviceType' => implode(", ", $_POST['service']),
 				'password' => md5($_POST['password']),
 				'created'=>date('Y-m-d H:i:s'),
 				'status'=>0
 			);
-			// if($this->Mymodel->insert('users',$data)) {
-			// 	$email=$_POST['email'];
-			//     $this->load->library('email');
-			// 	$data=array('email'=>$email,'password'=>$_POST['password']);
-			// 	$htmlContent = $this->load->view('email_template/signup',$data,TRUE);
-			// 	$config = array(
-			// 		'protocol' => 'ssmtp',
-			// 		'smtp_host' => 'ssl://ssmtp.googlemail.com',
-			// 		'smtp_port' => 587,
-			// 		'smtp_user' => 'mediaadgroup',
-			// 		'smtp_pass' => 'Kade2000',
-			// 		'smtp_crypto' => 'security',
-			// 		'mailtype' => 'html',
-			// 		'smtp_timeout' => '4',
-			// 		'charset' => 'iso-8859-1',
-			// 		'wordwrap' => TRUE
-			// 	);
-			// 	$this->email->initialize($config);
-			// 	$this->email->from('info@afrebay.pro','AFREBAY PRO');
-			// 	$this->email->to($email);
-			// 	$this->email->subject('Registration Confirmation message from AFREBAY PRO');
-			// 	$this->email->message($htmlContent);
-			// 	$this->email->send();
-			// 	$this->session->set_flashdata('success', 'Registration Successfull !');
-			// 	$data=array('result'=>1,'data'=>1);
-			// } else {
-			// 	$this->session->set_flashdata('error', 'Failed to Register !');
-			// 	$data=array('result'=>2,'data'=>2);
-			// }
 			$result = $this->Mymodel->insert('users',$data);
 			$insert_id = $this->db->insert_id();
 			if(!empty($insert_id)) {

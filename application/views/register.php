@@ -5,7 +5,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
 <style>
-#register-messages {text-align: center; margin-top: 10px;}
+#register-messages {text-align: center; margin-top: 10px; display: none;}
+#err-messages {text-align: center; margin-top: 10px; display: none;}
 </style>
 <section class="overlape">
     <div class="block no-padding">
@@ -34,9 +35,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-12 col-sm-12 SignUp_Left">
                                     <h3>Sign Up</h3>
-                                    <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at
-                                        lobortis
-                                        ullamcorper</span>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
                                     <div class="select-user">
                                         <span class="user-tab" user_type="1" onclick="get_value(1)">Freelancer</span>
                                         <span class="user-tab" user_type="2" onclick="get_value(2)">Vender</span>
@@ -44,7 +43,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <div class="error" id="err_usertype"></div>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignUp_Right">
-                                    <div id="register-messages" class="text-success f-20"></div>
+                                    <div id="register-messages" class="text-success f-20">
+                                        <h4>Successful Registration</h4>
+                                        <p style="color: #28a745;">We have sent an activation link to your account to continue wih the registration process.</p>
+                                    </div>
+                                    <div id="err-messages">
+                                        <h4 style="color: red;">Error</h4>
+                                        <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
+                                    </div>
                                     <form action="#" method="post">
                                         <div class="row m-0">
                                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -87,7 +93,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 </div>
                                                 <div class="error text-left" id="err_mobile"></div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <!-- <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="cfield">
                                                     <label for="" class="form-label">Select Option</label>
                                                     <div class="cfield_Input">
@@ -104,10 +110,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     </div>
                                                 </div>
                                                 <div class="error text-left" id="err_service"></div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignUp_Btn">
                                                 <input type="hidden" name="user_type" id="user_type">
                                                 <button type="button" class="btn btn-info" onclick="return btn_register();">Signup</button>
+                                                <img src="<?php echo base_url()?>uploads/loading.gif" id="loader">
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="extra-login">
@@ -129,6 +136,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </section>
+<style>
+#loader {display: none; width: 40px;}
+</style>
 <script src="<?= base_url('assets/js/jquery.min.js')?>" type="text/javascript"></script>
 <script type="text/javascript">
     function get_value(id) {

@@ -71,13 +71,18 @@ function btn_register() {
 		type: 'POST',
 		data: {user_type:user_type,username:username,email:email,password:password,service:service,mobile:mobile},
 		dataType:'json',
+		beforeSend : function(){
+			$("#loader").show();
+			$(".SignUp_Btn button").prop('disable','true');
+		},
 		success:function(returndata) {
 			//console.log(returndata);
+			$("#loader").hide();
 			if(returndata.result==1) {
-				$('#register-messages').append("Registration Successfull !");
+				$('#register-messages').show();
 				setTimeout(function () {
-                 	window.location.href=base_url+'register';
-             	}, 2500);
+                 	$('#register-messages').hide();
+             	}, 3000);
 			}
 			if(returndata.result=='0') {
 				if(returndata.data=='phone') {
@@ -94,6 +99,7 @@ function btn_register() {
 				}
 			}
 			if(returndata.result==2) {
+				$('#err-messages').fadeIn().html('Please').css('color','red');
 				window.location.href=base_url+'register';
 			}
 		}
