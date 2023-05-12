@@ -14137,9 +14137,9 @@ h2.job-bid {
    width: 95%;
    min-width: 360px;
    max-width: 1000px;
-   height: 92vh;
+   /* height: 92vh;
    min-height: 300px;
-   max-height: 720px;
+   max-height: 720px; */
    background: #E6EAEA;
 }
 
@@ -14259,6 +14259,8 @@ h2.job-bid {
    float: left;
    margin-left: 15px;
    color: #fff;
+   font-weight: 600;
+   text-transform: uppercase;
 }
 
 @media screen and (max-width: 735px) {
@@ -14551,7 +14553,7 @@ h2.job-bid {
 }
 
 #frame #sidepanel #contacts ul li.contact:hover {
-   background: #32465a;
+   background: #0000001a;
 }
 
 #frame #sidepanel #contacts ul li.contact.active {
@@ -14742,7 +14744,10 @@ h2.job-bid {
    width: 100%;
    height: 60px;
    line-height: 60px;
-   background: #0e5e55;
+   background: #ffffff;
+   box-shadow: 0 10px 25px #c3c3c3;
+   z-index: 1;
+   position: relative;
 }
 
 #frame .content .contact-profile img {
@@ -14769,7 +14774,7 @@ h2.job-bid {
 
 #frame .content .contact-profile .social-media i:nth-last-child(1) {
    margin-right: 20px;
-   color: #fff;
+   color: #f4794f;
 }
 
 #frame .content .contact-profile .social-media i:hover {
@@ -14777,7 +14782,7 @@ h2.job-bid {
 }
 
 #frame .content .messages {
-   background: #E7E3E1;
+   background: #f3f3f3;
    height: auto;
    min-height: calc(100% - 93px);
    max-height: calc(100% - 93px);
@@ -14818,8 +14823,10 @@ h2.job-bid {
 }
 
 #frame .content .messages ul li.sent p {
-   background: #ffffff;
+   background: #dddddd;
    color: #000000;
+   font-size: 14px;
+   font-weight: 500;
 }
 
 #frame .content .messages ul li.replies img {
@@ -14828,9 +14835,11 @@ h2.job-bid {
 }
 
 #frame .content .messages ul li.replies p {
-   background: #E2FFCB;
-   color: #000000;
+   color: #ffffff;
    float: right;
+   background: linear-gradient(315deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%);
+   font-size: 14px;
+   font-weight: 500;
 }
 
 #frame .content .messages ul li img {
@@ -14869,13 +14878,15 @@ h2.job-bid {
    font-family: "proxima-nova", "Source Sans Pro", sans-serif;
    float: left;
    border: none;
-   width: calc(100% - 120px);
+   width: calc(100% - 90px);
    padding: 15px 25px;
    font-size: 0.8em;
    color: #000000;
-   background: #fff;
+   background: #f3f3f3;
+   box-shadow: inset 3px 3px 5px #cbcbcb, inset -3px -3px 5px #ffffff;
    border-radius: 35px;
    margin-left: 10px;
+   margin-bottom: 25px !important;
 }
 
 @media screen and (max-width: 735px) {
@@ -14898,6 +14909,7 @@ h2.job-bid {
    color: #435f7a;
    opacity: .5;
    cursor: pointer;
+   display: none;
 }
 
 @media screen and (max-width: 735px) {
@@ -14916,11 +14928,15 @@ h2.job-bid {
    border: none;
    border-radius: 50%;
    width: 50px;
-   margin-right: 10px;
+   margin-right: 15px;
    padding: 12px 0;
    cursor: pointer;
-   background: #19AF96;
    color: #ffffff;
+   background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+}
+
+#frame .content .message-input .wrap button:hover {
+   background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
 }
 
 @media screen and (max-width: 735px) {
@@ -14930,7 +14946,7 @@ h2.job-bid {
 }
 
 #frame .content .message-input .wrap button:hover {
-   background: #0d9b83;
+   background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
 }
 
 #frame .content .message-input .wrap button:focus {
@@ -19798,7 +19814,7 @@ footer .social {
 
 .Chat_User #frame .content .messages ul li.sent p {
    margin: 0 !important;
-   border-radius: 0 13px 13px 13px !important;
+   border-radius: 13px 13px 13px 0 !important;
 }
 
 .Chat_User #frame .content .messages ul li.replies img {
@@ -19809,14 +19825,73 @@ footer .social {
 
 .Chat_User #frame .content .messages ul li.replies p {
    margin: 0 !important;
-   border-radius: 13px 0 13px 13px !important;
+   border-radius: 13px 13px 0 13px !important;
 }
 
 .Chat_User #frame .content .contact-profile p {
    margin: 0 !important;
    margin-top: 15px !important;
    font-weight: 600;
-   color: #fff;
+   color: #000;
+}
+
+.Chat_User .cardak,
+.Chat_User .cardak .col-xs-12.col-lg-12.col-md-12.col-sm-12.col-12 {
+   padding: 0 !important;
+   border: 0 !important;
+   box-shadow: none !important;
+}
+
+.Chat_User #frame {
+   height: 400px;
+   min-height: 400px;
+   background: transparent !important;
+}
+
+.Chat_User #frame #sidepanel {
+   border-radius: 15px 0 0 15px;
+   background: linear-gradient(0deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%);
+}
+
+.Chat_User #frame #sidepanel #search {
+   border: 0 !important;
+}
+
+.Chat_User #frame #sidepanel #search input {
+   background: #893310 !important;
+   font-size: 13px;
+}
+
+.Chat_User #frame .content {
+   border-radius: 0 15px 15px 0;
+   box-shadow: 5px 0 10px #e3e3e3;
+   border: 2px solid #f27854c9;
+   border-left: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.Chat_User #frame .content img.chat-start-img {
+   background-repeat: no-repeat;
+   height: 300px;
+   width: 300px;
+   object-fit: contain;
+}
+
+.Chat_User #frame.chat_frame {
+   height: 92vh;
+   max-height: 720px;
+}
+
+.Chat_User #frame.chat_frame .content {
+   display: unset;
+   border: 0;
+}
+
+.Chat_User #frame.chat_frame .content img.chat-start-img,
+.Chat_User #frame.chat_frame .content #message_list .contact-profile .social-media a:nth-last-child(1) {
+   display: none;
 }
 
 /********************* User Dashboard *********************/
