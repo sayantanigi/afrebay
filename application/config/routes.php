@@ -87,6 +87,7 @@ $route['jobbid'] = "user/dashboard/jobbid";
 $route['calender'] = "user/dashboard/calender";
 $route['chat'] = "user/dashboard/chat";
 $route['video'] = "user/dashboard/video_call";
+$route['product'] = "user/dashboard/products";
 $route['password-reset'] = "user/dashboard/change_password";
 $route['education-list'] = "user/dashboard/education_list";
 $route['add-education'] = "user/dashboard/add_education";

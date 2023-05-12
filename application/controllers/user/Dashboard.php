@@ -164,6 +164,15 @@ class Dashboard extends CI_Controller
 		$this->load->view('user_dashboard/subscription', $data);
 		$this->load->view('footer');
 	}
+
+	public function products() {
+		//$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
+		$this->load->view('header');
+		//$this->load->view('user_dashboard/product', $data);
+		$this->load->view('user_dashboard/products');
+		$this->load->view('footer');
+	}
+
 	public function myservice()
 	{
 		$data['get_services'] = $this->Crud_model->GetData('employer_services', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
