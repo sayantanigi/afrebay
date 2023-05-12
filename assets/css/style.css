@@ -14507,7 +14507,7 @@ h2.job-bid {
 
 #frame #sidepanel #contacts {
    height: calc(100% - 177px);
-   overflow-y: scroll;
+   /* overflow-y: scroll; */
    overflow-x: hidden;
    width: 100%;
 }
@@ -14604,6 +14604,7 @@ h2.job-bid {
    border-radius: 50%;
    float: left;
    margin-right: 10px;
+   object-fit: cover;
 }
 
 @media screen and (max-width: 735px) {
@@ -14741,15 +14742,16 @@ h2.job-bid {
    width: 100%;
    height: 60px;
    line-height: 60px;
-   background: #f5f5f5;
+   background: #0e5e55;
 }
 
 #frame .content .contact-profile img {
    width: 45px;
    height: 45px;
    border-radius: 50%;
+   object-fit: cover;
    float: left;
-   margin: 9px 12px 0 9px;
+   margin: 9px 12px 0 15px;
 }
 
 #frame .content .contact-profile p {
@@ -14767,6 +14769,7 @@ h2.job-bid {
 
 #frame .content .contact-profile .social-media i:nth-last-child(1) {
    margin-right: 20px;
+   color: #fff;
 }
 
 #frame .content .contact-profile .social-media i:hover {
@@ -14774,6 +14777,7 @@ h2.job-bid {
 }
 
 #frame .content .messages {
+   background: #E7E3E1;
    height: auto;
    min-height: calc(100% - 93px);
    max-height: calc(100% - 93px);
@@ -14814,8 +14818,8 @@ h2.job-bid {
 }
 
 #frame .content .messages ul li.sent p {
-   background: #435f7a;
-   color: #f5f5f5;
+   background: #ffffff;
+   color: #000000;
 }
 
 #frame .content .messages ul li.replies img {
@@ -14824,7 +14828,8 @@ h2.job-bid {
 }
 
 #frame .content .messages ul li.replies p {
-   background: #f5f5f5;
+   background: #E2FFCB;
+   color: #000000;
    float: right;
 }
 
@@ -14864,10 +14869,13 @@ h2.job-bid {
    font-family: "proxima-nova", "Source Sans Pro", sans-serif;
    float: left;
    border: none;
-   width: calc(100% - 90px);
-   padding: 11px 32px 10px 8px;
+   width: calc(100% - 120px);
+   padding: 15px 25px;
    font-size: 0.8em;
-   color: #32465a;
+   color: #000000;
+   background: #fff;
+   border-radius: 35px;
+   margin-left: 10px;
 }
 
 @media screen and (max-width: 735px) {
@@ -14884,7 +14892,8 @@ h2.job-bid {
    position: absolute;
    right: 60px;
    z-index: 4;
-   margin-top: 10px;
+   margin-top: 15px;
+   margin-right: 20px;
    font-size: 1.1em;
    color: #435f7a;
    opacity: .5;
@@ -14905,11 +14914,13 @@ h2.job-bid {
 #frame .content .message-input .wrap button {
    float: right;
    border: none;
+   border-radius: 50%;
    width: 50px;
+   margin-right: 10px;
    padding: 12px 0;
    cursor: pointer;
-   background: #32465a;
-   color: #f5f5f5;
+   background: #19AF96;
+   color: #ffffff;
 }
 
 @media screen and (max-width: 735px) {
@@ -14919,7 +14930,7 @@ h2.job-bid {
 }
 
 #frame .content .message-input .wrap button:hover {
-   background: #435f7a;
+   background: #0d9b83;
 }
 
 #frame .content .message-input .wrap button:focus {
@@ -19744,10 +19755,56 @@ footer .social {
    background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
 }
 
-.User_Sub #navigation .navi ul li a i.fa-joomla:before,
-.User_Sub #navigation .navi ul li a i.fa-commenting-o:before {
+.User_Sidemenu #navigation .navi ul li a i.fa-joomla:before,
+.User_Sidemenu #navigation .navi ul li a i.fa-commenting-o:before {
    font-family: 'FontAwesome';
    font-weight: 100;
+}
+
+/* Chat */
+
+.Chat_User {
+   padding-top: 0 !important;
+}
+
+.Chat_User #frame #sidepanel #search input {
+   padding: 10px 0 10px 40px !important;
+}
+
+.Chat_User #frame #sidepanel #contacts ul li .wrap {
+   width: 80% !important;
+}
+
+.Chat_User #frame #sidepanel #contacts ul li .wrap .meta p.preview {
+   margin-bottom: 0 !important;
+}
+
+.Chat_User #frame .content .messages ul li.sent img {
+   margin: 0 !important;
+   margin-right: 10px !important;
+}
+
+.Chat_User #frame .content .messages ul li.sent p {
+   margin: 0 !important;
+   border-radius: 0 13px 13px 13px !important;
+}
+
+.Chat_User #frame .content .messages ul li.replies img {
+   margin: 0 !important;
+   margin-left: 10px !important;
+   object-fit: cover;
+}
+
+.Chat_User #frame .content .messages ul li.replies p {
+   margin: 0 !important;
+   border-radius: 13px 0 13px 13px !important;
+}
+
+.Chat_User #frame .content .contact-profile p {
+   margin: 0 !important;
+   margin-top: 15px !important;
+   font-weight: 600;
+   color: #fff;
 }
 
 /********************* User Dashboard *********************/
