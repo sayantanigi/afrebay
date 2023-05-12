@@ -38,7 +38,7 @@
                         <div class="col-xl-12 col-lg-12 col-md-12">
                             <div class="cardak">
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                    <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div id="frame">
                                             <div id="sidepanel">
                                                 <div id="profile">
@@ -155,6 +155,7 @@
 
                                  </div>
                                  <div class="content">
+                                    <img class="chat-start-img" src="assets/images/chat-start-img.png">
                                     <div id="message_list" style="height:650px;  overflow-y: scroll;overflow-y: hidden;">
                                        </ul>
                                     </div>
@@ -184,7 +185,9 @@
 </section>
 
 
-
+<style>
+   .message-input{display: none;}
+</style>
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -223,8 +226,6 @@
 
    });
 
-
-
    $(".expand-button").click(function() {
 
       $("#profile").toggleClass("expanded");
@@ -232,8 +233,6 @@
       $("#contacts").toggleClass("expanded");
 
    });
-
-
 
    $("#status-options ul li").click(function() {
 
@@ -278,8 +277,6 @@
       $("#status-options").removeClass("active");
 
    });
-
-
 
    function newMessage() {
 
@@ -341,15 +338,11 @@
 
    };
 
-
-
    $('.submit').click(function() {
 
       newMessage();
 
    });
-
-
 
    $(window).on('keydown', function(e) {
 
@@ -366,7 +359,6 @@
    //# sourceURL=pen.js
 
    function getuser(user_id) {
-
       var displayProduct = 3;
 
       $('#message_list').html(createSkeleton(displayProduct));
@@ -432,7 +424,8 @@
          success: function(result) {
 
             $('#message_list').html(result);
-
+            $('.message-input').show();
+            $('#frame').addClass('chat_frame');
 
 
          }
@@ -441,8 +434,6 @@
 
    }
 
-
-
    function openVideoCallWindow(fid) {
 
 		var callPath = "<?php echo base_url('livevideo/video/');?>"+fid;
@@ -450,5 +441,6 @@
 		  window.open(callPath, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=250,left=20,width=600,height=450");
 
 	}
+
 
 </script>
