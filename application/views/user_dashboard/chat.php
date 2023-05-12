@@ -28,7 +28,7 @@
     </div>
 </section>
 
-<section class="dashboard-gig">
+<section class="dashboard-gig Chat_User">
     <div class="container-fluid display-table">
         <div class="row display-table-row">
             <?php $this->load->view('sidebar'); ?>
@@ -143,93 +143,44 @@
                                                    </li>
 
                                                 <?php } ?>
-
-
-
                                           <?php }
-
                                           } ?>
-
-
-
-
-
                                        </ul>
-
                                     </div>
 
                                     <!-- <div id="bottom-bar">
-
                                                <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-
                                                <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-
                                             </div> -->
 
                                  </div>
-
                                  <div class="content">
-
-
-
                                     <div id="message_list" style="height:650px;  overflow-y: scroll;overflow-y: hidden;">
-
-
-
                                        </ul>
-
                                     </div>
-
-
-
-
-
-
-
                                     <div class="message-input">
-
                                        <div class="wrap">
-
                                           <input type="hidden" name="userto_id" id="userto_id" value="" />
-
                                           <input type="text" name="message" id="message" placeholder="Write your message..." />
-
                                           <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-
                                           <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-
                                        </div>
-
                                     </div>
-
                                  </div>
 
                                  <!--end message list div -->
 
                               </div>
-
                            </div>
-
                         </div>
-
                      </div>
-
                   </div>
-
                </div>
-
             </div>
-
          </div>
-
       </div>
-
    </div>
-
    </div>
-
-
-
 </section>
 
 
