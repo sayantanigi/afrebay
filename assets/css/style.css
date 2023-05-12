@@ -19608,9 +19608,17 @@ footer .social {
    padding: 14px 25px;
 }
 
+.User_Dashboard_Menu .Profile_dashboard_btn {
+   border: 2px solid #f27854;
+   border-radius: 35px;
+   font-weight: 600;
+   width: 105px;
+   padding: 10px 25px !important;
+}
+
 .User_Dashboard_Menu .Profile_dashboard_btn::before {
    position: absolute;
-   right: 0px;
+   right: 15px;
    width: 10px;
    height: 10px;
    content: "\f110";
@@ -19618,6 +19626,10 @@ footer .social {
    font-size: 9px;
    top: 50%;
    margin-top: -10px;
+}
+
+.User_Dashboard_Menu ul {
+   margin-top: 15px;
 }
 
 .User_Dashboard_Menu ul li {
