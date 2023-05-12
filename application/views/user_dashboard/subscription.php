@@ -28,6 +28,13 @@
 
 <?php $this->load->view('sidebar');?>
 <div class="col-md-12 col-sm-12 display-table-cell v-align User_Sub">
+    <div id="subscription-messages" class="text-success f-20">
+        <p style="color: #28a745;">Subscription Successful.</p>
+    </div>
+    <div id="err-messages">
+        <h4 style="color: red;">Error</h4>
+        <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
+    </div>
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
@@ -48,19 +55,20 @@
                                         </div>
                                         <div class="Icon">
                                             <span>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/5673/5673647.png">
+                                                <!-- <img src="https://cdn-icons-png.flaticon.com/512/5673/5673647.png"> -->
+                                                <img src="<?php echo base_url()?>uploads/logo/3397_favicon.png" />
                                             </span>
                                         </div>
                                     </div>
                                     <div></div>
                                     <div><?= $value->subscription_description; ?></div>
                                     <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $i?>">Subscribe</a>
-                                    <input type="text" name="user_id" id="user_id_<?php echo $i?>" value="<?php echo $_SESSION['afrebay']['userId']?>" />
-                                    <input type="text" name="sub_id" id="sub_id_<?php echo $i?>" value="<?php echo $value->id?>" />
-                                    <input type="text" name="sub_id" id="sub_name_<?php echo $i?>" value="<?php echo $value->subscription_name?>" />
-                                    <input type="text" name="user_email" id="user_email_<?php echo $i?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>" />
-                                    <input type="text" name="sub_price" id="sub_price_<?php echo $i?>" value="<?php echo $value->subscription_amount?>" />
-                                    <input type="text" name="sub_duration" id="sub_duration_<?php echo $i?>" value="<?php echo $value->subscription_duration?>" />
+                                    <input type="hidden" name="user_id" id="user_id_<?php echo $i?>" value="<?php echo $_SESSION['afrebay']['userId']?>" />
+                                    <input type="hidden" name="sub_id" id="sub_id_<?php echo $i?>" value="<?php echo $value->id?>" />
+                                    <input type="hidden" name="sub_id" id="sub_name_<?php echo $i?>" value="<?php echo $value->subscription_name?>" />
+                                    <input type="hidden" name="user_email" id="user_email_<?php echo $i?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>" />
+                                    <input type="hidden" name="sub_price" id="sub_price_<?php echo $i?>" value="<?php echo $value->subscription_amount?>" />
+                                    <input type="hidden" name="sub_duration" id="sub_duration_<?php echo $i?>" value="<?php echo $value->subscription_duration?>" />
                                 </div>
                             </div>
                             <?php $i++; }} else { ?>
@@ -101,6 +109,10 @@
     </div>
 </div>
 </section>
+<style>
+#subscription-messages{display: none;}
+#err-messages{display: none;}
+</style>
 <script>
 $(document).ready(function(){
     <?php
@@ -119,27 +131,21 @@ $(document).ready(function(){
                 url:base_url+"user/dashboard/userSubscription",
                 method:"POST",
                 data:{user_id: user_id,sub_id: sub_id,sub_name: sub_name,user_email: user_email,sub_price: sub_price,sub_duration: sub_duration},
+                beforeSend : function(){
+        			$("#loader").show();
+        			//$(".SignUp_Btn button").prop('disable','true');
+        		},
                 success:function(data) {
                     //alert(data);
                     if (data == '1'){
-                        $('.text-success').show();
+                        $('#subscription-messages').show();
                         setTimeout(function () {
-                            $('.text-success').hide();
-                        }, 2500);
-                    } else if (data == '2') {
-                        $('.text-error').show();
-                        setTimeout(function () {
-                            $('.text-error').hide();
-                        }, 2500);
-                    } else if (data == '3') {
-                        $('.text-danger').show();
-                        setTimeout(function () {
-                            $('.text-danger').hide();
+                            $('#subscription-messages').hide();
                         }, 2500);
                     } else {
-                        $('.text-danger').show();
+                        $('#err-messages').show();
                         setTimeout(function () {
-                            $('.text-danger').hide();
+                            $('#err-messages').hide();
                         }, 2500);
                     }
                 }

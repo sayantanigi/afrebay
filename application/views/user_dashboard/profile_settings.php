@@ -142,14 +142,14 @@
                                                 <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
                                                 <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
                                             </div>
+
+                                            <?php if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Zip Code</h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo @$userinfo->zip;?>" required onkeypress="only_number(event)" maxlength="6" />
                                             </div>
-
-                                            <?php if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Resume upload</h4>
@@ -229,7 +229,7 @@
                                             </div>
                                             <?php } ?>
 
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-12">
                                                 <label for="last_name">
                                                     <h4>Short Bio</h4>
                                                 </label>
