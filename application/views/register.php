@@ -51,7 +51,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <h4 style="color: red;">Error</h4>
                                         <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
                                     </div>
-                                    <form action="#" method="post">
+                                    <form id="signUp_form" action="#" method="post">
                                         <div class="row m-0">
                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                 <div class="cfield cfield_top">

@@ -78,11 +78,12 @@ function btn_register() {
 		success:function(returndata) {
 			//console.log(returndata);
 			$("#loader").hide();
+			$("#signUp_form")[0].reset()
 			if(returndata.result==1) {
 				$('#register-messages').show();
 				setTimeout(function () {
                  	$('#register-messages').hide();
-             	}, 3000);
+             	}, 20000);
 			}
 			if(returndata.result=='0') {
 				if(returndata.data=='phone') {
@@ -99,8 +100,10 @@ function btn_register() {
 				}
 			}
 			if(returndata.result==2) {
-				$('#err-messages').fadeIn().html('Please').css('color','red');
-				window.location.href=base_url+'register';
+				$('#err-messages').show();
+				setTimeout(function () {
+                 	$('#register-messages').hide();
+             	}, 20000);
 			}
 		}
 	});
