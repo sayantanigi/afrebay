@@ -38,7 +38,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
                                     <div class="select-user">
                                         <span class="user-tab" user_type="1" onclick="get_value(1)">Freelancer</span>
-                                        <span class="user-tab" user_type="2" onclick="get_value(2)">Vender</span>
+                                        <span class="user-tab" user_type="2" onclick="get_value(2)">Vendor</span>
                                     </div>
                                     <div class="error" id="err_usertype"></div>
                                 </div>
