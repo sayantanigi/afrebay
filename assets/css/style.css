@@ -17926,11 +17926,26 @@ footer .bottom-line span {
 
 .Sign_In .account-popup .SignIn_Right .SignIn_Remember {
    display: flex;
-   justify-content: space-between;
+   justify-content: start;
    align-items: center;
-   padding: 0 50px;
    font-size: 13px !important;
    margin-top: 20px !important;
+}
+
+.Sign_In .account-popup .SignIn_Right .SignIn_Remember p.remember-label {
+   position: relative;
+   display: flex;
+   justify-content: start;
+   align-items: center;
+}
+
+.Sign_In .account-popup .SignIn_Right .SignIn_Remember p.remember-label input {
+   background: #ddd;
+   opacity: 1;
+}
+
+.Sign_In .account-popup .SignIn_Right .SignIn_Remember p.remember-label input[type="checkbox"]+label::after {
+   color: transparent !important;
 }
 
 .Sign_In .account-popup .SignIn_Right .SignIn_Remember .remember-label label {
@@ -17941,6 +17956,7 @@ footer .bottom-line span {
 
 .Sign_In .account-popup .SignIn_Right .SignIn_Remember a {
    color: #f67a49;
+   padding-left: 20px;
 }
 
 .Sign_In .account-popup .SignIn_Right .SignIn_Remember a:hover {
@@ -19533,6 +19549,11 @@ footer .social {
 
 .User_Sidemenu .display-table-cell .user-dashboard .row {
    margin: 0 !important;
+}
+
+.User_Sidemenu .display-table-cell .user-dashboard .row .list_profile {
+   border: 1px solid #ddd;
+   width: 100%;
 }
 
 .User_Sidemenu .hidden-xs.display-table-cell .navi ul {

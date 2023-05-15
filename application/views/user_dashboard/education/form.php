@@ -94,7 +94,6 @@
 
                                         <div class="tab-pane active" style="padding: 0px;">
 
-                                            <hr />
 
                                            
 
