@@ -1,14 +1,16 @@
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= base_url('assets/images/resource/mslider1.jpg')?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-            <div class="container fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="inner-header" style="padding-top: 90px;"></div>
-                    </div>
+        <div data-velocity="-.1"
+            style="background: url('<?= base_url('assets/images/resource/mslider1.jpg')?>') repeat scroll 50% 422.28px transparent;"
+            class="parallax scrolly-invisible no-parallax"></div>
+        <div class="container fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-header" style="padding-top: 90px;"></div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <section class="dashboardhak">
     <div class="container-fluid">
@@ -46,8 +48,10 @@
                                 <th scope="row">1</th>
                                 <td>Demo</td>
                                 <td>Demo</td>
-                                <td>
-                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <td class="d-flex justify-content-around">
+                                    <a href="#" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -57,8 +61,7 @@
         </div>
     </div>
 </div>
-</div>
-</div>
+
 <div id="add_project" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

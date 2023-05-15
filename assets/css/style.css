@@ -18463,6 +18463,7 @@ footer .bottom-line span {
 .Employees_Search_List .Employees_Search_Panel .Employees_Search_Panel_Data .widget h3.sb-title {
    color: #f4794f !important;
    font-weight: 600;
+   margin-bottom: 15px;
 }
 
 .Employees_Search_List .Employees_Search_Panel .Employees_Search_Panel_Data .Last_widget {
@@ -19749,6 +19750,7 @@ footer .social {
    padding: 0;
    text-align: left;
    font-size: 15px;
+   font-weight: 600;
 }
 
 .User_Sub .Sub_Block h2 {
@@ -19757,6 +19759,7 @@ footer .social {
    margin: 0;
    padding: 10px 0 20px;
    font-weight: 600;
+   color: #f4794f;
 }
 
 .User_Sub .Sub_Block ul li {
@@ -19764,6 +19767,8 @@ footer .social {
    justify-content: start;
    align-items: center;
    font-weight: 500;
+   text-align: left;
+   margin-bottom: 15px !important;
 }
 
 .User_Sub .Sub_Block ul li i {
@@ -19895,3 +19900,13 @@ footer .social {
 }
 
 /********************* User Dashboard *********************/
+
+/********************* User Dashboard Table *********************/
+
+
+
+/********************* User Dashboard Table *********************/
+.dashboard-gig .table.table-bordered thead tr th {
+   background: #f4794f;
+   color: #fff;
+}
