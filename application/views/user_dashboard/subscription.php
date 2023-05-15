@@ -49,20 +49,29 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Product Desctiption</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Plan Name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Payment Date</th>
+                                            <th scope="col">Duration</th>
+                                            <th scope="col">Expiry Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                        if(!empty($subcriber_pack)) {
+                                            $i = 1;
+                                            foreach ($subcriber_pack as $row) { ?>
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Demo</td>
-                                            <td>Demo</td>
-                                            <td>
-                                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </td>
+                                            <td scope="row"><?php echo $i?></th>
+                                            <td><?php echo $row->transaction_id;?></td>
+                                            <td><?php echo $row->name_of_card;?></td>
+                                            <td><?php echo $row->amount;?></td>
+                                            <td><?php echo $row->payment_date;?></td>
+                                            <td><?php echo $row->duration;?></td>
+                                            <td><?php echo $row->expiry_date;?></td>
                                         </tr>
+                                        <?php $i++; }  } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -97,13 +106,23 @@
                                     </div>
                                     <div></div>
                                     <div><?= $value->subscription_description; ?></div>
-                                    <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $i?>">Subscribe</a>
-                                    <input type="hidden" name="user_id" id="user_id_<?php echo $i?>" value="<?php echo $_SESSION['afrebay']['userId']?>" />
-                                    <input type="hidden" name="sub_id" id="sub_id_<?php echo $i?>" value="<?php echo $value->id?>" />
-                                    <input type="hidden" name="sub_id" id="sub_name_<?php echo $i?>" value="<?php echo $value->subscription_name?>" />
-                                    <input type="hidden" name="user_email" id="user_email_<?php echo $i?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>" />
-                                    <input type="hidden" name="sub_price" id="sub_price_<?php echo $i?>" value="<?php echo $value->subscription_amount?>" />
-                                    <input type="hidden" name="sub_duration" id="sub_duration_<?php echo $i?>" value="<?php echo $value->subscription_duration?>" />
+                                    <?php
+                                    $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and subscription_id = ".$value->id." and payment_status = 'succeeded'")->result_array();
+                                    //echo "<pre>"; print_r($get_sub_data);
+                                    if(!empty($get_sub_data)) {
+                                    foreach ($get_sub_data as $val) {
+                                        if ($value->id == $val['subscription_id']) { ?>
+                                        <a href="javascript:void(0);" class="btn btn-primary">Subscribed</a>
+                                    <?php } } } else { ?>
+                                        <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $value->id?>">Subscribe</a>
+                                        <input type="hidden" name="user_id" id="user_id_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userId']?>" />
+                                        <input type="hidden" name="sub_id" id="sub_id_<?php echo $value->id?>" value="<?php echo $value->id?>" />
+                                        <input type="hidden" name="sub_id" id="sub_name_<?php echo $value->id?>" value="<?php echo $value->subscription_name?>" />
+                                        <input type="hidden" name="user_email" id="user_email_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>" />
+                                        <input type="hidden" name="sub_price" id="sub_price_<?php echo $value->id?>" value="<?php echo $value->subscription_amount?>" />
+                                        <input type="hidden" name="sub_duration" id="sub_duration_<?php echo $value->id?>" value="<?php echo $value->subscription_duration?>" />
+                                    <?php } ?>
+
                                 </div>
                             </div>
                             <?php $i++; }} else { ?>
@@ -154,13 +173,13 @@ $(document).ready(function(){
     if(!empty($get_subscription)) {
         $i=1;
         foreach ($get_subscription as $value) { ?>
-        $('#getSubscription_<?php echo $i?>').click(function() {
-            var user_id = $('#user_id_<?php echo $i?>').val();
-            var sub_id = $('#sub_id_<?php echo $i?>').val();
-            var sub_name = $('#sub_name_<?php echo $i?>').val();
-            var user_email = $('#user_email_<?php echo $i?>').val();
-            var sub_price = $('#sub_price_<?php echo $i?>').val();
-            var sub_duration = $('#sub_duration_<?php echo $i?>').val();
+        $('#getSubscription_<?php echo $value->id?>').click(function() {
+            var user_id = $('#user_id_<?php echo $value->id?>').val();
+            var sub_id = $('#sub_id_<?php echo $value->id?>').val();
+            var sub_name = $('#sub_name_<?php echo $value->id?>').val();
+            var user_email = $('#user_email_<?php echo $value->id?>').val();
+            var sub_price = $('#sub_price_<?php echo $value->id?>').val();
+            var sub_duration = $('#sub_duration_<?php echo $value->id?>').val();
             var base_url = $('#base_url').val();
             $.ajax({
                 url:base_url+"user/dashboard/userSubscription",

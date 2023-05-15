@@ -721,6 +721,7 @@ class Dashboard extends CI_Controller {
 			'payment_date' => $paymentDate,
 			'created_date' => $paymentDate,
 			'duration' => $this->input->post('sub_duration'),
+			'payment_status' => 'succeeded',
 			'expiry_date' => date("Y-m-d H:i:s", strtotime($this->input->post('sub_duration'), strtotime($paymentDate)))
 		);
 		$this->Crud_model->SaveData('employer_subscription', $data);
