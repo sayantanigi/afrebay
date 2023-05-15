@@ -20,9 +20,22 @@ $seg1=$this->uri->segment(1);
                         <?php } ?>
 
                         <li <?php if($seg1=='profile') { ?> class="active" <?php } ?>>
+                            <?php if(@$_SESSION['afrebay']['userType']=='2') {
+                            $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'succeeded'")->result_array();
+                            if(!empty($get_sub_data)) {
+                            ?>
                             <a href="<?= base_url('profile')?>"><i class="fa fa-image" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">Profile</span>
                             </a>
+                            <?php } else { ?>
+                            <a href="javascript:void(0)"><i class="fa fa-image" aria-hidden="true"></i>
+                                <span class="hidden-xs hidden-sm">Profile</span>
+                            </a>
+                            <?php } } else { ?>
+                            <a href="<?= base_url('profile')?>"><i class="fa fa-image" aria-hidden="true"></i>
+                                <span class="hidden-xs hidden-sm">Profile</span>
+                            </a>
+                        <?php } ?>
                         </li>
 
                         <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>

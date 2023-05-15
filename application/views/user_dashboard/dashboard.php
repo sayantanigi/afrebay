@@ -128,10 +128,6 @@
                 </div>
                 <!-- end row -->
                 <?php } ?>
-
-                <!--   end worker list -->
-
-
             </div>
         </div>
     </div>
