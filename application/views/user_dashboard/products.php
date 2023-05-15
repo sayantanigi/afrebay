@@ -137,29 +137,44 @@
                                                     commonly used to demonstrate.</span></p>
                                         </div>
                                         <div class="col-lg-4 column Product-Contact">
-                                            <form>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <label for="" class="form-label">Name</label>
-                                                        <label class="data">Arnab Das</label>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <label for="" class="form-label">Email</label>
-                                                        <label class="data">demo@gmail.com</label>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <label for="" class="form-label">Details</label>
-                                                        <label class="data data-field">In publishing and graphic design, Lorem ipsum is a
-                                                            placeholder text commonly used to demonstrate the visual
-                                                            form of a document or a typeface without relying on
-                                                            meaningful content. Lorem ipsum may be used as a placeholder
-                                                            before final copy is available.</label>
-                                                    </div>
-                                                    <div class="col-lg-12 text-center ContactBtn">
-                                                        <a type="button" class="btn btn-info">Contact</a>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label for="" class="form-label">Name</label>
+                                                    <label class="data">Arnab Das</label>
                                                 </div>
-                                            </form>
+                                                <div class="col-lg-12">
+                                                    <label for="" class="form-label">Email</label>
+                                                    <label class="data">demo@gmail.com</label>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <label for="" class="form-label">Details</label>
+                                                    <label class="data data-field">In publishing and graphic design,
+                                                        Lorem ipsum is a
+                                                        placeholder text commonly used to demonstrate the visual
+                                                        form of a document or a typeface without relying on
+                                                        meaningful content. Lorem ipsum may be used as a placeholder
+                                                        before final copy is available.</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label for="" class="form-label">Name</label>
+                                                    <label class="data">Arnab Das</label>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <label for="" class="form-label">Email</label>
+                                                    <label class="data">demo@gmail.com</label>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <label for="" class="form-label">Details</label>
+                                                    <label class="data data-field">In publishing and graphic design,
+                                                        Lorem ipsum is a
+                                                        placeholder text commonly used to demonstrate the visual
+                                                        form of a document or a typeface without relying on
+                                                        meaningful content. Lorem ipsum may be used as a placeholder
+                                                        before final copy is available.</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>

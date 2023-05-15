@@ -19930,16 +19930,24 @@ footer .social {
    display: table-row !important;
 }
 
-.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact form .data {
+.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact .data {
    margin: 0 !important;
    font-weight: 400;
    display: block;
 }
 
-.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact form .data-field {
-   height: 200px;
+.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact .data-field {
+   height: 160px;
    overflow: auto;
    text-align: justify;
+   border-bottom: 1px solid #f4794f;
+   margin-bottom: 20px !important;
+}
+
+.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact {
+   height: 300px;
+   overflow: auto;
+   padding-right: 0;
 }
 
 /********************* User Dashboard Table *********************/
