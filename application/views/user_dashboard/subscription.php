@@ -115,6 +115,7 @@
                                         <a href="javascript:void(0);" class="btn btn-primary">Subscribed</a>
                                     <?php } } } else { ?>
                                         <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $value->id?>">Subscribe</a>
+                                        <img src="<?php echo base_url()?>uploads/loading.gif" id="loader">
                                         <input type="hidden" name="user_id" id="user_id_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userId']?>" />
                                         <input type="hidden" name="sub_id" id="sub_id_<?php echo $value->id?>" value="<?php echo $value->id?>" />
                                         <input type="hidden" name="sub_id" id="sub_name_<?php echo $value->id?>" value="<?php echo $value->subscription_name?>" />
@@ -141,6 +142,9 @@
 </div>
 </div>
 </div>
+<style>
+#loader {display: none; width: 40px;}
+</style>
 <div id="add_project" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -164,8 +168,8 @@
 </div>
 </section>
 <style>
-#subscription-messages{display: none;}
-#err-messages{display: none;}
+#subscription-messages{display: none; text-align: center;}
+#err-messages{display: none; text-align: center;}
 </style>
 <script>
 $(document).ready(function(){
@@ -190,17 +194,29 @@ $(document).ready(function(){
         			//$(".SignUp_Btn button").prop('disable','true');
         		},
                 success:function(data) {
-                    //alert(data);
                     if (data == '1'){
-                        $('#subscription-messages').show();
+                        setTimeout(function () {
+                            $("#loader").hide();
+                            window.scroll({top: 0, behavior: "smooth"});
+                            $('#subscription-messages').show();
+                        }, 10000);
                         setTimeout(function () {
                             $('#subscription-messages').hide();
-                        }, 2500);
+                        }, 13000);
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 16000);
                     } else {
                         $('#err-messages').show();
                         setTimeout(function () {
+                            window.scroll({top: 0, behavior: "smooth"})
+                        }, 5000);
+                        setTimeout(function () {
                             $('#err-messages').hide();
-                        }, 2500);
+                        }, 8000);
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 9000);
                     }
                 }
 
