@@ -174,7 +174,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                                         <a href="<?= base_url('workers-list')?>" title="">Profile Settings</a>
                                     </li> -->
                                     <li>
-                                        <a href="<?= base_url('workers-list')?>" title="">Change Password</a>
+                                        <a href="<?= base_url('password-reset')?>" title="">Change Password</a>
                                     </li>
                                     <li><a href="<?=base_url(); ?>logout">Logout</a></li>
                                 </ul>

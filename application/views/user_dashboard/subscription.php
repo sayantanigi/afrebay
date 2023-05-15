@@ -39,6 +39,41 @@
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak" style="background: #f2f2f2 !important;">
+                    <div style="display: inline-block; text-align: center;">
+                        <h3>Current Plan</h3>
+                    </div>
+                    <div class="row row-sm">
+                        <div class="col-xl-12 col-lg-12 col-md-12">
+                            <div class="cardak">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Product Desctiption</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Demo</td>
+                                            <td>Demo</td>
+                                            <td>
+                                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cardak" style="background: #f2f2f2 !important; margin-top: 40px;">
+                    <div style="display: inline-block; text-align: center;">
+                        <h3>Pricing</h3>
+                    </div>
                     <div class="container-fluid">
                         <div class="row text-center align-items-end">
                             <!-- Pricing Table-->

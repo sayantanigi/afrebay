@@ -200,7 +200,7 @@ class Login extends CI_Controller {
 			$password = $this->input->post("password");
 			if($this->Mymodel->check_record($email, $password)) {
 				$this->session->set_flashdata('message', 'Logged in successfully !');
-				redirect('home');
+				redirect('dashboard');
 			} else {
 				$this->session->set_flashdata('error', 'Invalid Email or Password !');
 				redirect('login');
