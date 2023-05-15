@@ -19930,4 +19930,16 @@ footer .social {
    display: table-row !important;
 }
 
+.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact form .data {
+   margin: 0 !important;
+   font-weight: 400;
+   display: block;
+}
+
+.dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact form .data-field {
+   height: 200px;
+   overflow: auto;
+   text-align: justify;
+}
+
 /********************* User Dashboard Table *********************/
