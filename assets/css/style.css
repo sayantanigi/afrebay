@@ -19768,7 +19768,7 @@ footer .social {
    align-items: center;
    font-weight: 500;
    text-align: left;
-   margin-bottom: 15px !important;
+   margin-bottom: 10px !important;
 }
 
 .User_Sub .Sub_Block ul li i {
@@ -19903,10 +19903,31 @@ footer .social {
 
 /********************* User Dashboard Table *********************/
 
-
-
-/********************* User Dashboard Table *********************/
 .dashboard-gig .table.table-bordered thead tr th {
    background: #f4794f;
    color: #fff;
 }
+
+.dashboard-gig .table.table-bordered tbody tr:nth-child(odd) {
+   background: #f278541c;
+}
+
+.dashboard-gig .table.table-bordered tbody tr th,
+.dashboard-gig .table.table-bordered tbody tr td {
+   vertical-align: middle;
+}
+
+.dashboard-gig .table.table-bordered.Dash-Product tbody tr#Product-Data-Block1 {
+   background: #ddd;
+   display: none;
+}
+
+.dashboard-gig .table.table-bordered.Dash-Product tbody tr:nth-child(2n+2) {
+   background: #fff !important;
+}
+
+.Show-Product-Block {
+   display: table-row !important;
+}
+
+/********************* User Dashboard Table *********************/
