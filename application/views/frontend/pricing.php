@@ -58,13 +58,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             							<?php echo $key->subscription_description;?>
             						</div>
                                     <?php
-                                    if(!empty($_SESSION['gigwork']['userType'])){
-                                    if($_SESSION['gigwork']['userType']=='2'){?>
+                                    if(!empty($_SESSION['afrebay']['userType'])){
+                                    if($_SESSION['afrebay']['userType']=='2'){?>
                                     <!-- <a href="#" onclick="return buy_subscription(<?= $key->id; ?>);" >Buy</a>  -->
-                                    <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($key->id))?>">Buy</a>
+                                    <!-- <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($key->product_key))?>">Buy</a> -->
+                                    <a class="btn btn-info" href="<?= $key->payment_link?>">Buy</a>
                                     <?php } else{?>
                                     <a class="btn btn-info" href="#" style="pointer-events: none; cursor: default;">Buy</a>
-                                    <?php } } else{?>
+                                    <?php } } else { ?>
                                     <a class="btn btn-info" href="<?= base_url('login')?>">Buy</a>
                                     <?php } ?>
                                 </div>

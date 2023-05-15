@@ -32,6 +32,18 @@
 								<label>Subscription Amount</label>
 								<input class="form-control" type="text" placeholder="Example: 100 USD" id="subscription_amount" name="subscription_amount" value="<?= $subscription_amount;?>" required>
 							</div>
+							<div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
+								<label>Payment Link (Stripe Payment Link)</label>
+								<input class="form-control" type="text" placeholder="Example: https://abc.abcdef.com/xxxx_xxxxxxxxxxxxxxxxxx" id="payment_link" name="payment_link" value="<?= $payment_link;?>" required>
+							</div>
+							<!-- <div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
+								<label>Product ID (Stripe Product Key)</label>
+								<input class="form-control" type="text" placeholder="Example: prod_XXXXXXXXXXXXXX" id="product_key" name="product_key" value="<?= $product_key;?>" required>
+							</div>
+							<div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
+								<label>Price ID (Stripe Price Key)</label>
+								<input class="form-control" type="text" placeholder="Example: price_XXXXXXXXXXXXXXXXXXXXXXXX" id="price_key" name="price_key" value="<?= $price_key;?>" required>
+							</div> -->
 							<div class="form-group">
 								<label>Subscription Durations</label>
 								<input class="form-control" type="text" placeholder="Example: 1 Year" name="subscription_duration" value="<?= $subscription_duration;?>" required>
