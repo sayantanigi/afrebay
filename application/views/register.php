@@ -55,9 +55,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="row m-0">
                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                 <div class="cfield cfield_top">
-                                                    <label for="" class="form-label">User Name</label>
+                                                    <label for="" class="form-label">Full Name</label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="User Name" name="username" id="username" onkeypress="only_alphabets(event)" />
+                                                        <input type="text" placeholder="Full Name" name="username" id="username" onkeypress="only_alphabets(event)" />
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
@@ -75,9 +75,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                 <div class="cfield">
-                                                    <label for="" class="form-label">Email</label>
+                                                    <label for="" class="form-label">Email Address</label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="Email" name="email" id="email" />
+                                                        <input type="text" placeholder="Email Address" name="email" id="email" />
                                                         <i class="la la-envelope-o"></i>
                                                     </div>
                                                 </div>
@@ -113,10 +113,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </div> -->
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignUp_Btn">
                                                 <input type="hidden" name="user_type" id="user_type">
-                                                <button type="button" class="btn btn-info" onclick="return btn_register();">Signup</button>
+                                                <button type="button" class="btn btn-info" onclick="return btn_register();">Sign up</button>
                                                 <img src="<?php echo base_url()?>uploads/loading.gif" id="loader">
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 d-none">
                                                 <div class="extra-login">
                                                     <span>OR</span>
                                                     <div class="login-social">

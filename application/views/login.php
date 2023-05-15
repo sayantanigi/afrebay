@@ -9,6 +9,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 .text-danger {display: none;}
 .text-error {display: none;}
 #forgotpass_message {text-align: center; margin-top: 10px;}
+.bottom-line .scrollup {display: none;}
 </style>
 <section class="overlape">
     <div class="block no-padding">
@@ -46,9 +47,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="row m-0">
                                             <div class="col-lg-6 col-md-6 col-sm-6">
                                                 <div class="cfield">
-                                                    <label for="" class="form-label">Email Id</label>
+                                                    <label for="" class="form-label">Email Address</label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="Registered Email Id" name="email" />
+                                                        <input type="text" placeholder="Email Address" name="email" />
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
@@ -70,9 +71,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <!-- <a href="<?= base_url('forgot-password')?>" title="">Forgot Password?</a> -->
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignIn_Btn">
-                                                <button type="submit" class="btn btn-info">Login</button>
+                                                <button type="submit" class="btn btn-info">LOG IN</button>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 d-none">
                                                 <div class="extra-login">
                                                     <span>OR</span>
                                                     <div class="login-social">
