@@ -33,8 +33,7 @@
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px;">
-                <a href="http://localhost/Projects/Github/Afrebay/add-education"
-                    class="btn btn-primary Education_Btn">Add</a>
+                <a href="#" class="btn btn-primary Education_Btn">Add</a>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak">
@@ -142,18 +141,19 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <label for="" class="form-label">Name</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Type your name ...">
+                                                        <label class="data">Arnab Das</label>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <label for="" class="form-label">Email</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Type your email ...">
+                                                        <label class="data">demo@gmail.com</label>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <label for="" class="form-label">Details</label>
-                                                        <textarea placeholder="Type comments ..." rows="4"
-                                                            cols="50"></textarea>
+                                                        <label class="data data-field">In publishing and graphic design, Lorem ipsum is a
+                                                            placeholder text commonly used to demonstrate the visual
+                                                            form of a document or a typeface without relying on
+                                                            meaningful content. Lorem ipsum may be used as a placeholder
+                                                            before final copy is available.</label>
                                                     </div>
                                                     <div class="col-lg-12 text-center ContactBtn">
                                                         <a type="button" class="btn btn-info">Contact</a>
