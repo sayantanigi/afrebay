@@ -55,6 +55,8 @@
                                             <th scope="col">Payment Date</th>
                                             <th scope="col">Duration</th>
                                             <th scope="col">Expiry Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,6 +72,17 @@
                                             <td><?php echo $row->payment_date;?></td>
                                             <td><?php echo $row->duration;?></td>
                                             <td><?php echo $row->expiry_date;?></td>
+                                            <td>
+                                                <?php
+                                                $now_date = date('Y/m/d');
+                                                $expire_date = date('Y/m/d', strtotime($row->expiry_date));
+                                                if($expire_date < $now_date) {
+                                                    echo "Expired";
+                                                } else {
+                                                    echo "Active";
+                                                } ?>
+                                            </td>
+                                            <td><button type="button">Cancel</button></td>
                                         </tr>
                                         <?php $i++; }  } ?>
                                     </tbody>
@@ -78,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-
+                <?php if(empty($subcriber_pack)) { ?>
                 <div class="cardak" style="background: #f2f2f2 !important; margin-top: 40px;">
                     <div style="display: inline-block; text-align: center;">
                         <h3>Pricing</h3>
@@ -106,24 +119,8 @@
                                     </div>
                                     <div></div>
                                     <div><?= $value->subscription_description; ?></div>
-                                    <?php
-                                    $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and subscription_id = ".$value->id." and payment_status = 'succeeded'")->result_array();
-                                    //echo "<pre>"; print_r($get_sub_data);
-                                    if(!empty($get_sub_data)) {
-                                    foreach ($get_sub_data as $val) {
-                                        if ($value->id == $val['subscription_id']) { ?>
-                                        <a href="javascript:void(0);" class="btn btn-primary">Subscribed</a>
-                                    <?php } } } else { ?>
-                                        <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $value->id?>">Subscribe</a>
-                                        <img src="<?php echo base_url()?>uploads/loading.gif" id="loader">
-                                        <input type="hidden" name="user_id" id="user_id_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userId']?>" />
-                                        <input type="hidden" name="sub_id" id="sub_id_<?php echo $value->id?>" value="<?php echo $value->id?>" />
-                                        <input type="hidden" name="sub_id" id="sub_name_<?php echo $value->id?>" value="<?php echo $value->subscription_name?>" />
-                                        <input type="hidden" name="user_email" id="user_email_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>" />
-                                        <input type="hidden" name="sub_price" id="sub_price_<?php echo $value->id?>" value="<?php echo $value->subscription_amount?>" />
-                                        <input type="hidden" name="sub_duration" id="sub_duration_<?php echo $value->id?>" value="<?php echo $value->subscription_duration?>" />
-                                    <?php } ?>
-
+                                    <!-- <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $value->id?>">Subscribe</a> -->
+                                    <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($value->price_key))?>">Subscribe</a>
                                 </div>
                             </div>
                             <?php $i++; }} else { ?>
@@ -136,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>

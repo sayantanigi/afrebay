@@ -21,7 +21,7 @@ $seg1=$this->uri->segment(1);
 
                         <li <?php if($seg1=='profile') { ?> class="active" <?php } ?>>
                             <?php if(@$_SESSION['afrebay']['userType']=='2') {
-                            $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'succeeded'")->result_array();
+                            $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
                             if(!empty($get_sub_data)) {
                             ?>
                             <a href="<?= base_url('profile')?>"><i class="fa fa-image" aria-hidden="true"></i>
@@ -38,32 +38,69 @@ $seg1=$this->uri->segment(1);
                         <?php } ?>
                         </li>
 
-                        <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
-                        <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
-                            <a href="<?= base_url('myjob')?>"><i class="fa fa-joomla" aria-hidden="true"></i>
-                                <span class="hidden-xs hidden-sm">My Jobs</span>
-                            </a>
-                        </li>
-                        <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
-                            <a href="<?= base_url('jobbid')?>"><i class="fa fa-joomla" aria-hidden="true"></i>
-                                <span class="hidden-xs hidden-sm">Jobs Bidding</span>
-                            </a>
-                        </li>
+                        <?php if(@$_SESSION['afrebay']['userType']=='2') {
+                        $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                        if(in_array('', $profile_check[0])) { ?>
+                            <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
+                                <a href="javascript:void(0)"><i class="fa fa-joomla" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">My Jobs</span>
+                                </a>
+                            </li>
+                            <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
+                                <a href="javascript:void(0)"><i class="fa fa-joomla" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Jobs Bidding</span>
+                                </a>
+                            </li>
+                        <?php } else { ?>
+                            <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
+                                <a href="<?= base_url('myjob')?>"><i class="fa fa-joomla" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">My Jobs</span>
+                                </a>
+                            </li>
+                            <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
+                                <a href="<?= base_url('jobbid')?>"><i class="fa fa-joomla" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Jobs Bidding</span>
+                                </a>
+                            </li>
+                        <?php } } ?>
+
+                        <?php if(@$_SESSION['afrebay']['userType']=='2') {
+                            $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                            if(in_array('', $profile_check[0])) { ?>
+                            <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
+                                <a href="javascript:void(0)"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Chat</span>
+                                </a>
+                            </li>
+                            <?php } else { ?>
+                            <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
+                                <a href="<?= base_url('chat')?>"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Chat</span>
+                                </a>
+                            </li>
+                            <?php } } else { ?>
+                            <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
+                                <a href="<?= base_url('chat')?>"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Chat</span>
+                                </a>
+                            </li>
                         <?php } ?>
 
-                        <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
-                            <a href="<?= base_url('chat')?>"><i class="fa fa-commenting-o" aria-hidden="true"></i>
-                                <span class="hidden-xs hidden-sm">Chat</span>
-                            </a>
-                        </li>
-
-                        <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
-                        <li <?php if($seg1=='product'){?>class="active" <?php } ?>>
-                            <a href="<?= base_url('product')?>"><i class="fa fa-bar-chart" aria-hidden="true"></i>
-                                <span class="hidden-xs hidden-sm">Product</span>
-                            </a>
-                        </li>
-                        <?php } ?>
+                        <?php if(@$_SESSION['afrebay']['userType']=='2') {
+                            $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                            if(in_array('', $profile_check[0])) { ?>
+                            <li <?php if($seg1=='product'){?>class="active" <?php } ?>>
+                                <a href="javascript:void(0)"><i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Product</span>
+                                </a>
+                            </li>
+                            <?php } else { ?>
+                            <li <?php if($seg1=='product') { ?>class="active" <?php } ?>>
+                                <a href="<?= base_url('product')?>"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Product</span>
+                                </a>
+                            </li>
+                            <?php } } ?>
 
                         <?php if(@$_SESSION['afrebay']['userType']=='1') { ?>
                         <li <?php if($seg1=='education-list') { ?>class="active" <?php } ?>>

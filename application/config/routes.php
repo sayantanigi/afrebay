@@ -95,7 +95,7 @@ $route['update-education/(:any)'] = "user/dashboard/update_education/$1";
 $route['workexperience-list'] = "user/dashboard/workexperience_list";
 $route['add-workexperience'] = "user/dashboard/add_workexperience";
 $route['update-workexperience/(:any)'] = "user/dashboard/update_workexperience/$1";
-
+$route['success/(:any)'] = "stripe/payment_success/$1";
 
 
 //ADMIN URL

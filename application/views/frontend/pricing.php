@@ -31,13 +31,17 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                         <h2>Become A AfreBay Partner Today!</h2>
                         <span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
                     </div>
+                    <div id="subscription-messages" class="text-success f-20">
+                        <p style="color: #28a745;">You Already have an active subscription plan.</p>
+                    </div>
                     <!-- Heading -->
                     <div class="plans-sec">
                         <div class="row">
-                            <?php if(!empty($get_subscription)){
-                                   foreach ($get_subscription as $key) {
-                                   $get_service=$this->Crud_model->GetData('subscription_service','',"subscription_id='".$key->id."'");
-                                   ?>
+                            <?php
+                            if(!empty($get_subscription)){
+                            foreach ($get_subscription as $key) {
+                            $get_service=$this->Crud_model->GetData('subscription_service','',"subscription_id='".$key->id."'");
+                            ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                                 <div class="pricetable style2">
                                     <div class="Price_Shadow"></div>
@@ -58,12 +62,15 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             							<?php echo $key->subscription_description;?>
             						</div>
                                     <?php
-                                    if(!empty($_SESSION['afrebay']['userType'])){
-                                    if($_SESSION['afrebay']['userType']=='2'){?>
-                                    <!-- <a href="#" onclick="return buy_subscription(<?= $key->id; ?>);" >Buy</a>  -->
-                                    <!-- <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($key->product_key))?>">Buy</a> -->
-                                    <a class="btn btn-info" href="<?= $key->payment_link?>">Buy</a>
-                                    <?php } else{?>
+                                    if(!empty($_SESSION['afrebay']['userType'])) {
+                                    if($_SESSION['afrebay']['userType']=='2') {
+                                        if(!empty($subcriber_pack)) { ?>
+                                        <a class="btn btn-info" href="javascript:void(0);" onclick="sub_alert()">Buy</a>
+                                        <?php } else { ?>
+                                        <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($key->price_key))?>">Buy</a>
+                                        <?php $this->session->set_userdata('subid', $key->id)?>
+                                        <input type="hidden" name="sub_id" value="<?php echo $this->session->userdata('subid');?>">
+                                    <?php } } else { ?>
                                     <a class="btn btn-info" href="#" style="pointer-events: none; cursor: default;">Buy</a>
                                     <?php } } else { ?>
                                     <a class="btn btn-info" href="<?= base_url('login')?>">Buy</a>
@@ -79,12 +86,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </section>
-
-
-
+<style>
+#subscription-messages{display: none; text-align: center;}
+</style>
 <script type="text/javascript">
-    function buy_subscription(id) {
-
+    /*function buy_subscription(id) {
         var base_url = $("#base_url").val();
         var subscription_id = id;
         var amount = $("#amount" + id).val();
@@ -98,12 +104,19 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             },
             success: function (returndata) {
                 if (returndata == 1) {
-
                     location.reload();
                 }
-
-
             }
         });
+    }*/
+    function sub_alert () {
+        setTimeout(function () {
+            //$("#loader").hide();
+            window.scroll({top: 0, behavior: "smooth"});
+            $('#subscription-messages').show();
+        }, 0000);
+        setTimeout(function () {
+            $('#subscription-messages').hide();
+        }, 13000);
     }
 </script>

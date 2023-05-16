@@ -13,10 +13,11 @@ class Stripe extends CI_Controller {
     }
 
 
-    public function index($id) {
-        $subscription_id=base64_decode($id);
-        $data['get_data']=$this->Crud_model->get_single('subscription',"id='".$subscription_id."'");
-        $data['get_user']=$this->Crud_model->get_single('users',"userId='".$_SESSION['afrebay']['userId']."'");
+    public function index($price_key) {
+        // $subscription_id=base64_decode($id);
+        // $data['get_data']=$this->Crud_model->get_single('subscription',"id='".$subscription_id."'");
+        // $data['get_user']=$this->Crud_model->get_single('users',"userId='".$_SESSION['afrebay']['userId']."'");
+        $data['amount']= base64_decode($price_key);
         $this->load->view('header');
         $this->load->view('stripe/product_form',$data);
         $this->load->view('footer');
@@ -145,8 +146,11 @@ class Stripe extends CI_Controller {
         }
     }
 
-    public function payment_success() {
-        $this->load->view('stripe/payment_success');
+    public function payment_success($id) {
+        $data['s_id'] = $id;
+        $this->load->view('header');
+        $this->load->view('stripe/payment_success', $data);
+        $this->load->view('footer');
     }
 
     public function payment_error() {

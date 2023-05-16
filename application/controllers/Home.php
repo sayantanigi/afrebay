@@ -89,6 +89,7 @@ class Home extends MY_Controller {
 
 	function pricing() {
 		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
+		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='11'");
 		$this->load->view('header');
 		$this->load->view('frontend/pricing', $data);

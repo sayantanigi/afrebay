@@ -1,5 +1,5 @@
 
-<?php 
+<?php
  if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
      $banner_img=base_url("uploads/banner/".$get_banner->image);
             } else{
@@ -42,7 +42,7 @@
                                                   <div class="col-lg-12">
                                                     <span class="pf-title">Description</span>
                                                     <div class="pf-field">
-                                                        <textarea name="description"  placeholder="Enter Description"></textarea>
+                                                        <textarea name="description" id="description" placeholder="Enter Description"></textarea>
 
                                                     </div>
                                                 </div>
@@ -183,11 +183,15 @@
             </section>
 
 
-            <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/taginput.css')?>">
-               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/taginput.css')?>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" />
 
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js" integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js" integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg==" crossorigin="anonymous"></script>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+      CKEDITOR.replace('description');
 
+   </script>
 <script>
 
 function show_location()

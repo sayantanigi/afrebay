@@ -157,9 +157,18 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                         </ul>
                     </nav>
                     <div class="btn-extars">
-                        <?php if(!empty($_SESSION['afrebay']['userId'])) { ?>
-                        <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-                        <?php } else { ?>
+                        <?php
+                        if(!empty($_SESSION['afrebay']['userId'])) {
+                            $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
+                            if(empty($get_sub_data)) {
+                                $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                                if(in_array('', $profile_check[0])) { ?>
+                                    <a href="javascript:void(0)" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                                <?php } else { ?>
+                                <a href="javascript:void(0)" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                            <?php } } else { ?>
+                                    <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                                <?php } } else { ?>
                         <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
                         <?php } ?>
                         <ul class="account-btns">
