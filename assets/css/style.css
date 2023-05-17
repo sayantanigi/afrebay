@@ -18539,7 +18539,7 @@ footer .bottom-line span {
    display: inline-block;
 }
 
-.Employees_Search_List .Employees_Search_Result .Employee-Details p {
+.Employees_Search_List .Employees_Search_Result .Employee-Details div {
    color: #000 !important;
    margin-bottom: 10px !important;
    font-size: 14px !important;
@@ -18621,7 +18621,7 @@ footer .bottom-line span {
    letter-spacing: 2px;
 }
 
-.Employees_Search_List .Employees_Search_Result .Employee-Details p.MoreDetailsTxtShow::before {
+.Employees_Search_List .Employees_Search_Result .Employee-Details div.MoreDetailsTxtShow::before {
    content: '';
    width: 0;
 }
@@ -19972,3 +19972,30 @@ footer .social {
 }
 
 /********************* User Dashboard Table *********************/
+
+.select2-selection__rendered li {margin-bottom: 0 !important;}
+.select2-results__option {padding: 2px 0px 2px 30px !important; margin-bottom: 0 !important;}
+
+.dashboard-gig .bid-dis ul li {
+   margin-bottom: 15px !important;
+   font-size: 14px;
+}
+.dashboard-gig .bid-dis ul .Bid-Data {
+   display: flex;
+   align-items: center;
+}
+.dashboard-gig .bid-dis ul .Bid-Data li {
+   width: 50%;
+}
+.dashboard-gig .bid-dis ul .Bid-Data li:nth-child(1) {
+   font-weight: 400 !important;
+}
+.dashboard-gig .bid-dis ul li span {
+   font-weight: 500;
+   color: #000 !important;
+   display: block;
+   font-size: 14px;
+}
+.dashboard-gig .bid-dis ul li:nth-child(1) {
+   font-weight: 500;
+}

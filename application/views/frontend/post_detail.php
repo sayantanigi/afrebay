@@ -1,10 +1,9 @@
-<?php 
- if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
-     $banner_img=base_url("uploads/banner/".$get_banner->image);
-            } else{
-       $banner_img=base_url("assets/images/resource/mslider1.jpg");
-        } ?>
-
+<?php
+if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)) {
+    $banner_img=base_url("uploads/banner/".$get_banner->image);
+} else {
+    $banner_img=base_url("assets/images/resource/mslider1.jpg");
+} ?>
 <style media="screen">
     .postdetail {
         padding: 7px 33px;
@@ -42,16 +41,65 @@
                     <div class="row row-sm">
                         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 col-12">
                             <div class="bid-dis">
+                                <?php //echo "<pre>"; print_r($post_data); ?>
                                 <ul>
-                                    <li><?php if(!empty($post_data->description)){ echo $post_data->description;} ?>
+                                    <li>
+                                        <span>Job Title </span>
+                                        <a href="<?= base_url('postdetail/'.base64_encode($post_data->id))?>" style="text-transform: uppercase;"><?php if(!empty($post_data->post_title)){ echo $post_data->post_title;} ?></a>
                                     </li>
-                                    <li>Skills: <a href="<?= base_url('employerdetail/'.base64_encode($post_data->user_id))?>" style="text-transform: uppercase;"><?php if(!empty($post_data->post_title)){ echo $post_data->post_title;} ?></a>
+                                    <?php if(!empty($post_data->description)) { ?>
+                                    <li><span>Description</span><?php echo $post_data->description; ?>
+                                    <?php } ?>
                                     </li>
+                                    <div class="Bid-Data">
+                                        <?php if(!empty($post_data->required_key_skills)) { ?>
+                                        <li><span>Required key skills </span><?php echo ucfirst($post_data->required_key_skills);?></li>
+                                        <?php } ?>
+                                        <?php if(!empty($post_data->appli_deadeline)) { ?>
+                                        <li><span>Application Deadline Date </span><?php echo $post_data->appli_deadeline;?></li>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="Bid-Data">
+                                        <?php if(!empty($post_data->category_id)) { ?>
+                                        <li><span>Categories </span>
+                                            <?php
+                                            $cname = $this->db->query("SELECT * FROM category WHERE id = '".$post_data->category_id."'")->result_array();
+                                            echo $cname[0]['category_name'];
+                                            ?>
+                                        </li>
+                                        <?php } ?>
+                                        <?php if(!empty($post_data->subcategory_id)) { ?>
+                                        <li><span>Sub Categories </span>
+                                            <?php
+                                            $scname = $this->db->query("SELECT * FROM sub_category WHERE id = '".$post_data->subcategory_id."'")->result_array();
+                                            echo $scname[0]['sub_category_name'];
+                                            ?>
+                                        </li>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="Bid-Data">
+                                        <?php if(!empty($post_data->charges)) { ?>
+                                        <li><span>Charges </span><?php echo $post_data->charges;?></li>
+                                        <?php } ?>
+                                        <?php if(!empty($post_data->duration)) { ?>
+                                        <li><span>Duration </span><?php echo $post_data->duration;?></li>
+                                        <?php } ?>
+                                    </div>
+                                    <?php if(!empty($post_data->country)) { ?>
+                                    <li><span>Complete Address </span><?php echo $post_data->city.', '.$post_data->state.', '.$post_data->country;?></li>
+                                    <?php } ?>
                                 </ul>
-                                <a class="btn btn-info" href="<?= base_url('employerdetail/'.base64_encode($post_data->user_id))?>"><?php if(!empty($post_data->fullname)){ echo ucfirst($post_data->fullname);} else{ echo ucfirst($post_data->username);} ?>
+                                <?php $postedBy = $this->db->query("SELECT * FROM users WHERE userId = '".$post_data->user_id."'")->result_array(); ?>
+                                <a class="btn btn-info" href="<?= base_url('employerdetail/'.base64_encode($post_data->user_id))?>">
+                                <?php
+                                if($postedBy[0]['userType'] == 1) {
+                                    echo $postedBy[0]['firstname'].' '.$postedBy[0]['lastname'];
+                                } else if($postedBy[0]['userType'] == 2) {
+                                    echo $postedBy[0]['companyname'];
+                                } ?>
                                 </a>
                             </div>
-                            <div class="employe-about">
+                            <div class="employe-about d-none">
                                 <ul>
                                     <li>
                                         <span class="rat-b">0.0</span>

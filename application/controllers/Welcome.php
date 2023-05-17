@@ -118,6 +118,8 @@ class Welcome extends CI_Controller {
 	}
 
 	function post_job() {
+		$data['key_skills']=$this->Crud_model->GetData('specialist',"","status = 'Active'");
+		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['category']=$this->Crud_model->GetData('category','','');
 		$data['subcategory']=$this->Crud_model->GetData('sub_category','','');
 		$data['get_banner']=$this->Crud_model->get_single('banner',"id='8'");
@@ -137,8 +139,20 @@ class Welcome extends CI_Controller {
     }
 
     public function save_postjob() {
-    	$data=array(
+		$key_skills = $this->input->post('key_skills');
+		for ($i=0; $i < count($key_skills); $i++) {
+			$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
+			if(empty($get_specialist)) {
+				$insrt = array(
+					'specialist_name'=>ucfirst($key_skills[$i]),
+					'created_date'=>date('Y-m-d H:i:s'),
+				);
+				$this->db->insert('specialist',$insrt);
+			}
+		}
+		$data=array(
     		'user_id'=>$_SESSION['afrebay']['userId'],
+			'required_key_skills'=>implode(", ",$this->input->post('key_skills',TRUE)),
     		'category_id'=>$this->input->post('category_id',TRUE),
     		'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
     		'post_title'=>$this->input->post('post_title',TRUE),
@@ -148,10 +162,14 @@ class Welcome extends CI_Controller {
             'location'=>$this->input->post('location',TRUE),
     		'latitude'=>$this->input->post('latitude',TRUE),
     		'longitude'=>$this->input->post('longitude',TRUE),
-    		'complete_address'=>$this->input->post('complete_address',TRUE),
+    		//'complete_address'=>$this->input->post('complete_address',TRUE),
+			'country'=>$this->input->post('country-dropdown',TRUE),
+			'state'=>$this->input->post('state-dropdown',TRUE),
+			'city'=>$this->input->post('city-dropdown',TRUE),
     		'appli_deadeline'=>$this->input->post('appli_deadeline',TRUE),
     		'created_date'=>date('Y-m-d H:i:s'),
     	);
+		//echo "<pre>"; print_r($data); die;
     	$this->Crud_model->SaveData('postjob',$data);
     	$this->session->set_flashdata('message', 'Post Job Created Successfull !');
 		redirect(base_url("postjob"));
@@ -215,5 +233,36 @@ class Welcome extends CI_Controller {
      	}
  		$data['get_postjob']=$this->post_job_model->postjobdata($con);
  		$this->load->view('filter/postjob_filter',$data);
-     }
+    }
+
+	public function states_by_country() {
+		$c_name = $this->input->post('country_name');
+		$get_cid = $this->db->query("SELECT * FROM countries WHERE name = '".$c_name."'")->result_array();
+		$state_list = $this->db->query("SELECT * FROM states WHERE country_id = '".$get_cid[0]['id']."'")->result_array();
+		if(!empty($state_list)) {
+			$html = "<option value=''>Select State</option>";
+	        foreach ($state_list as $row_data) {
+	            $html .= "<option value='".$row_data['name']."'>".ucfirst($row_data['name'])."</option>";
+	        }
+		} else {
+			$html = '';
+		}
+		echo $html;
+	}
+
+	public function cities_by_state() {
+		$s_name = $this->input->post('state_name');
+		$get_sid = $this->db->query("SELECT * FROM states WHERE name = '".$s_name."'")->result_array();
+		$cities_list = $this->db->query("SELECT * FROM cities WHERE state_id = '".$get_sid[0]['id']."'")->result_array();
+		if(!empty($cities_list)) {
+			$html = "<option value=''>Select City</option>";
+	        foreach ($cities_list as $row_data) {
+	            $html .= "<option value='".$row_data['name']."'>".ucfirst($row_data['name'])."</option>";
+	        }
+		} else {
+			$html = '';
+		}
+		echo $html;
+
+	}
 }

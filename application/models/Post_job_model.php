@@ -202,10 +202,11 @@ class Post_job_model extends My_Model {
     function subcategory_fetchdata($limit, $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location) {
         if(isset($title) || isset($location) || isset($days) || isset($category_id)|| isset($subcategory_id)|| isset($search_title)|| isset($search_location)){
             $query = $this->make_query($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location);
+            $query .= ' ORDER BY id DESC';
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         } else {
-            $query = "SELECT * FROM postjob WHERE is_delete = '0'";
+            $query = "SELECT * FROM postjob WHERE is_delete = '0' ORDER BY id DESC";
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         }
@@ -214,6 +215,11 @@ class Post_job_model extends My_Model {
         if($data->num_rows() > 0) {
             foreach($data->result_array() as $row) {
                 $get_users=$this->Crud_model->get_single('users',"userId='".$row['user_id']."'");
+                if($get_users->userType == 1){
+                    $name = $get_users->firstname.' '.$get_users->lastname;
+                } else {
+                    $name = $get_users->companyname;
+                }
                 $get_category=$this->Crud_model->get_single('category',"id='".$row['category_id']."'");
                 $get_subcategory=$this->Crud_model->get_single('sub_category',"id='".$row['subcategory_id']."'");
                 if(!empty($get_users->profilePic) && file_exists('uploads/users/'.$get_users->profilePic)){
@@ -222,7 +228,7 @@ class Post_job_model extends My_Model {
                     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
                 }
 
-                $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb">'.$profile_pic.'</div><div class="emply-resume-info"><h3><a href="#" title="">'.$row['post_title'].'</a></h3><span>'.$get_category->category_name.'</span><span>'.$get_subcategory->sub_category_name.' </span><p><i class="la la-map-marker"></i>'.$row['location'].'</p><div class="Employee-Details"><p class="MoreDetailsTxt_'.$row['id'].'">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.</p><a class="btn btn-info More" onclick="MoreDetailsTxt('.$row['id'].')">View Details</a></div></div><div class="shortlists"><a class="Emp_Comp"><i class="fa fa-briefcase" aria-hidden="true"></i> Thebigword Genaral Information</a><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">Bid Now <i class="la la-plus"></i></a></div></div> ';
+                $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb">'.$profile_pic.'</div><div class="emply-resume-info"><h3><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">'.$row['post_title'].'</a></h3><span>'.$get_category->category_name.'</span><span>'.$get_subcategory->sub_category_name.' </span><p><i class="la la-map-marker"></i>'.$row["city"].', '.$row["state"].', '.$row["country"].'</p><div class="Employee-Details"><div class="MoreDetailsTxt_'.$row['id'].'">'.$row['description'].'</div><a class="btn btn-info More" onclick="MoreDetailsTxt('.$row['id'].')">View Details</a></div></div><div class="shortlists"><a class="Emp_Comp"><i class="fa fa-briefcase" aria-hidden="true"></i>'.$name.'</a><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">Bid Now <i class="la la-plus"></i></a></div></div> ';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';

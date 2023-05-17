@@ -20,6 +20,9 @@
 			<li <?php if ($seg2 =='sub_category') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('sub_category')?>"><i class="fab fa-buffer"></i> <span>Sub Categories</span></a>
 			</li>
+			<li <?php if ($seg2 =='specialist') {?>class="active"<?php }?>>
+				<a href="<?= admin_url('specialist')?>"><i class="fab fa-teamspeak"></i> <span>Specialist</span></a>
+			</li>
 			<li <?php if ($seg2 =='banner') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('banner')?>"><i class="fas fa-image"></i> <span>Slider and Breadecrumb</span></a>
 			</li>
