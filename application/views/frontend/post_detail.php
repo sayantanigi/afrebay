@@ -43,6 +43,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="bid-dis">
                                 <?php //echo "<pre>"; print_r($post_data); ?>
                                 <ul>
+<<<<<<< HEAD
                                     <li>
                                         <span>Job Title </span>
                                         <a href="<?= base_url('postdetail/'.base64_encode($post_data->id))?>" style="text-transform: uppercase;"><?php if(!empty($post_data->post_title)){ echo $post_data->post_title;} ?></a>
@@ -97,6 +98,31 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 } else if($postedBy[0]['userType'] == 2) {
                                     echo $postedBy[0]['companyname'];
                                 } ?>
+=======
+                                    <li><span>Job Title </span><a
+                                            href="<?= base_url('employerdetail/'.base64_encode($post_data->user_id))?>"
+                                            style="text-transform: uppercase;"><?php if(!empty($post_data->post_title)){ echo $post_data->post_title;} ?></a>
+                                    </li>
+                                    <li><span>Description 
+                                        </span><?php if(!empty($post_data->description)){ echo $post_data->description;} ?>
+                                    </li>
+                                    <div class="Bid-Data">
+                                        <li><span>Required key skills </span>IT & Software</li>
+                                        <li><span>Application Deadline Date </span>20/08/23</li>
+                                    </div>
+                                    <div class="Bid-Data">
+                                        <li><span>Categories </span>Websites, IT & Software</li>
+                                        <li><span>Sub Categories </span>Websites, IT & Software</li>
+                                    </div>
+                                    <div class="Bid-Data">
+                                        <li><span>Charges </span>$200</li>
+                                        <li><span>Duration </span>30 Days</li>
+                                    </div>
+                                    <li><span>Complete Address </span>Hyderabad, Telangana, India</li>
+                                </ul>
+                                <a class="btn btn-info"
+                                    href="<?= base_url('employerdetail/'.base64_encode($post_data->user_id))?>"><?php if(!empty($post_data->fullname)){ echo ucfirst($post_data->fullname);} else{ echo ucfirst($post_data->username);} ?>
+>>>>>>> fd9b656ec049bb0ecc70ac54c5fef14fd1c62671
                                 </a>
                             </div>
                             <div class="employe-about d-none">
@@ -134,37 +160,44 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Bid Amount</label>
-                                        <input type="text" class="form-control f1" placeholder="Your bid Amount" name="bid_amount" required>
+                                        <input type="text" class="form-control f1" placeholder="Your bid Amount"
+                                            name="bid_amount" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Email</label>
-                                        <input type="email" class="form-control f1" placeholder="Contact Email" name="email" required>
+                                        <input type="email" class="form-control f1" placeholder="Contact Email"
+                                            name="email" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Duration</label>
-                                        <input type="text" class="form-control f1" placeholder="Duration" name="duration" required>
+                                        <input type="text" class="form-control f1" placeholder="Duration"
+                                            name="duration" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control f1" placeholder="Phone" name="phone" onkeypress="only_number(event)" required>
+                                        <input type="text" class="form-control f1" placeholder="Phone" name="phone"
+                                            onkeypress="only_number(event)" required>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Details</label>
-                                        <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                                        <textarea class="form-control" name="description"
+                                            placeholder="Description"></textarea>
                                     </div>
-                                    <input type="hidden" name="postjob_id" value="<?php if(!empty($post_data->id)) { echo $post_data->id;} ?>">
+                                    <input type="hidden" name="postjob_id"
+                                        value="<?php if(!empty($post_data->id)) { echo $post_data->id;} ?>">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="bid-btn">
                                             <?php if(!empty($_SESSION['afrebay']['userId'])) {
                                                 if(@$_SESSION['afrebay']['userType']=='1') {
                                             ?>
-                                            <input type="submit" name="" >
+                                            <input type="submit" name="">
                                             <?php } else { ?>
                                             <h2 class="job-bid" style="font-size:16px;">You are not accepted bidding
                                             </h2>
                                             <?php } } else { ?>
                                             <br />
-                                            <a href="<?= base_url('login')?>" class="btn btn-info postdetail">Submit Query</a>
+                                            <a href="<?= base_url('login')?>" class="btn btn-info postdetail">Submit
+                                                Query</a>
                                             <?php } ?>
                                         </div>
                                     </div>
