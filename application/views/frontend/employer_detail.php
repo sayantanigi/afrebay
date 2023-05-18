@@ -40,19 +40,23 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="job-single-info3">
                                             <h3>
                                                 <?php
-                                                $fullname=$userdata->firstname.' '.$userdata->lastname;
-                                                if(!empty($fullname)){echo $fullname;} else{ echo $userdata->username; }?>
+                                                $companyname=$userdata->companyname;
+                                                if(!empty($companyname)) {
+                                                    echo ucwords($companyname);
+                                                } else {
+                                                    echo $userdata->username;
+                                                } ?>
                                             </h3>
                                             <span><i class="la la-map-marker"></i><?= @$userdata->address;?></span>
                                             <!--<span class="job-is ft">Full time</span>-->
                                             <ul class="tags-jobs">
                                                 <li><i class="la la-file-text"></i> Applications <?= count($get_post);?></li>
-                                                <li><i class="la la-calendar-o"></i>
+                                                <!-- <li><i class="la la-calendar-o"></i>
                                                     <?php $getdate=$this->Crud_model->get_single('postjob',"user_id='".$userdata->userId."'");
                                                     if(!empty($getdate->appli_deadeline)) { ?>
                                                     Post Date: <?= date('M d,Y',strtotime(@$getdate->appli_deadeline));
                                                     } ?>
-                                                </li>
+                                                </li> -->
                                                 <li><i class="la la-eye"></i> Views <?= @$userdata->view_count?></li>
                                             </ul>
                                         </div>
@@ -93,6 +97,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="job-list-modern">
                                             <div class="job-listings-sec no-border">
                                                 <?php
+                                                //echo "<pre>"; print_r($get_post);
                                                 $total_post=count($get_post);
                                                 if(!empty($get_post)){
                                                 foreach ($get_post as $key) {
@@ -100,7 +105,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="job-listing wtabs noimg">
                                                     <div class="job-title-sec">
                                                         <h3 style="text-transform: uppercase;"><a href="javascript:void(0)" title=""><?= $key->post_title; ?></a></h3>
-                                                        <span>Massimo Artemisis</span>
+                                                        <span><?php echo $key->required_key_skills; ?></span>
                                                         <div class="job-lctn"><i class="la la-map-marker"></i><?= $key->location; ?></div>
                                                     </div>
                                                     <div class="job-style-bx">
@@ -140,20 +145,33 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <i class="la la-map"></i>
                                                 <h3>Locations</h3> <span><?= @$userdata->address;?></span>
                                             </li>
+
+                                            <?php
+                                            $skills = $this->db->query("SELECT group_concat(required_key_skills) as skill FROM postjob WHERE user_id = '".$userdata->userId."'")->result_array();
+                                            if(!empty($skills[0]['skill'])) { ?>
                                             <li>
                                                 <i class="la la-bars"></i>
-                                                <h3>Categories</h3>
-                                                <span>Arts, Design, Media</span>
+                                                <h3>Skills</h3>
+                                                <span>
+                                                <?php echo $uniq_skill = implode(', ',array_unique(explode(',', $skills[0]['skill']))); ?>
+                                                </span>
                                             </li>
+                                            <?php } ?>
                                             <li>
                                                 <i class="la la-clock-o"></i>
                                                 <h3>Since</h3>
-                                                <span>2002</span>
+                                                <span><?= @$userdata->foundedyear;?></span>
                                             </li>
                                             <li>
                                                 <i class="la la-users"></i>
                                                 <h3>Team Size</h3>
-                                                <span>15</span>
+                                                <span>
+                                                    <?php if($userdata->teamsize > '10000'){
+                                                        echo "10000+";
+                                                    } else {
+                                                        echo $userdata->teamsize;
+                                                    }
+                                                    ?></span>
                                             </li>
                                         </ul>
                                     </div>

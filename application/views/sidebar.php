@@ -69,19 +69,19 @@ $seg1=$this->uri->segment(1);
                             if(in_array('', $profile_check[0])) { ?>
                             <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
                                 <a href="javascript:void(0)"><i class="fa fa-commenting-o" aria-hidden="true"></i>
-                                    <span class="hidden-xs hidden-sm">Chat</span>
+                                    <span class="hidden-xs hidden-sm">Messages</span>
                                 </a>
                             </li>
                             <?php } else { ?>
                             <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
                                 <a href="<?= base_url('chat')?>"><i class="fa fa-commenting-o" aria-hidden="true"></i>
-                                    <span class="hidden-xs hidden-sm">Chat</span>
+                                    <span class="hidden-xs hidden-sm">Messages</span>
                                 </a>
                             </li>
                             <?php } } else { ?>
                             <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
                                 <a href="<?= base_url('chat')?>"><i class="fa fa-commenting-o" aria-hidden="true"></i>
-                                    <span class="hidden-xs hidden-sm">Chat</span>
+                                    <span class="hidden-xs hidden-sm">Messages</span>
                                 </a>
                             </li>
                         <?php } ?>

@@ -15952,6 +15952,8 @@ aside .widget.border:first-child {
 
    padding-left: 30px;
 
+   width: 60%;
+
 }
 
 
@@ -37142,6 +37144,8 @@ footer .bottom-line span {
 
    position: relative;
 
+   width: 40%;
+
 }
 
 
@@ -37180,7 +37184,12 @@ footer .bottom-line span {
 
    width: max-content !important;
 
-   pointer-events: none;
+   pointer-events: auto;
+
+}
+
+.Employees_Search_List .Employees_Search_Result .emply-resume-list .shortlists a.Emp_Comp:hover {
+    background: #fff !important;
 
 }
 
@@ -39999,4 +40008,3 @@ footer .social {
    font-weight: 500;
 
 }
-

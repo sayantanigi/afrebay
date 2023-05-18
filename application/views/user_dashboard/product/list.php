@@ -20,7 +20,7 @@
                 <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">My Job</li>
+                        <li class="breadcrumb-item active" aria-current="page">My Products</li>
                     </ol>
                 </nav>
             </div>
@@ -30,10 +30,17 @@
 
 <?php $this->load->view('sidebar');?>
 <div class="col-md-12 col-md-12 col-sm-12 display-table-cell v-align">
+    <div id="product-messages" class="text-success f-20">
+        <p style="color: #28a745;">Product Deleted Successfully.</p>
+    </div>
+    <div id="err-messages">
+        <h4 style="color: red;">Error</h4>
+        <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
+    </div>
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px;">
-                <a href="#" class="btn btn-primary Education_Btn">Add</a>
+                <a href="<?php echo base_url('add-product')?>" class="btn btn-primary Education_Btn">Add</a>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak">
@@ -47,94 +54,63 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php if (!empty($product_list)) {
+                                $i=1;
+                                foreach ($product_list as $value) {
+                            ?>
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Demo</td>
-                                <td>Demo</td>
-                                <td class="d-flex justify-content-around">
-                                    <a href="#" id="View1" data-toggle="tooltip" title="View"><i class="fa fa-eye"
-                                            aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o"
-                                            aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"
-                                            aria-hidden="true"></i></a>
+                                <th scope="row"><?php echo $i?></th>
+                                <td><?php echo $value->prod_name;?></td>
+                                <td>
+                                    <?php
+                                    $string = strip_tags($value->prod_description);
+                                    if (strlen($string) > 200) {
+                                        $stringCut = substr($string, 0, 200);
+                                        $endPoint = strrpos($stringCut, ' ');
+                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                        $string .= '...';
+                                    }
+                                    echo $string;
+                                    //echo strip_tags($value->prod_description);?>
+                                </td>
+                                <td class="d-flex justify-content-around" style="height: 73px;">
+                                    <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="productDelete(<?php echo $value->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
-                            <tr id="Product-Data-Block1">
+                            <tr id="Product-Data-Block1_<?php echo $value->id;?>">
                                 <td colspan="4" class="Product-Details-Page">
                                     <div class="row Product-Block">
                                         <div class="col-lg-4 col-md-12 col-sm-12 column Product-Img">
                                             <div class="Product-Img-Container">
+                                                <?php $product_image = $this->db->query("SELECT * FROM user_product_image WHERE prod_id = '".$value->id."'")->result_array();
+                                                //print_r($product_image);
+                                                if(!empty($product_image)) {
+                                                foreach($product_image as $row) {
+                                                ?>
                                                 <div class="imgSlides">
-                                                    <img src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651"
-                                                        style="width:100%">
+                                                    <img src="<?php echo base_url('uploads/products/'.$row["prod_image"])?>" style="width:100%">
                                                 </div>
-                                                <div class="imgSlides">
-                                                    <img src="https://static.doofinder.com/main-files/uploads/2018/01/Top6Sales.png"
-                                                        style="width:100%">
-                                                </div>
-                                                <div class="imgSlides">
-                                                    <img src="https://queue-it.com/media/ppcp1twv/product-drop.jpg"
-                                                        style="width:100%">
-                                                </div>
-                                                <div class="imgSlides">
-                                                    <img src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651"
-                                                        style="width:100%">
-                                                </div>
-                                                <div class="imgSlides">
-                                                    <img src="https://static.doofinder.com/main-files/uploads/2018/01/Top6Sales.png"
-                                                        style="width:100%">
-                                                </div>
-                                                <div class="imgSlides">
-                                                    <img src="https://queue-it.com/media/ppcp1twv/product-drop.jpg"
-                                                        style="width:100%">
-                                                </div>
+                                                <?php } } ?>
                                                 <a class="prev" onclick="plusSlides(-1)">❮</a>
                                                 <a class="next" onclick="plusSlides(1)">❯</a>
                                                 <div class="row Slider-All-Img">
+                                                    <?php $product_image = $this->db->query("SELECT * FROM user_product_image WHERE prod_id = '".$value->id."'")->result_array();
+                                                    $j = 1;
+                                                    if(!empty($product_image)) {
+                                                    foreach($product_image as $row) {
+                                                    ?>
                                                     <div class="column">
-                                                        <img class="demo cursor"
-                                                            src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651"
-                                                            style="width:100%" onclick="currentSlide(1)"
-                                                            alt="The Woods">
+                                                        <img class="demo cursor" src="<?php echo base_url('uploads/products/'.$row["prod_image"])?>" style="width:100%" onclick="currentSlide(<?= $j; ?>)">
                                                     </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor"
-                                                            src="https://static.doofinder.com/main-files/uploads/2018/01/Top6Sales.png"
-                                                            style="width:100%" onclick="currentSlide(2)"
-                                                            alt="Cinque Terre">
-                                                    </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor"
-                                                            src="https://queue-it.com/media/ppcp1twv/product-drop.jpg"
-                                                            style="width:100%" onclick="currentSlide(3)"
-                                                            alt="Mountains and fjords">
-                                                    </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor"
-                                                            src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651"
-                                                            style="width:100%" onclick="currentSlide(4)"
-                                                            alt="The Woods">
-                                                    </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor"
-                                                            src="https://static.doofinder.com/main-files/uploads/2018/01/Top6Sales.png"
-                                                            style="width:100%" onclick="currentSlide(5)"
-                                                            alt="Cinque Terre">
-                                                    </div>
-                                                    <div class="column">
-                                                        <img class="demo cursor"
-                                                            src="https://queue-it.com/media/ppcp1twv/product-drop.jpg"
-                                                            style="width:100%" onclick="currentSlide(6)"
-                                                            alt="Mountains and fjords">
-                                                    </div>
+                                                    <?php $j++; } } ?>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-12 col-sm-12 column Product-Data">
-                                            <p><span>Test Product</span></p>
-                                            <p><span>In publishing and graphic design, Lorem ipsum is a placeholder text
-                                                    commonly used to demonstrate.</span></p>
+                                            <p><span><?php echo $value->prod_name;?></span></p>
+                                            <p><span><?php echo $value->prod_description; ?></span></p>
                                         </div>
                                         <div class="col-lg-4 column Product-Contact">
                                             <div class="row">
@@ -179,6 +155,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            <?php $i++; } } ?>
                         </tbody>
                     </table>
                 </div>
@@ -208,12 +185,72 @@
     </div>
 </div>
 
+<style>
+#product-messages{display: none; text-align: center;}
+#err-messages{display: none; text-align: center;}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
 <script>
-    $("#View1").click(function () {
-        $("#Product-Data-Block1").toggleClass('Show-Product-Block')
-    });
+$(document).ready(function(){
+    <?php
+    if(!empty($product_list)) {
+    $i=1;
+    foreach ($product_list as $value) { ?>
+        $("#Product-Data-Block1_<?php echo $value->id;?>").hide();
+        $('#View1_<?php echo $value->id?>').click(function () {
+            //$("#Product-Data-Block1_<?php echo $value->id;?>").toggleClass('Show-Product-Block_<?php echo $value->id;?>');
+            $("#Product-Data-Block1_<?php echo $value->id;?>").toggle();
+        });
+    <?php $i++; } } ?>
+});
+
+function productDelete(id) {
+    var p_id = id;
+    if(confirm("Are you sure you want to delete this?")) {
+        var base_url = $('#base_url').val();
+        $.ajax({
+            url:base_url+"user/dashboard/delete_product",
+            method:"POST",
+            data:{id: p_id},
+            beforeSend : function(){
+                $("#loader").show();
+                //$(".SignUp_Btn button").prop('disable','true');
+            },
+            success:function(data) {
+                if (data == '1'){
+                    setTimeout(function () {
+                        $("#loader").hide();
+                        window.scroll({top: 0, behavior: "smooth"});
+                        $('#product-messages').show();
+                    }, 7000);
+                    setTimeout(function () {
+                        $('#product-messages').hide();
+                    }, 9000);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 10000);
+                } else {
+                    $('#err-messages').show();
+                    setTimeout(function () {
+                        window.scroll({top: 0, behavior: "smooth"})
+                    }, 7000);
+                    setTimeout(function () {
+                        $('#err-messages').hide();
+                    }, 9000);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 10000);
+                }
+            }
+
+        })
+    } else {
+        //return false;
+        location.reload(true);
+    }
+
+
+}
 </script>
 <script>
     let slideIndex = 1;

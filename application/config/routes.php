@@ -95,6 +95,9 @@ $route['update-education/(:any)'] = "user/dashboard/update_education/$1";
 $route['workexperience-list'] = "user/dashboard/workexperience_list";
 $route['add-workexperience'] = "user/dashboard/add_workexperience";
 $route['update-workexperience/(:any)'] = "user/dashboard/update_workexperience/$1";
+$route['product-list'] = "user/dashboard/product_list";
+$route['add-product'] = "user/dashboard/add_product";
+$route['update-product/(:any)'] = "user/dashboard/update_product/$1";
 $route['success/(:any)'] = "stripe/payment_success/$1";
 
 

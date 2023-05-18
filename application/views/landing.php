@@ -42,10 +42,10 @@ Header -->
           </li>
           <li class="nav-item">
             <a href="https://igiapp.com/greatgigz/demand/" class="nav-link">On Demand Services</a>
-          </li>  
+          </li>
         </ul>
       </div>
-     
+
     </div>
   </nav>
 </header>
@@ -117,7 +117,7 @@ Banner -->
           </div>
         </div>
       </div>
-     </div> 
+     </div>
     <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
@@ -139,7 +139,7 @@ Banner -->
           <h3 class="text-white">Create free account to find thousands Jobs, Employment &amp; Career Opportunities around you!</h3>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>
@@ -438,7 +438,7 @@ Browse listing -->
        </div>
      </div>
    </div>
-</section>  
+</section>
 
 <section class="bg-light">
   <div class="container">
@@ -501,7 +501,7 @@ Footer-->
       </div>
       <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
         <div class="footer-link">
-          <h5 class="text-dark mb-4">For Employers</h5>
+          <h5 class="text-dark mb-4">For Vendors</h5>
           <ul class="list-unstyled">
             <li><a href="#">Browse Candidates</a></li>
             <li><a href="#">Browse Categories</a></li>

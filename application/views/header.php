@@ -214,7 +214,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 
                                 <li><a href="#" title="">For Employer</a></li>
 
-                                <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Workers</a></li>
+                                <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Freelancer</a></li>
 
                             </ul>
 
@@ -296,9 +296,9 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 
                                 <ul>
 
-                                    <li><a href="<?= base_url('employer-list')?>" title="">For Vendors</a></li>
+                                    <li><a href="<?= base_url('employer-list')?>" title="">Vendors</a></li>
 
-                                    <li><a href="<?= base_url('workers-list')?>" title="">For Freelancers</a></li>
+                                    <li><a href="<?= base_url('workers-list')?>" title="">Freelancers</a></li>
 
                                 </ul>
 
@@ -403,4 +403,3 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
             </div>
 
         </header>
-

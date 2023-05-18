@@ -109,7 +109,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading">
-                        <h2>Available AfreBay Workers</h2>
+                        <h2>Available AfreBay Freelancer</h2>
                         <span>Found by employers communicate directly with hiring managers and recruiters.</span>
                     </div>
                     <div class="blog-sec">

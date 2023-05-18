@@ -246,15 +246,15 @@
 
             </div>
 
-            
 
-            
+
+
 
             <!--footer-->
 
-            
 
-            
+
+
 
 <?php
 
@@ -322,11 +322,11 @@ if(!empty($_SESSION['gigwork']['userId']))
 
                                                 <!--<a href="javascript:void(0)" title="">Our Services</a>-->
 
-                                                <a href="<?= base_url('employer-list')?>" title="Employer">Employers</a>
+                                                <a href="<?= base_url('employer-list')?>" title="Employer">Vendors</a>
 
                                                <!--  <a href="javascript:void(0)" title="Employees">Employees</a> -->
 
-                                                <a href="<?= base_url('workers-list')?>" title="workers">Workers</a>
+                                                <a href="<?= base_url('workers-list')?>" title="workers">Freelancer</a>
 
                                                 <a href="<?= base_url('pricing')?>" title="">Pricing</a>
 
@@ -486,13 +486,13 @@ if(!empty($_SESSION['gigwork']['userId']))
 
     <!--  end modal -->
 
-     
+
 
            <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script> -->
 
-       
 
-          <script src="<?= base_url('assets/js/jquery_min.js')?>" type="text/javascript"></script> 
+
+          <script src="<?= base_url('assets/js/jquery_min.js')?>" type="text/javascript"></script>
 
        <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js" type="text/javascript"></script>
 
@@ -524,11 +524,11 @@ if(!empty($_SESSION['gigwork']['userId']))
 
         <script src="<?= base_url('assets/js/bootstrap-datepicker.js')?>" type="text/javascript"></script>
 
-    
 
-    
 
-    
+
+
+
 
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places&callback=initMap"
 
@@ -592,17 +592,17 @@ if(!empty($_SESSION['gigwork']['userId']))
 
 
 
-            
 
-            
+
+
 
             <!--end footer-->
 
-            
 
-            
 
-            
+
+
+
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
@@ -668,7 +668,7 @@ if(!empty($_SESSION['gigwork']['userId']))
 
   </script>
 
-  
+
 
      <script>
 
@@ -682,7 +682,7 @@ if(!empty($_SESSION['gigwork']['userId']))
 
            });
 
-        </script> 
+        </script>
 
    <script type="text/javascript">
 
@@ -833,4 +833,3 @@ if(!empty($_SESSION['gigwork']['userId']))
   })(jQuery);
 
         </script>
-

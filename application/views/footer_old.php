@@ -26,9 +26,9 @@ $get_setting=$this->Crud_model->get_single('setting');
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <a href="#" title="">Our Services</a>
-                                                <a href="<?= base_url('employer_list')?>" title="Employer">Employers</a>
+                                                <a href="<?= base_url('employer_list')?>" title="Employer">Vendors</a>
                                                 <a href="<?= base_url('employees_list')?>" title="Employees">Employees</a>
-                                                <a href="<?= base_url('workers_list')?>" title="workers">Workers</a>
+                                                <a href="<?= base_url('workers_list')?>" title="workers">Freelancer</a>
                                                 <a href="<?= base_url('pricing')?>" title="">Pricing</a>
                                             </div>
                                             <!-- <div class="col-lg-6">

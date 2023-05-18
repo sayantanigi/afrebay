@@ -106,7 +106,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                         <a href="<?= base_url('employer-list')?>" title="">Become a AfreBay Partner</a>
                         <ul>
                             <li><a href="#" title="">For Employer</a></li>
-                            <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Workers</a></li>
+                            <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Freelancer</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -148,7 +148,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                                 <a href="#" title="">Become a AfreBay Partner</a>
                                 <ul>
                                     <li><a href="<?= base_url('employer-list')?>" title="">For Employer</a></li>
-                                    <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Workers</a></li>
+                                    <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Freelancer</a></li>
                                 </ul>
                             </li>
                             <li class="">

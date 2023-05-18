@@ -173,7 +173,7 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <ul class="gigasjh">
-                                                        <li>Start Date</li>
+                                                        <li>Member Since</li>
                                                         <li><?php echo date('m/d/Y', strtotime(@$user->created));?></li>
                                                     </ul>
                                                 </div>
@@ -188,23 +188,22 @@
                                             <!-- <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p> -->
                                         </div>
                                         <div class="staak">
-                                            <span><?= !empty($user->rate)?round($user->rate):'0';?> Star AfreBay</span>
+                                            <span><?= !empty($user->rate)?round($user->rate)."Star AfreBay":'Not Rated Yet';?></span>
                                             <?php if(!empty($user->rate)){
                                                 for ($i = 0; $i < $user->rate; $i++) {
                                             ?>
                                             <span class="fa fa-star checked"></span>
                                             <?php }} else { ?>
+                                            <!-- <span class="fa fa-star-o checked"></span>
                                             <span class="fa fa-star-o checked"></span>
                                             <span class="fa fa-star-o checked"></span>
                                             <span class="fa fa-star-o checked"></span>
-                                            <span class="fa fa-star-o checked"></span>
-                                            <span class="fa fa-star-o checked"></span>
+                                            <span class="fa fa-star-o checked"></span> -->
+                                            <span class=""></span>
                                             <?php } ?>
                                         </div>
                                         <h3 class="nkash">
-                                            <a type="button" class="btn"
-                                                href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
-                                                title="">
+                                            <a type="button" class="btn" href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
                                                 <?php if(!empty($user->firstname)){ echo $user->firstname.' '.$user->lastname; } else{ echo ucfirst($user->username);}?>
                                             </a>
                                         </h3>
