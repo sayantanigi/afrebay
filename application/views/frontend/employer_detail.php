@@ -97,7 +97,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 ?>
                                                 <div class="job-listing wtabs noimg">
                                                     <div class="job-title-sec">
-                                                        <h3 style="text-transform: uppercase;"><a href="javascript:void(0)" title=""><?= $key->post_title; ?></a></h3>
+                                                        <h3 style="text-transform: uppercase;"><a href="<?php echo base_url()?>postdetails/<?php echo base64_encode($key->id)?>" title=""><?= $key->post_title; ?></a></h3>
                                                         <span><?php echo $key->required_key_skills; ?></span>
                                                         <div class="job-lctn"><i class="la la-map-marker"></i><?= $key->location; ?></div>
                                                     </div>
@@ -173,49 +173,34 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <div class="Product_Details">
                                         <h3 class="mt-5 mb-5">Products</h3>
                                         <div class="row">
+                                            <?php if(!empty($prod_list)) {
+                                                $i = 1;
+                                            foreach ($prod_list as $value) { ?>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="Product">
                                                     <div class="Product_Img">
-                                                        <img src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651">
+                                                        <img src="<?php echo base_url()?>uploads/products/<?php echo $value['prod_image']?>">
                                                     </div>
                                                     <div class="Product_Data">
-                                                        <p class="mt-2 mb-2"><span>Test Product</span></p>
-                                                        <p><span>In publishing and graphic design, Lorem ipsum is a
-                                                                placeholder text commonly used to demonstrate.</span>
+                                                        <p class="mt-2 mb-2"><span><?php echo $value['prod_name']?></span></p>
+                                                        <p><span>
+                                                            <?php
+                                                            $string = strip_tags($value['prod_description']);
+                                                            if (strlen($string) > 200) {
+                                                                $stringCut = substr($string, 0, 100);
+                                                                $endPoint = strrpos($stringCut, ' ');
+                                                                $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                                $string .= '...';
+                                                            }
+                                                            echo $string;
+                                                            ?>
+                                                            </span>
                                                         </p>
-                                                        <a href="<?php echo base_url()?>productdetail" type="button" class="btn btn-info">Contact Seller</a>
+                                                        <a href="<?php echo base_url()?>productdetail/<?php echo base64_encode($value['id'])?>" type="button" class="btn btn-info">Contact Seller</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                <div class="Product">
-                                                    <div class="Product_Img">
-                                                        <img
-                                                            src="https://static.doofinder.com/main-files/uploads/2018/01/Top6Sales.png">
-                                                    </div>
-                                                    <div class="Product_Data">
-                                                        <p class="mt-2 mb-2"><span>Test Product</span></p>
-                                                        <p><span>In publishing and graphic design, Lorem ipsum is a
-                                                                placeholder text commonly used to demonstrate.</span>
-                                                        </p>
-                                                        <a href="<?php echo base_url()?>productdetail" type="button" class="btn btn-info">Contact Seller</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                <div class="Product">
-                                                    <div class="Product_Img">
-                                                        <img src="https://queue-it.com/media/ppcp1twv/product-drop.jpg">
-                                                    </div>
-                                                    <div class="Product_Data">
-                                                        <p class="mt-2 mb-2"><span>Test Product</span></p>
-                                                        <p><span>In publishing and graphic design, Lorem ipsum is a
-                                                                placeholder text commonly used to demonstrate.</span>
-                                                        </p>
-                                                        <a href="<?php echo base_url()?>productdetail" type="button" class="btn btn-info">Contact Seller</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <?php  $i++; } }?>
                                         </div>
                                     </div>
                                 </div>

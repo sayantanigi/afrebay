@@ -71,7 +71,7 @@
                                         $string .= '...';
                                     }
                                     echo $string;
-                                    //echo strip_tags($value->prod_description);?>
+                                    ?>
                                 </td>
                                 <td class="d-flex justify-content-around" style="height: 73px;">
                                     <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -109,8 +109,9 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-12 col-sm-12 column Product-Data">
-                                            <p><span><?php echo $value->prod_name;?></span></p>
-                                            <p><span><?php echo $value->prod_description; ?></span></p>
+                                            <div><h2><?php echo $value->prod_name;?></h2></div>
+                                            <hr>
+                                            <div class="prod_desc"><?php echo $value->prod_description; ?></div>
                                         </div>
                                         <div class="col-lg-4 column Product-Contact">
                                             <div class="row">

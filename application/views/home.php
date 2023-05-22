@@ -102,7 +102,7 @@
                                                 ?>
                                                 <p><?= ucfirst($title)?></p>
                                                 <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array();?>
-                                                <p>By <?php echo $get_user[0]['firstname'].' '.$get_user[0]['lastname']?></p>
+                                                <p>By <?php echo $get_user[0]['companyname']?></p>
                                             </div>
                                         </div>
                                         <h3 class="nkash"><a href="javascript:void(0)" title="">Description</a></h3>
@@ -115,11 +115,13 @@
                         </div>
                     </div>
                 </div>
+                <?php if(!empty($get_post)) { ?>
                 <div class="col-lg-12">
                     <div class="browse-all-cat">
                         <a href="<?= base_url('ourjobs')?>" title="">View More</a>
                     </div>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -184,7 +186,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <p><?= ucfirst($shortbio)?></p>
+                                            <p><?= ucfirst(strip_tags($shortbio))?></p>
                                             <!-- <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p> -->
                                         </div>
                                         <div class="staak">
@@ -214,11 +216,13 @@
                         </div>
                     </div>
                 </div>
+                <?php if(!empty($get_users)) { ?>
                 <div class="col-lg-12">
                     <div class="browse-all-cat">
                         <a href="<?= base_url('workers-list')?>" title="">View More</a>
                     </div>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>

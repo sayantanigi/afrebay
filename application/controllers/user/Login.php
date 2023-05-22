@@ -25,19 +25,31 @@ class Login extends CI_Controller {
 		}
 
 		if(empty($validate)) {
+			// $data=array(
+			// 	'username' =>$_POST['username'],
+			// 	'userType' =>$_POST['user_type'],
+			// 	'email' =>$_POST['email'],
+			// 	'mobile' =>$_POST['mobile'],
+			// 	//'serviceType' => implode(", ", $_POST['service']),
+			// 	'password' => md5($_POST['password']),
+			// 	'created'=>date('Y-m-d H:i:s'),
+			// 	'status'=>0
+			// );
+
 			$data=array(
-				'username' =>$_POST['username'],
 				'userType' =>$_POST['user_type'],
+				'firstname' =>$_POST['first_name'],
+				'lastname' =>$_POST['last_name'],
+				'companyname' =>$_POST['company_name'],
 				'email' =>$_POST['email'],
 				'mobile' =>$_POST['mobile'],
-				//'serviceType' => implode(", ", $_POST['service']),
 				'password' => md5($_POST['password']),
 				'created'=>date('Y-m-d H:i:s'),
 				'status'=>0
 			);
 
 			$result = $this->Mymodel->insert('users',$data);
-
+			$fullname = $_POST['first_name']." ".$_POST['last_name'];
 			$insert_id = $this->db->insert_id();
 			$get_setting=$this->Crud_model->get_single('setting');
 			if(!empty($insert_id)) {
@@ -68,7 +80,7 @@ class Login extends CI_Controller {
 
 				<tr>
 
-				<td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello ".$_POST['username'].",</td>
+				<td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello ".$fullname.",</td>
 
 				</tr>
 

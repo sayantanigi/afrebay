@@ -60,7 +60,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 							<div class="heading">
 								<h4 class="card-title">Payment Successful #<?php echo $this->db->insert_id(); ?></h4>
 								<p class="card-text">We received your payment on your purchase #<?php echo $session['subscription']; ?>, check your email for more information.</p>
-		                        <a href="<?php echo base_url('pricing'); ?>" class="btn btn-info btn-sm float-right">Go Home</a>
+		                        <a href="<?php echo base_url('profile'); ?>" class="btn btn-info btn-sm float-right">Update Profile</a>
 		                    </div>
 					<?php }	}?>
 

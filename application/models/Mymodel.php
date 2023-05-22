@@ -55,7 +55,9 @@ class Mymodel extends MY_Model {
             $result = $query->row();
             $data['afrebay'] = array(
                 'userId'=>$result->userId,
-                'username'=>$result->username,
+				'companyname'=>$result->companyname,
+                'firstname'=>$result->firstname,
+				'lastname'=>$result->lastname,
                 'userEmail'=>$result->email,
                 'userMobile'=>$result->mobile,
                 'userType'=>$result->userType,

@@ -39943,7 +39943,7 @@ footer .social {
 
 .dashboard-gig .table.table-bordered.Dash-Product .Product-Details-Page .Product-Contact {
 
-   height: 300px;
+   height: 378px;
 
    overflow: auto;
 
@@ -40017,3 +40017,6 @@ footer .social {
     margin: 0 12px 0 15px;
 }
 .bid_contact-profile p {margin-top: 6px;}
+.prod_desc {text-align: justify; font-size: 19px; margin-top: 40px; height: 300px; overflow: auto;}
+.prod_desc h2 {font-size: 16px;}
+.prod_desc p {font-size: 14px;}

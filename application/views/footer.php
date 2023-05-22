@@ -85,6 +85,15 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     </div>
 </footer>
 <input type="hidden" name="base_url" id="base_url" value="<?= base_url()?>">
+
+<style>
+<?php $seg2 = $this->uri->segment(1);
+    if($seg2 == 'register') { ?>
+        .scrollup {display: none !important;}
+    <?php } elseif ($seg2 != 'login') { ?>
+        .scrollup {display: none !important;}
+    <?php } ?>
+</style>
 <?php
 if(!empty($_SESSION['afrebay']['userId'])){
     if(!empty($get_video->created_date)){

@@ -37,7 +37,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <h3>Sign Up</h3>
                                     <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
                                     <div class="select-user">
-                                        <span class="user-tab" user_type="1" onclick="get_value(1)">Freelancer</span>
+                                        <span class="user-tab active" user_type="1" onclick="get_value(1)">Freelancer</span>
                                         <span class="user-tab" user_type="2" onclick="get_value(2)">Vendor</span>
                                     </div>
                                     <div class="error" id="err_usertype"></div>
@@ -53,7 +53,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <form id="signUp_form" action="#" method="post">
                                         <div class="row m-0">
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Full Name</label>
                                                     <div class="cfield_Input">
@@ -62,20 +62,40 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     </div>
                                                 </div>
                                                 <div class="error text-left" id="err_username"></div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                            </div> -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 first_name">
                                                 <div class="cfield cfield_top">
-                                                    <label for="" class="form-label">Password</label>
+                                                    <label for="" class="form-label">First Name <span style="color:red">*</span></label>
                                                     <div class="cfield_Input">
-                                                        <input type="password" placeholder="********" name="password" id="password" />
-                                                        <i class="la la-key"></i>
+                                                        <input type="text" placeholder="First Name" name="first_name" id="first_name" onkeypress="only_alphabets(event)"/>
+                                                        <i class="la la-user"></i>
                                                     </div>
                                                 </div>
-                                                <div class="error text-left" id="err_password"></div>
+                                                <div class="error text-left" id="err_firstname"></div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <div class="cfield">
-                                                    <label for="" class="form-label">Email Address</label>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 last_name">
+                                                <div class="cfield cfield_top">
+                                                    <label for="" class="form-label">Last Name <span style="color:red">*</span></label>
+                                                    <div class="cfield_Input">
+                                                        <input type="text" placeholder="Last Name" name="last_name" id="last_name" onkeypress="only_alphabets(event)"/>
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="error text-left" id="err_lastname"></div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6 col-sm-6 company_name">
+                                                <div class="cfield cfield_top">
+                                                    <label for="" class="form-label">Company Name <span style="color:red">*</span></label>
+                                                    <div class="cfield_Input">
+                                                        <input type="text" placeholder="Company Name" name="company_name" id="company_name" onkeypress="only_alphabets(event)" />
+                                                        <i class="la la-home"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="error text-left" id="err_companyname"></div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 email">
+                                                <div class="cfield cfield_top">
+                                                    <label for="" class="form-label">Email Address <span style="color:red">*</span></label>
                                                     <div class="cfield_Input">
                                                         <input type="text" placeholder="Email Address" name="email" id="email" />
                                                         <i class="la la-envelope-o"></i>
@@ -83,8 +103,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 </div>
                                                 <div class="error text-left" id="err_email"></div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <div class="cfield">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile">
+                                                <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Phone Number</label>
                                                     <div class="cfield_Input">
                                                         <input type="text" placeholder="Phone Number" name="mobile" maxlength="10" id="mobile" onkeypress="only_number(event)" />
@@ -93,6 +113,27 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 </div>
                                                 <div class="error text-left" id="err_mobile"></div>
                                             </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 pass">
+                                                <div class="cfield cfield_top">
+                                                    <label for="" class="form-label">Password <span style="color:red">*</span></label>
+                                                    <div class="cfield_Input">
+                                                        <input type="password" placeholder="********" name="password" id="password" />
+                                                        <i class="la la-key" onclick="checkPass()"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="error text-left" id="err_password"></div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 c_pass">
+                                                <div class="cfield cfield_top">
+                                                    <label for="" class="form-label">Confirm Password <span style="color:red">*</span></label>
+                                                    <div class="cfield_Input">
+                                                        <input type="password" placeholder="********" name="conf_password" id="conf_password" />
+                                                        <i class="la la-key" onclick="checkConfPass()"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="error text-left" id="err_confpassword"></div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6 col-sm-6" id="err_check_pass" style="tex-align:center;"></div>
                                             <!-- <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="cfield">
                                                     <label for="" class="form-label">Select Option</label>
@@ -116,7 +157,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <button type="button" class="btn btn-info" onclick="return btn_register();">Sign up</button>
                                                 <img src="<?php echo base_url()?>uploads/loading.gif" id="loader">
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 d-none">
+                                            <!-- <div class="col-lg-12 col-md-12 col-sm-12 d-none">
                                                 <div class="extra-login">
                                                     <span>OR</span>
                                                     <div class="login-social">
@@ -124,7 +165,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                         <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </form>
                                 </div>
@@ -138,11 +179,32 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </section>
 <style>
 #loader {display: none; width: 40px;}
+.company_name {display: none}
 </style>
 <script src="<?= base_url('assets/js/jquery.min.js')?>" type="text/javascript"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    $('#user_type').val(1);
+})
     function get_value(id) {
         $('#user_type').val(id);
+        if(id == 1){
+            $('.company_name').hide();
+            $('.first_name').show();
+            $('.last_name').show();
+            $('.email').show();
+            $('.pass').show();
+            $('.c_pass').show();
+            $('.mobile').show();
+        } else {
+            $('.company_name').show();
+            $('.first_name').hide();
+            $('.last_name').hide();
+            $('.email').show();
+            $('.pass').show();
+            $('.c_pass').show();
+            $('.mobile').show();
+        }
     }
 </script>
 <script type="text/javascript" src="<?= base_url('assets/custom_js/register.js')?>"></script>

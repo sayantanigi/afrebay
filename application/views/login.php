@@ -72,8 +72,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield">
                                                     <label for="" class="form-label">Password</label>
                                                     <div class="cfield_Input">
-                                                        <input type="password" placeholder="********" name="password" />
-                                                        <i class="la la-key"></i>
+                                                        <input type="password" placeholder="********" name="password" id="login_pass"/>
+                                                        <i class="la la-key" onclick="checkPass()"></i>
                                                     </div>
                                                 </div>
                                                 <div class="error text-left"><?php echo form_error('password'); ?></div>
@@ -177,5 +177,14 @@ function forgotPass() {
         }
 
     })
+}
+
+function checkPass() {
+    var x = document.getElementById("login_pass");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
 }
 </script>

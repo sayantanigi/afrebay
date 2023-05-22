@@ -184,7 +184,14 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                         <ul class="account-btns">
                             <?php if(!empty($_SESSION['afrebay']['userId'])) { ?>
                                 <li class="menu-item-has-children User_Dashboard_Menu">
-                                    <a class="Profile_dashboard_btn" href="#" title="">Hi, <?php echo ucfirst($_SESSION['afrebay']['username']); ?></a>
+                                    <a class="Profile_dashboard_btn" href="#" title="">Hi,
+                                        <?php if(!empty($_SESSION['afrebay']['firstname'])) {
+                                            $fullname = $_SESSION['afrebay']['firstname']." ".$_SESSION['afrebay']['lastname'];
+                                        } else {
+                                            $fullname = $_SESSION['afrebay']['companyname'];
+                                        }
+                                        echo ucwords($fullname); ?>
+                                    </a>
                                     <ul>
                                         <li>
                                             <a href="<?=base_url(); ?>dashboard" title="">Dashboard</a>
