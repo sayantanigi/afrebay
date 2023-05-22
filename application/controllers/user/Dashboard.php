@@ -15,10 +15,22 @@ class Dashboard extends CI_Controller {
 	function index() {
 		$data['get_service'] = $this->Crud_model->GetData('employer_services', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
 		$data['get_job'] = $this->Crud_model->GetData('postjob', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
+		$data['bid_job'] = $this->db->query("SELECT `postjob`.*, `job_bid`.* FROM `job_bid` JOIN `postjob` ON `postjob`.`id` = `job_bid`.`postjob_id` where `postjob`.user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
 		$data['get_subscribe'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
 		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='" . $_SESSION['afrebay']['userId'] . "' and userType='1'");
+		$data['get_product'] = $this->Crud_model->GetData('user_product', '', "user_id='".$_SESSION['afrebay']['userId']."' AND status = 1 AND is_delete= 1");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/dashboard', $data);
+		$this->load->view('footer');
+	}
+
+	public function view_profile() {
+		$user_info = $this->Crud_model->get_single('users', "userId='" . $_SESSION['afrebay']['userId'] . "'");
+		$data = array(
+			'userinfo' => $user_info,
+		);
+		$this->load->view('header');
+		$this->load->view('user_dashboard/view_profile', $data);
 		$this->load->view('footer');
 	}
 
@@ -118,6 +130,24 @@ class Dashboard extends CI_Controller {
 				$resume  = '';
 			}
 		}
+
+		if(!empty($this->input->post('key_skills'))) {
+			$key_skills = $this->input->post('key_skills');
+			for ($i=0; $i < count($key_skills); $i++) {
+				$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
+				if(empty($get_specialist)) {
+					$insrt = array(
+						'specialist_name'=>ucfirst($key_skills[$i]),
+						'created_date'=>date('Y-m-d H:i:s'),
+					);
+					$this->db->insert('specialist',$insrt);
+				}
+			}
+			$skills = implode(",",$this->input->post('key_skills',TRUE));
+		} else {
+			$skills = '';
+		}
+
 		$data = array(
 			'companyname' => $_POST['companyname'],
 			'firstname' => $_POST['firstname'],
@@ -126,8 +156,8 @@ class Dashboard extends CI_Controller {
 			'mobile' => $_POST['mobile'],
 			'gender' => $this->input->post('gender', TRUE),
 			'experience' => $this->input->post('experience', TRUE),
-			'qualification' => $this->input->post('qualification', TRUE),
-			'skills' => $this->input->post('skills', TRUE),
+			//'qualification' => $this->input->post('qualification', TRUE),
+			'skills' => $skills,
 			'profilePic' => $image,
 			'additional_image' => $additional_image,
 			'zip' => $_POST['zip'],
@@ -597,15 +627,14 @@ class Dashboard extends CI_Controller {
 
 	///////////////// start work experience //////////////////////////
 
-	function workexperience_list()
-	{
+	function workexperience_list() {
 		$data['workexperience_list'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/work_experience/list', $data);
 		$this->load->view('footer');
 	}
-	function add_workexperience()
-	{
+
+	function add_workexperience() {
 		$get_designation = $this->Crud_model->GetData('user_workexperience', 'id,designation', "");
 		$get_companyname = $this->Crud_model->GetData('user_workexperience', 'id,company_name', "");
 		$get_duration = $this->Crud_model->GetData('user_workexperience', 'id,duration', "");
@@ -615,9 +644,10 @@ class Dashboard extends CI_Controller {
 			'action' => base_url('user/Dashboard/save_workexperience'),
 			'designation' => set_value('designation'),
 			'company_name' => set_value('company_name'),
-			'duration' => set_value('duration'),
+			//'duration' => set_value('duration'),
+			'from_date' => set_value('from_date'),
+			'to_date' => set_value('to_date'),
 			'description' => set_value('description'),
-
 			'id' => set_value('id'),
 			'get_designation' => $get_designation,
 			'get_companyname' => $get_companyname,
@@ -630,16 +660,15 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function save_workexperience()
-	{
+	public function save_workexperience() {
 		$data = array(
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'designation' => $this->input->post('designation', TRUE),
 			'company_name' => $this->input->post('company_name', TRUE),
-			'duration' => $this->input->post('duration', TRUE),
-
+			//'duration' => $this->input->post('duration', TRUE),
+			'from_date' => $this->input->post('from_date', TRUE),
+			'to_date' => $this->input->post('to_date', TRUE),
 			'description' => $this->input->post('description', TRUE),
-
 			'created_date' => date('Y-m-d H:i:s'),
 		);
 		$this->Crud_model->SaveData('user_workexperience', $data);
@@ -647,23 +676,20 @@ class Dashboard extends CI_Controller {
 		redirect(base_url('workexperience-list'));
 	}
 
-
-
-	public function update_workexperience($id)
-	{
+	public function update_workexperience($id) {
 		$work_id = base64_decode($id);
-
 		$update_data = $this->Crud_model->get_single('user_workexperience', "id='" . $work_id . "'");
 		$get_designation = $this->Crud_model->GetData('user_workexperience', 'id,designation', "");
 		$get_companyname = $this->Crud_model->GetData('user_workexperience', 'id,company_name', "");
 		$get_duration = $this->Crud_model->GetData('user_workexperience', 'id,duration', "");
 		$data = array(
-
 			'button' => 'update',
 			'action' => base_url('user/Dashboard/edit_workexperience'),
 			'designation' => $update_data->designation,
 			'company_name' => $update_data->company_name,
-			'duration' => $update_data->duration,
+			//'duration' => $update_data->duration,
+			'from_date' => $update_data->from_date,
+			'to_date' => $update_data->to_date,
 			'description' => $update_data->description,
 			'id' => $update_data->id,
 			'get_designation' => $get_designation,
@@ -671,36 +697,33 @@ class Dashboard extends CI_Controller {
 			'get_duration' => $get_duration,
 
 		);
-
 		$this->load->view('header');
 		$this->load->view('user_dashboard/work_experience/form', $data);
 		$this->load->view('footer');
 	}
 
 
-	public function edit_workexperience()
-	{
+	public function edit_workexperience() {
 		$id = $_POST['id'];
 		$data = array(
 			'designation' => $this->input->post('designation', TRUE),
 			'company_name' => $this->input->post('company_name', TRUE),
-			'duration' => $this->input->post('duration', TRUE),
-
+			//'duration' => $this->input->post('duration', TRUE),
+			'from_date' => $this->input->post('from_date', TRUE),
+			'to_date' => $this->input->post('to_date', TRUE),
 			'description' => $this->input->post('description', TRUE),
-
 		);
 		$this->Crud_model->SaveData('user_workexperience', $data, "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Work Updated Successfully !');
 		redirect(base_url('workexperience-list'));
 	}
 
-	function delete_workexperience($id)
-	{
-
+	function delete_workexperience($id) {
 		$this->Crud_model->DeleteData('user_workexperience', "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Item deleted successfully !');
 		redirect(base_url('workexperience-list'));
 	}
+
 	///////////////// end work experience //////////////////////////
 
 	///////////////// User Subscription //////////////////////////

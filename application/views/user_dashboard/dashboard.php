@@ -62,22 +62,10 @@
                 <?php if($_SESSION['afrebay']['userType']==2){?>
                 <div class="row justify-content-md-center">
                     <div class="col-md-3 col-sm-12">
-                        <a href="<?= base_url('myservice')?>">
-                            <div class="dashboard">
-                                <h4>
-                                    <center>Total Services</center>
-                                </h4>
-                                <h3>
-                                    <center><?= count($get_service);?></center>
-                                </h3>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
                         <a href="<?= base_url('myjob')?>">
                             <div class="dashboard">
                                 <h4>
-                                    <center>Total Jobs</center>
+                                    <center>Job Posts</center>
                                 </h4>
                                 <h3>
                                     <center><?= count($get_job);?></center>
@@ -86,13 +74,25 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-sm-12">
-                        <a href="<?= base_url('subscription')?>">
+                        <a href="<?= base_url('jobbid')?>">
                             <div class="dashboard">
                                 <h4>
-                                    <center>Total Subscription</center>
+                                    <center>Job Bids</center>
                                 </h4>
                                 <h3>
-                                    <center><?= count($get_subscribe);?></center>
+                                    <center><?= count($bid_job);?></center>
+                                </h3>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <a href="<?= base_url('product')?>">
+                            <div class="dashboard">
+                                <h4>
+                                    <center>Products</center>
+                                </h4>
+                                <h3>
+                                    <center><?= count($get_product);?></center>
                                 </h3>
                             </div>
                         </a>
@@ -102,30 +102,30 @@
                 </div> <!--  end row -->
                 <?php } else if($_SESSION['afrebay']['userType']==1){?>
                 <!--  end employer list -->
-
+                
                 <!-- worker list     -->
-                <div style="background: #f67a49; color:white; padding:10px;">Profile</div>
-                <div class="row">
+                <!-- <div style="background: #f67a49; color:white; padding:10px;">Profile</div> -->
+                <!-- <div class="row">
                     <ul class="list_profile">
                         <li>
                             <b>Name :</b> <span
-                                style="font-size:16px;"><?php if(!empty($get_user->firstname)){ echo $get_user->firstname.' '.$get_user->lastname;}?></span>
+                                style="font-size:16px;"><?php //if(!empty($get_user->firstname)){ echo $get_user->firstname.' '.$get_user->lastname;}?></span>
                         </li>
                         <li>
                             <b>Address : </b><span
-                                style="font-size:16px;"><?php if(!empty($get_user->address)){ echo $get_user->address;}?></span>
+                                style="font-size:16px;"><?php //if(!empty($get_user->address)){ echo $get_user->address;}?></span>
                         </li>
                         <li>
                             <b>Email : </b><span
-                                style="font-size:16px;"><?php if(!empty($get_user->email)){ echo $get_user->email;}?></span>
+                                style="font-size:16px;"><?php //if(!empty($get_user->email)){ echo $get_user->email;}?></span>
                         </li>
                         <li>
                             <b>Phone : </b><span
-                                style="font-size:16px;"><?php if(!empty($get_user->mobile)){ echo $get_user->mobile;}?></span>
+                                style="font-size:16px;"><?php //if(!empty($get_user->mobile)){ echo $get_user->mobile;}?></span>
                         </li>
 
                     </ul>
-                </div>
+                </div> -->
                 <!-- end row -->
                 <?php } ?>
             </div>

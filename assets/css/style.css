@@ -40008,3 +40008,12 @@ footer .social {
    font-weight: 500;
 
 }
+.bid_contact-profile img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    float: left;
+    margin: 0 12px 0 15px;
+}
+.bid_contact-profile p {margin-top: 6px;}

@@ -51,7 +51,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Transaction ID</th>
                                             <th scope="col">Plan Name</th>
-                                            <th scope="col">Price</th>
+                                            <th scope="col">Price ($)</th>
                                             <th scope="col">Payment Date</th>
                                             <th scope="col">Duration</th>
                                             <th scope="col">Expiry Date</th>
@@ -68,10 +68,10 @@
                                             <td scope="row"><?php echo $i?></th>
                                             <td><?php echo $row->transaction_id;?></td>
                                             <td><?php echo $row->name_of_card;?></td>
-                                            <td><?php echo $row->amount;?></td>
-                                            <td><?php echo $row->payment_date;?></td>
+                                            <td><?php echo "$". number_format((float)$row->amount, 2, '.', '');?></td>
+                                            <td><?php echo date ('Y-m-d',strtotime($row->payment_date));?></td>
                                             <td><?php echo $row->duration;?></td>
-                                            <td><?php echo $row->expiry_date;?></td>
+                                            <td><?php echo date ('Y-m-d',strtotime($row->expiry_date));?></td>
                                             <td>
                                                 <?php
                                                 $now_date = date('Y/m/d');

@@ -128,6 +128,77 @@ class Welcome extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	public function update_post_job($id) {
+		$work_id = base64_decode($id);
+		$update_data = $this->Crud_model->get_single('postjob', "id='" . $work_id . "'");
+		$get_keySkills = $this->Crud_model->GetData('specialist', 'id, specialist_name', "");
+		$category = $this->Crud_model->GetData('category', 'id, category_name', "");
+		$subcategory = $this->Crud_model->GetData('sub_category', 'id, sub_category_name', "");
+		$get_country = $this->Crud_model->GetData('countries', 'id, name', "");
+		$get_state = $this->Crud_model->GetData('states', 'id, name', "");
+		$get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
+		$data = array(
+			'button' => 'update',
+			'action' => base_url('welcome/edit_post_job'),
+			'post_title' => $update_data->post_title,
+			'description' => $update_data->description,
+			//'duration' => $update_data->duration,
+			'key_skills' => $get_keySkills,
+			'duration' => $update_data->duration,
+			'charges' => $update_data->charges,
+			'category' => $category,
+			'subcategory' => $subcategory,
+			'appli_deadeline' => $update_data->appli_deadeline,
+			'countries' => $get_country,
+			'state' => $get_state,
+			'cities' => $get_cities,
+			'location' => $update_data->location,
+			'latitude' => $update_data->latitude,
+			'longitude' => $update_data->longitude,
+		);
+		$this->load->view('header');
+		$this->load->view('frontend/post_job', $data);
+		$this->load->view('footer');
+	}
+
+
+	public function edit_post_job() {
+		$key_skills = $this->input->post('key_skills');
+		for ($i=0; $i < count($key_skills); $i++) {
+			$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
+			if(empty($get_specialist)) {
+				$insrt = array(
+					'specialist_name'=>ucfirst($key_skills[$i]),
+					'created_date'=>date('Y-m-d H:i:s'),
+				);
+				$this->db->insert('specialist',$insrt);
+			}
+		}
+		$id = $_POST['id'];
+		$data=array(
+    		'user_id'=>$_SESSION['afrebay']['userId'],
+			'required_key_skills'=>implode(", ",$this->input->post('key_skills',TRUE)),
+    		'category_id'=>$this->input->post('category_id',TRUE),
+    		'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
+    		'post_title'=>$this->input->post('post_title',TRUE),
+    		'description'=>$this->input->post('description',TRUE),
+    		'duration'=>$this->input->post('duration',TRUE),
+    		'charges'=>$this->input->post('charges',TRUE),
+            'location'=>$this->input->post('location',TRUE),
+    		'latitude'=>$this->input->post('latitude',TRUE),
+    		'longitude'=>$this->input->post('longitude',TRUE),
+    		//'complete_address'=>$this->input->post('complete_address',TRUE),
+			'country'=>$this->input->post('country-dropdown',TRUE),
+			'state'=>$this->input->post('state-dropdown',TRUE),
+			'city'=>$this->input->post('city-dropdown',TRUE),
+    		'appli_deadeline'=>$this->input->post('appli_deadeline',TRUE),
+    		'created_date'=>date('Y-m-d H:i:s'),
+    	);
+		$this->Crud_model->SaveData('postjob', $data, "id='" . $id . "'");
+		$this->session->set_flashdata('message', 'Post Job Created Successfully !');
+		redirect(base_url('myjob'));
+	}
+
 	public function get_subcategory() {
         $id =$_POST['id'];
         $CategoryData = $this->Crud_model->GetData('sub_category',"","category_id ='".$id."'");

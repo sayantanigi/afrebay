@@ -99,7 +99,8 @@ $route['product-list'] = "user/dashboard/product_list";
 $route['add-product'] = "user/dashboard/add_product";
 $route['update-product/(:any)'] = "user/dashboard/update_product/$1";
 $route['success/(:any)'] = "stripe/payment_success/$1";
-
+$route['view_profile'] = "user/dashboard/view_profile";
+$route['update-postjob/(:any)'] = "welcome/update_post_job/$1";
 
 //ADMIN URL
 $route['admin'] = 'admin/login/index';

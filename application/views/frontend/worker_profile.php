@@ -190,7 +190,7 @@
                                 </div>
                                 <!-- Job Overview -->
                                 <div class="quick-form-job">
-                                    <h3>Employer Rating</h3>
+                                    <h3>Rate This Freelancer</h3>
 
                                     <form method="post" action="<?= base_url('user/dashboard/save_employer_rating')?>">
                                         <div class="row m-0">

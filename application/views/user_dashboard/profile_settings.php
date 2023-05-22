@@ -119,18 +119,38 @@
                                                 </label>
                                                 <input type="text" class="form-control" name="experience" required value="<?= @$userinfo->experience;?>" placeholder="Enter Experience" />
                                             </div>
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Highest Qualification<span style="color:red;">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="qualification" required value="<?= @$userinfo->qualification;?>" placeholder="Enter qualification" />
-                                            </div>
-                                            <div class="col-lg-6">
+                                            </div> -->
+                                            <!-- <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Skills<span style="color:red;">*</span></h4>
                                                 </label>
                                                 <br>
                                                 <input type="text" name="skills" required id="skills" class="form-control" value="<?= @$userinfo->skills?>" />
+                                            </div> -->
+                                            <div class="col-lg-12">
+                                                <span class="pf-title">Key Skills<span style="color:red;">*</span></span>
+                                                <div class="pf-field">
+                                                    <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
+                                                    <?php
+                                                    $key_skills = $this->Crud_model->GetData('specialist',"","status = 'Active'");
+                                                    foreach($key_skills as $val) {?>
+                                                        <option value="<?php echo $val->specialist_name; ?>"
+                                                        <?php if(!empty($userinfo->skills)){
+                                                            $skills = explode(",", $userinfo->skills);
+                                                            for($i=0; $i<count($skills); $i++) {
+                                                                if($skills[$i] == $val->specialist_name){
+                                                                    echo "selected";
+                                                                }
+                                                            }
+                                                        } ?>><?php echo $val->specialist_name;?></option>
+                                                    <?php } ?>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <?php } ?>
 
@@ -173,24 +193,24 @@
                                                     style="width:60px;height: 60px;" />
                                                 <?php }?>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Additional Images</h4>
                                                 </label>
                                                 <input type="file" class="form-control" name="additional_image" />
                                                 <br>
                                                 <?php
-                                                if(!empty($userinfo->additional_image)){
-                                                    if(!file_exists('uploads/users/additional_image/'.$userinfo->additional_image)){
+                                                //if(!empty($userinfo->additional_image)){
+                                                    //if(!file_exists('uploads/users/additional_image/'.$userinfo->additional_image)){
                                                 ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php } else { ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/users/additional_image/'.$userinfo->additional_image); ?>" style="width:60px;height: 60px;" /></a>
+                                                <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
+                                                <?php //} else { ?>
+                                                <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/users/additional_image/'.$userinfo->additional_image); ?>" style="width:60px;height: 60px;" /></a>
                                                 <input type="hidden" name="old_additionalimage" value="<?= $userinfo->additional_image ?>">
-                                                <?php } } else { ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php } ?>
-                                            </div>
+                                                <?php //} } else { ?>
+                                                <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
+                                                <?php //} ?>
+                                            </div> -->
                                             <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Short Video</h4>
@@ -258,6 +278,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script>
 CKEDITOR.replace('short_bio');
 </script>
@@ -265,5 +287,11 @@ CKEDITOR.replace('short_bio');
     $('#skills').tagsinput({
         confirmKeys: [13, 44],
         maxTags: 20,
+    });
+    $('.key_skills').select2({
+        tags: true,
+        //maximumSelectionLength: 10,
+        tokenSeparators: [',', ' '],
+        placeholder: "Select or Type Skills"
     });
 </script>

@@ -30,18 +30,23 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <h3>Post a New Job</h3>
                         </div>
                         <div class="profile-form-edit">
-                            <form method="post" action="<?php echo base_url('Welcome/save_postjob')?>" enctype="multipart/form-data" >
+                            <?php $seg1=$this->uri->segment(1);
+                            if($seg1 == 'update-postjob') { ?>
+                            <form method="post" action="<?php echo base_url('Welcome/edit_post_job')?>" enctype="multipart/form-data" >
+                            <?php } else { ?>
+                                <form method="post" action="<?php echo base_url('Welcome/save_postjob')?>" enctype="multipart/form-data" >
+                            <?php } ?>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <span class="pf-title">Job Title<span style="color:red;">*</span></span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="Enter Job Title" name="post_title" id="post_title" class="form-control " value="" data-role="tagsinput" required/>
+                                            <input type="text" placeholder="Enter Job Title" name="post_title" id="post_title" class="form-control " value="<?= @$post_title; ?>" data-role="tagsinput" required/>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <span class="pf-title">Description</span>
                                         <div class="pf-field">
-                                            <textarea name="description" id="description" placeholder="Enter Description"></textarea>
+                                            <textarea name="description" id="description" placeholder="Enter Description"><?= @$description; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -55,15 +60,15 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <span class="pf-title">Duration</span>
+                                        <span class="pf-title">Approximate Duration</span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="Enter Duration" name="duration" class="form-control " value=""/>
+                                            <input type="text" placeholder="Enter Duration" name="duration" class="form-control " value="<?= @$duration; ?>"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <span class="pf-title">Charges</span>
+                                        <span class="pf-title">Approximate Remuneration ($)</span>
                                         <div class="pf-field">
-                                            <input type="text" placeholder="Enter Charges" name="charges" class="form-control " value=""/>
+                                            <input type="text" placeholder="Enter Charges" name="charges" class="form-control " value="<?= @$charges; ?>"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -88,7 +93,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <div class="col-lg-12">
                                         <span class="pf-title">Application Deadline Date<span style="color:red;">*</span></span>
                                         <div class="pf-field">
-                                            <input type="date" placeholder="Enter Complete Address" name="appli_deadeline" class="form-control datepicker" required/>
+                                            <input type="date" placeholder="Enter Complete Address" name="appli_deadeline" class="form-control datepicker" value="<?= @$appli_deadeline; ?>" required/>
                                         </div>
                                     </div>
                                     <!-- <div class="col-lg-12">
@@ -132,19 +137,19 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             <div class="col-lg-6">
                                                 <span class="pf-title">Find On Map<span style="color:red;">*</span></span>
                                                 <div class="pf-field">
-                                                    <input type="text" placeholder="Collins Street West, Victoria 8007, Australia." name="location" value="" id="location"  required autocomplete="off"/>
+                                                    <input type="text" placeholder="Collins Street West, Victoria 8007, Australia." name="location" value="<?= @$location; ?>" id="location"  required autocomplete="off"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <span class="pf-title">Latitude</span>
                                                 <div class="pf-field">
-                                                    <input type="text" id="search_lat" name="latitude"  placeholder="41.1589654" />
+                                                    <input type="text" id="search_lat" name="latitude"  placeholder="41.1589654" value="<?= @$latitude; ?>"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <span class="pf-title">Longitude</span>
                                                 <div class="pf-field">
-                                                    <input type="text" id="search_lon"   placeholder="21.1589654" name="longitude" />
+                                                    <input type="text" id="search_lon"   placeholder="21.1589654" name="longitude" value="<?= @$longitude; ?>"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -182,7 +187,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script>
 CKEDITOR.replace('description');
-
 </script>
 <script>
 $('.key_skills').select2({
