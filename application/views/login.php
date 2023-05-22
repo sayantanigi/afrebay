@@ -36,13 +36,26 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-12 col-sm-12 SignIn_Left">
                                     <h3>Login</h3>
-                                    <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at
-                                        lobortis
-                                        ullamcorper</span>
-                                    <span class="text-success f-15"><?=$this->session->flashdata('success');  ?></span>
-                                    <span class="text-danger f-15"><?=$this->session->flashdata('error');  ?></span>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
+
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">
+                                    <div id="register-messages" class="text-success f-20">
+                                        <span class="text-success f-15" style="text-align: center;">
+                                            <?php if($this->session->flashdata('success')) {
+                                                echo $this->session->flashdata('success');
+                                                unset($_SESSION['success']);
+                                            } ?>
+                                        </span>
+                                    </div>
+                                    <?php if($this->session->userdata('error')) { ?>
+                                    <div id="err-messages">
+                                        <span class="text-danger f-15" style="text-align: center;">
+                                            <?php echo $this->session->userdata('error');
+                                                unset($_SESSION['error']); ?>
+                                        </span>
+                                    </div>
+                                    <?php } ?>
                                     <form action="<?=base_url(); ?>validate" method="post">
                                         <div class="row m-0">
                                             <div class="col-lg-6 col-md-6 col-sm-6">

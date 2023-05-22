@@ -42,22 +42,24 @@
                         </span>
                         <div class="bootstrap snippet">
                             <div class="new-pro">
-                                <a href="#" class="pull-right">
-                                    <?php
-                                    if(!empty($userinfo->profilePic)) {
-                                        if(!file_exists('uploads/users/'.$userinfo->profilePic)) {
-                                    ?>
-                                    <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                    <?php } else { ?>
-                                    <img class="img-circle img-responsive" src="<?php echo base_url('uploads/users/'.$userinfo->profilePic); ?>" style="width:60px;height: 60px;" />
-                                </a>
+                                <?php
+                                if(!empty($userinfo->profilePic)) {
+                                    if(!file_exists('uploads/users/'.$userinfo->profilePic)) {
+                                ?>
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
+                                <?php } else { ?>
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/users/'.$userinfo->profilePic); ?>" style="width:60px;height: 60px;" />
                                 <?php } } else { ?>
                                 <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
                                 <?php } ?>
                                 <input type="hidden" name="old_image" value="<?=$userinfo->profilePic ?>">
                                 <input type="hidden" name="id" value="<?=$userinfo->userId  ?>">
                                 <div class="profile-ak">
-                                    <h6>Upload a different photo...</h6>
+                                    <?php if(!empty($userinfo->profilePic)) { ?>
+                                    <h6>Upload a different photo</h6>
+                                    <?php } else { ?>
+                                        <h6>Upload a photo</h6>
+                                    <?php } ?>
                                     <input type="file" name="profilePic" class="text-center center-block file-upload" />
                                 </div>
                             </div>

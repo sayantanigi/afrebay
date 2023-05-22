@@ -51,8 +51,7 @@ class Mymodel extends MY_Model {
 		$this->db->where("password", md5($password));
         $this->db->where("status", '1');
 		$query = $this->db->get();
-		if($query->num_rows() > 0)
-        {
+		if($query->num_rows() > 0) {
             $result = $query->row();
             $data['afrebay'] = array(
                 'userId'=>$result->userId,
@@ -64,8 +63,7 @@ class Mymodel extends MY_Model {
             );
             $this->session->set_userdata($data);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
 	}

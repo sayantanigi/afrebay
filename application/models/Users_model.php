@@ -246,7 +246,7 @@ class Users_model extends My_Model {
 
                                                <p><i class="la la-map-marker"></i>'. $row['address'].'</p>
 
-                                               <p>'.$desc.'</p>
+                                               <p>'.strip_tags($desc).'</p>
 
                                            </div>
 

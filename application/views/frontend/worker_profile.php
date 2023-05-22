@@ -73,7 +73,7 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 Worker_Head_Social">
                                 <div class="Worker_Head_Social_Data">
-                                    <div class="share-bar circle">
+                                    <!-- <div class="share-bar circle">
                                         <a href="javascript:void(0)" title="" class="share-google">
                                             <i class="la la-google"></i>
                                         </a>
@@ -83,7 +83,7 @@
                                         <a href="javascript:void(0)" title="" class="share-twitter">
                                             <i class="fa fa-twitter"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                     <div class="download-cv">
                                         <a class="btn btn-info" href="<?= base_url('uploads/users/resume/'.@$user_detail->resume)?>" title="" download>Download CV <i class="la la-download"></i></a>
                                     </div>

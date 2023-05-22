@@ -64,18 +64,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <!-- Job Head -->
                                 </div>
                                 <div class="col-lg-2 col-md-12 col-sm-12">
-                                    <div class="share-bar">
-                                        <!--<a href="javascript:void(0)" title="" class="share-google"><i class="la la-google"></i></a><a href="javascript:void(0)" title="" class="share-fb"><i class="fa fa-facebook"></i></a>-->
-                                        <!--<a href="javascript:void(0)" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>-->
-                                        <!-- ShareThis BEGIN -->
+                                    <!-- <div class="share-bar">
                                         <div class="sharethis-inline-share-buttons"></div>
-                                        <!-- ShareThis END -->
-                                    </div>
+                                    </div> -->
                                     <div class="emply-btns">
                                         <a class="seemap" id="ShowMap"><i class="la la-map-marker"></i> See On Map</a>
-                                        <!-- <a class="seemap" href="javascript:void(0)" title=""
-                                            onclick="show_map()"><i class="la la-map-marker"></i> See On Map</a> -->
-                                        <!--<a class="followus" href="javascript:void(0)" title=""><i class="la la-paper-plane"></i> Follow us</a>-->
                                         <?php if(!empty(@$userdata->address)){?>
                                         <p style="display:none;" id="show_maping">
                                             <iframe width="260" height="100px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?q=<?= @$userdata->address?>&output=embed"></iframe>

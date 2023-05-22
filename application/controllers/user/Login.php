@@ -46,7 +46,6 @@ class Login extends CI_Controller {
 				$imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
 				$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'><tbody>
 				<tr><td align='center'><table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'>
-
 				<tbody>
 
 				<tr>
@@ -102,7 +101,6 @@ class Login extends CI_Controller {
 				<td align='center'>
 
 				<table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'>
-
 				<tbody>
 				<tr>
 				<td height='10'></td>
@@ -235,7 +233,12 @@ class Login extends CI_Controller {
 				if($_SESSION['afrebay']['userType'] == '1') {
 					redirect('profile');
 				} else if($_SESSION['afrebay']['userType'] == '2') {
-					redirect('dashboard');
+					$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
+					if(!empty($check_sub)) {
+						redirect('dashboard');
+					} else {
+						redirect('subscription');
+					}
 				}
 			} else {
 				$this->session->set_flashdata('error', 'Invalid Email or Password !');
