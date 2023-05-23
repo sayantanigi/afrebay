@@ -1,4 +1,4 @@
-<section class="topak">
+<!-- <section class="topak">
 
     <div class="block no-padding">
 
@@ -118,9 +118,102 @@
 
     </div>
 
+</section> -->
+
+<section class="topak">
+    <div class="block no-padding">
+        <div class="container fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-featured-sec">
+                        <ul class="main-slider-sec text-arrows">
+                            <li class="slideHome">
+                                <?php if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){?>
+                                <img src="<?=base_url('uploads/banner/'.$get_banner->image); ?>" alt="" />
+                                <?php } else{?>
+                                <img src="<?=base_url(); ?>assets/images/resource/mslider1.jpg" alt="" />
+                                <?php } ?>
+                            </li>
+                        </ul>
+                        <div class="job-search-sec">
+                            <div class="job-search">
+                                <h3>The Easiest Way to Get Your New Job</h3>
+                                <span>Find Jobs, Employment & Career Opportunities</span>
+                                <form method="post" action="<?= base_url('search-job')?>">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="job-field">
+                                                <input type="text" name="search_title" placeholder="Job title, keywords or company name" value="" />
+                                                <i class="la la-search"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="job-field">
+                                                <div class="custom-select">
+                                                    <select id="location">
+                                                        <option value="0">Country</option>
+                                                        <option value="1">Argentina</option>
+                                                        <option value="2">Brazil</option>
+                                                        <option value="3">Denmark</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="job-field">
+                                                <div class="custom-select">
+                                                    <select id="">
+                                                        <option value="0">State/County</option>
+                                                        <option value="1">Uttar Pradesh</option>
+                                                        <option value="2">West Bengal</option>
+                                                        <option value="3">Tamil Nadu</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="job-field">
+                                                <div class="custom-select">
+                                                    <select id="">
+                                                        <option value="0">City</option>
+                                                        <option value="1">Mumbai</option>
+                                                        <option value="2">Delhi</option>
+                                                        <option value="3">Bangalore</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="job-field">
+                                                <input type="text" placeholder="Country" name="search_location"
+                                                    id="location" required autocomplete="off" />
+                                                <input type="hidden" name="search_lat" id="search_lat">
+                                                <input type="hidden" name="search_lon" id="search_lon">
+                                                <i class="la la-close" onclick="return reset_location()"></i>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-btn">
+                                            <button type="submit"><i class="la la-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- <div class="or-browser">
+                                    <span>Browse job posts by</span>
+                                    <a href="<?php echo base_url('ourjobs')?>" title="">
+                                        <span>All Categories</span>
+                                    </a>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="scroll-to">
+                            <a href="#scroll-here" title=""><i class="la la-arrow-down"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-
-
 
 <section>
 
@@ -853,4 +946,70 @@
     }
 
 </script>
-
+<script>
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        ll = selElmnt.length;
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < ll; j++) {
+            c = document.createElement("DIV");
+            c.innerHTML = selElmnt.options[j].innerHTML;
+            c.addEventListener("click", function (e) {
+                var y, i, k, s, h, sl, yl;
+                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                sl = s.length;
+                h = this.parentNode.previousSibling;
+                for (i = 0; i < sl; i++) {
+                    if (s.options[i].innerHTML == this.innerHTML) {
+                        s.selectedIndex = i;
+                        h.innerHTML = this.innerHTML;
+                        y = this.parentNode.getElementsByClassName("same-as-selected");
+                        yl = y.length;
+                        for (k = 0; k < yl; k++) {
+                            y[k].removeAttribute("class");
+                        }
+                        this.setAttribute("class", "same-as-selected");
+                        break;
+                    }
+                }
+                h.click();
+            });
+            b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function (e) {
+            e.stopPropagation();
+            closeAllSelect(this);
+            this.nextSibling.classList.toggle("select-hide");
+            this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+            if (elmnt == y[i]) {
+                arrNo.push(i)
+            } else {
+                y[i].classList.remove("select-arrow-active");
+            }
+        }
+        for (i = 0; i < xl; i++) {
+            if (arrNo.indexOf(i)) {
+                x[i].classList.add("select-hide");
+            }
+        }
+    }
+    document.addEventListener("click", closeAllSelect);
+</script>

@@ -32,10 +32,13 @@ class Welcome extends CI_Controller {
 		$days = $this->input->post('days');
 		$subcategory_id = $this->input->post('subcategory_id');
 		$location = $this->input->post('location');
+		$country = $this->input->post('country');
+		$state = $this->input->post('state');
+		$city = $this->input->post('city');
 		$search_title = $this->input->post('search_title');
 		$search_location = $this->input->post('search_location');
-		if(isset($category_id)&& !empty($category_id) || isset($title)&& !empty($title)|| isset($days)&& !empty($days)||isset($subcategory_id)&& !empty($subcategory_id)|| isset($location)&& !empty($location)|| isset($search_title)&& !empty($search_title) || isset($search_location)&& !empty($search_location)) {
-			$total_count=$this->post_job_model->subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location);
+		if(isset($category_id) && !empty($category_id) || isset($title) && !empty($title) || isset($days) && !empty($days)||isset($subcategory_id) && !empty($subcategory_id)|| isset($location) && !empty($location) || isset($search_title) && !empty($search_title) || isset($search_location) && !empty($search_location) || isset($country) && !empty($country) || isset($state) && !empty($state) || isset($city) && !empty($city)) {
+			$total_count=$this->post_job_model->subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city);
 			//print_r($total_count);
 		} else {
 			$get_product=$this->Crud_model->GetData('postjob','',"subcategory_id='".$post_id."' and is_delete='0'");
@@ -75,10 +78,10 @@ class Welcome extends CI_Controller {
 			$start = '0';
 		}
 
-		if(isset($category_id) || isset($title)|| isset($days)||isset($subcategory_id)|| isset($location)|| isset($search_title)|| isset($search_location)) {
-			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location);
+		if(isset($category_id) || isset($title)|| isset($days)||isset($subcategory_id)|| isset($location)|| isset($search_title)|| isset($search_location)|| isset($country)|| isset($state)|| isset($city)) {
+			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location,$country,$state,$city);
 		} else {
-			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location);
+			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location,$country,$state,$city);
 		}
 
 		$output = array(
@@ -260,12 +263,27 @@ class Welcome extends CI_Controller {
 
 
 	// post job list in filter
+	// public function subcategory_data() {
+	// 	$id =$_POST['id'];
+	// 	$CategoryData = $this->Crud_model->GetData('sub_category',"","category_id ='".$id."'");
+	// 	$html = "";
+	// 	foreach ($CategoryData as $row_data) {
+	// 		$html .= '<p> <input type="checkbox" class="common_selector storage" name="subcategory_id[]"  id="subcategory_'.$row_data->id.'"  value='.$row_data->id.'><label for="subcategory_'.$row_data->id.'">'.ucfirst($row_data->sub_category_name).'</label></p>';
+	// 	}
+	// 	echo $html;
+	// }
+
 	public function subcategory_data() {
 		$id =$_POST['id'];
 		$CategoryData = $this->Crud_model->GetData('sub_category',"","category_id ='".$id."'");
 		$html = "";
-		foreach ($CategoryData as $row_data) {
-			$html .= '<p> <input type="checkbox" class="common_selector storage" name="subcategory_id[]"  id="subcategory_'.$row_data->id.'"  value='.$row_data->id.'><label for="subcategory_'.$row_data->id.'">'.ucfirst($row_data->sub_category_name).'</label></p>';
+		if(!empty($CategoryData)) {
+			$html = "<option value=''>Select Sub Category</option>";
+			foreach ($CategoryData as $row_data) {
+				$html .= "<option value='".$row_data->id."'>".ucfirst($row_data->sub_category_name)."</option>";
+			}
+		} else {
+			$html = '';
 		}
 		echo $html;
 	}

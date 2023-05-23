@@ -40020,3 +40020,100 @@ footer .social {
 .prod_desc {text-align: justify; font-size: 19px; margin-top: 40px; height: 300px; overflow: auto;}
 .prod_desc h2 {font-size: 16px;}
 .prod_desc p {font-size: 14px;}
+
+
+section.topak {
+   top: 0 !important;
+}
+section.topak .block {
+   padding-bottom: 100px !important;
+}
+section.topak .job-search-sec {
+   top: 60% !important;
+}
+section.topak .job-search-sec .job-search form .job-field {
+   margin-bottom: 20px;
+}
+section.topak .job-search-sec .job-search form .search-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+section.topak .job-search-sec .job-search form .search-btn button {
+   width: auto !important;
+   padding: 10px 70px !important;
+   height: auto !important;
+   margin: 20px 0;
+   border-radius: 35px !important;
+}
+section.topak .job-search-sec .job-search form .custom-select {
+   position: relative;
+   font-family: Arial;
+   background: none !important;
+   border: none !important;
+   padding: 0 !important;
+   height: 61px !important;
+}
+section.topak .job-search-sec .job-search form .custom-select select {
+   display: none;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-selected {
+   border-radius: 35px;
+   border: 2px solid #FA7630;
+   height: 61px;
+   display: flex;
+   align-items: center;
+   font-size: 13px;
+   color: #888888;
+   background: #fff;
+   padding: 0 30px;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-selected:after {
+   position: absolute;
+   content: "";
+   top: 30px;
+   right: 30px;
+   width: 0;
+   height: 0;
+   border: 6px solid transparent;
+   border-color: #888 transparent transparent transparent;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-selected.select-arrow-active:after {
+   border-color: transparent transparent #fff transparent;
+   top: 7px;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-items div,
+section.topak .job-search-sec .job-search form .select-selected {
+   color: #888888;
+   padding: 8px 30px;
+   border: 1px solid transparent;
+   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+   cursor: pointer;
+   user-select: none;
+   font-size: 13px;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-items {
+   position: absolute;
+    background-color: white;
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 20px;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-hide {
+   display: none;
+}
+section.topak .job-search-sec .job-search form .custom-select .select-items div:hover,
+section.topak .job-search-sec .job-search form .custom-select .same-as-selected {
+   color: #F4794F;
+}
+
+.state_field {display: none;}
+.city_field {display: none;}
+
+.chosen_country {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
+
+.chosen_state {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
+
+.chosen_city {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}

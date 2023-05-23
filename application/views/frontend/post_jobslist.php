@@ -33,17 +33,17 @@
                             <div class="widget">
                                 <div class="search_widget_job">
                                     <div class="field_w_search">
-                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords" value="" />
+                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords"/>
                                         <i class="la la-search"></i>
                                     </div>
-                                    <div class="field_w_search">
+                                    <!-- <div class="field_w_search">
                                         <input type="text" name="search_location" id="location" placeholder="All Locations" oninput="getsourceaddress()" value="" />
                                         <i class="la la-map-marker"></i>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Category</h3>
+                                <h3 class="sb-title closed">Category</h3>
                                 <div class="specialism_widget">
                                     <select class="chosen" name="category_id" id="category_id" onchange="getsubcategory(this.value);filter_job();">
                                         <option value="">Select Category</option>
@@ -53,16 +53,48 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="widget sub_cat">
+                            <!-- <div class="widget sub_cat">
                                 <h3 class="sb-title open">Subcategory</h3>
                                 <div class="specialism_widget" >
                                     <div class="simple-checkbox scrollbar" >
                                         <div id="subcategory_list"></div>
                                     </div>
                                 </div>
+                            </div> -->
+                            <div class="widget sub_cat">
+                                <h3 class="sb-title closed">Subcategory</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_state" name="subcategory_id" id="subcategory_id" onchange="filter_job();">
+                                    </select>
+                                </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Last Activity</h3>
+                                <h3 class="sb-title closed">Country</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_country" name="country_id" id="country_id" onchange="getState(this.value);filter_job();">
+                                        <option value="">Select Country</option>
+                                        <?php if(!empty($getcountry)){ foreach($getcountry as $item){?>
+                                        <option value="<?= $item->name ?>"><?= ucfirst($item->name)?></option>
+                                        <?php } }?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget state_field">
+                                <h3 class="sb-title closed">State</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_state" name="state_id" id="state_id" onchange="getCity(this.value);filter_job();">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget city_field">
+                                <h3 class="sb-title closed">City</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_city" name="city_id" id="city_id" onchange="filter_job();">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget">
+                                <h3 class="sb-title closed">Last Activity</h3>
                                 <div class="specialism_widget">
                                     <div class="simple-checkbox">
                                         <p><input type="radio" name="days" id="22"  onclick="filter_job()" value="one"/><label for="22">Last Hour</label></p>
@@ -122,12 +154,14 @@ $(document).ready(function () {
         var action = 'fetch_data';
         var title_keyword = $('#title_keyword').val();
         var category_id = $('#category_id').val();
-        var subcategory_id = get_filter('storage');
-
+        //var subcategory_id = get_filter('storage');
+        var subcategory_id = $('#subcategory_id').val();
         var days = $('input:radio[name=days]:checked').val();
-
         var post_id = $('#post_id').val();
         var location = $('#location').val();
+        var country = $('#country_id').val();
+        var state = $('#state_id').val();
+        var city = $('#city_id').val();
         var search_title = $('#search_title').val();
         var search_location = $('#search_location').val();
         $.ajax({
@@ -142,11 +176,14 @@ $(document).ready(function () {
                 subcategory_id: subcategory_id,
                 days: days,
                 location: location,
+                country: country,
+                state: state,
+                city: city,
                 search_title: search_title,
                 search_location: search_location
             },
             success: function (data) {
-                $('#title_keyword').val(data.keyword);
+                //$('#title_keyword').val(data.keyword);
                 $('#location').val(data.keyword_location);
                 $('#post_list').html(data.postlist);
                 $('#pagination_link').html(data.pagination_link);
@@ -172,7 +209,7 @@ $(document).ready(function () {
         filter_data(1);
     });
 
-    $('#title_keyword').keydown(function () {
+    $('#title_keyword').keyup(function () {
         filter_data(1);
     });
 
@@ -185,6 +222,22 @@ $(document).ready(function () {
     });
 
     $('#category_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#subcategory_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#country_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#state_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#city_id').on('change', function () {
         filter_data(1);
     });
 });
