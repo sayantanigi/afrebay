@@ -114,44 +114,24 @@
                                             <div class="prod_desc"><?php echo $value->prod_description; ?></div>
                                         </div>
                                         <div class="col-lg-4 column Product-Contact">
+                                        <?php $product_contact = $this->db->query("SELECT * FROM product_contact WHERE product_id = '".$value->id."'")->result_array();
+                                        if(!empty($product_contact)) {
+                                        foreach($product_contact as $val) { ?>
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <label for="" class="form-label">Name</label>
-                                                    <label class="data">Arnab Das</label>
+                                                    <label class="data"><?php echo $val['c_name']?></label>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <label for="" class="form-label">Email</label>
-                                                    <label class="data">demo@gmail.com</label>
+                                                    <label class="data"><?php echo $val['c_email']?></label>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <label for="" class="form-label">Details</label>
-                                                    <label class="data data-field">In publishing and graphic design,
-                                                        Lorem ipsum is a
-                                                        placeholder text commonly used to demonstrate the visual
-                                                        form of a document or a typeface without relying on
-                                                        meaningful content. Lorem ipsum may be used as a placeholder
-                                                        before final copy is available.</label>
+                                                    <label class="data data-field"><?php echo $val['c_description']?></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <label for="" class="form-label">Name</label>
-                                                    <label class="data">Arnab Das</label>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <label for="" class="form-label">Email</label>
-                                                    <label class="data">demo@gmail.com</label>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <label for="" class="form-label">Details</label>
-                                                    <label class="data data-field">In publishing and graphic design,
-                                                        Lorem ipsum is a
-                                                        placeholder text commonly used to demonstrate the visual
-                                                        form of a document or a typeface without relying on
-                                                        meaningful content. Lorem ipsum may be used as a placeholder
-                                                        before final copy is available.</label>
-                                                </div>
-                                            </div>
+                                        <?php } }?>
                                         </div>
                                     </div>
                                 </td>

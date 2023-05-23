@@ -31,31 +31,31 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 					require 'vendor/autoload.php';
 					require_once APPPATH."third_party/stripe/init.php";
 					\Stripe\Stripe::setApiKey('sk_test_835fqzvcLuirPvH0KqHeQz9K');
-					//print_r($s_id);
 					$session = \Stripe\Checkout\Session::retrieve($s_id);
 					$invoice_id = $session["invoice"];
-					//echo "<pre>";
-					//print_r($session);
-					// echo "customer ==>".$session['customer']; echo "<br>";
-					// echo "email ==>".$session['customer_details']['email']; echo "<br>";
-					// echo "name ==>".$session['customer_details']['name']; echo "<br>";
-					// echo "invoice ==>".$session['invoice']; echo "<br>";
-					// echo "payment_status ==>".$session['payment_status']; echo "<br>";
-					// echo "status ==>".$session['status']; echo "<br>";
-					// echo "subscription ==>".$session['subscription']; echo "<br>";
-					if($session['status'] == 'complete') {
+                    $stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
+                    $sub_data = $stripe->subscriptions->retrieve($session['subscription'],[]);
+					$expire_date = date('Y-m-d', $sub_data['current_period_end']);
+                    $created_date = date('Y-m-d');
+                    $futureDate = $expire_date;
+                    $month = (int)abs((strtotime($created_date) - strtotime($futureDate))/(60*60*24*30));
+                    $price = $session['amount_total']/100;
+                    $subQuery = $this->db->query("SELECT * FROM subscription where subscription_amount = '".$price."'")->result_array();
+                    if($session['status'] == 'complete') {
 						$dataDB = array(
 							'employer_id' =>$_SESSION['afrebay']['userId'],
-							'subscription_id' => $this->session->userdata('subid'),
-							'name_of_card' =>$session['customer_details']['name'],
+							'subscription_id' => $subQuery[0]['id'],
+							'name_of_card' => $subQuery[0]['subscription_name'],
 							'email' => $session['customer_details']['email'],
-							'amount' => $session['customer_details']['email'],
+							'amount' => $price,
 							'transaction_id' => $session['subscription'],
 							'payment_status' => $session['payment_status'],
 							'payment_date' => date('Y-m-d H:i:s'),
-							'created_date' => date('Y-m-d H:i:s'),
+                            'expiry_date' => $expire_date,
+                            'duration' => $month." Month",
+							'created_date' => date('Y-m-d'),
 						);
-						$this->db->insert('employer_subscription', $dataDB);
+                        $this->db->insert('employer_subscription', $dataDB);
 						if($this->db->insert_id()) { ?>
 							<div class="heading">
 								<h4 class="card-title">Payment Successful #<?php echo $this->db->insert_id(); ?></h4>
