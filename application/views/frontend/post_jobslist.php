@@ -71,7 +71,7 @@
                             <div class="widget">
                                 <h3 class="sb-title closed">Country</h3>
                                 <div class="specialism_widget">
-                                    <select class="chosen_country" name="country_id" id="country_id" onchange="getState(this.value);filter_job();">
+                                    <select class="chosen_country" name="country" id="country" onchange="getState(this.value);filter_job();">
                                         <option value="">Select Country</option>
                                         <?php if(!empty($getcountry)){ foreach($getcountry as $item){?>
                                         <option value="<?= $item->name ?>"><?= ucfirst($item->name)?></option>
@@ -82,14 +82,14 @@
                             <div class="widget state_field">
                                 <h3 class="sb-title closed">State</h3>
                                 <div class="specialism_widget">
-                                    <select class="chosen_state" name="state_id" id="state_id" onchange="getCity(this.value);filter_job();">
+                                    <select class="chosen_state" name="state" id="state" onchange="getCity(this.value);filter_job();">
                                     </select>
                                 </div>
                             </div>
                             <div class="widget city_field">
                                 <h3 class="sb-title closed">City</h3>
                                 <div class="specialism_widget">
-                                    <select class="chosen_city" name="city_id" id="city_id" onchange="filter_job();">
+                                    <select class="chosen_city" name="city" id="city" onchange="filter_job();">
                                     </select>
                                 </div>
                             </div>
@@ -159,9 +159,9 @@ $(document).ready(function () {
         var days = $('input:radio[name=days]:checked').val();
         var post_id = $('#post_id').val();
         var location = $('#location').val();
-        var country = $('#country_id').val();
-        var state = $('#state_id').val();
-        var city = $('#city_id').val();
+        var country = $('#country').val();
+        var state = $('#state').val();
+        var city = $('#city').val();
         var search_title = $('#search_title').val();
         var search_location = $('#search_location').val();
         $.ajax({
@@ -229,15 +229,15 @@ $(document).ready(function () {
         filter_data(1);
     });
 
-    $('#country_id').on('change', function () {
+    $('#country').on('change', function () {
         filter_data(1);
     });
 
-    $('#state_id').on('change', function () {
+    $('#state').on('change', function () {
         filter_data(1);
     });
 
-    $('#city_id').on('change', function () {
+    $('#city').on('change', function () {
         filter_data(1);
     });
 });

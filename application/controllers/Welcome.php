@@ -18,6 +18,9 @@ class Welcome extends CI_Controller {
 
 	function searchjob() {
 		$data['getcategory']=$this->Crud_model->GetData('category');
+		$data['countries']=$this->Crud_model->GetData('countries',"","");
+		$data['states']=$this->Crud_model->GetData('states',"","");
+		$data['cities']=$this->Crud_model->GetData('cities',"","");
 		$data['get_banner']=$this->Crud_model->get_single('banner',"id='2'");
 		$this->load->view('header');
 		$this->load->view('frontend/new_employees_list',$data);
@@ -88,6 +91,9 @@ class Welcome extends CI_Controller {
 			'pagination_link'  => $this->pagination->create_links(),
 			'postlist'   =>$getdata,
 			'keyword'   =>$this->input->post('search_title'),
+			'country'   => $this->input->post('country'),
+			'state'   => $this->input->post('state'),
+			'city'   => $this->input->post('city'),
 			'keyword_location'   =>$this->input->post('search_location'),
 		);
 		echo json_encode($output);

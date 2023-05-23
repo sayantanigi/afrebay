@@ -149,12 +149,19 @@
                                         </div>
                                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                             <div class="job-field">
+                                                <select class="chosen_country" name="country" id="country" onchange="getState(this.value)">
+                                                    <option value="0">Select Country</option>
+                                                    <?php if(!empty($countries)){ foreach($countries as $item){?>
+                                                    <option value="<?= $item->name ?>"><?= ucfirst($item->name)?></option>
+                                                    <?php } }?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="job-field">
                                                 <div class="custom-select">
-                                                    <select id="location">
-                                                        <option value="0">Country</option>
-                                                        <option value="1">Argentina</option>
-                                                        <option value="2">Brazil</option>
-                                                        <option value="3">Denmark</option>
+                                                    <select class="chosen_state" name="state" id="state" onchange="getCity(this.value);filter_job();">
+                                                        <option value="">Select Country First</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -162,23 +169,8 @@
                                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                             <div class="job-field">
                                                 <div class="custom-select">
-                                                    <select id="">
-                                                        <option value="0">State/County</option>
-                                                        <option value="1">Uttar Pradesh</option>
-                                                        <option value="2">West Bengal</option>
-                                                        <option value="3">Tamil Nadu</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="job-field">
-                                                <div class="custom-select">
-                                                    <select id="">
-                                                        <option value="0">City</option>
-                                                        <option value="1">Mumbai</option>
-                                                        <option value="2">Delhi</option>
-                                                        <option value="3">Bangalore</option>
+                                                    <select class="chosen_city" name="city" id="city" onchange="filter_job();">
+                                                        <option value="">Select Country First</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -870,7 +862,11 @@
     </div>
 
 </section>
-
+<style>
+.chosen_country {color: #888888; height: 60px; border-radius: 50px; padding: 17px !important;}
+#state {display: block;color: #888888; height: 60px; border-radius: 50px; padding: 17px !important;}
+#city {display: block;color: #888888; height: 60px; border-radius: 50px; padding: 17px !important;}
+</style>
 <script>
 
     $(window).load(function () {
@@ -947,69 +943,110 @@
 
 </script>
 <script>
-    var x, i, j, l, ll, selElmnt, a, b, c;
-    x = document.getElementsByClassName("custom-select");
-    l = x.length;
-    for (i = 0; i < l; i++) {
-        selElmnt = x[i].getElementsByTagName("select")[0];
-        ll = selElmnt.length;
-        a = document.createElement("DIV");
-        a.setAttribute("class", "select-selected");
-        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-        x[i].appendChild(a);
-        b = document.createElement("DIV");
-        b.setAttribute("class", "select-items select-hide");
-        for (j = 1; j < ll; j++) {
-            c = document.createElement("DIV");
-            c.innerHTML = selElmnt.options[j].innerHTML;
-            c.addEventListener("click", function (e) {
-                var y, i, k, s, h, sl, yl;
-                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                sl = s.length;
-                h = this.parentNode.previousSibling;
-                for (i = 0; i < sl; i++) {
-                    if (s.options[i].innerHTML == this.innerHTML) {
-                        s.selectedIndex = i;
-                        h.innerHTML = this.innerHTML;
-                        y = this.parentNode.getElementsByClassName("same-as-selected");
-                        yl = y.length;
-                        for (k = 0; k < yl; k++) {
-                            y[k].removeAttribute("class");
-                        }
-                        this.setAttribute("class", "same-as-selected");
-                        break;
-                    }
-                }
-                h.click();
-            });
-            b.appendChild(c);
-        }
-        x[i].appendChild(b);
-        a.addEventListener("click", function (e) {
-            e.stopPropagation();
-            closeAllSelect(this);
-            this.nextSibling.classList.toggle("select-hide");
-            this.classList.toggle("select-arrow-active");
+    // var x, i, j, l, ll, selElmnt, a, b, c;
+    // x = document.getElementsByClassName("custom-select");
+    // l = x.length;
+    // for (i = 0; i < l; i++) {
+    //     selElmnt = x[i].getElementsByTagName("select")[0];
+    //     ll = selElmnt.length;
+    //     a = document.createElement("DIV");
+    //     a.setAttribute("class", "select-selected");
+    //     a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    //     x[i].appendChild(a);
+    //     b = document.createElement("DIV");
+    //     b.setAttribute("class", "select-items select-hide");
+    //     for (j = 1; j < ll; j++) {
+    //         c = document.createElement("DIV");
+    //         c.innerHTML = selElmnt.options[j].innerHTML;
+    //         c.addEventListener("click", function (e) {
+    //             var y, i, k, s, h, sl, yl;
+    //             s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+    //             sl = s.length;
+    //             h = this.parentNode.previousSibling;
+    //             for (i = 0; i < sl; i++) {
+    //                 if (s.options[i].innerHTML == this.innerHTML) {
+    //                     s.selectedIndex = i;
+    //                     h.innerHTML = this.innerHTML;
+    //                     y = this.parentNode.getElementsByClassName("same-as-selected");
+    //                     yl = y.length;
+    //                     for (k = 0; k < yl; k++) {
+    //                         y[k].removeAttribute("class");
+    //                     }
+    //                     this.setAttribute("class", "same-as-selected");
+    //                     break;
+    //                 }
+    //             }
+    //             h.click();
+    //         });
+    //         b.appendChild(c);
+    //     }
+    //     x[i].appendChild(b);
+    //     a.addEventListener("click", function (e) {
+    //         e.stopPropagation();
+    //         closeAllSelect(this);
+    //         this.nextSibling.classList.toggle("select-hide");
+    //         this.classList.toggle("select-arrow-active");
+    //     });
+    // }
+    // function closeAllSelect(elmnt) {
+    //     var x, y, i, xl, yl, arrNo = [];
+    //     x = document.getElementsByClassName("select-items");
+    //     y = document.getElementsByClassName("select-selected");
+    //     xl = x.length;
+    //     yl = y.length;
+    //     for (i = 0; i < yl; i++) {
+    //         if (elmnt == y[i]) {
+    //             arrNo.push(i)
+    //         } else {
+    //             y[i].classList.remove("select-arrow-active");
+    //         }
+    //     }
+    //     for (i = 0; i < xl; i++) {
+    //         if (arrNo.indexOf(i)) {
+    //             x[i].classList.add("select-hide");
+    //         }
+    //     }
+    // }
+    // document.addEventListener("click", closeAllSelect);
+
+    function getState(val) {
+        var base_url = $("#base_url").val();
+        var id = val;
+        $.ajax({
+            type:"post",
+            cache:false,
+            url:base_url+"Welcome/states_by_country",
+            data:{
+                country_name:id
+            },
+            beforeSend:function(){},
+            success:function(returndata) {
+                //console.log(returndata); return false;
+                $('.state_field').show();
+                $('#state').html(returndata);
+                //$('#state_id_chosen .chosen-results').html(returndata);
+                $('#city').html('<option value="">Select State First</option>');
+            }
         });
     }
-    function closeAllSelect(elmnt) {
-        var x, y, i, xl, yl, arrNo = [];
-        x = document.getElementsByClassName("select-items");
-        y = document.getElementsByClassName("select-selected");
-        xl = x.length;
-        yl = y.length;
-        for (i = 0; i < yl; i++) {
-            if (elmnt == y[i]) {
-                arrNo.push(i)
-            } else {
-                y[i].classList.remove("select-arrow-active");
+
+    function getCity(val) {
+        var base_url = $("#base_url").val();
+        var id = val;
+        $.ajax({
+            type:"post",
+            cache:false,
+            url:base_url+"Welcome/cities_by_state",
+            data:{
+                state_name:id
+            },
+            beforeSend:function(){},
+            success:function(returndata) {
+                //console.log(returndata); return false;
+                $('.city_field').show();
+                $('#city').html(returndata);
+                //$('#city_id_chosen .chosen-results').html(returndata);
             }
-        }
-        for (i = 0; i < xl; i++) {
-            if (arrNo.indexOf(i)) {
-                x[i].classList.add("select-hide");
-            }
-        }
+        });
     }
-    document.addEventListener("click", closeAllSelect);
 </script>

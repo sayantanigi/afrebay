@@ -37,14 +37,14 @@ $postid=base64_decode($subcategory_id);
                                         <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords" value="" />
                                         <i class="la la-search"></i>
                                     </div>
-                                    <div class="field_w_search">
+                                    <!-- <div class="field_w_search">
                                         <input type="text" name="search_location" id="location" placeholder="All Locations" oninput="getsourceaddress()" value="" />
                                         <i class="la la-map-marker"></i>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Category</h3>
+                                <h3 class="sb-title closed">Category</h3>
                                 <div class="specialism_widget">
                                     <select class="chosen" name="category_id" id="category_id"
                                         onchange="getsubcategory(this.value);">
@@ -55,16 +55,56 @@ $postid=base64_decode($subcategory_id);
                                     </select>
                                 </div>
                             </div>
-                            <div class="widget Last_widget sub_cat">
+                            <!-- <div class="widget Last_widget sub_cat">
                                 <h3 class="sb-title open">Subcategory</h3>
                                 <div class="specialism_widget">
                                     <div class="simple-checkbox scrollbar">
                                         <div id="subcategory_list"></div>
                                     </div>
                                 </div>
+                            </div> -->
+                            <div class="widget sub_cat">
+                                <h3 class="sb-title closed">Subcategory</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_state" name="subcategory_id" id="subcategory_id">
+                                    </select>
+                                </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Last Activity</h3>
+                                <h3 class="sb-title open">Country</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_country" name="country" id="country" onchange="getState(this.value);">
+                                        <option value="">Select Country</option>
+                                        <?php if(!empty($countries)){ foreach($countries as $item){?>
+                                        <option value="<?= $item->name ?>" <?php if(@$item->name == @$_POST['country']){ echo "selected"; } ?>><?= ucfirst($item->name)?></option>
+                                        <?php } }?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget state_field1">
+                                <h3 class="sb-title open">State</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_state" name="state" id="state" onchange="getCity(this.value);">
+                                        <option value="">Select State</option>
+                                        <?php if(!empty($states)){ foreach($states as $item){?>
+                                        <option value="<?= $item->name ?>" <?php if(@$item->name == @$_POST['state']){ echo "selected"; } ?>><?= ucfirst($item->name)?></option>
+                                        <?php } }?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget city_field1">
+                                <h3 class="sb-title open">City</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_city" name="city" id="city">
+                                        <option value="">Select City</option>
+                                        <?php if(!empty($cities)){ foreach($cities as $item){?>
+                                        <option value="<?= $item->name ?>" <?php if(@$item->name == @$_POST['city']){ echo "selected"; } ?>><?= ucfirst($item->name)?></option>
+                                        <?php } }?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget">
+                                <h3 class="sb-title closed">Last Activity</h3>
                                 <div class="specialism_widget">
                                     <div class="simple-checkbox">
                                         <p><input type="radio" name="days" id="22" value="one" /><label for="22">Last Hour</label></p>
@@ -82,9 +122,12 @@ $postid=base64_decode($subcategory_id);
                             <?php } else{?>
                             <input type="hidden" name="post_id" id="post_id" value="">
                             <?php } ?>
-                            <?php  if(isset($_POST['search_title']) &&!empty($_POST['search_title']) || isset($_POST['search_location']) &&!empty($_POST['search_location']) ){ ?>
+                            <?php  if(isset($_POST['search_title']) &&!empty($_POST['search_title']) || isset($_POST['search_location']) &&!empty($_POST['search_location']) || isset($_POST['country']) &&!empty($_POST['country']) || isset($_POST['state']) &&!empty($_POST['state']) || isset($_POST['city']) &&!empty($_POST['city']) ){ ?>
                             <input type="hidden" name="search_title" id="search_title" value="<?= @$_POST['search_title']?>">
                             <input type="hidden" name="search_location" id="search_location" value="<?= @$_POST['search_location']?>">
+                            <input type="hidden" name="country" id="country" value="<?= @$_POST['country']?>">
+                            <input type="hidden" name="state" id="state" value="<?= @$_POST['state']?>">
+                            <input type="hidden" name="city" id="city" value="<?= @$_POST['city']?>">
                             <?php } else{?>
                             <input type="hidden" name="search_title" id="search_title" value="">
                             <input type="hidden" name="search_location" id="search_location" value="">
@@ -140,11 +183,12 @@ $(document).ready(function () {
         var title_keyword = $('#title_keyword').val();
         var category_id = $('#category_id').val();
         var subcategory_id = get_filter('storage');
-
         var days = $('input:radio[name=days]:checked').val();
-
         var post_id = $('#post_id').val();
         var location = $('#location').val();
+        var country = $('#country').val();
+        var state = $('#state').val();
+        var city = $('#city').val();
         var search_title = $('#search_title').val();
         var search_location = $('#search_location').val();
         $.ajax({
@@ -159,10 +203,14 @@ $(document).ready(function () {
                 subcategory_id: subcategory_id,
                 days: days,
                 location: location,
+                country: country,
+                state: state,
+                city: city,
                 search_title: search_title,
                 search_location: search_location
             },
             success: function (data) {
+                //console.log(data);
                 $('#title_keyword').val(data.keyword);
                 $('#location').val(data.keyword_location);
                 $('#post_list').html(data.postlist);
@@ -202,6 +250,22 @@ $(document).ready(function () {
     });
 
     $('#category_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#subcategory_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#country').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#state').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#city').on('change', function () {
         filter_data(1);
     });
 });

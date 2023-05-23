@@ -32,9 +32,9 @@ function getState(val) {
         success:function(returndata) {
             //console.log(returndata); return false;
             $('.state_field').show();
-            $('#state_id').html(returndata);
+            $('#state').html(returndata);
             //$('#state_id_chosen .chosen-results').html(returndata);
-            $('#city_id').html('<option value="">Select State First</option>');
+            $('#city').html('<option value="">Select State First</option>');
         }
     });
 }
@@ -53,7 +53,7 @@ function getCity(val) {
         success:function(returndata) {
             //console.log(returndata); return false;
             $('.city_field').show();
-            $('#city_id').html(returndata);
+            $('#city').html(returndata);
             //$('#city_id_chosen .chosen-results').html(returndata);
         }
     });
