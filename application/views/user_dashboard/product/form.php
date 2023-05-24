@@ -46,24 +46,17 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="new-pro">
-                                                <?php
-                                                if(!empty($userinfo->profilePic)) {
-                                                    if(!file_exists('uploads/users/'.$userinfo->profilePic)) {
-                                                ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                </a>
-                                                <?php } else { ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/users/'.$userinfo->profilePic); ?>" style="width:60px;height: 60px;" />
-                                                <?php } } else { ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php } ?>
-                                                <input type="hidden" name="old_image" value="<?=$userinfo->profilePic ?>">
-                                                <input type="hidden" name="id" value="<?=$userinfo->userId  ?>">
                                                 <div class="profile-ak">
                                                     <h6>Upload a different photo...</h6>
                                                     <input type="file" name="prod_image[]" multiple class="text-center center-block file-upload" />
                                                 </div>
                                             </div>
+                                            <?php $get_product_image = $this->db->query("SELECT * FROM user_product_image WHERE prod_id='".$id."'")->result_array();
+                                            if(!empty($get_product_image)){
+                                            foreach ($get_product_image as $val) { ?>
+                                                <img class="img-circle_<?php echo $val['id']?> img-responsive" src="<?php echo base_url('uploads/products/'.$val['prod_image']); ?>" style="width:60px;height: 60px;"/>
+                                                <img class="img-circle-close_<?php echo $val['id']?> img-responsive" src="<?php echo base_url('uploads/close-icon.png'); ?>" onclick="deleteProdImg(<?php echo $val['id']?>);" style="width: 15px; height: 15px; position: relative;top: -7px;right: 9px;"/>
+                                            <?php } } ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -72,11 +65,11 @@
                                                 <label for="first_name">
                                                     <h4>Product Name <span style="color: red">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="prod_name" placeholder="Product Name"  value="<?= @$prod_name; ?>" required/>
+                                                <input type="text" class="form-control" name="prod_name" placeholder="Product Name"  value="<?= @$product; ?>" required/>
                                             </div>
                                             <div class="col-lg-12"><br>
                                                 <label for="first_name"><h4>Product Description </h4></label>
-                                                <textarea type="text" class="form-control" name="prod_description" id="prod_description" value="<?= $prod_description;?>" ><?= @$prod_description; ?></textarea>
+                                                <textarea type="text" class="form-control" name="prod_description" id="prod_description" value="<?= $description;?>" ><?= @$description; ?></textarea>
                                             </div>
                                             <input type="hidden" name="id" value="<?= @$id; ?>">
                                         </div>
@@ -98,4 +91,17 @@
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('prod_description');
+function deleteProdImg(pi_id) {
+    var id = pi_id;
+    var base_url = $('#base_url').val();
+    $('.img-circle_'+id).css('display','none');
+    $('.img-circle-close_'+id).css('display','none');
+    $.ajax({
+        url:base_url+"user/dashboard/delete_product_image",
+        method:"POST",
+        data:{id: id},
+        beforeSend : function(){},
+        success:function(data) {}
+    })
+}
 </script>

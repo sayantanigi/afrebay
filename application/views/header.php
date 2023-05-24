@@ -122,7 +122,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                     </div>
                     <nav>
                         <ul>
-                            <li class="menu-item-has-children">
+                            <!-- <li class="menu-item-has-children">
                                 <a href="#" title="">Our Services</a>
                                 <ul>
                                 <?php if(!empty($get_category)){
@@ -146,6 +146,12 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                                     <li><a href="<?= base_url('employer-list')?>" title="">Vendors</a></li>
                                     <li><a href="<?= base_url('workers-list')?>" title="">Freelancers</a></li>
                                 </ul>
+                            </li> -->
+                            <li class="">
+                                <a href="<?= base_url('employer-list')?>" title="">Vendors</a>
+                            </li>
+                            <li class="">
+                                <a href="<?= base_url('workers-list')?>" title="">Freelancers</a>
                             </li>
                             <li class="">
                                 <a href="<?= base_url('ourjobs')?>" title="">Our Jobs</a>

@@ -75,7 +75,7 @@
                                 </td>
                                 <td class="d-flex justify-content-around" style="height: 73px;">
                                     <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a href="<?= base_url('update-product/'.base64_encode($value->id));?>" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="productDelete(<?php echo $value->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
                             </tr>

@@ -28,7 +28,12 @@ $get_setting=$this->Crud_model->get_single('setting');
                         <h3>Login <span><?= $get_setting->website_name;?></span></h3>
                         <p class="text-muted">Access to our dashboard</p>
                     </div>
-                    <span class="msghide"><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></span>
+                    <span class="msghide">
+                    <?php if($this->session->flashdata('error')) {
+                        echo $this->session->flashdata('error');
+                        unset($_SESSION['error']);
+                    } ?>
+                    </span>
                     <form class="pt-3" method="post" action="<?=admin_url(); ?>Login/actionLogin" onsubmit="return validation()">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-lg" id="email_id" name="email_id" placeholder="Username">

@@ -811,23 +811,12 @@ class Dashboard extends CI_Controller {
 	public function update_product($id) {
 		$product_id = base64_decode($id);
 		$update_product = $this->Crud_model->get_single('user_product', "id='" . $product_id . "'");
-		$get_product = $this->Crud_model->GetData('user_product', 'id,product', "");
-		$get_passing = $this->Crud_model->GetData('user_product', 'id,passing_of_year', "");
-		$get_college = $this->Crud_model->GetData('user_product', 'id,college_name', "");
-		$get_department = $this->Crud_model->GetData('user_product', 'id,department', "");
 		$data = array(
 			'button' => 'update',
 			'action' => base_url('user/Dashboard/edit_product'),
-			'product' => $update_product->product,
-			'passing_of_year' => $update_product->passing_of_year,
-			'college_name' => $update_product->college_name,
-			'department' => $update_product->department,
-			'description' => $update_product->description,
+			'product' => $update_product->prod_name,
+			'description' => $update_product->prod_description,
 			'id' => $update_product->id,
-			'get_product' => $get_product,
-			'get_passing' => $get_passing,
-			'get_college' => $get_college,
-			'get_department' => $get_department,
 		);
 		$this->load->view('header');
 		$this->load->view('user_dashboard/product/form', $data);
@@ -838,15 +827,41 @@ class Dashboard extends CI_Controller {
 	public function edit_product() {
 		$id = $_POST['id'];
 		$data = array(
-			'product' => $this->input->post('product', TRUE),
-			'passing_of_year' => $this->input->post('passing_of_year', TRUE),
-			'college_name' => $this->input->post('college_name', TRUE),
-			'department' => $this->input->post('department', TRUE),
-			'description' => $this->input->post('description', TRUE),
+			'prod_name' => $this->input->post('prod_name', TRUE),
+			'prod_description' => $this->input->post('prod_description', TRUE),
 		);
-		$this->Crud_model->SaveData('user_product', $data, "id='" . $id . "'");
+		$updateQuery = $this->Crud_model->SaveData('user_product', $data, "id='".$id."'");
+		if ($_FILES['prod_image']['name'] != '') {
+			$cpt = count($_FILES['prod_image']['name']);
+			for($i=0; $i<$cpt; $i++) {
+				$_POST['prod_image'] = rand(0000, 9999) . "_" . $_FILES['prod_image']['name'][$i];
+				$config2['image_library'] = 'gd2';
+				$config2['source_image'] =  $_FILES['prod_image']['tmp_name'][$i];
+				$config2['new_image'] =   getcwd() . '/uploads/products/'.$_POST['prod_image'];
+				$config2['upload_path'] =  getcwd() . '/uploads/products/';
+				$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
+				$config2['maintain_ratio'] = FALSE;
+				$this->image_lib->initialize($config2);
+				//$this->load->library('image_lib', $config2);
+				if (!$this->image_lib->resize()) {
+					echo ('<pre>');
+					echo ($this->image_lib->display_errors());
+					exit;
+				} else {
+					$image  = $_POST['prod_image'];
+					@unlink('uploads/products/' . $_POST['old_image']);
+				}
+				$data_image = array(
+					'prod_id' => $_POST['id'],
+					'prod_image' => $image,
+					'created_date' => date("Y-m-d H:i:s"),
+				);
+				$this->Crud_model->SaveData('user_product_image', $data_image);
+				$this->session->set_flashdata('message', 'Product Created Successfully !');
+			}
+		}
 		$this->session->set_flashdata('message', 'Product Updated Successfully !');
-		redirect(base_url('product-list'));
+		redirect(base_url('product'));
 	}
 
 	function delete_product() {
@@ -857,6 +872,11 @@ class Dashboard extends CI_Controller {
 		} else {
 			echo '2';
 		}
+
+	}
+	function delete_product_image() {
+		$p_id = $this->input->post('id');
+		$delete_prod = $this->db->query("DELETE FROM user_product_image WHERE id = '$p_id'");
 	}
 
 	///////////////// End User Product //////////////////////////

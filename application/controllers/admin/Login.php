@@ -32,9 +32,10 @@ class Login extends MY_Controller {
 					"status"=>$checkLoginUser->status,
 				);
 				$this->session->set_userdata($sess);
+				$this->session->set_flashdata('message', 'Successfully Logged In');
 				redirect(admin_url('dashboard'));
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-block alert-danger text-center">Email and Password not matched</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-block alert-danger text-center">Incorrect Email ID and Password</div>');
 				redirect(admin_url());
 			}
 		}

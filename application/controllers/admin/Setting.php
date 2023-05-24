@@ -31,7 +31,7 @@ class Setting extends MY_Controller {
             $config2['maintain_ratio'] = FALSE;
             $this->image_lib->initialize($config2);
             if(!$this->image_lib->resize()) {
-                $this->session->set_flashdata('image_error', 'This file type is not allowed');
+                $this->session->set_flashdata('message', 'This file type is not allowed');
                 $this->index();
                 return;
             } else {
@@ -51,7 +51,7 @@ class Setting extends MY_Controller {
             $config2['maintain_ratio'] = FALSE;
             $this->image_lib->initialize($config2);
             if(!$this->image_lib->resize()) {
-                $this->session->set_flashdata('image_error', 'This file type is not allowed');
+                $this->session->set_flashdata('message', 'This file type is not allowed');
                 $this->index();
                 return;
             } else {
@@ -73,7 +73,7 @@ class Setting extends MY_Controller {
             $config2['maintain_ratio'] = FALSE;
             $this->image_lib->initialize($config2);
             if(!$this->image_lib->resize()) {
-                $this->session->set_flashdata('image_error', 'This file type is not allowed');
+                $this->session->set_flashdata('message', 'This file type is not allowed');
                 $this->index();
                 return;
             } else {

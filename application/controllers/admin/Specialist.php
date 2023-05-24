@@ -110,6 +110,7 @@ class Specialist extends MY_Controller {
     		$this->session->set_flashdata('message', 'Specialist created successfully');
     		echo "1"; exit;
 		} else {
+			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
         	echo "0"; exit;
       	}
 	}
@@ -166,6 +167,7 @@ class Specialist extends MY_Controller {
         	$this->session->set_flashdata('message', 'Specialist Updated successfully');
        		echo 1; exit;
 		} else {
+			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
       		echo 0; exit;
      	}
     }
