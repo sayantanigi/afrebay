@@ -161,7 +161,7 @@
                                             <div class="job-field">
                                                 <div class="custom-select">
                                                     <select class="chosen_state" name="state" id="state" onchange="getCity(this.value);filter_job();">
-                                                        <option value="">Select Country First</option>
+                                                        <option value="">Select State</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -170,7 +170,7 @@
                                             <div class="job-field">
                                                 <div class="custom-select">
                                                     <select class="chosen_city" name="city" id="city" onchange="filter_job();">
-                                                        <option value="">Select Country First</option>
+                                                        <option value="">Select City</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -667,7 +667,7 @@
 
                         <h3>Make a Difference with Your Online Resume!</h3>
 
-                        <span>Your resume in minutes with JobHunt resume assistant is ready!</span>
+                        <span>Get access to the latest jobs and projects globally!!</span>
 
                         <?php if(empty($_SESSION['afrebay']['userId'])){?>
 

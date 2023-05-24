@@ -418,90 +418,60 @@ class Home extends MY_Controller {
 
 	}
 
-
-
 	function employer_list() {
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='5'");
-
+		$data['getcategory']=$this->Crud_model->GetData('category');
 		$this->load->view('header');
-
 		$this->load->view('frontend/employer_list', $data);
-
 		$this->load->view('footer');
-
 	}
 
-
-
 	function employerlist_fetchdata() {
-
 		sleep(1);
-
+		$title = $this->input->post('title_keyword');
+		$category_id = $this->input->post('category');
+		$subcategory_id = $this->input->post('subcategory');
+		$search_location = $this->input->post('location');
+		$days = $this->input->post('days');
 		$this->load->library('pagination');
-
 		$config = array();
-
 		$config['base_url'] = '#';
-
 		$config['total_rows'] = count($this->Users_model->get_employercount());
-
 		$config['per_page'] = 10;
-
 		$config['uri_segment'] = 3;
-
 		$config['use_page_numbers'] = TRUE;
-
 		$config['full_tag_open'] = '<ul class="pagination">';
-
 		$config['full_tag_close'] = '</ul>';
-
 		$config['first_tag_open'] = '<li>';
-
 		$config['first_tag_close'] = '</li>';
-
 		$config['last_tag_open'] = '<li>';
-
 		$config['last_tag_close'] = '</li>';
-
 		$config['next_link'] = '&gt;';
-
 		$config['next_tag_open'] = '<li>';
-
 		$config['next_tag_close'] = '</li>';
-
 		$config['prev_link'] = '&lt;';
-
 		$config['prev_tag_open'] = '<li>';
-
 		$config['prev_tag_close'] = '</li>';
-
 		$config['cur_tag_open'] = "<li class='active'><a href='#'>";
-
 		$config['cur_tag_close'] = '</a></li>';
-
 		$config['num_tag_open'] = '<li>';
-
 		$config['num_tag_close'] = '</li>';
-
 		$config['num_links'] = 3;
-
 		$this->pagination->initialize($config);
-
 		$page = $this->uri->segment(3);
-
 		$start = ($page - 1) * $config['per_page'];
 
+		if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
+			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days);
+		} else {
+			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days);
+			//$this->Users_model->employer_fetchdata($config["per_page"], $start);
+		}
 		$output = array(
-
 			'pagination_link'  => $this->pagination->create_links(),
-
-			'employer_list'   => $this->Users_model->employer_fetchdata($config["per_page"], $start)
-
+			'employer_list'   => $getdata
 		);
-
 		echo json_encode($output);
-
 	}
 
 

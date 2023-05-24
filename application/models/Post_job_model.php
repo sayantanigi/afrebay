@@ -222,7 +222,7 @@ class Post_job_model extends My_Model {
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         } else {
-            $query = "SELECT * FROM postjob WHERE is_delete = '1' ORDER BY id DESC";
+            $query = "SELECT * FROM postjob WHERE is_delete = '0' ORDER BY id DESC";
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         }

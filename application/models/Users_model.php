@@ -11,21 +11,21 @@ class Users_model extends My_Model {
     }
 
     private function _get_datatables_query() {
-		$this->db->select('users.*');
+        $this->db->select('users.*');
         $this->db->from('users');
         // $this->db->where($cond);
-		$i = 0;
+        $i = 0;
 
         if($_POST['search']['value']) {
-                $explode_string = explode(' ', $_POST['search']['value']);
-                foreach ($explode_string as $show_string) {
-                    $cond  = " ";
-                    $cond.=" ( users.username LIKE '%".trim($show_string)."%' ";
-                    $cond.=" OR  users.email LIKE '%".trim($show_string)."%' ";
-                    $cond.=" OR  users.mobile LIKE '%".trim($show_string)."%') ";
-                    $this->db->where($cond);
-                }
+            $explode_string = explode(' ', $_POST['search']['value']);
+            foreach ($explode_string as $show_string) {
+                $cond  = " ";
+                $cond.=" ( users.username LIKE '%".trim($show_string)."%' ";
+                $cond.=" OR  users.email LIKE '%".trim($show_string)."%' ";
+                $cond.=" OR  users.mobile LIKE '%".trim($show_string)."%') ";
+                $this->db->where($cond);
             }
+        }
         $i++;
         if(isset($_POST['order'])) {
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
@@ -66,372 +66,179 @@ class Users_model extends My_Model {
         return $query->result();
     }
 
-   function getmessage($con)
-
-   {
-
+    function getmessage($con) {
         $this->db->select('chat.*,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,to_user.username as to_username,CONCAT(to_user.firstname," ",to_user.lastname) as to_fullname,to_user.profilePic as to_profile');
-
-       $this->db->from('chat');
-
-       $this->db->join('users','users.userId=chat.userfrom_id');
-
-       $this->db->join('users to_user','to_user.userId=chat.userto_id');
-
-       $this->db->where($con);
-
+        $this->db->from('chat');
+        $this->db->join('users','users.userId=chat.userfrom_id');
+        $this->db->join('users to_user','to_user.userId=chat.userto_id');
+        $this->db->where($con);
         $query = $this->db->get();
+        return $query->row();
+    }
 
-       return $query->row();
-
-   }
-
-   function get_jobbidding($cond)
-
-   {
-
+    function get_jobbidding($cond) {
         $this->db->select('job_bid.*,job_bid.user_id as userid,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,postjob.user_id,postjob.id as post_id');
-
-       $this->db->from('job_bid');
-
-       $this->db->join('postjob','postjob.id=job_bid.postjob_id','left');
-
-       $this->db->join('users','users.userId=job_bid.user_id','left');
-
-       $this->db->where($cond);
-
+        $this->db->from('job_bid');
+        $this->db->join('postjob','postjob.id=job_bid.postjob_id','left');
+        $this->db->join('users','users.userId=job_bid.user_id','left');
+        $this->db->where($cond);
         $query = $this->db->get();
+        return $query->result();
+    }
 
-       return $query->result();
-
-   }
-
-
-
-    function get_users()
-
-   {
-
+    function get_users() {
         $this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,category.category_name,');
-
-       $this->db->from('users');
-
-       $this->db->join('category','category.id=users.serviceType','left');
-
-       $this->db->join('employer_rating rt','rt.worker_id=users.userId','left');
-
-
-
-       $this->db->where('users.userType','1');
-
-       $this->db->group_by('rt.worker_id');
-
-       $this->db->order_by('rate','DESC');
-
-         $this->db->limit(8);
-
+        $this->db->from('users');
+        $this->db->join('category','category.id=users.serviceType','left');
+        $this->db->join('employer_rating rt','rt.worker_id=users.userId','left');
+        $this->db->where('users.userType','1');
+        $this->db->group_by('rt.worker_id');
+        $this->db->order_by('rate','DESC');
+        $this->db->limit(8);
         $query = $this->db->get();
-        //print_r($this->db->last_query());
-       return $query->result();
+        return $query->result();
+    }
 
-   }
-
-    function users_detail($cond)
-
-   {
-
+    function users_detail($cond) {
         $this->db->select('users.*,category.category_name');
-
-       $this->db->from('users');
-
-       $this->db->join('category','category.id=users.serviceType','left');
-
-      $this->db->where($cond);
-
+        $this->db->from('users');
+        $this->db->join('category','category.id=users.serviceType','left');
+        $this->db->where($cond);
         $query = $this->db->get();
-
-       return $query->row();
-
-   }
-
-
-
-    function getcount()
-
-{
-
-   $this->db->select('users.*,category.category_name');
-
-       $this->db->from('users');
-
-       $this->db->join('category','category.id=users.serviceType','left');
-
-  $this->db->where('users.userType','1');
-
-  $this->db->order_by('users.userId','desc');
-
-   $query = $this->db->get();
-
-  return $query->result();
-
-}
-
-  function fetchdata($limit, $start)
-
-{
-
-
-
- $this->db->select('users.*,category.category_name');
-
-       $this->db->from('users');
-
-       $this->db->join('category','category.id=users.serviceType','left');
-
-  $this->db->where('users.userType','1');
-
-   $this->db->limit($limit, $start);
-
-   $this->db->order_by('users.userId','desc');
-
-   $data = $this->db->get();
-
-
-
- $output = '';
-
- if(!empty($data))
-
- {
-
-  foreach($data->result_array() as $row)
-
-  {
-
-    if(!empty($row['firstname'])){
-
-      $name= $row['firstname'].' '.$row['lastname'];
-
+        return $query->row();
     }
 
-    else{
-
-      $name=$row['username'];
-
+    function getcount() {
+        $this->db->select('users.*,category.category_name');
+        $this->db->from('users');
+        $this->db->join('category','category.id=users.serviceType','left');
+        $this->db->where('users.userType','1');
+        $this->db->order_by('users.userId','desc');
+        $query = $this->db->get();
+        return $query->result();
     }
 
-    if(strlen($row['short_bio'])>100){
+    function fetchdata($limit, $start) {
+        $this->db->select('users.*,category.category_name');
+        $this->db->from('users');
+        $this->db->join('category','category.id=users.serviceType','left');
+        $this->db->where('users.userType','1');
+        $this->db->limit($limit, $start);
+        $this->db->order_by('users.userId','desc');
+        $data = $this->db->get();
+        $output = '';
+        if(!empty($data)) {
+            foreach($data->result_array() as $row) {
+                if(!empty($row['firstname'])) {
+                    $name= $row['firstname'].' '.$row['lastname'];
+                } else {
+                    $name=$row['username'];
+                }
 
-    $desc= substr($row['short_bio'], 0,100).'...';}
+                if(strlen($row['short_bio'])>100) {
+                    $desc= substr($row['short_bio'], 0,100).'...';
+                } else {
+                    $desc= $row['short_bio'];
+                }
+                $output .= '<div class="emply-resume-list"> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3> <span>'.$row['category_name'].'</span> <p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.strip_tags($desc).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+            }
+        } else {
+            $output .= ' <div class="emply-resume-list">
+            <div class="emply-resume-thumb">
+            <h2>No Data Found</h2>
+            </div>
+            </div>';
+        }
+        return $output;
+    }
+        ////////////////////// ajax list employer///////////////////////
 
-    else {
-
-      $desc= $row['short_bio'];
-
+    function get_employercount() {
+        $this->db->select('users.*,category.category_name');
+        $this->db->from('users');
+        $this->db->join('category','category.id=users.serviceType','left');
+        $this->db->where('users.userType','2');
+        $this->db->order_by('users.userId','desc');
+        $query = $this->db->get();
+        return $query->result();
     }
 
-   $output .= '
-
-   <div class="emply-resume-list">
-
-
-
-      <div class="emply-resume-info">
-
-      <h3><a href="#" title="">'.$name.'</a></h3>
-
-                                               <span>'.$row['category_name'].'</span>
-
-
-
-                                               <p><i class="la la-map-marker"></i>'. $row['address'].'</p>
-
-                                               <p>'.strip_tags($desc).'</p>
-
-                                           </div>
-
-
-
-                                 <div class="shortlists" style="width:50px;">
-
-                <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a>
-
-                                    </div>
-
-                                </div>';
-
-  }
-
- }
-
- else
-
- {
-
-  $output .= ' <div class="emply-resume-list">
-
-                   <div class="emply-resume-thumb">
-
-                  <h2>No Data Found</h2>
-
-                    </div>
-
-                    </div>';
-
- }
-
- return $output;
-
-}
-
-
-
-   ////////////////////// ajax list employer///////////////////////
-
-function get_employercount()
-
-{
-
-   $this->db->select('users.*,category.category_name');
-
-       $this->db->from('users');
-
-       $this->db->join('category','category.id=users.serviceType','left');
-
-  $this->db->where('users.userType','2');
-
-  $this->db->order_by('users.userId','desc');
-
-   $query = $this->db->get();
-
-  return $query->result();
-
-}
-
-  function employer_fetchdata($limit, $start)
-
-{
-
-
-
- $this->db->select('users.*,category.category_name');
-
-       $this->db->from('users');
-
-       $this->db->join('category','category.id=users.serviceType','left');
-
-  $this->db->where('users.userType','2');
-
-   $this->db->limit($limit, $start);
-
-   $this->db->order_by('users.userId','desc');
-
-   $data = $this->db->get();
-
-
-
- $output = '';
-
- if(!empty($data))
-
- {
-
-  foreach($data->result_array() as $row)
-
-  {
-
-       $get_post=$this->Crud_model->GetData('postjob','',"user_id='".$row['userId']."'");
-
-    if(!empty($row['firstname'])){
-
-      $name= $row['firstname'].' '.$row['lastname'];
-
+    function make_query($title, $category_id, $subcategory_id, $search_location, $days) {
+        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
+            $query = "SELECT * FROM users join postjob ON users.userId = postjob.user_id";
+            if(isset($title) && !empty($title)) {
+                $query .= " AND users.companyname like '%".$title."%'";
+            }
+
+            if(isset($search_location) && !empty($search_location)) {
+                $query .= "AND users.address like '%".$search_location."%'";
+            }
+
+            if(isset($category_id) && !empty($category_id)) {
+                $query .= "
+                WHERE postjob.category_id='".$category_id."'";
+            }
+
+            if(isset($subcategory_id) && !empty($subcategory_id)) {
+                $query .= "
+                AND postjob.subcategory_id='".$subcategory_id."'";
+            }
+
+            if(isset($days) && !empty($days)) {
+                if($days=='one') {
+                    $query .=" AND users.created>=NOW()-INTERVAL 1 HOUR";
+                } else {
+                    $current_date=date('Y-m-d');
+                    $dates=date('Y-m-d', strtotime($current_date.'-'.$days.'days'));
+                    $query .=" AND users.created>='".$dates."'";
+                }
+            }
+            $query .= " AND users.userType = '2'";
+            return $query;
+        }
     }
 
-    else{
+    function employer_fetchdata($limit, $start, $title, $category_id, $subcategory_id, $search_location, $days) {
+        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
+            $query = $this->make_query($title, $category_id, $subcategory_id, $search_location, $days);
+            $query .= ' ORDER BY userId DESC';
+            $query .= ' LIMIT '.$start.', ' . $limit;
+            $data = $this->db->query($query);
+        } else {
+            $query = "SELECT * FROM users WHERE status = '1' ORDER BY userId DESC";
+            $query .= ' LIMIT '.$start.', ' . $limit;
+            $data = $this->db->query($query);
+        }
 
-      $name=$row['username'];
+        $output = '';
+        if(!empty($data)) {
+            foreach($data->result_array() as $row) {
+                $get_post=$this->Crud_model->GetData('postjob','',"user_id='".$row['userId']."'");
+                if(!empty($row['firstname'])){
+                    $name= $row['firstname'].' '.$row['lastname'];
+                } else{
+                    $name=$row['companyname'];
+                }
 
+                if(strlen($row['short_bio'])>100){
+                    $desc= substr($row['short_bio'], 0,100).'...';
+                } else {
+                    $desc= $row['short_bio'];
+                }
+
+                if(!empty($row['profilePic']) && file_exists('uploads/users/'.$row['profilePic'])){
+
+                    $profile_pic= '<img src="'.base_url('uploads/users/'.$row['profilePic']).'" alt="" />';
+
+                } else {
+                    $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
+                }
+                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Post Job '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+            }
+        } else {
+            $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
+        }
+        return $output;
     }
-
-    if(strlen($row['short_bio'])>100){
-
-    $desc= substr($row['short_bio'], 0,100).'...';}
-
-    else {
-
-      $desc= $row['short_bio'];
-
-    }
-
-     if(!empty($row['profilePic']) && file_exists('uploads/users/'.$row['profilePic'])){
-
-    $profile_pic= '<img src="'.base_url('uploads/users/'.$row['profilePic']).'" alt="" />';
-
-   }
-
-   else{
-
-     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
-
-   }
-
-   $output .= '
-
-   <div class="emply-resume-list">
-
-     <div class="emply-resume-thumb">'.$profile_pic.'</div>
-
-      <div class="emply-resume-info">
-
-      <h3><a href="#" title="">'.$name.'</a></h3>
-
-                                               <span>'.$row['category_name'].'</span>
-
-
-
-                                               <p><i class="la la-map-marker"></i>'. $row['address'].'</p>
-
-                                               <p>'.$desc.'</p>
-
-                                                <p>Post Job '.count($get_post).'</p>
-
-                                           </div>
-
-
-
-                                 <div class="shortlists" style="width:50px;">
-
-                <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a>
-
-                                    </div>
-
-                                </div>';
-
-  }
-
- }
-
- else
-
- {
-
-  $output .= ' <div class="emply-resume-list">
-
-                   <div class="emply-resume-thumb">
-
-                  <h2>No Data Found</h2>
-
-                    </div>
-
-                    </div>';
-
- }
-
- return $output;
-
-}
-
-////////////////////// end ajax list employer///////////////////////
-
+    ////////////////////// end ajax list employer///////////////////////
 }

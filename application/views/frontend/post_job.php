@@ -192,7 +192,7 @@ CKEDITOR.replace('description');
 $('.key_skills').select2({
     tags: true,
     //maximumSelectionLength: 10,
-    tokenSeparators: [',', ' '],
+    tokenSeparators: [','],
     placeholder: "Select or Type Skills"
 });
 function show_location() {

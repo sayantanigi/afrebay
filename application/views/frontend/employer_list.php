@@ -29,7 +29,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="widget">
                                 <div class="search_widget_job">
                                     <div class="field_w_search">
-                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords"  onkeydown="filter_job();"  value="" />
+                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords" value="" />
                                         <i class="la la-search"></i>
                                     </div>
                                     <div class="field_w_search">
@@ -39,7 +39,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Category</h3>
+                                <h3 class="sb-title closed">Category</h3>
                                 <div class="specialism_widget">
                                     <select class="chosen" name="category_id" id="category_id" onchange="getsubcategory(this.value);filter_job();">
                                         <option value="">Select Category</option>
@@ -50,11 +50,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
                             <div class="widget sub_cat">
-                                <h3 class="sb-title open">Subcategory</h3>
-                                <div class="specialism_widget" >
-                                    <div class="simple-checkbox scrollbar" >
-                                        <div id="subcategory_list"></div>
-                                    </div>
+                                <h3 class="sb-title closed">Subcategory</h3>
+                                <div class="specialism_widget">
+                                    <select class="chosen_state" name="subcategory_id" id="subcategory_id" onchange="filter_job();">
+                                    </select>
                                 </div>
                             </div>
                             <div class="widget">
@@ -87,57 +86,82 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </section>
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
+    filter_data(1);
 
-        filter_data(1);
-        //alert('hii'); return false;
-        function filter_data(page) {
-            var base_url = $("#base_url").val();
-
-            $('#employer_list').html(createSkeleton(5));
-
-            function createSkeleton(limit) {
-                var skeletonHTML = '';
-                for (var i = 0; i < limit; i++) {
-                    skeletonHTML += '<div class="ph-item">';
-                    skeletonHTML += '<div class="ph-col-4">';
-                    skeletonHTML += '<div class="ph-picture"></div>';
-                    skeletonHTML += '</div>';
-                    skeletonHTML += '<div>';
-                    skeletonHTML += '<div class="ph-row">';
-                    skeletonHTML += '<div class="ph-col-12 big"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '<div class="ph-col-12"></div>';
-                    skeletonHTML += '</div>';
-                    skeletonHTML += '</div>';
-                    skeletonHTML += '</div>';
-                }
-                return skeletonHTML;
+    function filter_data(page) {
+        var base_url = $("#base_url").val();
+        $('#employer_list').html(createSkeleton(5));
+        function createSkeleton(limit) {
+            var skeletonHTML = '';
+            for (var i = 0; i < limit; i++) {
+                skeletonHTML += '<div class="ph-item">';
+                skeletonHTML += '<div class="ph-col-4">';
+                skeletonHTML += '<div class="ph-picture"></div>';
+                skeletonHTML += '</div>';
+                skeletonHTML += '<div>';
+                skeletonHTML += '<div class="ph-row">';
+                skeletonHTML += '<div class="ph-col-12 big"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '<div class="ph-col-12"></div>';
+                skeletonHTML += '</div>';
+                skeletonHTML += '</div>';
+                skeletonHTML += '</div>';
             }
-            var action = 'fetch_data';
-            $.ajax({
-                url: base_url + "home/employerlist_fetchdata/" + page,
-                method: "POST",
-                dataType: "JSON",
-                data: {
-                    action: action
-                },
-                success: function (data) {
-                    $('#employer_list').html(data.employer_list);
-                    $('#pagination_link').html(data.pagination_link);
-                }
-            })
+            return skeletonHTML;
         }
+        var action = 'fetch_data';
+        var title_keyword = $('#title_keyword').val();
+        var location = $('#location').val();
+        var category = $('#category_id').val();
+        var subcategory = $('#subcategory_id').val();
+        var days = $('input:radio[name=days]:checked').val();
+        $.ajax({
+            url: base_url + "home/employerlist_fetchdata/" + page,
+            method: "POST",
+            dataType: "JSON",
+            data: {
+                action: action,
+                title_keyword: title_keyword,
+                location: location,
+                category: category,
+                subcategory: subcategory,
+                days: days,
+            },
+            success: function (data) {
+                $('#employer_list').html(data.employer_list);
+                $('#pagination_link').html(data.pagination_link);
+            }
+        })
+    }
 
-
-        $(document).on('click', '.pagination li a', function (event) {
-            event.preventDefault();
-            var page = $(this).data('ci-pagination-page');
-            filter_data(page);
-        });
-
-
+    $(document).on('click', '.pagination li a', function (event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        filter_data(page);
     });
+
+    $('#title_keyword').keyup(function () {
+        filter_data(1);
+    });
+
+    $('#location').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#category_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#subcategory_id').on('change', function () {
+        filter_data(1);
+    });
+
+    $('input:radio').click(function () {
+        filter_data(1);
+    });
+});
 </script>
+<script type="text/javascript" src="<?= base_url('assets/custom_js/postjob_list.js')?>"></script>
