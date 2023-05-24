@@ -165,23 +165,21 @@ class Users_model extends My_Model {
 
     function make_query($title, $category_id, $subcategory_id, $search_location, $days) {
         if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
-            $query = "SELECT * FROM users join postjob ON users.userId = postjob.user_id";
+            $query = "SELECT * FROM users join postjob ON users.userId = postjob.user_id WHERE users.userType = '2'";
             if(isset($title) && !empty($title)) {
                 $query .= " AND users.companyname like '%".$title."%'";
             }
 
             if(isset($search_location) && !empty($search_location)) {
-                $query .= "AND users.address like '%".$search_location."%'";
+                $query .= " AND users.address like '%".$search_location."%'";
             }
 
             if(isset($category_id) && !empty($category_id)) {
-                $query .= "
-                WHERE postjob.category_id='".$category_id."'";
+                $query .= " AND postjob.category_id='".$category_id."'";
             }
 
             if(isset($subcategory_id) && !empty($subcategory_id)) {
-                $query .= "
-                AND postjob.subcategory_id='".$subcategory_id."'";
+                $query .= " AND postjob.subcategory_id='".$subcategory_id."'";
             }
 
             if(isset($days) && !empty($days)) {
@@ -193,7 +191,7 @@ class Users_model extends My_Model {
                     $query .=" AND users.created>='".$dates."'";
                 }
             }
-            $query .= " AND users.userType = '2'";
+            //$query .= " AND users.userType = '2'";
             return $query;
         }
     }
@@ -211,7 +209,7 @@ class Users_model extends My_Model {
         }
 
         $output = '';
-        if(!empty($data)) {
+        if(!empty($data->result_array())) {
             foreach($data->result_array() as $row) {
                 $get_post=$this->Crud_model->GetData('postjob','',"user_id='".$row['userId']."'");
                 if(!empty($row['firstname'])){

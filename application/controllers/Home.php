@@ -465,7 +465,6 @@ class Home extends MY_Controller {
 			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days);
 		} else {
 			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days);
-			//$this->Users_model->employer_fetchdata($config["per_page"], $start);
 		}
 		$output = array(
 			'pagination_link'  => $this->pagination->create_links(),
