@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="widget">
-                            <h3 class="sb-title open">Last Activity</h3>
+                            <h3 class="sb-title closed">Last Activity</h3>
                             <div class="specialism_widget">
                                 <div class="simple-checkbox">
                                     <p><input type="radio" name="days" id="22"  onclick="filter_job()" value="one"/><label for="22">Last Hour</label></p>

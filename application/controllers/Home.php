@@ -311,89 +311,63 @@ class Home extends MY_Controller {
 
 
 	function workers_list() {
-
-		$data['get_category'] = $this->Crud_model->GetData('category');
-
+		$data['get_specialist'] = $this->Crud_model->GetData('specialist');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='6'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/workers_list', $data);
-
 		$this->load->view('footer');
-
 	}
 
 
 
 	function workerlist_fetchdata() {
-
 		sleep(1);
-
+		$title = $this->input->post('title_keyword');
+		$search_location = $this->input->post('location');
+		$specialist = $this->input->post('specialist');
+		if($specialist) {
+			$specialist = implode(',', $specialist);
+		}
+		$userType = 1;
 		$this->load->library('pagination');
-
 		$config = array();
-
 		$config['base_url'] = '#';
-
 		$config['total_rows'] = count($this->Users_model->getcount());
-
 		$config['per_page'] = 10;
-
 		$config['uri_segment'] = 3;
-
 		$config['use_page_numbers'] = TRUE;
-
 		$config['full_tag_open'] = '<ul class="pagination">';
-
 		$config['full_tag_close'] = '</ul>';
-
 		$config['first_tag_open'] = '<li>';
-
 		$config['first_tag_close'] = '</li>';
-
 		$config['last_tag_open'] = '<li>';
-
 		$config['last_tag_close'] = '</li>';
-
 		$config['next_link'] = '&gt;';
-
 		$config['next_tag_open'] = '<li>';
-
 		$config['next_tag_close'] = '</li>';
-
 		$config['prev_link'] = '&lt;';
-
 		$config['prev_tag_open'] = '<li>';
-
 		$config['prev_tag_close'] = '</li>';
-
 		$config['cur_tag_open'] = "<li class='active'><a href='#'>";
-
 		$config['cur_tag_close'] = '</a></li>';
-
 		$config['num_tag_open'] = '<li>';
-
 		$config['num_tag_close'] = '</li>';
-
 		$config['num_links'] = 3;
-
 		$this->pagination->initialize($config);
-
 		$page = $this->uri->segment(3);
-
 		$start = ($page - 1) * $config['per_page'];
 
+		if(isset($title) || isset($search_location) || isset($specialist) || isset($userType)) {
+			$getdata=$this->Users_model->workers_fetchdata($config["per_page"], $start, $title, $search_location, $specialist, $userType);
+		} else {
+			$getdata=$this->Users_model->workers_fetchdata($config["per_page"], $start, $title, $search_location, $specialist, $userType);
+		}
+
 		$output = array(
-
 			'pagination_link'  => $this->pagination->create_links(),
-
-			'product_list'   => $this->Users_model->fetchdata($config["per_page"], $start)
-
+			'product_list'   => $getdata
 		);
-
 		echo json_encode($output);
-
 	}
 
 
@@ -433,6 +407,7 @@ class Home extends MY_Controller {
 		$subcategory_id = $this->input->post('subcategory');
 		$search_location = $this->input->post('location');
 		$days = $this->input->post('days');
+		$userType = 2;
 		$this->load->library('pagination');
 		$config = array();
 		$config['base_url'] = '#';
@@ -461,11 +436,12 @@ class Home extends MY_Controller {
 		$page = $this->uri->segment(3);
 		$start = ($page - 1) * $config['per_page'];
 
-		if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
-			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days);
+		if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days) || isset($userType)) {
+			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days, $userType);
 		} else {
-			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days);
+			$getdata=$this->Users_model->employer_fetchdata($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days, $userType);
 		}
+
 		$output = array(
 			'pagination_link'  => $this->pagination->create_links(),
 			'employer_list'   => $getdata

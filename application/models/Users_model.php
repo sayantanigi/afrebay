@@ -163,9 +163,9 @@ class Users_model extends My_Model {
         return $query->result();
     }
 
-    function make_query($title, $category_id, $subcategory_id, $search_location, $days) {
-        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
-            $query = "SELECT * FROM users join postjob ON users.userId = postjob.user_id WHERE users.userType = '2'";
+    function make_query($title, $category_id, $subcategory_id, $search_location, $days, $userType) {
+        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days) || isset($userType)) {
+            $query = "SELECT * FROM users join postjob ON users.userId = postjob.user_id WHERE users.userType = $userType";
             if(isset($title) && !empty($title)) {
                 $query .= " AND users.companyname like '%".$title."%'";
             }
@@ -191,14 +191,80 @@ class Users_model extends My_Model {
                     $query .=" AND users.created>='".$dates."'";
                 }
             }
+
+            if(isset($specialist) && !empty($specialist)) {
+                $query .= " AND instr(concat(',', skills, ','), ',$specialist,'))";
+            }
             //$query .= " AND users.userType = '2'";
             return $query;
         }
     }
 
-    function employer_fetchdata($limit, $start, $title, $category_id, $subcategory_id, $search_location, $days) {
-        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days)) {
-            $query = $this->make_query($title, $category_id, $subcategory_id, $search_location, $days);
+    function make_workers_query($title, $search_location, $specialist, $userType) {
+        if(isset($title) || isset($search_location) || isset($specialist) || isset($userType)) {
+            $query = "SELECT * FROM users WHERE users.userType = $userType";
+            if(isset($title) && !empty($title)) {
+                $query .= " AND users.companyname like '%".$title."%'";
+            }
+
+            if(isset($search_location) && !empty($search_location)) {
+                $query .= " AND users.address like '%".$search_location."%'";
+            }
+
+            if(isset($specialist) && !empty($specialist)) {
+                $query .= " AND instr(concat(',', skills, ','), ',$specialist,')";
+            }
+            //$query .= " AND users.userType = '2'";
+            return $query;
+        }
+    }
+
+    function employer_fetchdata($limit, $start, $title, $category_id, $subcategory_id, $search_location, $days, $userType) {
+        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days) || isset($userType)) {
+            $query = $this->make_query($title, $category_id, $subcategory_id, $search_location, $days, $userType);
+            $query .= ' ORDER BY userId DESC';
+            $query .= ' LIMIT '.$start.', ' . $limit;
+            $data = $this->db->query($query);
+        } else {
+            $query = "SELECT * FROM users WHERE status = '1' ORDER BY userId DESC";
+            $query .= ' LIMIT '.$start.', ' . $limit;
+            $data = $this->db->query($query);
+        }
+
+        $output = '';
+        if(!empty($data->result_array())) {
+            foreach($data->result_array() as $row) {
+                $get_post=$this->Crud_model->GetData('postjob','',"user_id='".$row['userId']."'");
+                if(!empty($row['firstname'])){
+                    $name= $row['firstname'].' '.$row['lastname'];
+                } else{
+                    $name=$row['companyname'];
+                }
+
+                if(strlen($row['short_bio'])>100){
+                    $desc= substr($row['short_bio'], 0,100).'...';
+                } else {
+                    $desc= $row['short_bio'];
+                }
+
+                if(!empty($row['profilePic']) && file_exists('uploads/users/'.$row['profilePic'])){
+
+                    $profile_pic= '<img src="'.base_url('uploads/users/'.$row['profilePic']).'" alt="" />';
+
+                } else {
+                    $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
+                }
+                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Post Job '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+            }
+        } else {
+            $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
+        }
+        return $output;
+    }
+
+    function workers_fetchdata($limit, $start, $title, $search_location, $specialist, $userType) {
+        if(isset($title) || isset($search_location) || isset($specialist) || isset($userType)) {
+            $query = $this->make_workers_query($title, $search_location, $specialist, $userType);
             $query .= ' ORDER BY userId DESC';
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);

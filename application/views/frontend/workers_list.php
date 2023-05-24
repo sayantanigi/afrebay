@@ -29,7 +29,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="widget">
                                 <div class="search_widget_job">
                                     <div class="field_w_search">
-                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords"  onkeydown="filter_job();"  value="" />
+                                        <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords"/>
                                         <i class="la la-search"></i>
                                     </div>
                                     <div class="field_w_search">
@@ -42,10 +42,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <h3 class="sb-title open">Specialization</h3>
                                 <div class="specialism_widget">
                                     <div class="dropdown-field">
-                                        <select id="example" class="example" multiple>
-                                            <?php if(!empty($get_category)){
-                                            foreach ($get_category as $key) {?>
-                                            <option value="<?= $key->id?>"><?= $key->category_name?></option>
+                                        <select id="example" class="example" name="specialist" multiple>
+                                            <option value="">Choose Skills</option>
+                                            <?php if(!empty($get_specialist)){
+                                            foreach ($get_specialist as $key) {?>
+                                            <option value="<?= $key->specialist_name?>"><?= $key->specialist_name?></option>
                                             <?php  } } ?>
                                         </select>
                                     </div>
@@ -76,7 +77,6 @@ $(document).ready(function () {
         var base_url = $("#base_url").val();
         var displayProduct = 5;
         $('#worker_list').html(createSkeleton(displayProduct));
-
         function createSkeleton(limit) {
             var skeletonHTML = '';
             for (var i = 0; i < limit; i++) {
@@ -97,14 +97,19 @@ $(document).ready(function () {
             }
             return skeletonHTML;
         }
-
         var action = 'fetch_data';
+        var title_keyword = $('#title_keyword').val();
+        var location = $('#location').val();
+        var specialist = $('#example').val();
         $.ajax({
             url: base_url + "home/workerlist_fetchdata/" + page,
             method: "POST",
             dataType: "JSON",
             data: {
-                action: action
+                action: action,
+                title_keyword: title_keyword,
+                location: location,
+                specialist: specialist,
             },
             success: function (data) {
                 $('#worker_list').html(data.product_list);
@@ -117,6 +122,18 @@ $(document).ready(function () {
         event.preventDefault();
         var page = $(this).data('ci-pagination-page');
         filter_data(page);
+    });
+
+    $('#title_keyword').keyup(function () {
+        filter_data(1);
+    });
+
+    $('#location').on('change', function () {
+        filter_data(1);
+    });
+
+    $('#example').on('change', function () {
+        filter_data(1);
     });
 });
 </script>
