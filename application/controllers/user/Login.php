@@ -183,7 +183,7 @@ class Login extends CI_Controller {
 					$mail->send();
 					// echo 'Message has been sent';
 				} catch (Exception $e) {
-					$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+					$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
 				}
 				//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
 				$data=array('result'=>1,'data'=>1);
@@ -196,7 +196,7 @@ class Login extends CI_Controller {
 
     public function emailVerification($otp=null) {
 		if(empty($otp)) {
-			$this->session->set_flashdata('error', 'You have not permission to access this page!');
+			$this->session->set_flashdata('message', 'You have not permission to access this page!');
 			redirect(base_url('register'), 'refresh');
 		}
         // $otp = $this->uri->segment(3);
@@ -217,15 +217,15 @@ class Login extends CI_Controller {
             // );
             $result = $this->db->query("UPDATE `users` SET `email_verified` = 1, `status` = 1 where `userId` = $usr->userId");
             if ($result) {
-                $this->session->set_flashdata('success', 'Your Email Address is successfully verified! Your account has been activated successfully. You can now login.');
+                $this->session->set_flashdata('message', 'Your Email Address is successfully verified! Your account has been activated successfully. You can now login.');
                 // $this->load->view('email-activation', $data);
 				redirect(base_url('login'), 'refresh');
             } else {
-                $this->session->set_flashdata('error', 'Sorry! There is error verifying your Email Address!');
+                $this->session->set_flashdata('message', 'Sorry! There is error verifying your Email Address!');
                 redirect(base_url('login'), 'refresh');
             }
         } else {
-            $this->session->set_flashdata('error', 'Sorry! Activation link is expired!');
+            $this->session->set_flashdata('message', 'Sorry! Activation link is expired!');
             redirect(base_url('login'), 'refresh');
         }
     }
@@ -253,7 +253,7 @@ class Login extends CI_Controller {
 					}
 				}
 			} else {
-				$this->session->set_flashdata('error', 'Invalid Email or Password !');
+				$this->session->set_flashdata('message', 'Invalid Email or Password !');
 				redirect('login');
 			}
 		}
@@ -261,7 +261,7 @@ class Login extends CI_Controller {
 
 	public function logout() {
 	    unset($_SESSION['afrebay']);
-			$this->session->set_flashdata('msg', 'You have logged out.');
+			$this->session->set_flashdata('message', 'You have logged out.');
 			redirect('login');
 	}
 
@@ -346,7 +346,7 @@ class Login extends CI_Controller {
 			 	$this->session->set_flashdata('message', 'New password successfully !');
 	           	echo "1";
             } else {
-            	$this->session->set_flashdata('error', 'Error');
+            	$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
             }
         }
 	}

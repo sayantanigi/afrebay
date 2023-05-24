@@ -30,7 +30,7 @@
 <div class="col-md-12 col-md-12 col-sm-12 display-table-cell v-align">
     <div class="user-dashboard">
         <div class="row row-sm">
-            
+
         </div>
     </div>
 </div>

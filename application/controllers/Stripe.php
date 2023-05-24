@@ -131,15 +131,15 @@ class Stripe extends CI_Controller {
                        // $this->load->view('stripe/payment_success', $data);
                         redirect(base_url('subscription'));
                     } else {
-                    	$this->session->set_flashdata('error', 'Transaction has been failed');
+                    	$this->session->set_flashdata('message', 'Transaction has been failed');
                         redirect(base_url('stripe/'.base64_encode($_POST['subscription_id'])));
                     }
                 } else {
-                	$this->session->set_flashdata('error', 'Transaction has been failed');
+                	$this->session->set_flashdata('message', 'Transaction has been failed');
                     redirect(base_url('stripe/'.base64_encode($_POST['subscription_id'])));
                 }
             } else {
-                $this->session->set_flashdata('error', 'Invalid Token');
+                $this->session->set_flashdata('message', 'Invalid Token');
                 $statusMsg = "";
                 redirect(base_url('stripe/'.base64_encode($_POST['subscription_id'])));
             }

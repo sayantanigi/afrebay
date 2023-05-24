@@ -136,13 +136,13 @@ class Home extends MY_Controller {
 
 		if ($this->Mymodel->insert('contact_us', $data)) {
 
-			$this->session->set_flashdata('success', 'Contact Detail Successfull !');
+			$this->session->set_flashdata('message', 'Contact Detail Successfull !');
 
 			redirect('contact-us');
 
 		} else {
 
-			$this->session->set_flashdata('error', 'Error!');
+			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
 
 			redirect('contact-us');
 
@@ -710,7 +710,7 @@ class Home extends MY_Controller {
 
 			} catch (Exception $e) {
 
-				$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
 
 			}
 

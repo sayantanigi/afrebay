@@ -1,4 +1,4 @@
- <?php 
+ <?php
     $seg2= $this->uri->segment(2);
     $email=base64_decode($seg2);
     ?>
@@ -25,30 +25,31 @@
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
                             <h3>Reset Password</h3>
-                            
-                            <span class="text-success f-20"><?=$this->session->flashdata('success');  ?></span>
-                            <span class="text-danger f-20"><?=$this->session->flashdata('error');  ?></span>
+                            <?php if($this->session->flashdata('message')) {
+                                echo $this->session->flashdata('message');
+                                unset($_SESSION['message']);
+                            } ?>
                             <form action="#" method="post">
                                 <input type="hidden" id="email" name="email" value="<?= $email?>">
                                 <div class="error text-left">New Password</div>
                                 <div class="cfield">
-                                  
+
                                     <input type="password" placeholder="********" name="password" id="new_password"/>
                                     <i class="la la-key"></i>
                                 </div>
                                 <div class="error text-left" id="err_password"></div>
                                 <div class="error text-left">Confirm Password</div>
                                  <div class="cfield">
-                                    
+
                                     <input type="password" placeholder="********" name="confirm_password" id="confirm_password" />
                                     <i class="la la-key"></i>
                                 </div>
                                 <div class="error text-left" id="err_confirmpassword"></div>
                                 <span id="matchPass2"></span>
-                                
+
                                 <button type="button" onclick="newpassword()">Submit</button>
                             </form>
-                           
+
                         </div>
                     </div>
                     <!-- LOGIN POPUP -->
@@ -62,7 +63,7 @@
             <script>
                 function newpassword()
                 {
-                  
+
         var base_url=$('#base_url').val();
         var password=$("#new_password").val();
         var cpass=$("#confirm_password").val();
@@ -82,7 +83,7 @@
     $("#new_password").focus();
     return false;
 }
-        
+
             if(cpass=="")
          {
                  $("#err_confirmpassword").fadeIn().html("Please enter Confirm password").css('color','red');
@@ -108,15 +109,15 @@
                  //alert(result); return false;
                      if(result==1)
                      {
-                        
+
                          window.location.href=base_url+'home';
                      }
                      else{
                          location.reload();
                      }
-                    
+
              }
 
-         }); 
+         });
                 }
             </script>

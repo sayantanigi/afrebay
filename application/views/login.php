@@ -42,9 +42,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">
                                     <div id="register-messages" class="text-success f-20">
                                         <span class="text-success f-15" style="text-align: center;">
-                                            <?php if($this->session->flashdata('success')) {
-                                                echo $this->session->flashdata('success');
-                                                unset($_SESSION['success']);
+                                            <?php if($this->session->flashdata('message')) {
+                                                echo $this->session->flashdata('message');
+                                                unset($_SESSION['message']);
                                             } ?>
                                         </span>
                                     </div>

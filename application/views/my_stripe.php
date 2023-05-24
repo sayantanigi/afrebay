@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<?php if($this->session->flashdata('success')){ ?>
 						<div class="alert alert-success text-center">
 							<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-							<p><?php echo $this->session->flashdata('success'); ?></p>
+							<p>
+								<?php if($this->session->flashdata('message')) {
+	                                echo $this->session->flashdata('message');
+	                                unset($_SESSION['message']);
+	                            } ?>
+							</p>
 						</div>
 						<?php } ?>
 
@@ -92,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$(function () {
 		var $stripeForm = $(".form-validation");
 		$('form.form-validation').bind('submit', function (e) {
-  
+
 			var $stripeForm = $(".form-validation"),
 				inputSelector = ['input[type=email]', 'input[type=password]',
 					'input[type=text]', 'input[type=file]',

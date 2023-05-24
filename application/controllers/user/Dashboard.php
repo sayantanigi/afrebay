@@ -172,7 +172,7 @@ class Dashboard extends CI_Controller {
 		);
 		//print_r($data); exit;
 		$this->Crud_model->SaveData('users', $data, "userId='" . $_POST['id'] . "'");
-		$this->session->set_flashdata('success', 'Profile Updated Successfull !');
+		$this->session->set_flashdata('message', 'Profile Updated Successfull !');
 		redirect(base_url('profile'));
 	}
 
@@ -267,7 +267,7 @@ class Dashboard extends CI_Controller {
 	function delete_service($id) {
 
 		$this->Crud_model->DeleteData('employer_services', "id='" . $id . "'");
-		$this->session->set_flashdata('message', 'service deleted successfully !');
+		$this->session->set_flashdata('message', 'Service Deleted successfully !');
 		redirect(base_url('myservice'));
 	}
 
@@ -489,6 +489,7 @@ class Dashboard extends CI_Controller {
 			$this->session->set_flashdata('message', 'Password Reset Successfully !');
 			echo "1";
 		} else {
+			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
 			echo "0";
 		}
 	}
@@ -507,7 +508,7 @@ class Dashboard extends CI_Controller {
 			$this->Crud_model->SaveData('employer_rating', $data);
 			$this->session->set_flashdata('message', 'Rating successfully');
 		} else {
-			$this->session->set_flashdata('message', 'Error');
+			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
 		}
 		redirect(base_url('worker-detail/' . base64_encode($_POST['user_id'])));
 	}
@@ -618,7 +619,7 @@ class Dashboard extends CI_Controller {
 	{
 
 		$this->Crud_model->DeleteData('user_education', "id='" . $id . "'");
-		$this->session->set_flashdata('message', 'education deleted successfully !');
+		$this->session->set_flashdata('message', 'Education Deleted successfully !');
 		redirect(base_url('education-list'));
 	}
 
@@ -672,7 +673,7 @@ class Dashboard extends CI_Controller {
 			'created_date' => date('Y-m-d H:i:s'),
 		);
 		$this->Crud_model->SaveData('user_workexperience', $data);
-		$this->session->set_flashdata('message', 'work experience Created Successfully !');
+		$this->session->set_flashdata('message', 'Work Experience Created Successfully !');
 		redirect(base_url('workexperience-list'));
 	}
 
