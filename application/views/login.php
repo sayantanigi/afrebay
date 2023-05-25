@@ -5,7 +5,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
 <style>
-.text-success {display: none;}
+/*.text-success {display: none;}*/
+.text-invalid {color: red;}
 .text-danger {display: none;}
 .text-error {display: none;}
 #forgotpass_message {text-align: center; margin-top: 10px;}
@@ -40,8 +41,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">
-                                    <div id="register-messages" class="text-success f-20">
-                                        <span class="text-success f-15" style="text-align: center;">
+                                    <div id="register-messages" class="text-invalid f-20">
+                                        <span class="text-invalid f-15" style="text-align: center;">
                                             <?php if($this->session->flashdata('message')) {
                                                 echo $this->session->flashdata('message');
                                                 unset($_SESSION['message']);

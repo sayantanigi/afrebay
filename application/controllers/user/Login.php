@@ -253,7 +253,7 @@ class Login extends CI_Controller {
 					}
 				}
 			} else {
-				$this->session->set_flashdata('message', 'Invalid Email or Password !');
+				$this->session->set_flashdata('message', 'Invalid Email Address or Password !');
 				redirect('login');
 			}
 		}

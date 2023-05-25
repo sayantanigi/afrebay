@@ -165,7 +165,7 @@ class Users_model extends My_Model {
 
     function make_query($title, $category_id, $subcategory_id, $search_location, $days, $userType) {
         if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days) || isset($userType)) {
-            $query = "SELECT * FROM users join postjob ON users.userId = postjob.user_id WHERE users.userType = $userType";
+            $query = "SELECT * FROM users LEFT JOIN postjob ON users.userId = postjob.user_id WHERE users.userType = $userType";
             if(isset($title) && !empty($title)) {
                 $query .= " AND users.companyname like '%".$title."%'";
             }
