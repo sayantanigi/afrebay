@@ -17,13 +17,13 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <h2 class="breadcrumb-title">My Job Posts</h2>
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">My Job</li>
                     </ol>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
                                     </tr>
                                     <?php $i++; }}else{?>
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="6">
                                                 <center>No Data Found</center>
                                             </td>
                                         </tr>

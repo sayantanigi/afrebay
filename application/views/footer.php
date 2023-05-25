@@ -68,11 +68,11 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         </div>
                     </div>
                     <div class="social">
-                        <a href="javascript:void(0)" title=""><i class="fa fa-facebook"></i></a>
-                        <a href="javascript:void(0)" title=""><i class="fa fa-twitter"></i></a>
-                        <a href="javascript:void(0)" title=""><i class="fa fa-linkedin"></i></a>
-                        <a href="javascript:void(0)" title=""><i class="fa fa-pinterest"></i></a>
-                        <a href="javascript:void(0)" title=""><i class="fa fa-behance"></i></a>
+                        <a href="<?php echo $get_setting->fb_link; ?>" title="" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="<?php echo $get_setting->tw_link; ?>" title="" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="<?php echo $get_setting->lnkd_link; ?>" title="" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="<?php echo $get_setting->ptrs_link?>" title="" target="_blank"><i class="fa fa-pinterest"></i></a>
+                        <a href="<?php echo $get_setting->baha_link?>" title="" target="_blank"><i class="fa fa-behance"></i></a>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     </div>
     </div>
     <div class="bottom-line">
-        <span><?= $get_setting->copyright?></span>
+        <span>Copyright © <?php echo date('Y')?> Afrebay. All rights reserved.</span>
         <a href="#scrollup" class="scrollup" title=""><i class="la la-arrow-up"></i></a>
     </div>
 </footer>

@@ -15,13 +15,13 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <h2 class="breadcrumb-title">Add Work Experience</h2>
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Add Education</li>
                     </ol>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -52,9 +52,9 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <label for="first_name">
-                                                    <h4>Designation <span style="color: red">*</span></h4>
+                                                    <h4>Job Title <span style="color: red">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="designation" placeholder="Enter designation"  value="<?= @$designation; ?>" required list="designation" autocomplete="off"/>
+                                                <input type="text" class="form-control" name="designation" placeholder="Enter Job Title"  value="<?= @$designation; ?>" required list="designation" autocomplete="off"/>
                                                 <datalist id="designation">
                                                 <?php if(!empty($get_designation)){ foreach($get_designation as $row){?>
                                                     <option value="<?= $row->designation ?>">
@@ -62,8 +62,8 @@
                                                 </datalist>
                                             </div>
                                             <div class="col-lg-6">
-                                                <label for="first_name"><h4>Company Name<span style="color: red">*</span></h4></label>
-                                                <input type="text" class="form-control" name="company_name" placeholder="Enter company name"  value="<?= @$company_name; ?>" required list="company_name" autocomplete="off"/>
+                                                <label for="first_name"><h4>Company Name <span style="color: red">*</span></h4></label>
+                                                <input type="text" class="form-control" name="company_name" placeholder="Enter Company Name"  value="<?= @$company_name; ?>" required list="company_name" autocomplete="off"/>
                                                 <datalist id="company_name">
                                                 <?php if(!empty($get_companyname)){ foreach($get_companyname as $row){?>
                                                     <option value="<?= $row->company_name ?>">
@@ -80,11 +80,11 @@
                                                 </datalist>
                                             </div> -->
                                             <div class="col-lg-6">
-                                                <label for="first_name"><h4>From Date<span style="color: red">*</span></h4></label>
+                                                <label for="first_name"><h4>From Date <span style="color: red">*</span></h4></label>
                                                 <input type="date" class="form-control" name="from_date" placeholder="From Date"  value="<?= $from_date; ?>" required/>
                                             </div>
                                             <div class="col-lg-6">
-                                                <label for="first_name"><h4>To Date<span style="color: red">*</span></h4></label>
+                                                <label for="first_name"><h4>To Date <span style="color: red">*</span></h4></label>
                                                 <input type="date" class="form-control" name="to_date" placeholder="To Date" value="<?= $to_date; ?>" required/>
                                             </div>
                                             <div class="col-lg-12"><br>

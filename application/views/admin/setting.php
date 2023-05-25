@@ -18,18 +18,18 @@
 										<div class="container">
 											<div class="card-body">
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-12">
 														<div class="form-group">
 															<label>Website Name</label>
 															<input type="text" class="form-control" placeholder="Website Name" name="website_name" value="<?php if(!empty($row->website_name)){echo $row->website_name; }?>" required>
 														</div>
 													</div>
-													<div class="col-md-6">
+													<!-- <div class="col-md-6">
 														<div class="form-group">
 															<label>Copyright</label>
 															<input type="text" class="form-control" placeholder="Copyright" name="copyright" value="<?php if(!empty($row->copyright)){ echo $row->copyright; }?>" required>
 														</div>
-													</div>
+													</div> -->
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>Phone Number</label>
@@ -58,6 +58,42 @@
 														<div class="form-group">
 															<label>Address</label>
 															<textarea placeholder="Address" name="address" class="form-control" style="resize:none;" rows="4" cols="4" required><?php if(!empty($row->address)) { echo $row->address;} ?></textarea>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>Footer About</label>
+															<textarea placeholder="Footer About" name="fabout" class="form-control" style="resize:none;" rows="4" cols="4"><?php if(!empty($row->fabout)) { echo $row->fabout;} ?></textarea>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>Facebook Link</label>
+															<input type="text" class="form-control" name="fb_link" placeholder="Facebook Link" value="<?php if(!empty($row->fb_link)){echo $row->fb_link; }?>">
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>Twitter Link</label>
+															<input type="text" class="form-control" name="tw_link" placeholder="Twitter Link" value="<?php if(!empty($row->tw_link)){echo $row->tw_link; }?>">
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>LinkedIn Link</label>
+															<input type="text" class="form-control" name="lnkd_link" placeholder="LinkedIn Link" value="<?php if(!empty($row->lnkd_link)){echo $row->lnkd_link; }?>">
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>Pinterest Link</label>
+															<input type="text" class="form-control" name="ptrs_link" placeholder="Pinterest Link" value="<?php if(!empty($row->ptrs_link)){echo $row->ptrs_link; }?>">
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>Bahance Link</label>
+															<input type="text" class="form-control" name="baha_link" placeholder="Bahance Link" value="<?php if(!empty($row->baha_link)){echo $row->baha_link; }?>">
 														</div>
 													</div>
 													<div class="col-md-12">

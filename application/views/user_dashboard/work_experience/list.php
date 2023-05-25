@@ -15,13 +15,13 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <h2 class="breadcrumb-title">Work Experience</h2>
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">My Work Experience</li>
                     </ol>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -30,8 +30,8 @@
 <div class="col-md-12 col-sm-12 display-table-cell v-align">
     <div class="user-dashboard">
         <div class="row row-sm">
-            <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px;">
-                <a href="<?php echo base_url('add-workexperience')?>" class="btn btn-primary Work_Btn">Add</a>
+            <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px; text-align: right;">
+                <a href="<?php echo base_url('add-workexperience')?>" class="btn btn-primary Work_Btn">Add Work Experience</a>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak">
@@ -39,7 +39,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Designation</th>
+                                <th scope="col">Job Title</th>
                                 <th scope="col">Company Name</th>
                                 <th scope="col">From Date</th>
                                 <th scope="col">To Date</th>
@@ -65,7 +65,7 @@
                             </tr>
                             <?php $i++;} } else {?>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="6">
                                     <center>No Data Found</center>
                                 </td>
                             </tr>

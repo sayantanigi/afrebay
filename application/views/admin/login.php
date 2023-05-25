@@ -24,9 +24,9 @@ $get_setting=$this->Crud_model->get_single('setting');
                             </a>
                         </div>
                     </div>
-                    <div class="login-header">
+                    <div class="login-header" style="text-align: center;">
                         <h3>Login <span><?= $get_setting->website_name;?></span></h3>
-                        <p class="text-muted">Access to our dashboard</p>
+                        <p class="text-muted">Access the Admin Dashboard</p>
                     </div>
                     <span class="msghide">
                     <?php if($this->session->flashdata('error')) {
@@ -36,7 +36,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                     </span>
                     <form class="pt-3" method="post" action="<?=admin_url(); ?>Login/actionLogin" onsubmit="return validation()">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" id="email_id" name="email_id" placeholder="Username">
+                            <input type="text" class="form-control form-control-lg" id="email_id" name="email_id" placeholder="Email Address">
                             <span class="error" id="error_email"><?php echo form_error('email_id'); ?></span>
                         </div>
                         <div class="form-group">

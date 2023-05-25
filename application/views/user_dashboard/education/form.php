@@ -32,9 +32,9 @@
 
             <div class="col-md-12 col-12">
 
-                <h2 class="breadcrumb-title">Dashboard</h2>
+                <h2 class="breadcrumb-title">Add Education</h2>
 
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
 
                     <ol class="breadcrumb">
 
@@ -44,7 +44,7 @@
 
                     </ol>
 
-                </nav>
+                </nav> -->
 
             </div>
 
@@ -108,9 +108,9 @@
 
                                             <div class="col-lg-6">
 
-                                                <label for="first_name"><h4>Education <span style="color: red">*</span></h4></label>
+                                                <label for="first_name"><h4>Degree <span style="color: red">*</span></h4></label>
 
-                                                <input type="text" class="form-control" name="education" placeholder="Enter Education"  value="<?= @$education; ?>" required list="education" autocomplete="off"/>
+                                                <input type="text" class="form-control" name="education" placeholder="Enter Degree"  value="<?= @$education; ?>" required list="education" autocomplete="off"/>
 
                                                 <datalist id="education">
 
@@ -126,9 +126,9 @@
 
                                                 <div class="col-lg-6">
 
-                                                    <label for="first_name"><h4>Passing of Year <span style="color: red">*</span></h4></label>
+                                                    <label for="first_name"><h4>Year of Graduation <span style="color: red">*</span></h4></label>
 
-                                                    <input type="text" class="form-control" name="passing_of_year" placeholder="Enter Passing of Year"  value="<?= @$passing_of_year; ?>" required list="passing_of_year" autocomplete="off"/>
+                                                    <input type="text" class="form-control" name="passing_of_year" placeholder="Enter the Year of Graduation"  value="<?= @$passing_of_year; ?>" required list="passing_of_year" autocomplete="off"/>
 
                                                     <datalist id="passing_of_year">
 
@@ -144,9 +144,9 @@
 
                                                     <div class="col-lg-6">
 
-                                                        <label for="first_name"><h4>College/school <span style="color: red">*</span></h4></label>
+                                                        <label for="first_name"><h4>College/School/University Name <span style="color: red">*</span></h4></label>
 
-                                                        <input type="text" class="form-control" name="college_name" placeholder="Enter College/School Name"  value="<?= $college_name; ?>" required list="college_name" autocomplete="off"/>
+                                                        <input type="text" class="form-control" name="college_name" placeholder="Enter College/School/University Name"  value="<?= $college_name; ?>" required list="college_name" autocomplete="off"/>
 
                                                         <datalist id="education">
 
@@ -162,7 +162,7 @@
 
                                                         <div class="col-lg-6">
 
-                                                            <label for="first_name"><h4>Department<span style="color: red">*</span></h4></label>
+                                                            <label for="first_name"><h4>Department <span style="color: red">*</span></h4></label>
 
                                                             <input type="text" class="form-control" name="department" placeholder="Enter Department"  value="<?= @$department; ?>" required list="department" autocomplete="off"/>
 
@@ -184,7 +184,7 @@
 
                                                                 <label for="first_name"><h4>Description </h4></label>
 
-                                                                <textarea type="text" class="form-control" name="description" id="description"   value="<?= $description; ?>" ><?= @$description; ?></textarea>
+                                                                <textarea type="text" class="form-control" name="description" id="description" value="<?= $description; ?>" ><?= @$description; ?></textarea>
 
                                                             </div>
 
@@ -233,3 +233,7 @@
 
 
     </section>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+    CKEDITOR.replace('description');
+    </script>

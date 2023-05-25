@@ -15,13 +15,13 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <h2 class="breadcrumb-title">Profile Settings</h2>
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
                     </ol>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                                                 <label for="first_name">
                                                     <h4>Company Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company name" value="<?php echo $userinfo->companyname;?>" required onkeypress="only_alphabets(event)" />
+                                                <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company name" value="<?php echo $userinfo->companyname;?>" required/>
                                             </div>
                                             <?php } else { ?>
                                             <div class="col-lg-6">
@@ -93,7 +93,7 @@
                                             <?php } ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
-                                                    <h4>Email ID <span style="color:red;">*</span></h4>
+                                                    <h4>Email Address <span style="color:red;">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="email" id="email" placeholder="xyz@example.com" readonly value="<?php echo $userinfo->email;?>" />
                                             </div>
@@ -158,9 +158,9 @@
 
                                             <div class="col-lg-6">
                                                 <label for="last_name">
-                                                    <h4>Address</h4>
+                                                    <h4>Legal Address <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="address" id="location" placeholder="Location" value="<?= $userinfo->address ?>" autocomplete="off" />
+                                                <input type="text" class="form-control" name="address" id="location" placeholder="Location" value="<?= $userinfo->address ?>" autocomplete="off" required/>
                                                 <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
                                                 <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
                                             </div>
@@ -239,13 +239,13 @@
                                             <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
-                                                    <h4>Founded Year <span style="color:red;">*</span></h4>
+                                                    <h4>Founded Year</h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="foundedyear" id="foundedyear" placeholder="Founded Year" value="<?php echo $userinfo->foundedyear;?>" required/>
+                                                <input type="text" class="form-control" name="foundedyear" id="foundedyear" placeholder="Founded Year" value="<?php echo $userinfo->foundedyear;?>"/>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
-                                                    <h4>Team Size <span style="color:red;">*</span></h4>
+                                                    <h4>TAX ID <span style="color:red;">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="Team Size" value="<?php echo $userinfo->teamsize;?>" required/>
                                             </div>

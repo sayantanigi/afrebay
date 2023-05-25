@@ -16,13 +16,13 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <h2 class="breadcrumb-title">Products</h2>
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">My Products</li>
                     </ol>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
     </div>
     <div class="user-dashboard">
         <div class="row row-sm">
-            <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px;">
-                <a href="<?php echo base_url('add-product')?>" class="btn btn-primary Education_Btn">Add</a>
+            <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px; text-align: right;">
+                <a href="<?php echo base_url('add-product')?>" class="btn btn-primary Education_Btn">Add Product</a>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak">

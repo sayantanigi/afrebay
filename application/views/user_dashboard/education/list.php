@@ -32,9 +32,9 @@
 
                        <div class="col-md-12 col-12">
 
-                           <h2 class="breadcrumb-title">Dashboard</h2>
+                           <h2 class="breadcrumb-title">Educations</h2>
 
-                           <nav aria-label="breadcrumb" class="page-breadcrumb">
+                           <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
 
                                <ol class="breadcrumb">
 
@@ -44,7 +44,7 @@
 
                                </ol>
 
-                           </nav>
+                           </nav> -->
 
                        </div>
 
@@ -64,9 +64,9 @@
 
                                <div class="row row-sm">
 
-                                  <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px;">
+                                  <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px; text-align: right;">
 
-                                   <a href="<?php echo base_url('add-education')?>" class="btn btn-primary Education_Btn">Add</a>
+                                   <a href="<?php echo base_url('add-education')?>" class="btn btn-primary Education_Btn">Add Education</a>
 
                                   </div>
 
@@ -106,7 +106,7 @@
 
                                                  foreach ($education_list as $row) {
 
-                                                  
+
 
                                                   ?>
 
@@ -164,7 +164,6 @@
 
                </div>
 
-              
+
 
            </section>
-

@@ -72,10 +72,10 @@
 				<a href="<?=admin_url(); ?>career"><i class="fa fa-graduation-cap"></i> <span>Career Tips</span></a>
 			</li>
 			<li <?php if ($seg2 =='email-template') {?>class="active"<?php }?>>
-				<a href="<?=admin_url(); ?>email-template"><i class="fa fa-envelope"></i> <span>Email Template</span></a>
+				<a href="<?=admin_url(); ?>email-template"><i class="fa fa-envelope"></i> <span>Email Templates</span></a>
 			</li>
 			<li <?php if ($seg2 =='setting') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('setting')?>"><i class="fas fa-cog"></i> <span> Settings</span></a>
+				<a href="<?= admin_url('setting')?>"><i class="fas fa-cog"></i> <span>Site Settings</span></a>
 			</li>
 		</ul>
 	</div>

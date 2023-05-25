@@ -155,7 +155,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <h3>Since</h3>
                                                 <span><?= @$userdata->foundedyear;?></span>
                                             </li>
-                                            <li>
+                                            <!-- <li>
                                                 <i class="la la-users"></i>
                                                 <h3>Team Size</h3>
                                                 <span>
@@ -165,6 +165,13 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                         echo $userdata->teamsize;
                                                     }
                                                     ?>
+                                                </span>
+                                            </li> -->
+                                            <li>
+                                                <i class="la la-users"></i>
+                                                <h3>TAX ID</h3>
+                                                <span>
+                                                    <?php echo $userdata->teamsize; ?>
                                                 </span>
                                             </li>
                                         </ul>

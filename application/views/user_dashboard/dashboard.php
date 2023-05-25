@@ -41,12 +41,12 @@
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
                 <h2 class="breadcrumb-title">Dashboard</h2>
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
                 </div> <!--  end row -->
                 <?php } else if($_SESSION['afrebay']['userType']==1){?>
                 <!--  end employer list -->
-                
+
                 <!-- worker list     -->
                 <!-- <div style="background: #f67a49; color:white; padding:10px;">Profile</div> -->
                 <!-- <div class="row">

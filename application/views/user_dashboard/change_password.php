@@ -34,9 +34,9 @@
 
             <div class="col-md-12 col-12">
 
-                <h2 class="breadcrumb-title">Dashboard</h2>
+                <h2 class="breadcrumb-title">Change Password</h2>
 
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
 
                     <ol class="breadcrumb">
 
@@ -46,7 +46,7 @@
 
                     </ol>
 
-                </nav>
+                </nav> -->
 
             </div>
 
