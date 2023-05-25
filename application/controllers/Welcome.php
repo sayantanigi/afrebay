@@ -102,7 +102,7 @@ class Welcome extends CI_Controller {
 	function employer_detail($user_id) {
 		$userid=base64_decode($user_id);
 		$data['userdata']=$this->Crud_model->get_single('users',"userId='".$userid."'");
-		$data['get_post']=$this->Crud_model->GetData('postjob','',"user_id='".$userid."'");
+		$data['get_post']=$this->Crud_model->GetData('postjob','',"user_id='".$userid."' AND is_delete = '0'");
 		$data['prod_list']=$this->db->query("SELECT user_product.id, user_product.prod_name, user_product.prod_description, user_product_image.prod_image FROM user_product_image JOIN user_product ON user_product.id = user_product_image.prod_id WHERE user_product.status = 1 AND user_product.is_delete = 1 AND user_id='".$userid."' group by user_product.id")->result_array();
 		$data['get_banner']=$this->Crud_model->get_single('banner',"id='15'");
 		$viewcount=$data['userdata']->view_count+1;
@@ -130,7 +130,7 @@ class Welcome extends CI_Controller {
 	}
 
 	function post_job() {
-		$data['key_skills']=$this->Crud_model->GetData('specialist',"","status = 'Active'");
+		//$data['getkey_skills']=$this->Crud_model->GetData('specialist',"","status = 'Active'");
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['category']=$this->Crud_model->GetData('category','','');
 		$data['subcategory']=$this->Crud_model->GetData('sub_category','','');
@@ -143,30 +143,31 @@ class Welcome extends CI_Controller {
 	public function update_post_job($id) {
 		$work_id = base64_decode($id);
 		$update_data = $this->Crud_model->get_single('postjob', "id='" . $work_id . "'");
-		$get_keySkills = $this->Crud_model->GetData('specialist', 'id, specialist_name', "");
-		$category = $this->Crud_model->GetData('category', 'id, category_name', "");
-		$subcategory = $this->Crud_model->GetData('sub_category', 'id, sub_category_name', "");
-		$get_country = $this->Crud_model->GetData('countries', 'id, name', "");
-		$get_state = $this->Crud_model->GetData('states', 'id, name', "");
-		$get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
+		//$get_keySkills = $this->Crud_model->GetData('specialist', 'id, specialist_name', "");
+		//$getcategory = $this->Crud_model->GetData('category', 'id, category_name', "");
+		//$getsubcategory = $this->Crud_model->GetData('sub_category', 'id, sub_category_name', "");
+		//$get_country = $this->Crud_model->GetData('countries', 'id, name', "");
+		//$get_state = $this->Crud_model->GetData('states', 'id, name', "");
+		//$get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
 		$data = array(
 			'button' => 'update',
 			'action' => base_url('welcome/edit_post_job'),
 			'post_title' => $update_data->post_title,
 			'description' => $update_data->description,
 			//'duration' => $update_data->duration,
-			'key_skills' => $get_keySkills,
+			'key_skills' => $update_data->required_key_skills,
 			'duration' => $update_data->duration,
 			'charges' => $update_data->charges,
-			'category' => $category,
-			'subcategory' => $subcategory,
+			'category' => $update_data->category_id,
+			'subcategory' => $update_data->subcategory_id,
 			'appli_deadeline' => $update_data->appli_deadeline,
-			'countries' => $get_country,
-			'state' => $get_state,
-			'cities' => $get_cities,
+			'countries' => $update_data->country,
+			'state' => $update_data->state,
+			'cities' => $update_data->city,
 			'location' => $update_data->location,
 			'latitude' => $update_data->latitude,
 			'longitude' => $update_data->longitude,
+			'id' => $work_id,
 		);
 		$this->load->view('header');
 		$this->load->view('frontend/post_job', $data);
@@ -207,7 +208,7 @@ class Welcome extends CI_Controller {
 			'created_date'=>date('Y-m-d H:i:s'),
 		);
 		$this->Crud_model->SaveData('postjob', $data, "id='" . $id . "'");
-		$this->session->set_flashdata('message', 'Post Job Created Successfully !');
+		$this->session->set_flashdata('message', 'Post Job Updated Successfully !');
 		redirect(base_url('myjob'));
 	}
 

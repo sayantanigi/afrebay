@@ -195,7 +195,7 @@ class Users_model extends My_Model {
             if(isset($specialist) && !empty($specialist)) {
                 $query .= " AND instr(concat(',', skills, ','), ',$specialist,'))";
             }
-            //$query .= " AND users.userType = '2'";
+            $query .= " GROUP BY users.userId";
             return $query;
         }
     }
@@ -242,9 +242,9 @@ class Users_model extends My_Model {
                 }
 
                 if(strlen($row['short_bio'])>100){
-                    $desc= substr($row['short_bio'], 0,100).'...';
+                    $desc= substr(strip_tags($row['short_bio']), 0,100).'...';
                 } else {
-                    $desc= $row['short_bio'];
+                    $desc= strip_tags($row['short_bio']);
                 }
 
                 if(!empty($row['profilePic']) && file_exists('uploads/users/'.$row['profilePic'])){
@@ -285,9 +285,9 @@ class Users_model extends My_Model {
                 }
 
                 if(strlen($row['short_bio'])>100){
-                    $desc= substr($row['short_bio'], 0,100).'...';
+                    $desc= substr(strip_tags($row['short_bio']), 0,100).'...';
                 } else {
-                    $desc= $row['short_bio'];
+                    $desc= strip_tags($row['short_bio']);
                 }
 
                 if(!empty($row['profilePic']) && file_exists('uploads/users/'.$row['profilePic'])){
@@ -297,7 +297,7 @@ class Users_model extends My_Model {
                 } else {
                     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Post Job '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Post Job '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';

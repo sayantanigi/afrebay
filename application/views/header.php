@@ -190,7 +190,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                         <ul class="account-btns">
                             <?php if(!empty($_SESSION['afrebay']['userId'])) { ?>
                                 <li class="menu-item-has-children User_Dashboard_Menu">
-                                    <a class="Profile_dashboard_btn" href="#" title="">Hi,
+                                    <a class="Profile_dashboard_btn" href="javascript:void(0)" title="">Hi,
                                         <?php if(!empty($_SESSION['afrebay']['firstname'])) {
                                             $fullname = $_SESSION['afrebay']['firstname']." ".$_SESSION['afrebay']['lastname'];
                                         } else {
@@ -200,7 +200,15 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                                     </a>
                                     <ul>
                                         <li>
-                                            <a href="<?=base_url(); ?>dashboard" title="">Dashboard</a>
+                                            <?php $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
+                                            if(empty($get_sub_data)) {
+                                                if(@$_SESSION['afrebay']['userType']=='1') { ?>
+                                                    <a href="<?=base_url(); ?>dashboard" title="">Dashboard</a>
+                                                <?php } else { ?>
+                                                    <a href="<?=base_url(); ?>subscription" title="">Subscribe</a>
+                                            <?php } } else { ?>
+                                                <a href="<?=base_url(); ?>dashboard" title="">Dashboard</a>
+                                            <?php } ?>
                                         </li>
                                         <li>
                                             <?php

@@ -27,9 +27,9 @@ class Subscription extends MY_Controller {
 			'subscription_amount' =>set_value('subscription_amount'),
 			'subscription_duration' =>set_value('subscription_duration'),
 			'subscription_id' =>set_value('subscription_id'),
-			'payment_link' =>set_value('payment_link'),
-			// 'product_key' =>set_value('product_key'),
-			// 'price_key' =>set_value('price_key'),
+			//'payment_link' =>set_value('payment_link'),
+			'product_key' =>set_value('product_key'),
+			'price_key' =>set_value('price_key'),
 			'subscription_description' =>set_value('subscription_description'),
 			'id' =>set_value('id')
 		);
@@ -47,9 +47,9 @@ class Subscription extends MY_Controller {
 			'subscription_amount'=> $_POST['subscription_amount'],
 			'subscription_duration'=> $_POST['subscription_duration'],
 			'subscription_description'=> $_POST['subscription_description'],
-			'payment_link'=> $_POST['payment_link'],
-			// 'product_key'=> $_POST['product_key'],
-			// 'price_key'=> $_POST['price_key'],
+			//'payment_link'=> $_POST['payment_link'],
+			'product_key'=> $_POST['product_key'],
+			'price_key'=> $_POST['price_key'],
 			'created_date'=> date('Y-m-d H:i:s')
 		);
         $this->Crud_model->SaveData('subscription',$data);
@@ -82,9 +82,9 @@ class Subscription extends MY_Controller {
 			'subscription_amount'=>set_value('subscription_amount',$update_sub->subscription_amount),
 			'subscription_duration'=>set_value('subscription_duration',$update_sub->subscription_duration),
 			'subscription_description'=>set_value('subscription_description',$update_sub->subscription_description),
-			'payment_link'=>set_value('payment_link',$update_sub->payment_link),
-			// 'product_key'=>set_value('product_key',$update_sub->product_key),
-			// 'price_key'=>set_value('price_key',$update_sub->price_key),
+			//'payment_link'=>set_value('payment_link',$update_sub->payment_link),
+			'product_key'=>set_value('product_key',$update_sub->product_key),
+			'price_key'=>set_value('price_key',$update_sub->price_key),
 			'id'=>$sub_id
 		);
 		//print_r($data); die();
@@ -102,9 +102,9 @@ class Subscription extends MY_Controller {
 			'subscription_amount'=> $_POST['subscription_amount'],
 			'subscription_duration'=> $_POST['subscription_duration'],
 			'subscription_description'=> $_POST['subscription_description'],
-			'payment_link'=> $_POST['payment_link'],
-			// 'product_key'=> $_POST['product_key'],
-			// 'price_key'=> $_POST['price_key'],
+			//'payment_link'=> $_POST['payment_link'],
+			'product_key'=> $_POST['product_key'],
+			'price_key'=> $_POST['price_key'],
 			'created_date'=> date('Y-m-d H:i:s')
 		);
         $this->Crud_model->SaveData('subscription',$data,"id='".$_POST['id']."'");

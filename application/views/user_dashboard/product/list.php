@@ -37,6 +37,12 @@
         <h4 style="color: red;">Error</h4>
         <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
     </div>
+    <div class="text-success f-20" style="text-align: center;">
+        <?php if($this->session->flashdata('message')) {
+            echo $this->session->flashdata('message');
+            unset($_SESSION['message']);
+        } ?>
+    </div>
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px;">
@@ -229,8 +235,6 @@ function productDelete(id) {
         //return false;
         location.reload(true);
     }
-
-
 }
 </script>
 <script>

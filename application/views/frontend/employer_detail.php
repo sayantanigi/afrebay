@@ -12,7 +12,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>Employer Detail</h3>
+                        <h3>Vendor Details</h3>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </li>
                                             <li>
                                                 <i class="la la-map"></i>
-                                                <h3>Locations</h3> <span><?= @$userdata->address;?></span>
+                                                <h3>Location</h3> <span><?= @$userdata->address;?></span>
                                             </li>
 
                                             <?php
@@ -164,7 +164,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     } else {
                                                         echo $userdata->teamsize;
                                                     }
-                                                    ?></span>
+                                                    ?>
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>

@@ -14,8 +14,8 @@ class Dashboard extends CI_Controller {
 
 	function index() {
 		$data['get_service'] = $this->Crud_model->GetData('employer_services', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
-		$data['get_job'] = $this->Crud_model->GetData('postjob', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
-		$data['bid_job'] = $this->db->query("SELECT `postjob`.*, `job_bid`.* FROM `job_bid` JOIN `postjob` ON `postjob`.`id` = `job_bid`.`postjob_id` where `postjob`.user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
+		$data['get_job'] = $this->Crud_model->GetData('postjob', '', "user_id='".$_SESSION['afrebay']['userId']."' AND is_delete = '0'");
+		$data['bid_job'] = $this->db->query("SELECT `postjob`.*, `job_bid`.* FROM `job_bid` JOIN `postjob` ON `postjob`.`id` = `job_bid`.`postjob_id` where `postjob`.user_id = '".$_SESSION['afrebay']['userId']."' AND postjob.is_delete = '0'")->result_array();
 		$data['get_subscribe'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
 		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='" . $_SESSION['afrebay']['userId'] . "' and userType='1'");
 		$data['get_product'] = $this->Crud_model->GetData('user_product', '', "user_id='".$_SESSION['afrebay']['userId']."' AND status = 1 AND is_delete= 1");
@@ -91,27 +91,27 @@ class Dashboard extends CI_Controller {
 			}
 		}
 
-		if ($_FILES['video']['error'] == '') {
-			$file_element_name = 'video';
-			$config['upload_path'] = getcwd() . '/uploads/video/';
-			$config['allowed_types'] = '*';
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			if (!$this->upload->do_upload($file_element_name)) {
-				$error = $this->upload->display_errors('<p style="color:#AF5655;">', '</p>');
-				$data = array('error' => $error);
-			}
-			$upload_quotation_file = $this->upload->data();
-			$video = $upload_quotation_file['file_name'];
-			@unlink('uploads/video/' . $_POST['old_video']);
-		} else {
-			if(!empty($_POST['old_video'])) {
-				$video = $_POST['old_video'];
-			} else {
-				$video  = '';
-			}
-		}
+		// if ($_FILES['video']['error'] == '') {
+		// 	$file_element_name = 'video';
+		// 	$config['upload_path'] = getcwd() . '/uploads/video/';
+		// 	$config['allowed_types'] = '*';
+		// 	$config['encrypt_name'] = TRUE;
+		// 	$this->load->library('upload', $config);
+		// 	$this->upload->initialize($config);
+		// 	if (!$this->upload->do_upload($file_element_name)) {
+		// 		$error = $this->upload->display_errors('<p style="color:#AF5655;">', '</p>');
+		// 		$data = array('error' => $error);
+		// 	}
+		// 	$upload_quotation_file = $this->upload->data();
+		// 	$video = $upload_quotation_file['file_name'];
+		// 	@unlink('uploads/video/' . $_POST['old_video']);
+		// } else {
+		// 	if(!empty($_POST['old_video'])) {
+		// 		$video = $_POST['old_video'];
+		// 	} else {
+		// 		$video  = '';
+		// 	}
+		// }
 
 		if ($_FILES['resume']['name'] != '') {
 			$src = $_FILES['resume']['tmp_name'];
@@ -143,7 +143,7 @@ class Dashboard extends CI_Controller {
 					$this->db->insert('specialist',$insrt);
 				}
 			}
-			$skills = implode(",",$this->input->post('key_skills',TRUE));
+			$skills = implode(", ",$this->input->post('key_skills',TRUE));
 		} else {
 			$skills = '';
 		}
@@ -160,14 +160,14 @@ class Dashboard extends CI_Controller {
 			'skills' => $skills,
 			'profilePic' => $image,
 			'additional_image' => $additional_image,
-			'zip' => $_POST['zip'],
+			//'zip' => $_POST['zip'],
 			'address' => $_POST['address'],
 			'foundedyear' => $_POST['foundedyear'],
 			'teamsize' => $_POST['teamsize'],
 			'latitude' => $_POST['latitude'],
 			'longitude' => $_POST['longitude'],
 			'short_bio' => $_POST['short_bio'],
-			'video' => $video,
+			//'video' => $video,
 			'resume' => $resume,
 		);
 		//print_r($data); exit;
@@ -272,7 +272,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function myjob() {
-		$data['get_postjob'] = $this->Crud_model->GetData('postjob', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
+		$data['get_postjob'] = $this->Crud_model->GetData('postjob', '', "user_id='".$_SESSION['afrebay']['userId']."' AND is_delete = '0'");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/my_job', $data);
 		$this->load->view('footer');
@@ -832,7 +832,8 @@ class Dashboard extends CI_Controller {
 			'prod_description' => $this->input->post('prod_description', TRUE),
 		);
 		$updateQuery = $this->Crud_model->SaveData('user_product', $data, "id='".$id."'");
-		if ($_FILES['prod_image']['name'] != '') {
+		//print_r($_FILES['prod_image']['name'][0]); die;
+		if (!empty($_FILES['prod_image']['name'][0])) {
 			$cpt = count($_FILES['prod_image']['name']);
 			for($i=0; $i<$cpt; $i++) {
 				$_POST['prod_image'] = rand(0000, 9999) . "_" . $_FILES['prod_image']['name'][$i];
@@ -858,7 +859,7 @@ class Dashboard extends CI_Controller {
 					'created_date' => date("Y-m-d H:i:s"),
 				);
 				$this->Crud_model->SaveData('user_product_image', $data_image);
-				$this->session->set_flashdata('message', 'Product Created Successfully !');
+				//$this->session->set_flashdata('message', 'Product Created Successfully !');
 			}
 		}
 		$this->session->set_flashdata('message', 'Product Updated Successfully !');
@@ -875,6 +876,18 @@ class Dashboard extends CI_Controller {
 		}
 
 	}
+
+	function delete_job() {
+		$p_id = $this->input->post('id');
+		$delete_prod = $this->db->query("UPDATE postjob SET is_delete = '1' WHERE id = '$p_id'");
+		if($delete_prod > 0){
+			echo '1';
+		} else {
+			echo '2';
+		}
+
+	}
+
 	function delete_product_image() {
 		$p_id = $this->input->post('id');
 		$delete_prod = $this->db->query("DELETE FROM user_product_image WHERE id = '$p_id'");

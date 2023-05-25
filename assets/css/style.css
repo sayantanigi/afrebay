@@ -15952,7 +15952,7 @@ aside .widget.border:first-child {
 
    padding-left: 30px;
 
-   width: 60%;
+   width: 100%;
 
 }
 
@@ -37096,7 +37096,7 @@ footer .bottom-line span {
 
    height: 25px;
 
-   width: 60%;
+   width: 100%;
 
    text-align: justify;
 
@@ -37371,11 +37371,11 @@ footer .bottom-line span {
 
 
 
-.List_Of_Workers .emply-resume-sec .emply-resume-list .emply-resume-info {
+/* .List_Of_Workers .emply-resume-sec .emply-resume-list .emply-resume-info {
 
    padding-left: 0 !important;
 
-}
+} */
 
 
 
@@ -40017,7 +40017,7 @@ footer .social {
     margin: 0 12px 0 15px;
 }
 .bid_contact-profile p {margin-top: 6px;}
-.prod_desc {text-align: justify; font-size: 19px; margin-top: 40px; height: 300px; overflow: auto;}
+.prod_desc {text-align: justify; font-size: 19px; margin-top: 40px; height: 300px; overflow: auto;padding: 0px 15px 0 0;}
 .prod_desc h2 {font-size: 16px;}
 .prod_desc p {font-size: 14px;}
 

@@ -26,8 +26,18 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row no-gape">
                 <div class="col-lg-12 column">
                     <div class="padding-left">
-                        <div class="profile-title">
+                        <div class="profile-title" style="text-align: center;">
+                            <?php if(empty(@$id)) { ?>
                             <h3>Post a New Job</h3>
+                            <?php } else { ?>
+                            <h3>Update Posted Job</h3>
+                            <?php } ?>
+                            <span class="text-success f-20" style="text-align: center;">
+                                <?php if($this->session->flashdata('message')) {
+                                    echo $this->session->flashdata('message');
+                                    unset($_SESSION['message']);
+                                } ?>
+                            </span>
                         </div>
                         <div class="profile-form-edit">
                             <?php $seg1=$this->uri->segment(1);
@@ -53,8 +63,23 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <span class="pf-title">Required Key Skills<span style="color:red;">*</span></span>
                                         <div class="pf-field">
                                             <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
-                                            <?php foreach($key_skills as $val) {?>
+                                            <!-- <?php foreach($getkey_skills as $val) {?>
                                                 <option value="<?php echo $val->specialist_name; ?>"><?php echo $val->specialist_name;?></option>
+                                            <?php } ?> -->
+                                            <?php
+                                            $skills = $this->Crud_model->GetData('specialist',"","status = 'Active'");
+                                            foreach($skills as $val) {?>
+                                                <option value="<?php echo $val->specialist_name; ?>"
+                                                <?php if(!empty($key_skills)) {
+                                                if(!empty($skills)){
+                                                        $vskills = explode(", ", $key_skills);
+                                                        for($i=0; $i<count($vskills); $i++) {
+                                                            if($vskills[$i] == $val->specialist_name){
+                                                                echo "selected";
+                                                            }
+                                                        }
+                                                    }
+                                                } ?>><?php echo $val->specialist_name;?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -76,8 +101,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="pf-field">
                                             <select data-placeholder="Please Select Category" class="form-control" name="category_id" onchange="get_subcategory(this.value)" required>
                                                 <option value="">Select Category</option>
-                                                <?php foreach($category as $key) {?>
-                                                    <option value="<?= $key->id; ?>"><?php echo $key->category_name;?></option>
+                                                <?php
+                                                $getcategory = $this->Crud_model->GetData('category', 'id, category_name', "");
+                                                foreach($getcategory as $key) {?>
+                                                    <option value="<?= $key->id; ?>" <?php if($key->id == $category) {echo "selected"; }?>><?php echo $key->category_name;?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -86,7 +113,16 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <span class="pf-title">Sub Categories<span style="color:red;">*</span></span>
                                         <div class="pf-field">
                                             <select data-placeholder="Please Select " class="form-control" name="subcategory_id" value="" id="subcategory_id" required>
+                                                <?php if(empty($id)) { ?>
                                                 <option>Select Subcategory</option>
+                                                <?php } else { ?>
+                                                    <option>Select Subcategory</option>
+                                                    <?php
+                                                    $getsubcategory = $this->Crud_model->GetData('sub_category', 'id, sub_category_name', "");
+                                                    foreach($getsubcategory as $key) {?>
+                                                        <option value="<?= $key->id; ?>" <?php if($key->id == $subcategory) {echo "selected"; }?>><?php echo $key->sub_category_name;?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -109,8 +145,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="pf-field">
                                             <select class="form-control" name="country-dropdown" id="country-dropdown" style="width: 100%;">
                                                 <option value="">Select Country</option>
-                                            <?php foreach($countries as $val) {?>
-                                                <option value="<?php echo $val->name; ?>"><?php echo $val->name;?></option>
+                                            <?php
+                                            $get_country = $this->Crud_model->GetData('countries', 'id, name', "");
+                                            foreach($get_country as $val) {?>
+                                                <option value="<?php echo $val->name; ?>" <?php if($val->name == $countries) {echo "selected"; }?>><?php echo $val->name;?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -119,7 +157,16 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <span class="pf-title">State<span style="color:red;">*</span></span>
                                         <div class="pf-field">
                                             <select class="form-control" name="state-dropdown" id="state-dropdown">
-                                                <option value="">Select Country First</option>
+                                            <?php if(empty($id)) { ?>
+                                                <option value="">Select State</option>
+                                                <?php } else { ?>
+                                                <option>Select State</option>
+                                                <?php
+                                                $get_state = $this->Crud_model->GetData('states', 'id, name', "");
+                                                foreach($get_state as $key) {?>
+                                                    <option value="<?= $key->name; ?>" <?php if($key->name == $state) {echo "selected"; }?>><?php echo $key->name;?></option>
+                                                <?php } ?>
+                                            <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -127,7 +174,16 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <span class="pf-title">City<span style="color:red;">*</span></span>
                                         <div class="pf-field">
                                             <select class="form-control" name="city-dropdown" id="city-dropdown">
-                                                <option value="">Select State First</option>
+                                                <?php if(empty($id)) { ?>
+                                                    <option value="">Select City</option>
+                                                    <?php } else { ?>
+                                                    <option>Select City</option>
+                                                    <?php
+                                                    $get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
+                                                    foreach($get_cities as $key) {?>
+                                                        <option value="<?= $key->name; ?>" <?php if($key->name == $cities) {echo "selected"; }?>><?php echo $key->name;?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -163,6 +219,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </div>
                                             <div class="col-lg-12">
                                                 <button type="submit">Submit</button>
+                                                <input type="hidden" name="id" value="<?php echo @$id?>">
                                             </div>
                                         </div>
                                     </div>

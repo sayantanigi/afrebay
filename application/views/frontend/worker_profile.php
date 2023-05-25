@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>Worker Detail</h3>
+                        <h3>Frelancer Details</h3>
                     </div>
                     <!-- <div class="inner-header">
                         <div class="container">
@@ -65,7 +65,7 @@
                                     <h3><?php if(!empty($user_detail->firstname)){ echo $user_detail->firstname.' '.$user_detail->lastname;} else { echo $user_detail->username; }?>
                                     </h3>
                                     <span><i>UX / UI Designer</i> at Atract Solutions</span>
-                                    <p><?= @$user_detail->email?></p>
+                                    <!-- <p><?= @$user_detail->email?></p> -->
                                     <p>Member Since, <?= date('Y',strtotime(@$user_detail->created))?></p>
                                     <p><i class="la la-map-marker"></i><?= @$user_detail->address?></p>
                                 </div>
@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col-lg-8 column">
                                 <div class="cand-details" id="about">
-                                    <h2>Candidates About</h2>
+                                    <h2>About This Freelancer</h2>
                                     <p>
                                         <?= @$user_detail->short_bio;?>
                                     </p>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="col-lg-4 column">
                                 <div class="job-overview">
-                                    <h3>Job Overview</h3>
+                                    <h3>Candidate Overview</h3>
                                     <ul>
                                         <li>
                                             <i class="la la-mars-double"></i>
@@ -181,11 +181,11 @@
                                             <h3>Experience</h3>
                                             <span><?= @$user_detail->experience?></span>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <i class="la la-line-chart"></i>
                                             <h3>Qualification</h3>
                                             <span><?= @$user_detail->qualification?></span>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <!-- Job Overview -->

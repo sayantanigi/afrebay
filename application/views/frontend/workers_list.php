@@ -39,7 +39,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
                             <div class="widget">
-                                <h3 class="sb-title open">Specialization</h3>
+                                <h3 class="sb-title closed">Specializations</h3>
                                 <div class="specialism_widget">
                                     <div class="dropdown-field">
                                         <select id="example" class="example" name="specialist" multiple>

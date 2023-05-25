@@ -166,12 +166,12 @@
                                             </div>
 
                                             <?php if(@$_SESSION['afrebay']['userType']=='1') { ?>
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Zip Code</h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo @$userinfo->zip;?>" required onkeypress="only_number(event)" maxlength="6" />
-                                            </div>
+                                            </div> -->
                                             <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Resume upload</h4>
@@ -213,7 +213,7 @@
                                                 <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
                                                 <?php //} ?>
                                             </div> -->
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Short Video</h4>
                                                 </label>
@@ -233,7 +233,7 @@
                                                 <?php } }else{?>
                                                 <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
                                                 <?php } ?>
-                                            </div>
+                                            </div> -->
                                             <?php } ?>
 
                                             <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>

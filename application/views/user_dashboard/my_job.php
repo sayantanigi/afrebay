@@ -30,6 +30,19 @@
 </section>
 <?php $this->load->view('sidebar');?>
 <div class="col-md-12 col-md-12 col-sm-12 display-table-cell v-align">
+    <div id="product-messages" class="text-success f-20">
+        <p style="color: #28a745;">Job Deleted Successfully.</p>
+    </div>
+    <div id="err-messages">
+        <h4 style="color: red;">Error</h4>
+        <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
+    </div>
+    <div class="text-success f-20" style="text-align: center;">
+        <?php if($this->session->flashdata('message')) {
+            echo $this->session->flashdata('message');
+            unset($_SESSION['message']);
+        } ?>
+    </div>
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
@@ -68,8 +81,8 @@
                                         <td><?=$key->appli_deadeline; ?></td>
                                         <td>
                                             <a href="<?php echo base_url('postdetail/'.base64_encode($key->id))?>" target="_blank"><i  class="fa fa-eye" aria-hidden="true"></i></a>
-                                             <a href="<?php echo base_url('update-postjob/'.base64_encode($key->id))?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                            <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <a href="<?php echo base_url('update-postjob/'.base64_encode($key->id))?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="jobDelete(<?php echo $key->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; }}else{?>
@@ -110,3 +123,54 @@
     </div>
 </div>
 </section>
+<style>
+#product-messages{display: none; text-align: center;}
+#err-messages{display: none; text-align: center;}
+</style>
+<script>
+function jobDelete(id) {
+    var p_id = id;
+    if(confirm("Are you sure you want to delete this?")) {
+        var base_url = $('#base_url').val();
+        $.ajax({
+            url:base_url+"user/dashboard/delete_job",
+            method:"POST",
+            data:{id: p_id},
+            beforeSend : function(){
+                $("#loader").show();
+                //$(".SignUp_Btn button").prop('disable','true');
+            },
+            success:function(data) {
+                if (data == '1'){
+                    setTimeout(function () {
+                        $("#loader").hide();
+                        window.scroll({top: 0, behavior: "smooth"});
+                        $('#product-messages').show();
+                    }, 7000);
+                    setTimeout(function () {
+                        $('#product-messages').hide();
+                    }, 9000);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 10000);
+                } else {
+                    $('#err-messages').show();
+                    setTimeout(function () {
+                        window.scroll({top: 0, behavior: "smooth"})
+                    }, 7000);
+                    setTimeout(function () {
+                        $('#err-messages').hide();
+                    }, 9000);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 10000);
+                }
+            }
+
+        })
+    } else {
+        //return false;
+        location.reload(true);
+    }
+}
+</script>

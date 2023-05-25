@@ -221,7 +221,7 @@
 
                         <h2>AfreBay Opportunities</h2>
 
-                        <span>Found by vendors communicate directly with hiring managers and recruiters.</span>
+                        <span>Look for the latest jobs and projects posted on the portal.</span>
 
                     </div>
 
@@ -299,7 +299,7 @@
 
                                         <h3 class="nkash"><a href="javascript:void(0)" title="">Description</a></h3>
 
-                                        <p><?= ucfirst($desc)?></p>
+                                        <p><?= ucfirst(strip_tags($desc))?></p>
 
 
 
@@ -365,7 +365,7 @@
 
                         <h2>Available AfreBay Freelancers</h2>
 
-                        <span>Found by vendors communicate directly with hiring managers and recruiters.</span>
+                        <span>Find the most eligible freelancers within the portal.</span>
 
                     </div>
 
@@ -449,9 +449,9 @@
 
                                                     <ul class="gigasjh">
 
-                                                        <li>Zip Code</li>
+                                                        <li>Experience</li>
 
-                                                        <li><?php echo @$user->zip;?></li>
+                                                        <li><?php echo @$user->experience;?></li>
 
                                                     </ul>
 
@@ -557,15 +557,7 @@
 
                         <h2>Our Services</h2>
 
-                        <span>
-
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-
-                            been the industry's standard dummy <br /> text ever since the 1500s, when an unknown printer
-
-                            took a galley of type and scrambled it to make a type specimen book.
-
-                        </span>
+                        <span>The marketplace for the most eligible freelancers and vendors. <br> Find the latest jobs in the industry globally.</span>
 
                     </div>
 
@@ -773,7 +765,7 @@
 
                         <h2>Quick Career Tips</h2>
 
-                        <span>Found by vendors communicate directly with hiring managers and recruiters.</span>
+                        <span>Review the latest updates and informations in the industry.</span>
 
                     </div>
 
