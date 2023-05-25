@@ -87,7 +87,7 @@
 
                                                             <?php if(!empty($get_userdata->profilePic)){
 
-                                                                if(!file_exists('uploads/users/'.$get_admin->profilePic)){
+                                                                if(!file_exists('uploads/users/'.$get_userdata->profilePic)){
 
                                                                     ?>
 
@@ -95,7 +95,7 @@
 
                                                                 <?php } else{?>
 
-                                                                    <img class="rounded-circle profile-img avatar-view-img" src="<?= base_url('uploads/users/'.$get_admin->profilePic)?>" alt="" width="100" height="100">
+                                                                    <img class="rounded-circle profile-img avatar-view-img" src="<?= base_url('uploads/users/'.$get_userdata->profilePic)?>" alt="" width="100" height="100">
 
                                                                 <?php } } else{?>
 
@@ -108,7 +108,7 @@
                                                         </div>
 
                                                     </div>
-
+                                                    <?php if(!empty($get_userdata->username)) { ?>
                                                     <div class="col-md-4">
 
                                                         <div class="form-group">
@@ -120,7 +120,7 @@
                                                         </div>
 
                                                     </div>
-
+                                                    <?php } ?>
                                                     <div class="col-md-4">
 
                                                         <div class="form-group">
