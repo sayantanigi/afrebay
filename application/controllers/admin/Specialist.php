@@ -10,9 +10,9 @@ class Specialist extends MY_Controller {
 
 	function index() {
     	$get_specialist=$this->Crud_model->GetData('specialist');
-		$header = array('title' => 'Specialist');
+		$header = array('title' => 'Specialization');
 		$data = array(
-			'heading' => 'Specialist',
+			'heading' => 'Specialization',
             'get_specialist' => $get_specialist
         );
         $this->load->view('admin/header', $header);
@@ -51,7 +51,8 @@ class Specialist extends MY_Controller {
         $data = array();
         foreach ($GetData as $row) {
             $btn = ''.'<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
-            if(!empty($row->specialist_image)) {
+			$btn .= ' | '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="specialDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
+			if(!empty($row->specialist_image)) {
 	            if(!file_exists("uploads/specialist/".$row->specialist_image)) {
 	                $img ='<img class="rounded service-img mr-1" src="'.base_url('uploads/no_image.png').'">';
 	            } else {
@@ -170,5 +171,11 @@ class Specialist extends MY_Controller {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
       		echo 0; exit;
      	}
+    }
+
+	public function delete() {
+        if(isset($_POST['cid'])) {
+            $this->Crud_model->DeleteData('specialist',"id='".$_POST['cid']."'");
+        }
     }
 }

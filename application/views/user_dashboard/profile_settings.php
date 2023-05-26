@@ -35,10 +35,10 @@
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="cardak">
                         <span class="text-success f-20" style="text-align: center;">
-                            <?php if($this->session->flashdata('message')) {
-                                echo $this->session->flashdata('message');
-                                unset($_SESSION['message']);
-                            } ?>
+                        <?php if($this->session->flashdata('message')) {
+                            echo $this->session->flashdata('message');
+                            unset($_SESSION['message']);
+                        } ?>
                         </span>
                         <div class="bootstrap snippet">
                             <div class="new-pro">
@@ -135,7 +135,7 @@
                                                 <input type="text" name="skills" required id="skills" class="form-control" value="<?= @$userinfo->skills?>" />
                                             </div> -->
                                             <div class="col-lg-12">
-                                                <span class="pf-title">Key Skills<span style="color:red;">*</span></span>
+                                                <span class="pf-title1">Key Skills<span style="color:red;">*</span></span>
                                                 <div class="pf-field">
                                                     <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
                                                     <?php
@@ -182,7 +182,7 @@
                                                 if(!empty($userinfo->resume)){
                                                     if(!file_exists('uploads/users/resume/'.$userinfo->resume)){
                                                 ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
+                                                <!-- <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" /> -->
                                                 <?php } else{?>
                                                 <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" />
                                                     <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:40px; color:red;"></i>
@@ -190,9 +190,7 @@
                                                 </a>
                                                 <input type="hidden" name="old_resume" value="<?= $userinfo->resume ?>">
                                                 <?php } }else { ?>
-                                                <img class="img-circle img-responsive"
-                                                    src="<?php echo base_url('uploads/no_image.png')?>"
-                                                    style="width:60px;height: 60px;" />
+                                                <!-- <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" /> -->
                                                 <?php }?>
                                             </div>
                                             <!-- <div class="col-lg-6">

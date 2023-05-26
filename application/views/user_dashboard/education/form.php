@@ -72,13 +72,6 @@
 
                     <div class="cardak">
 
-                        <span class="text-success f-20">
-                            <?php if($this->session->flashdata('message')) {
-                                echo $this->session->flashdata('message');
-                                unset($_SESSION['message']);
-                            } ?>
-                        </span>
-
                         <div class="container bootstrap snippet">
 
                             <div class="new-pro">

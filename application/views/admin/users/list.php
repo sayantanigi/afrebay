@@ -73,7 +73,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Type</th>
-                                    <th>User name</th>
+                                    <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Date</th>

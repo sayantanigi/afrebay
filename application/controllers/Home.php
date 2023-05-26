@@ -2,223 +2,144 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
-
 use PHPMailer\PHPMailer\PHPMailer;
-
 use PHPMailer\PHPMailer\SMTP;
-
 use PHPMailer\PHPMailer\Exception;
 
-
-
 class Home extends MY_Controller {
-
-
-
 	public function __construct() {
-
 		parent::__construct();
-
 		$this->load->model('Mymodel');
-
 		$this->load->model('post_job_model');
-
 		$this->load->model('Users_model');
-
 	}
 
-
-
 	public function index() {
-
 		$data['get_post'] = $this->Crud_model->GetData('postjob', 'id,post_title,description,user_id', "is_delete='0'", '', '(id)desc', '6');
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
-
 		$data['get_career'] = $this->Crud_model->GetData('career_tips', '', "status='Active'", '', '', '3');
-
 		$data['get_company'] = $this->Crud_model->GetData('company_logo', '', "status='Active'", '', '', '');
-
 		$data['get_users'] = $this->Users_model->get_users();
-
 		$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='1'");
-
 		$this->load->view('header');
-
 		$this->load->view('home', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	public function signup() {
-
 		$data['get_category'] = $this->Crud_model->GetData('category');
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='10'");
-
 		$this->load->view('header');
-
 		$this->load->view('register', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	public function login_page() {
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='9'");
-
 		$this->load->view('header');
-
 		$this->load->view('login', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	public function about() {
-
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='2'");
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='3'");
-
 		$data['get_employer'] = $this->Crud_model->GetData('users', '', "userType='2'", '', '(userId)desc', '4');
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/about_us', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	public function contact() {
-
 		$data['get_data'] = $this->Crud_model->get_single('setting');
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='4'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/contact_us', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	function save_contact() {
-
 		$data = array(
-
 			'name' => $_POST['name'],
-
 			'email' => $_POST['email'],
-
 			'subject' => $_POST['subject'],
-
 			'message' => $_POST['message'],
-
 		);
-
-		if ($this->Mymodel->insert('contact_us', $data)) {
-
-			$this->session->set_flashdata('message', 'Contact Detail Successfull !');
-
+		$this->Mymodel->insert('contact_us', $data);
+		$insert_id = $this->db->insert_id();
+		$get_setting=$this->Crud_model->get_single('setting');
+		if(!empty($insert_id)) {
+			$subject = $_POST['subject'];
+			$imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
+			$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'><tbody> <tr><td align='center'><table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'> <tbody> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'><img src='" . $imagePath . "' style='width: 250px'/></td> </tr> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello Team,</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'> Please find the below contact form details. </td> </tr> </tbody> </table> </td> </tr> <tr> <td align='center'> <table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'> <tbody> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Name : ".$_POST['name'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Email : ".$_POST['email'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>".$_POST['message'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'> Sincerely, </td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>".$_POST['name']."</td> </tr> <tr> <td height='30'></td> </tr> </tbody> </table> </td> </tr> </tbody> </table>";
+			require 'vendor/autoload.php';
+			$mail = new PHPMailer(true);
+			try {
+				//Server settings
+				$mail->CharSet = 'UTF-8';
+				$mail->SetFrom($_POST['email']);
+				//$mail->AddAddress('no-reply@goigi.com', 'Afrebay');
+				$mail->AddAddress('sayantan@goigi.in', 'sayantan bhakta');
+				$mail->IsHTML(true);
+				$mail->Subject = $subject;
+				$mail->Body = $message;
+				//Send email via SMTP
+				$mail->IsSMTP();
+				$mail->SMTPAuth   = true;
+				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+				$mail->Host       = "smtp.gmail.com";
+				$mail->Port       = 587; //587 465
+				$mail->Username   = "no-reply@goigi.com";
+				$mail->Password   = "wj8jeml3eu0z";
+				$mail->send();
+				// echo 'Message has been sent';
+			} catch (Exception $e) {
+				$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+			}
+			//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
+			$this->session->set_flashdata('message', 'Thank you for your message. Our team will connect you soon!');
 			redirect('contact-us');
-
 		} else {
-
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
-
 			redirect('contact-us');
-
 		}
-
 	}
-
-
 
 	public function privacy() {
-
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='3'");
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='12'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/privacy_policy', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	public function term_and_conditions() {
-
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='1'");
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='13'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/term_and_conditions', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	function pricing() {
-
 		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
-
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='11'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/pricing', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	function our_jobs() {
-
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['getcountry']=$this->Crud_model->GetData('countries');
-
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='7'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/post_jobslist', $data);
-
 		$this->load->view('footer');
-
 	}
-
-
 
 	function ourjob_fetchdata() {
 

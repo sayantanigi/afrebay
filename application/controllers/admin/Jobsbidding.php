@@ -9,9 +9,9 @@ class Jobsbidding extends MY_Controller {
     }
 
     function index() {
-  		$header = array('title' => 'jobsBid');
+  		$header = array('title' => 'jobs Bid');
   		$data = array(
-            'heading' => 'JobsBid List',
+            'heading' => 'Jobs Bid List',
         );
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');

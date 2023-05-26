@@ -91,7 +91,7 @@ class Setting extends MY_Controller {
           	'copyright' => $this->input->post('copyright'),
           	'address' => $this->input->post('address'),
             'fabout' => $this->input->post('fabout'),
-          	'fax' => $this->input->post('fax'),
+          	//'fax' => $this->input->post('fax'),
           	'alternate_email' => $this->input->post('alternate_email'),
 			'fb_link' => $this->input->post('fb_link'),
 			'tw_link' => $this->input->post('tw_link'),

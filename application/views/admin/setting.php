@@ -18,7 +18,7 @@
 										<div class="container">
 											<div class="card-body">
 												<div class="row">
-													<div class="col-md-12">
+													<div class="col-md-6">
 														<div class="form-group">
 															<label>Website Name</label>
 															<input type="text" class="form-control" placeholder="Website Name" name="website_name" value="<?php if(!empty($row->website_name)){echo $row->website_name; }?>" required>
@@ -29,17 +29,17 @@
 															<label>Copyright</label>
 															<input type="text" class="form-control" placeholder="Copyright" name="copyright" value="<?php if(!empty($row->copyright)){ echo $row->copyright; }?>" required>
 														</div>
-													</div> -->
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>Phone Number</label>
-															<input type="text" class="form-control" name="phone" placeholder="phone number" value="<?php if(!empty($row->phone)){echo $row->phone; }?>" required maxlength="10">
-														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>Fax</label>
 															<input type="text" class="form-control" name="fax" placeholder="Fax" value="<?php if(!empty($row->fax)){echo $row->fax; }?>">
+														</div>
+													</div> -->
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Phone Number</label>
+															<input type="text" class="form-control" name="phone" placeholder="phone number" value="<?php if(!empty($row->phone)){echo $row->phone; }?>" required maxlength="10">
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -94,12 +94,6 @@
 														<div class="form-group">
 															<label>Bahance Link</label>
 															<input type="text" class="form-control" name="baha_link" placeholder="Bahance Link" value="<?php if(!empty($row->baha_link)){echo $row->baha_link; }?>">
-														</div>
-													</div>
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Footer About</label>
-															<textarea placeholder="Footer About" name="fabout" class="form-control" style="resize:none;" rows="4" cols="4"><?php if(!empty($row->fabout)) { echo $row->fabout;} ?></textarea>
 														</div>
 													</div>
 													<div class="col-md-4">

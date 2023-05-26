@@ -66,7 +66,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Specialist</th>
+                                            <th>Specialization</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                         </tr>
@@ -87,7 +87,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Specialist</h4>
+                <h4 class="modal-title">Add Specialization</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -95,11 +95,11 @@
                     <div class="card-body">
                         <form action="#" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Specialist Name <span style="color:red;">*</span> <span id="specialist_err"></span></label>
+                                <label>Specialization Name <span style="color:red;">*</span> <span id="specialist_err"></span></label>
                                 <input class="form-control" type="text" name="specialist_name" id="specialist_name">
                             </div>
                             <div class="form-group">
-                                <label>Specialist Image</label>
+                                <label>Specialization Image</label>
                                 <input class="form-control" type="file" name="specialist_image" id="specialist_image">
                             </div>
                             <div class="mt-4">

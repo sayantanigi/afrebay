@@ -7,9 +7,9 @@
                     <h3 class="page-title"><?= $heading;?></h3>
                 </div>
                 <div class="col-auto text-right">
-                    <!--<a href="#" class="btn btn-primary add-button ml-3" data-toggle="modal" data-target="#createModal">-->
-                    <!--   <i class="fas fa-plus"></i>-->
-                    <!-- </a>-->
+                    <a href="#" class="btn btn-primary add-button ml-3" data-toggle="modal" data-target="#createModal">
+                      <i class="fas fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>

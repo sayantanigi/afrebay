@@ -1,14 +1,13 @@
-<?php 
- if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
-     $banner_img=base_url("uploads/banner/".$get_banner->image);
-            } else{
-       $banner_img=base_url("assets/images/resource/mslider1.jpg");
-        } ?>
+<?php
+if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
+    $banner_img=base_url("uploads/banner/".$get_banner->image);
+} else {
+    $banner_img=base_url("assets/images/resource/mslider1.jpg");
+} ?>
 
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"
-            class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
@@ -29,15 +28,18 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 column">
                     <div class="contact-form">
                         <h3>Keep In Touch</h3>
-                        <span class="text-success f-20"><?=$this->session->flashdata('success');  ?></span>
-                        <span class="text-danger f-20"><?=$this->session->flashdata('error');  ?></span>
+                        <span class="text-success f-20">
+                        <?php if($this->session->flashdata('message')) {
+                            echo $this->session->flashdata('message');
+                            unset($_SESSION['message']);
+                        } ?>
+                        </span>
                         <form method="post" action="<?= base_url('Home/save_contact')?>">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <span class="pf-title">Full Name</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="Full Name" name="name" id="name" required
-                                            onkeypress="only_alphabets(event)" />
+                                        <input type="text" placeholder="Full Name" name="name" id="name" required onkeypress="only_alphabets(event)" />
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -68,9 +70,8 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 column">
                     <div class="block remove-bottom">
                         <div class="Map_back"></div>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3451.3433400942886!2d-92.02472478540473!3d30.112987422287425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x862362f6ab1a6857%3A0xb416dfcf8937671f!2s208%20Rue%20Saint%20Barts%2C%20Youngsville%2C%20LA%2070592%2C%20USA!5e0!3m2!1sen!2sin!4v1630565931873!5m2!1sen!2sin"
-                            width="100%" height="420" style="border: 0;" allowfullscreen="" loading="lazy"></iframe>
+                        <?php $gmap = str_replace(",", "", str_replace(" ", "+", $get_data->address))?>
+                        <iframe src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=<?php echo $gmap?>&z=14&output=embed" width="100%" height="420" style="border: 0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 column">
@@ -91,13 +92,13 @@
                                     <?php if(!empty($get_data->phone)){ echo $get_data->phone;}?>
                                 </span>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <i class="la la-fax"></i>
                                 <span>
                                     <label>Fax:</label>
                                     1-985-518-1388
                                 </span>
-                            </li>
+                            </li> -->
                             <li>
                                 <i class="la la-envelope-o"></i>
                                 <span>

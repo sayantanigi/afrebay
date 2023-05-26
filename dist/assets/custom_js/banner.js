@@ -4,15 +4,15 @@ function create_banner()
 	var name=$('#name').val();
 	var image=$('#image').val();
 
-   
+
      if(image=="")
     {
       	$("#image_err").fadeIn().html("Required").css("color","red");
           setTimeout(function(){$("#image_err").fadeOut("&nbsp;");},2000)
-    
+
         $("#image").focus();
         return false;
-    } 
+    }
          var form_data= new FormData();
     	var image=$('#image')[0].files[0];
 	      form_data.append('image',image);
@@ -21,7 +21,7 @@ function create_banner()
 	        type:"post",
 	        url:admin_url+"manage_home/Banner/create_action",
 	        cache:false,
-	        contentType: false,   
+	        contentType: false,
 	        processData:false,
 	        async:false,
 	        data:form_data,
@@ -33,10 +33,10 @@ function create_banner()
 	             location.reload();
 	        	$('#name').val('');
 	        	$('#image').val('');
-	         
-	         
+
+
 	        }
-	       
+
 	        }
 	    });
 
@@ -45,7 +45,7 @@ function create_banner()
 function getValue(id)
 {
 	 var admin_url = $("#admin_url").val();
-    
+
         $.ajax({
 	        type:'post',
 	        cache:false,
@@ -74,7 +74,7 @@ function update_banner()
 	var name=$('#edit_name').val();
 	 var old_image=$("#old_image").val();
    var id=$("#id").val();
-     
+
          var form_data= new FormData();
     	var image=$('#edit_image')[0].files[0];
 	      form_data.append('image',image);
@@ -85,7 +85,7 @@ function update_banner()
 	        type:"post",
 	        url:admin_url+"manage_home/Banner/update_action",
 	        cache:false,
-	        contentType: false,   
+	        contentType: false,
 	        processData:false,
 	        async:false,
 	        data:form_data,
@@ -97,12 +97,30 @@ function update_banner()
 	             location.reload();
 	        	$('#edit_name').val('');
 	        	$('#edit_image').val('');
-	         
-	         
+
+
 	        }
-	        
+
 	        }
 	    });
 
 }
+
+function sliderDelete(obj,cid) {
+	var admin_url=$('#admin_url').val();
+	var ask = confirm("Do you want to delete this record?");
+	if(ask==true) {
+		$(".id"+cid).fadeOut();
+		var datastring="cid="+cid;
+		$.ajax({
+			type:"POST",
+			url:admin_url+'manage_home/Banner/delete',
+			data:datastring,
+			cache:false,
+			success:function(returndata) {
+				table.draw();
+			}
+		});
+	}
+}
 

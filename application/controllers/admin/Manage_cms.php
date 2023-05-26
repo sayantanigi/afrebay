@@ -30,7 +30,7 @@ class Manage_cms extends CI_Controller {
             $btn = ''.'<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#viewModal" onclick="view_data('.$row->id.')" data-placement="right"><i class="far fa-eye mr-1"></i>View</span>';
             $btn .= '| '.'<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
             if(strlen($row->description)>100) {
-                $desc=substr($row->description,0,100).'...';
+                $desc=substr($row->description,0,60).'...';
             } else {
                 $desc=$row->description;
             }

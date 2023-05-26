@@ -11,9 +11,9 @@ class Company_logo extends MY_Controller {
 	function index()
 	{
 
-		$header = array('title' => 'company logo');
+		$header = array('title' => 'Partner Companies');
 		$data = array(
-			'heading' => 'List of company logo',
+			'heading' => 'List of Partner Companies',
 		);
 		$this->load->view('admin/header', $header);
 		$this->load->view('admin/sidebar');
@@ -38,6 +38,7 @@ class Company_logo extends MY_Controller {
 		{
 
 			$btn = '<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
+			$btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="companyLogoDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
 			if(!empty($row->logo) && file_exists("uploads/company_logo/".$row->logo))
 			{
 
@@ -180,10 +181,9 @@ class Company_logo extends MY_Controller {
 
 	}
 
-
-
-
-
-
-
+	public function delete() {
+        if(isset($_POST['cid'])) {
+            $this->Crud_model->DeleteData('company_logo',"id='".$_POST['cid']."'");
+        }
+    }
 }

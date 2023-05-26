@@ -59,11 +59,16 @@ class Users extends MY_Controller {
                 <label for="rating_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
                 </div>';
             }
+            if(!empty($row->firstname)){
+                $name = $row->firstname.' '.$row->lastname;
+            } else {
+                $name = $row->companyname;
+            }
             $no++;
             $nestedData = array();
             $nestedData[] = $no;
             $nestedData[] = $type;
-            $nestedData[] = $row->username;
+            $nestedData[] = $name;
             $nestedData[] = $row->email;
             $nestedData[] = $row->mobile;
             $nestedData[] = date('d-M-Y',strtotime($row->created));

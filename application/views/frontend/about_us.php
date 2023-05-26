@@ -1,4 +1,4 @@
-<?php 
+<?php
  if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
      $banner_img=base_url("uploads/banner/".$get_banner->image);
             } else{
@@ -37,7 +37,7 @@
                             <div class="col-lg-5">
                                 <img src="<?= base_url('assets/images/resource/About_Us.jpg')?>" alt="" />
                             </div>
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <p>
                                     Far much that one rank beheld bluebird after outside ignobly allegedly more when oh
                                     arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely
@@ -57,17 +57,14 @@
                                     while superbly orca and far hence one.Far much that one rank beheld bluebird after
                                     outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy.
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="tags-share">
+                        <!-- <div class="tags-share">
                             <div class="share-bar">
-                                <a href="javascript:void(0)" title="" class="share-fb"><i
-                                        class="fa fa-facebook"></i></a><a href="javascript:void(0)" title=""
-                                    class="share-twitter"><i class="fa fa-twitter"></i></a>
-                                <a href="javascript:void(0)" title="" class="share-google"><i
-                                        class="la la-google"></i></a><span>Share</span>
+                                <a href="javascript:void(0)" title="" class="share-fb"><i class="fa fa-facebook"></i></a><a href="javascript:void(0)" title="" class="share-twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="javascript:void(0)" title="" class="share-google"><i class="la la-google"></i></a><span>Share</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -85,8 +82,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading light">
-                        <h2>Kind Words From Happy Candidates</h2>
-                        <span>What other people thought about the service provided by JobHunt</span>
+                        <h2>Reviews submitted by our vendors</h2>
+                        <span>What other people thought about the service provided by Afrebay</span>
                     </div>
                     <!-- Heading -->
                     <div class="reviews-sec" id="reviews-carousel">

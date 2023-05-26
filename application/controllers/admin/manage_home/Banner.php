@@ -38,6 +38,7 @@ class Banner extends MY_Controller {
 		{
 
 			$btn = '<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
+			$btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="sliderDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
 			if(!empty($row->image) && file_exists("uploads/banner/".$row->image))
 			{
 
@@ -180,10 +181,10 @@ class Banner extends MY_Controller {
 
 	}
 
-
-
-
-
-
+	public function delete() {
+        if(isset($_POST['cid'])) {
+            $this->Crud_model->DeleteData('banner',"id='".$_POST['cid']."'");
+        }
+    }
 
 }
