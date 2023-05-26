@@ -86,10 +86,10 @@
 
                                                  <th scope="col">#</th>
 
-                                                 <th scope="col">Education</th>
+                                                 <th scope="col">Degree</th>
 
-                                                 <th scope="col">Passig year </th>
-
+                                                 <th scope="col">Year of Graduation</th>
+                                                 <th scope="col">College/School/University Name</th>
                                                  <th scope="col">Department</th>
 
                                                  <th scope="col">Action</th>
@@ -117,7 +117,7 @@
                                                  <td><?= ucfirst($row->education); ?></td>
 
                                                  <td><?= $row->passing_of_year; ?></td>
-
+                                                 <td><?= $row->college_name; ?></td>
                                                  <td><?= $row->department; ?></td>
 
                                                  <td>
@@ -136,7 +136,7 @@
 
                                                <tr>
 
-                                                 <td colspan="5"><center>No Data Found</center></td>
+                                                 <td colspan="6"><center>No Data Found</center></td>
 
                                                </tr>
 

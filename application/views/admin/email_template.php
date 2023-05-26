@@ -43,10 +43,10 @@
                                     <label>Page Content</label>
                                     <textarea class="form-control" name="description" id="description"><?= @$get_email[0]->description ?></textarea>
                                  </div>
-                                  <div class="form-group">
+                                  <!-- <div class="form-group">
                                     <label>Signature</label>
                                      <input type="text" name="signature" id="signature" value="<?= @$get_email[0]->signature ?>" class="form-control">
-                                 </div>
+                                 </div> -->
                               </div>
                              <input type="hidden" name="emailid" id="emailid" value="<?= @$get_email[0]->id ?>">
                            </div>

@@ -13,7 +13,7 @@ class Our_services extends MY_Controller {
 		$get_category=$this->Crud_model->GetData('category',"id,category_name");
 		$header = array('title' => 'our service');
 		$data = array(
-			'heading' => 'List of our service',
+			'heading' => 'Our Services',
 			'get_category' => $get_category,
 		);
 		$this->load->view('admin/header', $header);

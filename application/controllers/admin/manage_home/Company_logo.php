@@ -174,7 +174,7 @@ class Company_logo extends MY_Controller {
 
 		);
 		$this->Crud_model->SaveData('company_logo',$data,"id='".$_POST['id']."'");
-		$this->session->set_flashdata('message', 'company logo Updated successfully');
+		$this->session->set_flashdata('message', 'Company logo updated successfully');
 
 		echo 1; exit;
 

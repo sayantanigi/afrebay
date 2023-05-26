@@ -74,7 +74,7 @@
                                                 $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
                                                 $string .= '...';
                                             }
-                                            echo $string;; ?>
+                                            echo $string; ?>
                                         </td>
                                         <td><?=$key->duration." "."Month"; ?></td>
                                         <td><?="USD"." ".$key->charges; ?></td>

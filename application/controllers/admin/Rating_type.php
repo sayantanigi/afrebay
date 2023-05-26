@@ -88,7 +88,7 @@ class Rating_type extends MY_Controller {
 			);
 
 			$this->db->insert('rating_type',$data);
-			$this->session->set_flashdata('message', 'Rating Type created successfully');
+			$this->session->set_flashdata('message', 'Rating type created successfully');
 			echo "1"; exit;
 		}
 
@@ -126,7 +126,7 @@ class Rating_type extends MY_Controller {
 
 			);
 			$this->Crud_model->SaveData('rating_type',$data,"id='".$_POST['id']."'");
-			$this->session->set_flashdata('message', 'Rating Type Updated successfully');
+			$this->session->set_flashdata('message', 'Rating type Updated successfully');
 
 			echo 1; exit;
 		}

@@ -119,7 +119,7 @@ class Login extends CI_Controller {
 				</tr>
 				<tr>
 				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'>
-				Please click on the below activation link to verify your email address.
+				Please click the button below to verify your email address.
 				</td>
 				</tr>
 				<tr>
@@ -127,24 +127,16 @@ class Login extends CI_Controller {
 				</tr>
 				<tr>
 				<td align='left' style='text-align:center;padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'>
-				<a href=" . $activationURL . " target='_blank' style='background:#232323;color:#fff;padding:10px;text-decoration:none;line-height:24px;'>click here</a>
+				<a href=" . $activationURL . " target='_blank' style='background:#232323;color:#fff;padding:10px;text-decoration:none;line-height:24px;'>Click Here</a>
 				</td>
-				</tr>
-				<tr>
-				<td height='10'></td>
-				</tr>
-				<tr>
-				<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'>
-				Email: " . $_POST['email'] . "<br/>
-				</td>
-				</tr>
-				<tr>
-				<td height='30'></td>
 				</tr>
 				<tr>
 				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:16px; color:#232323; line-height:24px; font-weight: 700;'>
 				Thank you!
 				</td>
+				</tr>
+				<tr>
+				<td height='10'></td>
 				</tr>
 				<tr>
 				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>
@@ -153,8 +145,11 @@ class Login extends CI_Controller {
 				</tr>
 				<tr>
 				<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>
-				Team Afrebay
+				Afrebay
 				</td>
+				</tr>
+				<tr>
+				<td height='30'></td>
 				</tr>
 				</tbody>
 				</table>

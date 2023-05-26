@@ -164,7 +164,7 @@ class Specialist extends MY_Controller {
 				'update_date'=>date('Y-m-d H:i:s'),
 			);
        		$this->Crud_model->SaveData('specialist',$data,"id='".$_POST['id']."'");
-        	$this->session->set_flashdata('message', 'Specialist Updated successfully');
+        	$this->session->set_flashdata('message', 'Specialist updated successfully');
        		echo 1; exit;
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');

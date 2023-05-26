@@ -13,7 +13,7 @@ class Banner extends MY_Controller {
 
 		$header = array('title' => 'banner');
 		$data = array(
-			'heading' => 'List of banner',
+			'heading' => 'Sliders and Banners',
 		);
 		$this->load->view('admin/header', $header);
 		$this->load->view('admin/sidebar');
@@ -174,7 +174,7 @@ class Banner extends MY_Controller {
 
 		);
 		$this->Crud_model->SaveData('banner',$data,"id='".$_POST['id']."'");
-		$this->session->set_flashdata('message', 'Banner Updated successfully');
+		$this->session->set_flashdata('message', 'Banner updated successfully');
 
 		echo 1; exit;
 

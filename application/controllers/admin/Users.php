@@ -37,8 +37,8 @@ class Users extends MY_Controller {
         foreach ($GetData as $row)
         {
 
-            $btn = ''.anchor(admin_url('users/view/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>view</span>');
-            $btn .= ' | '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')">Delete</span>';
+            $btn = ''.anchor(admin_url('users/view/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
+            $btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;">Delete</span>';
             if($row->userType==1)
             {
                 $type='Freelancer';

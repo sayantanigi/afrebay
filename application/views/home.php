@@ -827,7 +827,7 @@
 
                                                 title=""><?= ucfirst($career->title)?></a></h3>
 
-                                        <p><?= ucfirst($desc)?></p>
+                                        <div><?= ucfirst($desc)?></div>
 
                                         <a href="<?= base_url('career-tip/'.base64_encode($career->id))?>"
 

@@ -30,11 +30,18 @@ class Post_job extends MY_Controller {
         }
         $data = array();
         foreach ($GetData as $row) {
-          	$btn = ''.anchor(admin_url('post_job/view/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>view</span>');
+			$string = strip_tags($row->post_title);
+			if (strlen($string) > 100) {
+				$stringCut = substr($string, 0, 50);
+				$endPoint = strrpos($stringCut, ' ');
+				$string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+				$string .= '...';
+			}
+			$btn = ''.anchor(admin_url('post_job/view/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;
-			$nestedData[] = ucwords($row->post_title);
+			$nestedData[] = ucwords($string);
 			$nestedData[] = ucwords($row->category_name);
 			$nestedData[] = $row->duration;
 			$nestedData[] = "USD"." ".$row->charges;
@@ -56,9 +63,9 @@ class Post_job extends MY_Controller {
 	 	$con="postjob.id='".base64_decode($id)."'";
 	 	$get_post_job=$this->Post_job_model->viewdata($con);
 		//print_r($get_post_job); die();
-		$header = array('title' => 'Post Job');
+		$header = array('title' => 'Job Details');
 		$data = array(
-			'heading' => 'Post Job',
+			'heading' => 'Job Details',
 			'get_post_job' => $get_post_job,
 		);
 		$this->load->view('admin/header', $header);

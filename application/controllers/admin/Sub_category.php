@@ -216,7 +216,7 @@ class Sub_category extends MY_Controller {
 
 			);
 			$this->Crud_model->SaveData('sub_category',$data,"id='".$_POST['id']."'");
-			$this->session->set_flashdata('message', 'Sub Category Updated successfully');
+			$this->session->set_flashdata('message', 'Sub Category updated successfully');
 
 			echo 1; exit;
 		}

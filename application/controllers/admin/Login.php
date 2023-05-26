@@ -35,7 +35,7 @@ class Login extends MY_Controller {
 				$this->session->set_flashdata('message', 'Successfully Logged In');
 				redirect(admin_url('dashboard'));
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-block alert-danger text-center">Incorrect Email ID and Password</div>');
+				$this->session->set_flashdata('message', 'Incorrect Email ID and Password');
 				redirect(admin_url());
 			}
 		}
@@ -111,7 +111,7 @@ class Login extends MY_Controller {
 			'profile'=> $image
 		);
        	$this->Crud_model->SaveData('admin',$data,"userId='".$_POST['id']."'");
-        $this->session->set_flashdata('message', 'profile Updated successfully');
+        $this->session->set_flashdata('message', 'Profile updated successfully');
         redirect(admin_url('profile'));
 	}
 
@@ -122,7 +122,7 @@ class Login extends MY_Controller {
 				'password'=>md5($_POST['new_password'])
 			);
 			$this->Crud_model->SaveData('admin',$data,"userId='".$_SESSION['afrebay_admin']['id']."'");
-			$this->session->set_flashdata('message', 'Password Reset successfully');
+			$this->session->set_flashdata('message', 'Password reset successfully');
 			echo "1";
 	    } else {
 	    	echo "0";

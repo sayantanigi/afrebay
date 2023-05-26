@@ -63,8 +63,8 @@ class Chat extends MY_Controller {
 		} else {
 			$html_data .= '<li class="sent"><center>No Messages</center></li>';
 		}
-		$header = array('title' => 'Chat Details');
-		$data = array('heading' => 'Chat Details');
+		$header = array('title' => 'Messages');
+		$data = array('heading' => 'Messages');
 		$data['chat_detail'] = $html_data;
 		$this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');

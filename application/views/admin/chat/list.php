@@ -57,9 +57,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>From Name</th>
-                                        <th>To Name</th>
-                                        <th>Date</th>
+                                        <th>Vendor</th>
+                                        <th>Freelancer</th>
+                                        <th>Initiated Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

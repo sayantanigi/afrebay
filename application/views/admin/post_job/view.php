@@ -64,7 +64,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label >  Post Charges</label>
+                                                        <label >  Remuneration</label>
                                                         <p><?= "USD"." ".$get_post_job->charges; ?></p>
                                                     </div>
                                                 </div>

@@ -187,7 +187,7 @@ class Career_tips extends MY_Controller {
 
 		);
 		$this->Crud_model->SaveData('career_tips',$data,"id='".$_POST['id']."'");
-		$this->session->set_flashdata('message', 'career Updated successfully');
+		$this->session->set_flashdata('message', 'Career updated successfully');
 
 		echo 1; exit;
 

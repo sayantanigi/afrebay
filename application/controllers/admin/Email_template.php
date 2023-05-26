@@ -35,7 +35,7 @@ class Email_template extends MY_Controller {
           'id'=>$get_data->id,
           'title'=>$get_data->title,
           'description'=>$get_data->description,
-          'signature'=>$get_data->signature,
+          //'signature'=>$get_data->signature,
         );
     }
 
@@ -48,13 +48,13 @@ class Email_template extends MY_Controller {
   public function update_action()
 {
     $data = array(
-          'signature' => $this->input->post('signature',TRUE),
+          //'signature' => $this->input->post('signature',TRUE),
           'description' => $this->input->post('description',TRUE),
       );
     $id=$this->input->post('email_id',TRUE);
     $this->Crud_model->SaveData("email_template",$data,"id='".$id."'");
-    //$this->session->set_flashdata('success', 'Email Template has been updated successfully !');
-    // $this->session->set_flashdata('message', 'Email Template has been updated successfully');
+    //$this->session->set_flashdata('success', 'Email template has been updated successfully !');
+    // $this->session->set_flashdata('message', 'Email template has been updated successfully');
     echo "1"; exit;
 }
 

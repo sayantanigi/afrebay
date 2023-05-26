@@ -163,7 +163,7 @@ class Category extends MY_Controller {
 
 			);
 			$this->Crud_model->SaveData('category',$data,"id='".$_POST['id']."'");
-			$this->session->set_flashdata('message', 'Category Updated successfully');
+			$this->session->set_flashdata('message', 'Category updated successfully');
 			echo 1; exit;
 		} else{
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');

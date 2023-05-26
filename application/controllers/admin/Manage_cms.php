@@ -87,7 +87,7 @@ class Manage_cms extends CI_Controller {
                 'description'=>$_POST['description'],
             );
             $this->Crud_model->SaveData('manage_cms',$data,"id='".$_POST['id']."'");
-            $this->session->set_flashdata('message', 'Cms Updated successfully');
+            $this->session->set_flashdata('message', 'CMS updated successfully');
             echo "1";exit;
         } else {
             $this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
