@@ -160,7 +160,7 @@
                                                 <label for="last_name">
                                                     <h4>Legal Address <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="address" id="location" placeholder="Location" value="<?= $userinfo->address ?>" autocomplete="off" required/>
+                                                <input type="text" class="form-control" name="address" id="location" placeholder="Legal Address" value="<?= $userinfo->address ?>" autocomplete="off" required/>
                                                 <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
                                                 <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
                                             </div>
@@ -247,7 +247,7 @@
                                                 <label for="first_name">
                                                     <h4>TAX ID <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="Team Size" value="<?php echo $userinfo->teamsize;?>" required/>
+                                                <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="TAX ID" value="<?php echo $userinfo->teamsize;?>" required/>
                                             </div>
                                             <?php } ?>
 

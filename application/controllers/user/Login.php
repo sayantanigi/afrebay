@@ -242,7 +242,7 @@ class Login extends CI_Controller {
 				} else if($_SESSION['afrebay']['userType'] == '2') {
 					$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
 					if(!empty($check_sub)) {
-						redirect('dashboard');
+						redirect('profile');
 					} else {
 						redirect('subscription');
 					}

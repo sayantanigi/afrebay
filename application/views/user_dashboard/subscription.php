@@ -39,6 +39,12 @@
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak" style="background: #f2f2f2 !important;">
+                    <span class="text-success f-20" style="text-align: center;">
+                    <?php if($this->session->flashdata('message')) {
+                        echo $this->session->flashdata('message');
+                        unset($_SESSION['message']);
+                    } ?>
+                    </span>
                     <div style="display: inline-block; text-align: center;">
                         <h3>Current Plan</h3>
                     </div>
