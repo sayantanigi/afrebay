@@ -859,7 +859,7 @@
 #state {display: block;color: #888888; height: 60px; border-radius: 50px; padding: 17px !important;}
 #city {display: block;color: #888888; height: 60px; border-radius: 50px; padding: 17px !important;}
 </style>
-<script>
+<!-- <script>
 
     $(window).load(function () {
 
@@ -933,7 +933,7 @@
 
     }
 
-</script>
+</script> -->
 <script>
     // var x, i, j, l, ll, selElmnt, a, b, c;
     // x = document.getElementsByClassName("custom-select");

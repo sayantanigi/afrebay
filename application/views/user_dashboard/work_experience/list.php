@@ -61,8 +61,8 @@
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= ucfirst($row->designation); ?></td>
                                 <td><?= ucfirst($row->company_name); ?></td>
-                                <td><?= ucfirst($row->from_date); ?></td>
-                                <td><?= ucfirst($row->to_date); ?></td>
+                                <td><?= date('d-m-Y',strtotime($row->from_date)); ?></td>
+                                <td><?= date('d-m-Y',strtotime($row->to_date)); ?></td>
                                 <td>
                                     <!-- <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a> -->
                                     <a href="<?= base_url('update-workexperience/'.base64_encode($row->id));?>"><i class="fa fa-edit" aria-hidden="true"></i></a>

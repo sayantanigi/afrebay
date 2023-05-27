@@ -214,19 +214,12 @@ class Home extends MY_Controller {
 
 
 	function post_bidding($postid) {
-
 		$con = "postjob.id='" . base64_decode($postid) . "'";
-
 		$data['post_data'] = $this->post_job_model->viewdata($con);
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='14'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/post_detail', $data);
-
 		$this->load->view('footer');
-
 	}
 
 

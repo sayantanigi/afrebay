@@ -524,7 +524,7 @@ class Dashboard extends CI_Controller {
 	//////////////////////////////// start education ///////////////////////////
 	function education_list()
 	{
-		$data['education_list'] = $this->Crud_model->GetData('user_education', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
+		$data['education_list'] = $this->Crud_model->GetData('user_education', '', "user_id='".$_SESSION['afrebay']['userId']."' order by id DESC");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/education/list', $data);
 		$this->load->view('footer');
@@ -636,7 +636,7 @@ class Dashboard extends CI_Controller {
 	///////////////// start work experience //////////////////////////
 
 	function workexperience_list() {
-		$data['workexperience_list'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . $_SESSION['afrebay']['userId'] . "'");
+		$data['workexperience_list'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='".$_SESSION['afrebay']['userId']."' order by id DESC");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/work_experience/list', $data);
 		$this->load->view('footer');

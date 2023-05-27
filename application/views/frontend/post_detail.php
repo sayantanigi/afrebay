@@ -47,7 +47,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     <div class="row row-sm">
                         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 col-12">
                             <div class="bid-dis">
-                                <?php //echo "<pre>"; print_r($post_data); ?>
+                                <?php //echo "<pre>"; print_r($post_data); die();?>
                                 <ul>
                                     <li>
                                         <span>Job Title </span>

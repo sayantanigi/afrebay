@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label>Specialist</label>
                                 <select class="form-control select filter_search_data6" name="">
-                                    <option value="">Select Specialist</option>
+                                    <option value="">Select Specialization</option>
                                     <?php if(!empty($get_specialist)){
                                         foreach($get_specialist as $item){ ?>
                                         <option value="<?= $item->id?>"><?= ucfirst($item->specialist_name)?></option>
@@ -103,7 +103,7 @@
                                 <input class="form-control" type="file" name="specialist_image" id="specialist_image">
                             </div>
                             <div class="mt-4">
-                                <button class="btn btn-primary" type="button" onclick="return create_specialist();">Add Specialist</button>
+                                <button class="btn btn-primary" type="button" onclick="return create_specialist();">Add Specialization</button>
                                 <a href="#" class="btn btn-link" data-dismiss="modal">Cancel</a>
                             </div>
                         </form>
@@ -123,7 +123,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Specialist</h4>
+                <h4 class="modal-title">Edit Specialization</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -131,11 +131,11 @@
                     <div class="card-body">
                         <form action="#" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Specialist Name <span style="color:red;">*</span> <span id="edit_specialist_err"></span></label>
+                                <label>Specialization Name <span style="color:red;">*</span> <span id="edit_specialist_err"></span></label>
                                 <input class="form-control" type="text" name="specialist_name" id="edit_specialist_name">
                             </div>
                             <div class="form-group">
-                                <label>Specialist Image</label>
+                                <label>Specialization Image</label>
                                 <input class="form-control" type="file" name="specialist_image" id="edit_specialist_image">
                             </div>
                             <div id="show_img"> </div>

@@ -1,14 +1,13 @@
 <?php
- if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
-     $banner_img=base_url("uploads/banner/".$get_banner->image);
-            } else{
-       $banner_img=base_url("assets/images/resource/mslider1.jpg");
-        } ?>
+if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
+    $banner_img=base_url("uploads/banner/".$get_banner->image);
+} else{
+    $banner_img=base_url("assets/images/resource/mslider1.jpg");
+} ?>
 
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"
-            class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
@@ -16,25 +15,6 @@
                     <div class="inner-header">
                         <h3>Frelancer Details</h3>
                     </div>
-                    <!-- <div class="inner-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="skills-btn" style="text-transform: uppercase;">
-                                        <a href="javascript:void(0)" title=""><?= @$user_detail->skills?></a> -->
-                    <!--  <a href="javascript:void(0)" title="">Designers</a>
-                                                    <a href="javascript:void(0)" title="">Illustrator</a> -->
-                    <!-- </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="action-inner"> -->
-                    <!--  <a href="javascript:void(0)" title=""><i class="la la-paper-plane"></i>Save Resume</a>
-                                                    <a href="javascript:void(0)" title=""><i class="la la-envelope-o"></i>Contact David</a> -->
-                    <!-- </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -62,10 +42,7 @@
                             </div>
                             <div class="col-lg-6 col-md-4 col-sm-12 Worker_Head_Text">
                                 <div class="Worker_Head_Text_Data">
-                                    <h3><?php if(!empty($user_detail->firstname)){ echo $user_detail->firstname.' '.$user_detail->lastname;} else { echo $user_detail->username; }?>
-                                    </h3>
-                                    <span><i>UX / UI Designer</i> at Atract Solutions</span>
-                                    <!-- <p><?= @$user_detail->email?></p> -->
+                                    <h3><?php if(!empty($user_detail->firstname)){ echo $user_detail->firstname.' '.$user_detail->lastname;} else { echo $user_detail->username; }?></h3>
                                     <p>Member Since, <?= date('Y',strtotime(@$user_detail->created))?></p>
                                     <p><i class="la la-map-marker"></i><?= @$user_detail->address?></p>
                                 </div>
@@ -73,17 +50,6 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-12 Worker_Head_Social">
                                 <div class="Worker_Head_Social_Data">
-                                    <!-- <div class="share-bar circle">
-                                        <a href="javascript:void(0)" title="" class="share-google">
-                                            <i class="la la-google"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" title="" class="share-fb">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" title="" class="share-twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </div> -->
                                     <div class="download-cv">
                                         <a class="btn btn-info" href="<?= base_url('uploads/users/resume/'.@$user_detail->resume)?>" title="" download>Download CV <i class="la la-download"></i></a>
                                     </div>
@@ -113,22 +79,13 @@
                                         <div class="edu-history">
                                             <i class="la la-graduation-cap"></i>
                                             <div class="edu-hisinfo">
-                                                <h3><?= ucfirst($edu->education)?></h3>
+                                                <h3><?= ucfirst($edu->education)?> in <?= $edu->department?> depertment</h3>
                                                 <i><?= $edu->passing_of_year?></i>
-                                                <span><?= $edu->college_name?><i><?= $edu->department?></i></span>
+                                                <span><?= $edu->college_name?></span>
                                                 <p><?= $edu->description?></p>
                                             </div>
                                         </div>
                                         <?php } }?>
-                                        <!--  <div class="edu-history">
-                                                        <i class="la la-graduation-cap"></i>
-                                                        <div class="edu-hisinfo">
-                                                            <h3>High School</h3>
-                                                            <i>2008 - 2012</i>
-                                                            <span>Tomms College <i>Bachlors in Fine Arts</i></span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                        </div>
-                                                    </div> -->
                                     </div>
                                     <div class="edu-history-sec" id="experience">
                                         <h2>Work & Experience</h2>
@@ -136,35 +93,19 @@
                                         <div class="edu-history style2">
                                             <i></i>
                                             <div class="edu-hisinfo">
-                                                <h3><?= ucfirst($row->designation)?><span><?= $row->company_name ?></span>
-                                                </h3>
-                                                <i><?= $row->duration?></i>
+                                                <h3><?= ucfirst($row->designation)?><span><?= $row->company_name ?></span></h3>
+                                                <i><?= date('d-m-Y',strtotime($row->from_date)).' to '.date('d-m-Y',strtotime($row->to_date))?></i>
                                                 <p><?= $row->description?></p>
                                             </div>
                                         </div>
                                         <?php } }?>
-                                        <!--  <div class="edu-history style2">
-                                                        <i></i>
-                                                        <div class="edu-hisinfo">
-                                                            <h3>CEO Founder <span>Inwave Studio</span></h3>
-                                                            <i>2008 - 2012</i>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                        </div>
-                                                    </div> -->
                                     </div>
-
                                     <div class="progress-sec" id="skills">
                                         <h2>Professional Skills</h2>
                                         <div class="progress-sec" style="text-transform: uppercase;">
                                             <span><?= @$user_detail->skills ?></span>
-                                            <!--  <div class="progressbar">
-                                                              <div class="progress" style="width: 80%;"><span>80%</span></div>
-                                                          </div> -->
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                             <div class="col-lg-4 column">
@@ -181,17 +122,12 @@
                                             <h3>Experience</h3>
                                             <span><?= @$user_detail->experience?></span>
                                         </li>
-                                        <!-- <li>
-                                            <i class="la la-line-chart"></i>
-                                            <h3>Qualification</h3>
-                                            <span><?= @$user_detail->qualification?></span>
-                                        </li> -->
                                     </ul>
                                 </div>
                                 <!-- Job Overview -->
+                                <?php if(!empty($_SESSION['afrebay']['userId'])&& $_SESSION['afrebay']['userType']==2){?>
                                 <div class="quick-form-job">
                                     <h3>Rate This Freelancer</h3>
-
                                     <form method="post" action="<?= base_url('user/dashboard/save_employer_rating')?>">
                                         <div class="row m-0">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -213,17 +149,13 @@
                                                 <textarea placeholder="Enter review" name="review"></textarea>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 Form_Btn">
-                                                <?php if(!empty($_SESSION['afrebay']['userId'])&& $_SESSION['afrebay']['userType']==2){?>
                                                 <button class="submit btn btn-info">Submit</button>
-                                                <?php } else {?>
-                                                <!-- <button type="button" class="submit btn btn-info" style=" pointer-events:none;">Submit</button> -->
-                                                <a href="<?php echo base_url('login')?>" class="submit btn btn-info" style=" pointer-events:none;">Submit</a>
-                                                <?php } ?>
                                             </div>
                                         </div>
                                         <!--  <span>You accepts our <a href="javascript:void(0)" title="">Terms and Conditions</a></span> -->
                                     </form>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

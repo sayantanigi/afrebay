@@ -5,7 +5,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
 <style>
-#register-messages {text-align: center; margin-top: 10px; display: none;}
+#register-messages {text-align: center; margin-top: 25px; display: none;}
 #err-messages {text-align: center; margin-top: 10px; display: none;}
 </style>
 <section class="overlape">

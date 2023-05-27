@@ -62,7 +62,7 @@ class Post_job_model extends My_Model {
         $this->db->from('postjob');
         $this->db->join('category','category.id=postjob.category_id');
         $this->db->join('users','users.userId=postjob.user_id');
-        $this->db->join('sub_category','sub_category.id=category.id');
+        $this->db->join('sub_category','sub_category.id=postjob.subcategory_id');
         $this->db->where($con);
         $query = $this->db->get();
         return $query->row();
