@@ -103,7 +103,7 @@ class Company_logo extends MY_Controller {
 		);
 
 		$this->db->insert('company_logo',$data);
-		$this->session->set_flashdata('message', 'Company logo added successfully');
+		$this->session->set_flashdata('message', 'Partner companies logo added successfully');
 		echo "1"; exit;
 
 	}
@@ -175,7 +175,7 @@ class Company_logo extends MY_Controller {
 
 		);
 		$this->Crud_model->SaveData('company_logo',$data,"id='".$_POST['id']."'");
-		$this->session->set_flashdata('message', 'Company logo updated successfully');
+		$this->session->set_flashdata('message', 'Partner companies logo updated successfully');
 
 		echo 1; exit;
 
@@ -184,6 +184,8 @@ class Company_logo extends MY_Controller {
 	public function delete() {
         if(isset($_POST['cid'])) {
             $this->Crud_model->DeleteData('company_logo',"id='".$_POST['cid']."'");
+			$this->session->set_flashdata('message', 'Partner companies logo deleted successfully');
+			echo 1; exit;
         }
     }
 }

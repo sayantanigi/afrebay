@@ -118,7 +118,10 @@ function sliderDelete(obj,cid) {
 			data:datastring,
 			cache:false,
 			success:function(returndata) {
-				table.draw();
+				if(returndata = 1){
+					location.reload();
+					table.draw();
+				}
 			}
 		});
 	}

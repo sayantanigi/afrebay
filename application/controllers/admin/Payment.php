@@ -51,6 +51,7 @@ class Payment extends MY_Controller {
             $nestedData = array();
             $nestedData[] = $no;
             $nestedData[] = ucfirst($row->name_of_card);
+            $nestedData[] = ucfirst($row->companyname);
             $nestedData[] = $row->email;
             $nestedData[] = $row->transaction_id;
             $nestedData[] = '$'.' '.$row->amount;

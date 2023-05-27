@@ -61,7 +61,7 @@ class Sub_category extends MY_Controller {
 		{
 
 			$btn = ''.'<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
-
+			$btn .= ' | '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="subCategoryDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
 			if(!empty($row->image))
 			{
 
@@ -228,7 +228,19 @@ class Sub_category extends MY_Controller {
 	}
 
 
-
+	public function delete() {
+        if(isset($_POST['cid'])) {
+			$check_catData = $this->db->query("SELECT * FROM postjob where subcategory_id = '".$_POST['cid']."'")->num_rows();
+			if($check_catData > 0) {
+				$this->session->set_flashdata('message', 'Job post is there related to this sub category. Please delete the job first to delete this sub category');
+				echo 1; exit;
+			} else {
+				$this->Crud_model->DeleteData('sub_category',"id='".$_POST['cid']."'");
+				$this->session->set_flashdata('message', 'Sub category deleted successfully');
+				echo 0; exit;
+			}
+        }
+    }
 
 
 

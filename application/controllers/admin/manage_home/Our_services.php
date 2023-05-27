@@ -39,7 +39,7 @@ class Our_services extends MY_Controller {
 		{
 
 			$btn = '<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
-
+			$btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="ourServicesDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
 			if(strlen($row->description)>50)
 			{
 				$desc=substr($row->description,0,50).'...';
@@ -142,6 +142,14 @@ class Our_services extends MY_Controller {
 		}
 
 	}
+
+	public function delete() {
+        if(isset($_POST['cid'])) {
+			$this->Crud_model->DeleteData('our_service',"id='".$_POST['cid']."'");
+			$this->session->set_flashdata('message', 'Our service deleted successfully');
+			echo 1; exit;
+        }
+    }
 
 
 }

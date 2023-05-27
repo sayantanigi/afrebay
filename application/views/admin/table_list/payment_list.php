@@ -73,6 +73,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Subscription plan</th>
+                                    <th>Vendor Name</th>
                                     <th>Email</th>
                                     <th>Transaction ID</th>
                                     <th>Amount</th>

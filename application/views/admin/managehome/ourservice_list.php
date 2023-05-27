@@ -93,8 +93,8 @@
 
 
               </div>   <!-- end row -->
-             
-              
+
+
 
               <div class="mt-4">
                 <button class="btn btn-primary" type="button" onclick="return create_service();">Submit</button>
@@ -153,10 +153,10 @@
 
 
               </div>
-             
+
 
               <input type="hidden" name="id" id="id">
-             
+
               <div class="mt-4">
                 <button class="btn btn-primary" type="button" onclick="return update_service();">Save Changes</button>
                 <a href="#" class="btn btn-link" data-dismiss="modal">Cancel</a>
@@ -172,7 +172,7 @@
   </div>
   <!--  end edit modal -->
 
-  
+
 
 
     <script>

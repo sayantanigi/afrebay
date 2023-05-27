@@ -50,6 +50,7 @@ class Category extends MY_Controller {
 		$data = array();
 		foreach ($GetData as $row) {
 			$btn = ''.'<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
+			$btn .= ' | '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="categoryDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
 			if(!empty($row->category_image)) {
 				if(!file_exists("uploads/category/".$row->category_image)) {
 					$img ='<img class="rounded service-img mr-1" src="'.base_url('uploads/no_image.png').'">';
@@ -170,4 +171,18 @@ class Category extends MY_Controller {
 			echo 0; exit;
 		}
 	}
+
+	public function delete() {
+        if(isset($_POST['cid'])) {
+			$check_catData = $this->db->query("SELECT * FROM postjob where category_id = '".$_POST['cid']."'")->num_rows();
+			if($check_catData > 0) {
+				$this->session->set_flashdata('message', 'Job post is there related to this category. Please delete the job first to delete this category');
+				echo 1; exit;
+			} else {
+				$this->Crud_model->DeleteData('category',"id='".$_POST['cid']."'");
+				$this->session->set_flashdata('message', 'Category deleted successfully');
+				echo 0; exit;
+			}
+        }
+    }
 }

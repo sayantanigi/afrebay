@@ -38,6 +38,7 @@ class Career_tips extends MY_Controller {
 		{
 
 			$btn = '<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#editModal" onclick="getValue('.$row->id.')" data-placement="right"><i class="far fa-edit mr-1"></i> Edit</span>';
+			$btn .= ' | '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2" onclick="careerTipsDelete(this,'.$row->id.')" style="margin-left: 8px;">Delete</span>';
 			if(!empty($row->image) && file_exists("uploads/career/".$row->image))
 			{
 
@@ -113,7 +114,7 @@ class Career_tips extends MY_Controller {
 		);
 
 		$this->db->insert('career_tips',$data);
-		$this->session->set_flashdata('message', 'Career added successfully');
+		$this->session->set_flashdata('message', 'Career tips added successfully');
 		echo "1"; exit;
 
 	}
@@ -187,11 +188,19 @@ class Career_tips extends MY_Controller {
 
 		);
 		$this->Crud_model->SaveData('career_tips',$data,"id='".$_POST['id']."'");
-		$this->session->set_flashdata('message', 'Career updated successfully');
+		$this->session->set_flashdata('message', 'Career tips updated successfully');
 
 		echo 1; exit;
 
 	}
+
+	public function delete() {
+        if(isset($_POST['cid'])) {
+			$this->Crud_model->DeleteData('career_tips',"id='".$_POST['cid']."'");
+			$this->session->set_flashdata('message', 'Career tips deleted successfully');
+			echo 1; exit;
+        }
+    }
 
 
 }

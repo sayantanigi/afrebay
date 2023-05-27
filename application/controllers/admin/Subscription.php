@@ -9,8 +9,8 @@ class Subscription extends MY_Controller {
 
 	function index() {
 		$offersdata=$this->Crud_model->GetData('subscription','','');
-		$header = array('title' => 'subscription');
-		$data = array('heading' => 'Subscriptions','offersdata' => $offersdata);
+		$header = array('title' => 'Subscription Plans');
+		$data = array('heading' => 'Subscription Plans','offersdata' => $offersdata);
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');
         $this->load->view('admin/subscription/list',$data);
@@ -20,7 +20,7 @@ class Subscription extends MY_Controller {
 	public function create() {
     	$header = array('title'=> 'Add');
       	$data = array(
-			'heading'=>'Add Subscription',
+			'heading'=>'Add Subscription Plan',
 			'button'=>'Create',
 			'subscription_name' =>set_value('subscription_name'),
 			'subscription_type' =>set_value('subscription_type'),
@@ -123,4 +123,18 @@ class Subscription extends MY_Controller {
         $this->session->set_flashdata('message', 'Subscription update successfully');
         redirect(admin_url('subscription'));
 	}
+
+	public function delete() {
+        if(isset($_POST['cid'])) {
+			$check_catData = $this->db->query("SELECT * FROM employer_subscription where subscription_id = '".$_POST['cid']."'")->num_rows();
+			if($check_catData > 0) {
+				$this->session->set_flashdata('message', 'Cannot Delete. User already subscribed with this subscription package.');
+				echo 1; exit;
+			} else {
+				$this->Crud_model->DeleteData('subscription',"id='".$_POST['cid']."'");
+				$this->session->set_flashdata('message', 'Subscription package deleted successfully');
+				echo 0; exit;
+			}
+        }
+    }
 }

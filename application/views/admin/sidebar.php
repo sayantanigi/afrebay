@@ -27,7 +27,7 @@
 				<a href="<?= admin_url('banner')?>"><i class="fas fa-image"></i> <span>Sliders and Banners</span></a>
 			</li>
 			<li <?php if ($seg2 =='manage_cms') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('manage_cms')?>"><i class="fas fa-circle"></i> <span>Manage CMS</span></a>
+				<a href="<?= admin_url('manage_cms')?>"><i class="fas fa-circle"></i> <span>Content Management</span></a>
 			</li>
 			<li <?php if ($seg2 =='post_job') {?>class="active"<?php }?>>
 				<a href="<?=admin_url(); ?>post_job"><i class="fas fa-star"></i> <span>Job Posts</span></a>
@@ -51,7 +51,7 @@
 				<a href="#"><i class="fas fa-star"></i> <span>Ratings</span></a>
 			</li> -->
 			<li <?php if ($seg2 =='subscription') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('subscription')?>"><i class="far fa-calendar-alt"></i> <span>Subscriptions</span></a>
+				<a href="<?= admin_url('subscription')?>"><i class="far fa-calendar-alt"></i> <span>Subscription Plans</span></a>
 			</li>
 			<!-- <li <?php if ($seg2 =='Wallet') {?>class="active"<?php }?>>
 				<a href="#"><i class="fas fa-wallet"></i> <span> Wallet</span></a>

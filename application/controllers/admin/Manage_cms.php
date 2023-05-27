@@ -8,9 +8,9 @@ class Manage_cms extends CI_Controller {
     }
 
     public function index() {
-        $header = array('title' => 'cms');
+        $header = array('title' => 'Content Management');
         $data = array(
-            'heading' => 'Manage Cms',
+            'heading' => 'Content Management',
         );
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');

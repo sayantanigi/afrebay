@@ -10,8 +10,8 @@ class Chat extends MY_Controller {
 	}
 
 	function index() {
-		$header = array('title' => 'Chat');
-		$data = array('heading' => 'Chat');
+		$header = array('title' => 'Messages');
+		$data = array('heading' => 'Messages');
 		$data['chat_list'] = $this->db->query('SELECT `chat`.*, `users`.`username`, CONCAT(users.firstname, " ", users.lastname) as full_name, `users`.`profilePic`, `to_user`.`username` as `to_username`, CONCAT(to_user.firstname, " ", to_user.lastname) as to_fullname FROM `chat` JOIN `users` ON `users`.`userId`=`chat`.`userfrom_id` JOIN `users` `to_user` ON `to_user`.`userId`=`chat`.`userto_id` group by userfrom_id order by id DESC')->result_array();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');
