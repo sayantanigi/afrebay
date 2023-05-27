@@ -40117,3 +40117,36 @@ section.topak .job-search-sec .job-search form .custom-select .same-as-selected 
 .chosen_state {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
 
 .chosen_city {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
+.Employees_Search_List .emply-resume-info h3 a { width: 75%; display: block; }
+
+.form-design form .cardak {
+   box-shadow: none !important;
+   border: 0 !important;
+}
+.form-design form .cardak .profile-dsd label {
+   margin-bottom: 10px !important;
+}
+.form-design form .cardak .profile-dsd label h4 {
+   font-weight: 600;
+   font-size: 15px !important;
+}
+.form-design form .cardak .profile-dsd input {
+   background: transparent !important;
+   font-size: 14px;
+   margin-bottom: 20px !important;
+   padding: 10px 10px !important;
+   border-bottom: 2px solid #B1B1B1;
+   border-radius: 10px !important;
+   box-shadow: 0 0 10px #E1E1E1;
+}
+
+.text-success-msg {
+    color: #f67a49 !important;
+    font-size: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.pf-field input.select2-search__field {
+    border: 0 !important;
+    box-shadow: none !important;   
+}

@@ -32,7 +32,7 @@
                                     <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at
                                         lobortis
                                         ullamcorper</span>
-                                    <!-- <span class="text-success f-15"><?=$this->session->flashdata('success');  ?></span>
+                                    <!-- <span class="text-success-msg f-15"><?=$this->session->flashdata('success');  ?></span>
                                     <span class="text-danger f-15"><?=$this->session->flashdata('error');  ?></span> -->
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">
@@ -101,7 +101,7 @@
                 <div class="Forgot_Modal_Header">
                     <img src="https://cdn-icons-png.flaticon.com/512/6357/6357042.png">
                     <h3>Forgot Password</h3>
-                    <!-- <span class="text-success f-20"></span>
+                    <!-- <span class="text-success-msg f-20"></span>
                 <span class="text-danger f-20">invalid Email Id!</span> -->
                 </div>
                 <form action="http://localhost/Projects/Afrebay/web/user/login/send_forget_password" method="post">

@@ -90,7 +90,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <input type="hidden" id="product_id" value="<?php echo $p_id;?>" />
                                     <input type="hidden" id="product_name" value="<?php echo $prod_details[0]['prod_name'];?>" />
                                 </div>
-                                <div id="register-messages" class="text-success f-20">
+                                <div id="register-messages" class="text-success-msg f-20">
                                     <p style="color: #28a745;">Thank you for you message. Our contact person will get in touch with you soon!</p>
                                 </div>
                                 <div id="err-messages">

@@ -50,8 +50,8 @@ class Login extends MY_Controller {
 	public function dashboard() {
 		$total_category=$this->Crud_model->GetData('category');
 		$total_user=$this->Crud_model->GetData('users');
-		$total_subscription=$this->Crud_model->GetData('subscription');
-		$total_service=$this->Crud_model->GetData('employer_services');
+		$total_subscription=$this->Crud_model->GetData('employer_subscription');
+		$total_service=$this->Crud_model->GetData('our_service');
 		$header = array('title' => 'Dashboard');
 		$data = array(
             'heading' => 'Dashboard',

@@ -29,12 +29,12 @@
 
 <?php $this->load->view('sidebar');?>
 <div class="col-md-12 col-sm-12 display-table-cell v-align">
-    <div class="user-dashboard Admin_Profile">
+    <div class="user-dashboard Admin_Profile form-design">
         <form class="form" action="<?php echo base_url('user/Dashboard/update_profile')?>" method="post" id="registrationForm" enctype="multipart/form-data">
             <div class="row row-sm">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="cardak">
-                        <span class="text-success f-20" style="text-align: center;">
+                        <span class="text-success-msg f-20" style="text-align: center;">
                         <?php if($this->session->flashdata('message')) {
                             echo $this->session->flashdata('message');
                             unset($_SESSION['message']);

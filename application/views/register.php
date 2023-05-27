@@ -43,7 +43,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <div class="error" id="err_usertype"></div>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignUp_Right">
-                                    <div id="register-messages" class="text-success f-20">
+                                    <div id="register-messages" class="text-success-msg f-20">
                                         <h4>Successful Registration</h4>
                                         <p style="color: #28a745;">We have sent an activation link to your account to continue wih the registration process.</p>
                                     </div>

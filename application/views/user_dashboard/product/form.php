@@ -27,13 +27,13 @@
     </div>
 </section>
 <?php $this->load->view('sidebar');?>
-<div class="col-md-12 col-sm-12 display-table-cell v-align">
+<div class="col-md-12 col-sm-12 display-table-cell v-align form-design">
     <div class="user-dashboard">
         <form class="form" action="<?= $action; ?>" method="post" id="registrationForm" enctype="multipart/form-data">
             <div class="row row-sm">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="cardak">
-                        <span class="text-success f-20">
+                        <span class="text-success-msg f-20">
                             <?php if($this->session->flashdata('message')) {
                                 echo $this->session->flashdata('message');
                                 unset($_SESSION['message']);

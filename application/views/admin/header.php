@@ -50,7 +50,7 @@ if(empty($_SESSION['afrebay_admin']['id'])) {
             </a>
             <ul class="nav user-menu">
 
-                <li class="nav-item dropdown noti-dropdown">
+                <!-- <li class="nav-item dropdown noti-dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="far fa-bell"></i> <span class="badge badge-pill"></span>
                     </a>
@@ -186,7 +186,7 @@ if(empty($_SESSION['afrebay_admin']['id'])) {
                             <a href="##">View all Notifications</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
 
 
                 <li class="nav-item dropdown">

@@ -23,7 +23,7 @@
                         <div class="account-popup">
                             <h3>Forgot Password</h3>
                             
-                            <span class="text-success f-20"><?=$this->session->flashdata('success');  ?></span>
+                            <span class="text-success-msg f-20"><?=$this->session->flashdata('success');  ?></span>
                             <span class="text-danger f-20"><?=$this->session->flashdata('error');  ?></span>
                             <form action="<?= base_url('user/login/send_forget_password')?>" method="post">
                                

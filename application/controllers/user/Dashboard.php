@@ -313,8 +313,15 @@ class Dashboard extends CI_Controller {
 			'created_date' => date('Y-m-d H:i:s'),
 		);
 		$this->Crud_model->SaveData('job_bid', $data);
-		$this->session->set_flashdata('message', 'Add Bid Successfully !');
-		redirect(base_url('ourjobs'));
+		$insert_id = $this->db->insert_id();
+		if(!empty($insert_id)) {
+			$this->session->set_flashdata('message', 'Add Bid Successfully !');
+			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
+		} else {
+			$this->session->set_flashdata('message', 'Something went wrong. Please try again later.');
+			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
+		}
+
 	}
 
 	function changebiddingstatus() {

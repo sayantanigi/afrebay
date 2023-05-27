@@ -39,7 +39,7 @@
                            <div class="col-lg-8 column">
                                <div class="contact-form">
                                    <h3>Keep In Touch</h3>
-                                   <span class="text-success f-20"><?=$this->session->flashdata('success');  ?></span>
+                                   <span class="text-success-msg f-20"><?=$this->session->flashdata('success');  ?></span>
                            <span class="text-danger f-20"><?=$this->session->flashdata('error');  ?></span>
                                    <form method="post" action="<?= base_url('Home/save_contact')?>">
                                        <div class="row">

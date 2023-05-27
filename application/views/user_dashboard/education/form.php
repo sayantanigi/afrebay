@@ -58,7 +58,7 @@
 
 <?php $this->load->view('sidebar');?>
 
-<div class="col-md-12 col-sm-12 display-table-cell v-align">
+<div class="col-md-12 col-sm-12 display-table-cell v-align form-design">
 
     <div class="user-dashboard">
 

@@ -117,6 +117,7 @@ function btn_register() {
 			$("#loader").hide();
 			$("#signUp_form")[0].reset();
 			if(returndata.result==1) {
+				$('.SignUp_Right').hide()
 				$('#register-messages').show();
 				setTimeout(function () {
                  	$('#register-messages').hide();

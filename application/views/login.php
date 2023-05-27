@@ -5,7 +5,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
 <style>
-/*.text-success {display: none;}*/
+/*.text-success-msg {display: none;}*/
 .text-invalid {color: red;}
 .text-danger {display: none;}
 .text-error {display: none;}
@@ -117,7 +117,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                 <div class="Forgot_Modal_Header">
                     <img src="https://cdn-icons-png.flaticon.com/512/6357/6357042.png">
                     <h3>Forgot Password</h3>
-                    <span class="text-success f-20">Message has been sent to your email id. Please check your inbox/spam folder for reset password link!</span>
+                    <span class="text-success-msg f-20">Message has been sent to your email id. Please check your inbox/spam folder for reset password link!</span>
                     <span class="text-danger f-20">Message could not be sent. Please try again later.</span>
                     <span class="text-error f-20">Email ID you have entered is not registered. Please register youself.</span>
                 </div>
@@ -155,9 +155,9 @@ function forgotPass() {
         success:function(data) {
             //alert(data);
             if (data == '1'){
-                $('.text-success').show();
+                $('.text-success-msg').show();
                 setTimeout(function () {
-                    $('.text-success').hide();
+                    $('.text-success-msg').hide();
                 }, 2500);
             } else if (data == '2') {
                 $('.text-error').show();

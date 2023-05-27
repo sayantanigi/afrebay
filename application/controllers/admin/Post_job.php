@@ -37,7 +37,7 @@ class Post_job extends MY_Controller {
 				$string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
 				$string .= '...';
 			}
-			$btn = ''.anchor(admin_url('post_job/view/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
+			$btn = ''.anchor(base_url('postdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;

@@ -35,7 +35,7 @@
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak">
-                    <span class="text-success f-20" style="text-align: center;">
+                    <span class="text-success-msg f-20" style="text-align: center;">
                         <?php if($this->session->flashdata('message')) {
                             echo $this->session->flashdata('message');
                             unset($_SESSION['message']);

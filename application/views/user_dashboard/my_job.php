@@ -30,14 +30,14 @@
 </section>
 <?php $this->load->view('sidebar');?>
 <div class="col-md-12 col-md-12 col-sm-12 display-table-cell v-align">
-    <div id="product-messages" class="text-success f-20">
+    <div id="product-messages" class="text-success-msg f-20">
         <p style="color: #28a745;">Job Deleted Successfully.</p>
     </div>
     <div id="err-messages">
         <h4 style="color: red;">Error</h4>
         <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
     </div>
-    <div class="text-success f-20" style="text-align: center;">
+    <div class="text-success-msg f-20" style="text-align: center;">
         <?php if($this->session->flashdata('message')) {
             echo $this->session->flashdata('message');
             unset($_SESSION['message']);

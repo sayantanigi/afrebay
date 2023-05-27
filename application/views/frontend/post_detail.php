@@ -34,6 +34,12 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </section>
 
 <section class="dashboard-gig">
+    <div class="text-success-msg f-20" style="text-align: center; margin-bottom: 20px;">
+    <?php if($this->session->flashdata('message')) {
+        echo $this->session->flashdata('message');
+        unset($_SESSION['message']);
+    } ?>
+    </div>
     <div class="container display-table">
         <div class="row display-table-row">
             <div class="col-md-12 col-sm-12 display-table-cell v-align">

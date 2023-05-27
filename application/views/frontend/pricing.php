@@ -31,7 +31,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                         <h2>Become A AfreBay Partner Today!</h2>
                         <span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
                     </div>
-                    <div id="subscription-messages" class="text-success f-20">
+                    <div id="subscription-messages" class="text-success-msg f-20">
                         <p style="color: #28a745;">You Already have an active subscription plan.</p>
                     </div>
                     <!-- Heading -->

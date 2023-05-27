@@ -28,7 +28,7 @@
 
 <?php $this->load->view('sidebar');?>
 <div class="col-md-12 col-sm-12 display-table-cell v-align User_Sub">
-    <div id="subscription-messages" class="text-success f-20">
+    <div id="subscription-messages" class="text-success-msg f-20">
         <p style="color: #28a745;">Subscription Successful.</p>
     </div>
     <div id="err-messages">
@@ -39,7 +39,7 @@
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="cardak" style="background: #f2f2f2 !important;">
-                    <span class="text-success f-20" style="text-align: center;">
+                    <span class="text-success-msg f-20" style="text-align: center;">
                     <?php if($this->session->flashdata('message')) {
                         echo $this->session->flashdata('message');
                         unset($_SESSION['message']);

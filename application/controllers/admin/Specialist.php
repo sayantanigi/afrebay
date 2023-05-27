@@ -10,9 +10,9 @@ class Specialist extends MY_Controller {
 
 	function index() {
     	$get_specialist=$this->Crud_model->GetData('specialist');
-		$header = array('title' => 'Specialization');
+		$header = array('title' => 'Specializations');
 		$data = array(
-			'heading' => 'Specialization',
+			'heading' => 'Specializations',
             'get_specialist' => $get_specialist
         );
         $this->load->view('admin/header', $header);

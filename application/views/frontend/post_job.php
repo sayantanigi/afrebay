@@ -32,7 +32,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <?php } else { ?>
                             <h3>Update Posted Job</h3>
                             <?php } ?>
-                            <span class="text-success f-20" style="text-align: center;">
+                            <span class="text-success-msg f-20" style="text-align: center;">
                                 <?php if($this->session->flashdata('message')) {
                                     echo $this->session->flashdata('message');
                                     unset($_SESSION['message']);

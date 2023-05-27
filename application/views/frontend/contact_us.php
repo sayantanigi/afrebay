@@ -28,7 +28,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                 <div class="col-lg-6 col-md-12 col-sm-12 column">
                     <div class="contact-form">
                         <h3>Keep In Touch</h3>
-                        <span class="text-success f-20">
+                        <span class="text-success-msg f-20">
                         <?php if($this->session->flashdata('message')) {
                             echo $this->session->flashdata('message');
                             unset($_SESSION['message']);

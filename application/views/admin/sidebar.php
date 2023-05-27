@@ -21,7 +21,7 @@
 				<a href="<?= admin_url('sub_category')?>"><i class="fab fa-buffer"></i> <span>Sub Categories</span></a>
 			</li>
 			<li <?php if ($seg2 =='specialist') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('specialist')?>"><i class="fab fa-teamspeak"></i> <span>Specialization</span></a>
+				<a href="<?= admin_url('specialist')?>"><i class="fab fa-teamspeak"></i> <span>Specializations</span></a>
 			</li>
 			<li <?php if ($seg2 =='banner') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('banner')?>"><i class="fas fa-image"></i> <span>Sliders and Banners</span></a>

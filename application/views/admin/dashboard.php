@@ -45,7 +45,7 @@
                 </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12">
-                <a href="<?= admin_url('services')?>">
+                <a href="<?= admin_url('our-services')?>">
                     <div class="card">
                         <div class="card-body">
                             <div class="dash-widget-header">
@@ -54,7 +54,7 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_service)?></h3>
-                                    <h6 class="text-muted">Services</h6>
+                                    <h6 class="text-muted">Our Services</h6>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                 </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12">
-                <a href="<?= admin_url('subscription')?>">
+                <a href="<?= admin_url('payment')?>">
                     <div class="card">
                         <div class="card-body">
                             <div class="dash-widget-header">
@@ -71,7 +71,7 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_subscription)?></h3>
-                                    <h6 class="text-muted">Subscriptions</h6>
+                                    <h6 class="text-muted">Vendors Subscription</h6>
                                 </div>
                             </div>
                         </div>
