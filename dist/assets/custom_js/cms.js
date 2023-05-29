@@ -8,10 +8,10 @@ function create_cms()
     {
       	$("#title_err").fadeIn().html("Please Enter title").css("color","red");
           setTimeout(function(){$("#title_err").fadeOut("&nbsp;");},2000)
-    
+
         $("#title").focus();
         return false;
-    } 
+    }
     if(description=="")
       {
           $("#description_err").fadeIn().html("Please enter description").css('color','red');
@@ -20,14 +20,14 @@ function create_cms()
           return false;
       }
          var form_data= new FormData();
-    
+
 	      form_data.append('title',title);
 	       form_data.append('description',description);
 	      	$.ajax({
 	        type:"post",
 	        url:admin_url+"Manage_cms/create_action",
 	        cache:false,
-	        contentType: false,   
+	        contentType: false,
 	        processData:false,
 	        async:false,
 	        data:form_data,
@@ -38,7 +38,7 @@ function create_cms()
 	        {
 
 	          location.reload();
-	         
+
 	        }
 	        else{
 	         $("#title_err").fadeIn().html("This title already exits ").css("color","red");
@@ -47,14 +47,14 @@ function create_cms()
                   return false;
 	        }
 
-	          
+
 	        }
 	    });
 
 }
 
 function getValue(id)
- {      
+ {
         var admin_url = $("#admin_url").val();
         $.ajax({
         type:'post',
@@ -69,7 +69,7 @@ function getValue(id)
          var obj=$.parseJSON(returndata);
          $("#edit_title").val(obj.title);
           $("#id").val(obj.id);
-         
+
         CKEDITOR.instances.edit_description.setData(obj.description);
         }
       })
@@ -78,8 +78,8 @@ function getValue(id)
  function update_cms()
   {
       var admin_url = $("#admin_url").val();
-      var title=$("#edit_title").val().trim();    
-      var id=$("#id").val();   
+      var title=$("#edit_title").val().trim();
+      var id=$("#id").val();
       var description=CKEDITOR.instances['edit_description'].getData();
       if(title=="")
       {
@@ -96,13 +96,13 @@ function getValue(id)
           return false;
       }
        var form_data= new FormData();
-      form_data.append('title',title); 
+      form_data.append('title',title);
      form_data.append('description',description);
       form_data.append('id',id);
       $.ajax({
         type:'post',
         cache:false,
-        contentType: false,   
+        contentType: false,
         processData:false,
         url:admin_url+'Manage_cms/update_action',
         data:form_data,
@@ -124,7 +124,7 @@ function getValue(id)
   }
 
   function view_data(id)
- {      
+ {
         var admin_url = $("#admin_url").val();
         $.ajax({
         type:'post',

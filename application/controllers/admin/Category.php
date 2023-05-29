@@ -153,7 +153,7 @@ class Category extends MY_Controller {
 				@unlink('uploads/category/'.$_POST['old_image']);
 			}
 		} else {
-			$image  = $_POST['old_image'];;
+			$image  = $_POST['old_image'];
 		}
 		$get_data=$this->Crud_model->get_single_record('category',"category_name='".$_POST['category_name']."' and id!='".$_POST['id']."'");
 		if(empty($get_data)) {
