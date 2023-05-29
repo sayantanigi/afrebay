@@ -327,7 +327,7 @@
 
                                                     <ul class="gigasjh">
 
-                                                        <li>Experience</li>
+                                                        <li>Work Experience</li>
 
                                                         <li><?php echo @$user->experience;?></li>
 

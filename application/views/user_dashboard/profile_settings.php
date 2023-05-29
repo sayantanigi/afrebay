@@ -117,7 +117,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
-                                                    <h4>Experience<span style="color:red;">*</span></h4>
+                                                    <h4>Work Experience<span style="color:red;">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="experience" required value="<?= @$userinfo->experience;?>" placeholder="Enter Experience" />
                                             </div>
