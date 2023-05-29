@@ -1,125 +1,3 @@
-<!-- <section class="topak">
-
-    <div class="block no-padding">
-
-        <div class="container fluid">
-
-            <div class="row">
-
-                <div class="col-lg-12">
-
-                    <div class="main-featured-sec">
-
-                        <ul class="main-slider-sec text-arrows">
-
-                            <li class="slideHome">
-
-                                <?php if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){?>
-
-                                <img src="<?=base_url('uploads/banner/'.$get_banner->image); ?>" alt="" />
-
-                                <?php } else{?>
-
-                                <img src="<?=base_url(); ?>assets/images/resource/mslider1.jpg" alt="" />
-
-                                <?php } ?>
-
-                            </li>
-
-                        </ul>
-
-                        <div class="job-search-sec">
-
-                            <div class="job-search">
-
-                                <h3>The Easiest Way to Get Your New Job</h3>
-
-                                <span>Find Jobs, Employment & Career Opportunities</span>
-
-                                <form method="post" action="<?= base_url('search-job')?>">
-
-                                    <div class="row">
-
-                                        <div class="col-lg-7 col-md-5 col-sm-12 col-xs-12">
-
-                                            <div class="job-field">
-
-                                                <input type="text" name="search_title"
-
-                                                    placeholder="Job title, keywords or company name" value=""
-
-                                                    required />
-
-                                                <i class="la la-search"></i>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
-
-                                            <div class="job-field">
-
-                                                <input type="text" name="search_location" id="location" required
-
-                                                    autocomplete="off" />
-
-                                                <input type="hidden" name="search_lat" id="search_lat">
-
-                                                <input type="hidden" name="search_lon" id="search_lon">
-
-                                                <i class="la la-close" onclick="return reset_location()"></i>
-
-                                                <i class="la la-map-marker"></i>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12">
-
-                                            <button type="submit"><i class="la la-search"></i></button>
-
-                                        </div>
-
-                                    </div>
-
-                                </form>
-
-                                <div class="or-browser">
-
-                                    <span>Browse job posts by</span>
-
-                                    <a href="<?php echo base_url('ourjobs')?>" title="">
-
-                                        <span>All Categories</span>
-
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="scroll-to">
-
-                            <a href="#scroll-here" title=""><i class="la la-arrow-down"></i></a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section> -->
-
 <section class="topak">
     <div class="block no-padding">
         <div class="container fluid">
@@ -591,7 +469,8 @@
 
                                     <a href="javascript:void(0)" title="">
 
-                                        <i class="<?= $item->icon?>"></i>
+                                        <!-- <i class="<?= $item->icon?>"></i> -->
+                                        <img src="<?php echo base_url()?>/uploads/services/<?php echo $item->icon?>" style="width: 100%; height: 150px;">
 
                                         <?php if(!empty($get_category->category_name)) { ?>
 
@@ -605,7 +484,7 @@
 
                                         <?php if(!empty($description)) { ?>
 
-                                        <p><?= ucfirst($description);?></p>
+                                        <p><?= ucfirst(strip_tags($description));?></p>
 
                                         <?php } else { ?>
 

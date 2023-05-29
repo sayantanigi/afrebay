@@ -2,6 +2,7 @@ function btn_register() {
 	var base_url=$('#base_url').val();
     var user_type=$('#user_type').val();
 	//var username=$('#username').val();
+	//var mobile=$('#mobile').val();
 	var first_name=$('#first_name').val();
 	var last_name=$('#last_name').val();
 	var company_name=$('#company_name').val();
@@ -9,7 +10,9 @@ function btn_register() {
 	var conf_password=$('#conf_password').val();
 	var email=$('#email').val();
     var pattern_email = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-	var mobile=$('#mobile').val();
+	var location=$('#location').val();
+	var latitude=$('#search_lat').val();
+	var longitude=$('#search_lon').val();
 
 	if(user_type=='') {
 		$('#err_usertype').fadeIn().html('Please select user type').css('color','red');
@@ -55,7 +58,7 @@ function btn_register() {
 		return false;
 	}
 
-	if(mobile=='') {
+	/*if(mobile=='') {
 		$('#err_mobile').fadeIn().html('Please enter mobile').css('color','red');
 		setTimeout(function(){$("#err_mobile").html("&nbsp;");},3000);
 		$("#mobile").focus();
@@ -65,7 +68,14 @@ function btn_register() {
     	setTimeout(function(){$("#err_mobile").html("&nbsp;");},3000);
         $("#mobile").focus();
         return false;
-    }
+    }*/
+
+	if(location=='') {
+		$('#err_address').fadeIn().html('Please enter legal address').css('color','red');
+		setTimeout(function(){$("#err_address").html("&nbsp;");},3000);
+		$("#location").focus();
+		return false;
+	}
 
 	if(password=='') {
 		$('#err_password').fadeIn().html('Please enter password').css('color','red');
@@ -106,35 +116,34 @@ function btn_register() {
 		url: base_url+'save',
 		type: 'POST',
 		//data: {user_type:user_type,username:username,email:email,password:password,service:service,mobile:mobile},
-		data: {user_type:user_type,first_name:first_name,last_name:last_name,company_name:company_name,email:email,password:password,mobile:mobile},
+		data: {user_type:user_type, first_name:first_name, last_name:last_name, company_name:company_name, email:email, password:password, location:location, latitude:latitude, longitude:longitude},
 		dataType:'json',
 		beforeSend : function(){
-			$("#loader").show();
-			$(".SignUp_Btn button").prop('disable','true');
+			$("#rSignUp").text("Please Wait...");
+			$("#rSignUp").prop("disable", "true");
 		},
 		success:function(returndata) {
-			//console.log(returndata);
-			$("#loader").hide();
-			$("#signUp_form")[0].reset();
 			if(returndata.result==1) {
 				$('#signUp_form').hide();
 				$('.select-user').hide();
 				$('#register-messages').show();
-				// setTimeout(function () {
-                //  	$('#register-messages').hide();
-             	// }, 20000);
+				$("#signUp_form")[0].reset();
+				/*setTimeout(function () {
+                 	$('#register-messages').hide();
+             	}, 20000);*/
 			}
 			if(returndata.result=='0') {
-				if(returndata.data=='phone') {
+				/*if(returndata.data=='phone') {
 					$("#err_mobile").fadeIn().html("This phone already exists").css('color','red');
 					setTimeout(function(){$("#err_mobile").html("&nbsp;");},3000);
 					$("#mobile").focus();
 					return false;
-				}
+				}*/
 				if(returndata.data=='email') {
 					$('#err_email').fadeIn().html('This email already exists').css('color','red');
 					setTimeout(function(){$("#err_email").html("&nbsp;");},3000);
 					$("#email").focus();
+					$("#rSignUp").text("Sign Up");
 					return false;
 				}
 			}
@@ -143,6 +152,7 @@ function btn_register() {
 				setTimeout(function () {
                  	$('#register-messages').hide();
              	}, 20000);
+				$("#rSignUp").text("Sign Up");
 			}
 		}
 	});

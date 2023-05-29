@@ -251,9 +251,10 @@
 
                                             <div class="col-lg-12">
                                                 <label for="last_name">
-                                                    <h4>Short Bio</h4>
+                                                    <h4>Short Bio <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio"><?= @$userinfo->short_bio ?></textarea>
+                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" required><?= @$userinfo->short_bio ?></textarea>
+                                                <div id="vld_shrtBio" style="color:red; margin-top: 10px;">Please enter short bio.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -274,6 +275,9 @@
 </div>
 </div>
 </section>
+<style>
+    #vld_shrtBio {display: none;}
+</style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
@@ -284,14 +288,23 @@
 CKEDITOR.replace('short_bio');
 </script>
 <script type="text/javascript">
-    $('#skills').tagsinput({
-        confirmKeys: [13, 44],
-        maxTags: 20,
-    });
-    $('.key_skills').select2({
-        tags: true,
-        //maximumSelectionLength: 10,
-        tokenSeparators: [','],
-        placeholder: "Select or Type Skills"
-    });
+$('#skills').tagsinput({
+    confirmKeys: [13, 44],
+    maxTags: 20,
+});
+$('.key_skills').select2({
+    tags: true,
+    //maximumSelectionLength: 10,
+    tokenSeparators: [','],
+    placeholder: "Select or Type Skills"
+});
+$("form").submit( function(e) {
+    var messageLength = CKEDITOR.instances['short_bio'].getData().replace(/<[^>]*>/gi, '').length;
+    if(!messageLength) {
+        $('#vld_shrtBio').show();
+        CKEDITOR.instances['short_bio'].focus();
+        setTimeout(function(){$("#vld_shrtBio").hide();},5000)
+        e.preventDefault();
+    }
+});
 </script>
