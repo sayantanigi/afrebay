@@ -22,28 +22,24 @@
                     <div class="account-popup-area signin-popup-box static">
                         <div class="account-popup">
                             <h3>Forgot Password</h3>
-                            
-                            <span class="text-success-msg f-20"><?=$this->session->flashdata('success');  ?></span>
-                            <span class="text-danger f-20"><?=$this->session->flashdata('error');  ?></span>
+                            <span class="text-success-msg f-20" style="text-align: center;">
+                            <?php if($this->session->flashdata('message')) {
+                                echo $this->session->flashdata('message');
+                                unset($_SESSION['message']);
+                            } ?>
+                            </span>
                             <form action="<?= base_url('user/login/send_forget_password')?>" method="post">
-                               
-                                <div class="error text-left">Email</div>
+                                <div class="error text-left">Registered Email Address</div>
                                 <div class="cfield">
-                                    <input type="email" placeholder="Registered Email Id" name="email" id="forget_email" required/>
+                                    <input type="email" placeholder="Registered Email Address" name="email" id="forget_email" required/>
                                     <i class="la la-user"></i>
                                 </div>
-                                
-                                <button type="submit">Submit</button>
+                                <button type="submit" class="frgt_pass">Submit</button>
                             </form>
-                           
                         </div>
                     </div>
-                    <!-- LOGIN POPUP -->
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-            

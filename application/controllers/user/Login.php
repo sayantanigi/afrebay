@@ -56,10 +56,13 @@ class Login extends CI_Controller {
 			$insert_id = $this->db->insert_id();
 			$get_setting=$this->Crud_model->get_single('setting');
 			if(!empty($insert_id)) {
-				$subject = 'Verify Your Email Address From Afrebay';
-				$activationURL = base_url() . "email-verification/" . urlencode(base64_encode($insert_id));
-				$imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
-				$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'><tbody> <tr><td align='center'><table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'> <tbody> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'><img src='" . $imagePath . "' style='width: 250px'/></td> </tr> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello ".$fullname.",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'> Thank you for registration on <strong style='font-weight:bold;'>Afrebay</strong>. </td> </tr> </tbody> </table> </td> </tr> <tr> <td align='center'> <table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'> <tbody> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'> Please click the button below to verify your email address. </td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='text-align:center;padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'> <a href=" . $activationURL . " target='_blank' style='background:#232323;color:#fff;padding:10px;text-decoration:none;line-height:24px;'>Click Here</a> </td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:16px; color:#232323; line-height:24px; font-weight: 700;'> Thank you! </td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'> Sincerely </td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'> Afrebay </td> </tr> <tr> <td height='30'></td> </tr> </tbody> </table> </td> </tr> </tbody> </table>";
+				//$subject = 'Verify Your Email Address From Afrebay';
+				$data=array(
+					'activationURL' => base_url() . "email-verification/" . urlencode(base64_encode($insert_id)),
+					'imagePath' => base_url().'uploads/logo/'.$get_setting->flogo,
+					'fullname' => $fullname,
+				);
+				$message = $this->load->view('email_template/signup',$data,TRUE);
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
@@ -68,7 +71,7 @@ class Login extends CI_Controller {
 					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
 					$mail->AddAddress($_POST['email']);
 					$mail->IsHTML(true);
-					$mail->Subject = $subject;
+					$mail->Subject = 'Verify Your Email Address From Afrebay';
 					$mail->Body = $message;
 					//Send email via SMTP
 					$mail->IsSMTP();
@@ -186,13 +189,17 @@ class Login extends CI_Controller {
 					$mail->Username   = "no-reply@goigi.com";
 					$mail->Password   = "wj8jeml3eu0z";
 					$mail->send();
-					echo $msg = '1';
+					//echo $msg = '1';
+					$this->session->set_flashdata('message', 'Please check your inbox. We have sent you an email to reset your password.');
 				} catch (Exception $e) {
-					echo $msg = '2';
+					//echo $msg = '2';
+					$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
 				}
          	} else {
-   				echo $msg = '3';
+   				//echo $msg = '3';
+				$this->session->set_flashdata('error', 'invalid Email Id!');
    			}
+			redirect(base_url('forgot-password'));
 		}
 	}
 
@@ -210,7 +217,7 @@ class Login extends CI_Controller {
 				$data = array('password' =>md5($_POST['password']));
 			 	$con="userId='".$get_email->userId."'";
 			 	$this->Crud_model->SaveData('users',$data, $con);
-			 	$this->session->set_flashdata('message', 'New password successfully !');
+			 	$this->session->set_flashdata('message', 'You have reset your password successfully. Please try to login.');
 	           	echo "1";
             } else {
             	$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
