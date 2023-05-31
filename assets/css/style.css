@@ -12244,7 +12244,7 @@ aside .widget.border:first-child {
 
    left: 23px;
 
-   top: 5px;
+/*   top: 5px;*/
 
    font-size: 30px;
 
@@ -15218,7 +15218,7 @@ aside .widget.border:first-child {
 
 .contact-edit .srch-lctn {
 
-   float: left;
+   float: right;
 
    font-family: Open Sans;
 
@@ -22620,7 +22620,7 @@ header.white {
 
    display: block !important;
 
-   overflow: auto;
+   overflow: inherit;
 
    background: no-repeat;
 
@@ -28048,7 +28048,7 @@ label::after {
 
 .aksek {
 
-   padding: 20px 0 50px;
+   padding: 20px 0 0;
 
 }
 
@@ -28485,6 +28485,7 @@ h2.job-bid {
 #frame #sidepanel #profile .wrap img.online {
 
    border: 2px solid #2ecc71;
+object-fit: cover;
 
 }
 
@@ -29112,6 +29113,10 @@ h2.job-bid {
 
    background: #0000001a;
 
+}
+
+.Chat_User #frame #sidepanel #contacts ul li.contact:hover {
+background: transparent !important;
 }
 
 
@@ -33743,6 +33748,7 @@ h2 {
 .cat-sec .p-category {
 
    padding: 15px;
+   margin-bottom: 15px;
 
 }
 
@@ -34278,7 +34284,7 @@ footer .bottom-line span {
 
    height: 200px;
 
-   object-fit: fill;
+   object-fit: cover;
 
    background-repeat: no-repeat;
 
@@ -34632,7 +34638,7 @@ footer .bottom-line span {
 
    width: 100%;
 
-   height: 100%;
+   height: 420px;
 
    object-fit: cover;
 
@@ -34753,6 +34759,7 @@ footer .bottom-line span {
    opacity: 0.4;
 
    height: 100%;
+object-fit: cover;
 
 }
 
@@ -34765,6 +34772,7 @@ footer .bottom-line span {
    opacity: 1;
 
    height: 100%;
+object-fit: cover;
 
 }
 
@@ -34868,7 +34876,7 @@ footer .bottom-line span {
 
    margin-bottom: 5px;
 
-   text-align: left;
+   text-align: center;
 
    color: #000 !important;
 
@@ -34880,7 +34888,7 @@ footer .bottom-line span {
 
    font-weight: 600;
 
-   text-align: left;
+   text-align: center;
 
    color: #000 !important;
 
@@ -34972,7 +34980,7 @@ footer .bottom-line span {
 
    word-break: break-all;
 
-   padding-bottom: 10px;
+/*   padding-bottom: 10px;*/
 
 }
 
@@ -35917,7 +35925,6 @@ footer .bottom-line span {
 
    color: #f67a49;
 
-   padding-left: 20px;
 
 }
 
@@ -39683,6 +39690,7 @@ footer .social {
    margin: 0 !important;
 
    margin-right: 10px !important;
+    object-fit: cover;
 
 }
 
@@ -40009,15 +40017,20 @@ footer .social {
    font-weight: 500;
 
 }
+
+.bid_contact-profile {
+display: flex;
+align-items: center;
+}
+
 .bid_contact-profile img{
     width: 45px;
     height: 45px;
     border-radius: 50%;
     object-fit: cover;
     float: left;
-    margin: 0 12px 0 15px;
 }
-.bid_contact-profile p {margin-top: 6px;}
+.bid_contact-profile p {margin: 0 20px;}
 .prod_desc {text-align: justify; font-size: 19px; margin-top: 40px; height: 300px; overflow: auto;padding: 0px 15px 0 0;}
 .prod_desc h2 {font-size: 16px;}
 .prod_desc p {font-size: 14px;}
@@ -40118,7 +40131,7 @@ section.topak .job-search-sec .job-search form .custom-select .same-as-selected 
 .chosen_state {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
 
 .chosen_city {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
-.Employees_Search_List .emply-resume-info h3 a { width: 75%; display: block; }
+.Employees_Search_List .emply-resume-info h3 a { width: 70%; display: block; }
 
 .form-design form .cardak {
    box-shadow: none !important;
@@ -40153,14 +40166,14 @@ section.topak .job-search-sec .job-search form .custom-select .same-as-selected 
 }
 .Career .blog-sec .my-blog .blog-thumb>a img {
    height: 300px;
-   object-fit: contain;
+   object-fit: cover;
    background-repeat: no-repeat;
 }
 .Career .blog-sec .my-blog .blog-details {
    height: 200px !important;
 }
 .cat-sec .p-category a {
-   height: auto !important;
+   height: 310px !important;
 }
 .cat-sec .p-category>a span {
    height: 55px !important;
@@ -40172,4 +40185,246 @@ section.topak .job-search-sec .job-search form .custom-select .same-as-selected 
 .frgt_pass {background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
     border: 0;
     color: #fff;
-    border-radius: 30px;}
+    border-radius: 30px;
+ }
+
+.forgot-pass .error {
+   font-weight: 600 !important;
+   margin-bottom: 5px;
+}
+
+.forgot-pass .cfield {
+   border: 0 !important;
+}
+
+.forgot-pass .cfield input {
+    background: transparent !important;
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    padding: 10px 10px !important;
+    border-bottom: 2px solid #b1b1b1;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px #e1e1e1;
+}
+
+.custom-cardak {
+   padding: 0 !important;
+   border: 0 !important;
+   display: contents !important;
+}
+
+.custom-cardak .text-success-msg {
+   width: 100% !important;
+   display: block !important;
+}
+
+.table-modific tr td.table-modific-td {
+   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+   border-radius: 10px;
+   border: 0 !important;
+}
+
+.table-modific tr td.height {
+   height: 20px;
+   border: 0 !important;
+   box-shadow: none !important;
+}
+
+.custom-table {
+   width: 100%;
+}
+
+.custom-table tr td {
+   border: 0 !important;
+   padding: 5px 5px !important;
+}
+
+.custom-table tr td.heading {
+    color: #f4794f !important;
+    font-weight: 600;
+    text-align: left;
+    margin: 0 !important;
+    font-size: 20px;
+}
+
+.custom-table tr td.heading div {
+font-size: 14px !important;
+color: #888888 !important;
+display: inline-block;
+}
+
+.custom-table tr td.btn-option {
+    text-align: right;
+}
+
+.custom-table tr td.btn-option .fa {
+    font-size: 20px;
+    color: #f67a49 !important;
+}
+
+.custom-table tr td.btn-option .fa-trash-o {
+    padding-left: 10px;
+}
+
+.custom-table tr td.bid-amount {
+    padding-top: 5px !important;
+    font-style: normal;
+    font-size: 15px;
+    color: #888888;
+text-align: left;
+}
+
+.custom-table tr td.year {
+    font-style: normal;
+    font-size: 15px;
+    color: #888888;
+    padding-top: 5px !important;
+text-align: left;
+}
+
+.custom-table tr td.year label,
+.custom-table tr td.bid-amount label {
+    padding: 0;
+    margin: 0;
+    color: #000;
+    font-weight: 600;
+text-align: left;
+}
+
+.custom-table tr td.dept {
+    font-weight: 600;
+    font-size: 15px;
+    color: #202020;
+text-align: left;
+    margin-top: 8px;
+}
+
+.custom-table tr td.desc,
+.custom-table tr td.desc p {
+   text-align: justify;
+   line-height: 22px !important;
+   font-size: 14px !important;
+   padding-top: 5px !important;
+}
+
+.list-job-modal .modal-header,
+.list-job-modal .modal-body {
+padding: 10px !important;
+}
+
+.list-job-modal .modal-header .modal-title {
+font-weight: 600 !important;
+}
+
+.list-job-modal .modal-header button {
+background: #f67a49 !important;
+border-radius: 5px;
+padding: 5px 30px !important;
+}
+
+.list-job-modal .list-job-modal-col {
+padding: 0;
+}
+
+.list-job-modal .list-job-modal-col p {
+text-align: left;
+margin-bottom: 5px !important;
+color: #000 !important;
+font-weight: 500;
+}
+
+.list-job-modal .list-job-modal-col span {
+font-weight: 300;
+color: #666666 !important;
+}
+
+.post-job-page {
+box-shadow: 0 0 10px #e3e3e3;
+border-radius: 10px;
+padding: 20px 35px;
+margin-bottom: 30px;
+}
+
+.post-job-page .pf-title {
+font-weight: 600;
+font-size: 15px !important;
+}
+
+.post-job-page .pf-field .bootstrap-tagsinput,
+.post-job-page .pf-field input,
+.post-job-page .pf-field select {
+background: transparent !important;
+    font-size: 14px;
+    margin-bottom: 20px !important;
+    padding: 10px 10px !important;
+    border-bottom: 2px solid #B1B1B1;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px #E1E1E1;
+}
+
+.post-job-page .pf-field .bootstrap-tagsinput input {
+border: 0 !important;
+box-shadow: none !important;
+}
+
+.post-job-page .pf-field select {
+height: 49px !important;
+}
+
+.post-job-page .contact-edit button {
+background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+}
+
+.post-job-page .contact-edit button:hover {
+background: linear-gradient(180deg, rgba(252, 119, 33, 1) 0%, rgba(249, 80, 30, 1) 100%) !important;
+}
+
+.post-job-page .pf-field.custom-select {
+background: transparent !important;
+    font-size: 14px;
+    margin-bottom: 20px !important;
+    padding: 10px 10px !important;
+    border-bottom: 2px solid #B1B1B1;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px #E1E1E1;
+height: auto !important;
+}
+
+.post-job-page .pf-field.custom-select .select2-selection.select2-selection--multiple {
+border: 0 !important;
+}
+
+.Admin_Profile .cardak .gender select {
+background: transparent !important;
+    font-size: 14px;
+    margin-bottom: 20px !important;
+    padding: 10px 10px !important;
+    border-bottom: 2px solid #B1B1B1;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px #E1E1E1;
+height: 49px !important;
+}
+
+.Admin_Profile .cardak .key-skill .pf-title1 {
+font-weight: 600;
+    font-size: 15px !important;
+}
+
+.Admin_Profile .cardak .key-skill .pf-field {
+background: transparent !important;
+    font-size: 14px;
+    margin-bottom: 20px !important;
+    padding: 10px 10px !important;
+    border-bottom: 2px solid #B1B1B1;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px #E1E1E1;
+height: auto !important;
+margin-top: 15px;
+}
+
+.Admin_Profile .cardak .key-skill .pf-field .select2-selection.select2-selection--multiple {
+border: 0 !important;
+}

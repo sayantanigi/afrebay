@@ -48,13 +48,13 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 Worker_Head_Social">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-12 Worker_Head_Social">
                                 <div class="Worker_Head_Social_Data">
                                     <div class="download-cv">
                                         <a class="btn btn-info" href="<?= base_url('uploads/users/resume/'.@$user_detail->resume)?>" title="" download>Download CV <i class="la la-download"></i></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- </div> -->
@@ -117,11 +117,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             <h3>Gender</h3>
                                             <span><?= @$user_detail->gender?></span>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <i class="la la-shield"></i>
                                             <h3>Experience</h3>
                                             <span><?= @$user_detail->experience?></span>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <!-- Job Overview -->

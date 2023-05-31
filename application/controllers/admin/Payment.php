@@ -25,6 +25,7 @@ class Payment extends MY_Controller {
     function ajax_manage_page()
     {
         $GetData = $this->Payment_model->get_datatables();
+        //print_r($GetData); die();
         if(empty($_POST['start']))
         {
 

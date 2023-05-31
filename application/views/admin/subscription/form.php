@@ -28,25 +28,21 @@
 									<option value="paid" <?php if($subscription_type == 'paid') { echo "selected"; } ?>>Paid</option>
 								</select>
 							</div>
-							<div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
-								<label>Subscription Amount</label>
-								<input class="form-control" type="text" placeholder="Example: 100 USD" id="subscription_amount" name="subscription_amount" value="<?= $subscription_amount;?>" required>
+							<div class="form-group showHideSection subscription_amount" >
+								<label>Subscription Amount ($)</label>
+								<input class="form-control" type="text" placeholder="Example: 100 USD" id="subscription_amount" name="subscription_amount" value="<?= $subscription_amount;?>" required  onkeypress="only_number(event)">
 							</div>
-							<!-- <div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
-								<label>Payment Link (Stripe Payment Link)</label>
-								<input class="form-control" type="text" placeholder="Example: https://abc.abcdef.com/xxxx_xxxxxxxxxxxxxxxxxx" id="payment_link" name="payment_link" value="<?= $payment_link;?>" required>
-							</div> -->
-							<div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
+							<div class="form-group showHideSection product_key" >
 								<label>Product ID (Stripe Product Key)</label>
-								<input class="form-control" type="text" placeholder="Example: prod_XXXXXXXXXXXXXX" id="product_key" name="product_key" value="<?= $product_key;?>" required>
+								<input class="form-control" type="text" placeholder="Example: prod_XXXXXXXXXXXXXX" id="product_key" name="product_key" value="<?= $product_key;?>">
 							</div>
-							<div class="form-group <?php if($button != 'Update') { echo "showHideSection"; }?>" >
+							<div class="form-group showHideSection price_key" >
 								<label>Price ID (Stripe Price Key)</label>
-								<input class="form-control" type="text" placeholder="Example: price_XXXXXXXXXXXXXXXXXXXXXXXX" id="price_key" name="price_key" value="<?= $price_key;?>" required>
+								<input class="form-control" type="text" placeholder="Example: price_XXXXXXXXXXXXXXXXXXXXXXXX" id="price_key" name="price_key" value="<?= $price_key;?>">
 							</div>
 							<div class="form-group">
-								<label>Subscription Durations</label>
-								<input class="form-control" type="text" placeholder="Example: 1 Year" name="subscription_duration" value="<?= $subscription_duration;?>" required>
+								<label>Subscription Duration (in days)</label>
+								<input class="form-control" type="text" placeholder="Example: 30" name="subscription_duration" value="<?= $subscription_duration;?>" required onkeypress="only_numbers(event)">
 							</div>
 							<div class="form-group">
 								<label>Subscription Description</label>
@@ -68,8 +64,11 @@
 </div>
 <style>
 .showHideSection {display: none;}
+.product_key {display: none;}
+.price_key {display: none;}
 </style>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 	CKEDITOR.replace('subscription_description');
 </script>
@@ -94,17 +93,66 @@ function remove(row) {
 		document.getElementById('purchaseTableclone1').deleteRow(i);
 	}
 }*/
+$(document).ready(function(){
+	var subscription_type = $('#subscription_type').val();
+	if(subscription_type == 'free') {
+		$('.product_key').hide();
+		$('.price_key').hide();
+		$('.product_key').prop('required',false);
+		$('.price_key').prop('required',false);
+		$('.subscription_amount').show();
+		$('#subscription_amount').val('0.00');
+		$('#subscription_amount').prop('readonly', true);
+	}else if(subscription_type == 'paid') {
+		$('.product_key').show();
+		$('.price_key').show();
+		$('.product_key').prop('required',true);
+		$('.price_key').prop('required',true);
+	}
+
+	$("#subscription_amount").on("keypress keyup blur", function (event) {
+ 		var patt = new RegExp(/(?<=\.\d\d).+/i);
+     	$(this).val($(this).val().replace(patt, ''));
+     	if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        	event.preventDefault();
+     	}
+ 	});
+})
 function showHideDiv() {
 	var selectedOption = $('#subscription_type').val();
 	if(selectedOption == 'free') {
 		$('.showHideSection').show();
 		$('#subscription_amount').val('0.00');
 		$('#subscription_amount').prop('readonly', true);
+		$('.product_key').hide();
+		$('.price_key').hide();
 	} else if (selectedOption == 'paid') {
 		$('.showHideSection').show();
 		$('#subscription_amount').prop('readonly', false);
+		$('.product_key').show();
+		$('.price_key').show();
+		$('.product_key').prop('required',true);
+		$('.price_key').prop('required',true);
 	} else {
 		$('.showHideSection').hide();
 	}
+}
+function only_number(event) {
+    var x = event.which || event.keyCode;
+    console.log(x);
+    if((x >= 48 ) && (x <= 57 ) || x == 8 | x == 9 || x == 13 || x == 46) {
+        return;
+    } else {
+        event.preventDefault();
+    }
+}
+function only_numbers(event) {
+    var x = event.which || event.keyCode;
+    console.log(x);
+    if((x >= 48 ) && (x <= 57 ) || x == 8 | x == 9 || x == 13) {
+        return;
+    } else {
+        event.preventDefault();
+    }
 }
 </script>

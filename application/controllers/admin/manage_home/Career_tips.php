@@ -114,7 +114,7 @@ class Career_tips extends MY_Controller {
 		);
 
 		$this->db->insert('career_tips',$data);
-		$this->session->set_flashdata('message', 'Career tips added successfully');
+		$this->session->set_flashdata('message', 'Career tips created successfully');
 		echo "1"; exit;
 
 	}

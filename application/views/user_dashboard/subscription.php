@@ -38,21 +38,21 @@
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="cardak" style="background: #f2f2f2 !important;">
+                <div class="cardak custom-cardak">
                     <span class="text-success-msg f-20" style="text-align: center;">
                     <?php if($this->session->flashdata('message')) {
                         echo $this->session->flashdata('message');
                         unset($_SESSION['message']);
                     } ?>
                     </span>
-                    <div style="display: inline-block; text-align: center;">
+                    <div class="col-xl-12 col-lg-12 col-md-12" style="display: inline-block; text-align: center; padding-bottom: 15px;">
                         <h3>Current Plan</h3>
                     </div>
                     <div class="row row-sm">
                         <div class="col-xl-12 col-lg-12 col-md-12">
-                            <div class="cardak">
-                                <table class="table table-bordered">
-                                    <thead>
+                            <div class="cardak custom-cardak">
+                                <table class="table table-modific">
+                                    <!-- <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Transaction ID</th>
@@ -64,32 +64,66 @@
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
                                         </tr>
-                                    </thead>
+                                    </thead> -->
                                     <tbody>
                                         <?php
                                         if(!empty($subcriber_pack)) {
                                             $i = 1;
                                             foreach ($subcriber_pack as $row) { ?>
-                                        <tr>
-                                            <td scope="row"><?php echo $i?></th>
-                                            <td><?php echo $row->transaction_id;?></td>
-                                            <td><?php echo $row->name_of_card;?></td>
-                                            <td><?php echo "$". number_format((float)$row->amount, 2, '.', '');?></td>
-                                            <td><?php echo date ('Y-m-d',strtotime($row->payment_date));?></td>
-                                            <td><?php echo $row->duration;?></td>
-                                            <td><?php echo date ('Y-m-d',strtotime($row->expiry_date));?></td>
-                                            <td>
-                                                <?php
-                                                $now_date = date('Y/m/d');
-                                                $expire_date = date('Y/m/d', strtotime($row->expiry_date));
-                                                if($expire_date < $now_date) {
-                                                    echo "Expired";
-                                                } else {
-                                                    echo "Active";
-                                                } ?>
-                                            </td>
-                                            <td><button type="button">Cancel</button></td>
-                                        </tr>
+                                                    <tr>
+                                                     <td class="table-modific-td">
+                                                         <table class="custom-table">
+                                                              <tr>
+                                                                  <td class="heading">Transaction ID: <?php echo $row->transaction_id;?></td>
+                                                                  <td class="btn-option">
+                                                                        <?php
+                                                                        $now_date = date('Y/m/d');
+                                                                        $expire_date = date('Y/m/d', strtotime($row->expiry_date));
+                                                                        if($expire_date < $now_date) {
+                                                                            echo "Expired";
+                                                                        } else {
+                                                                            echo "Active";
+                                                                        } ?>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="bid-amount">
+                                                                    <?php  if($row->name_of_card=='FREE'){?>
+                                                                  <!-- <label>Price : </label> -->
+
+                                                                  <?php  } else{
+                                                                    ?>
+                                                                <label>Price ($):</label> <?php echo "$". number_format((float)$row->amount, 2, '.', '');?>
+
+
+
+                                                                 <?php } ?>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="year">
+                                                                  <label>Payment Date:</label> <?php echo date ('Y-m-d',strtotime($row->payment_date));?>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="year">
+                                                                  <label>Duration:</label> <?php echo $row->duration." Days";?>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="year">
+                                                                  <label>Expiry Date:</label> <?php echo date ('Y-m-d',strtotime($row->expiry_date));?>
+                                                                  </td>
+                                                              </tr>
+                                                         </table>
+                                                     </td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td colspan="2" class="height"></td>
+                                                   </tr>
                                         <?php $i++; }  } ?>
                                     </tbody>
                                 </table>
@@ -114,7 +148,7 @@
                                         <div class="Heading">
                                             <h1><?= $value->subscription_name; ?></h1>
                                             <h2>Price: <?= ' '.$value->subscription_amount; ?><span></span></h2>
-                                            <p style="text-align: justify;">Duration: <b><?= ' '.$value->subscription_duration; ?></b><span></span></p>
+                                            <p style="text-align: justify;">Duration: <b><?= ' '.$value->subscription_duration." Days"; ?></b><span></span></p>
                                         </div>
                                         <div class="Icon">
                                             <span>
@@ -126,7 +160,17 @@
                                     <div></div>
                                     <div><?= $value->subscription_description; ?></div>
                                     <!-- <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $value->id?>">Subscribe</a> -->
+                                    <?php if($value->subscription_type == 'paid') { ?>
                                     <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($value->price_key))?>">Subscribe</a>
+                                    <?php } else { ?>
+                                    <a href="javascript:void(0);" class="btn btn-primary getSubscription_<?php echo $value->id?>" id="getSubscription_<?php echo $value->id?>">Subscribe</a>
+                                    <input type="hidden" name="user_id_<?php echo $value->id?>" id="user_id_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userId']?>">
+                                    <input type="hidden" name="sub_id_<?php echo $value->id?>" id="sub_id_<?php echo $value->id?>" value="<?php echo $value->id?>">
+                                    <input type="hidden" name="sub_name_<?php echo $value->id?>" id="sub_name_<?php echo $value->id?>" value="<?php echo $value->subscription_name?>">
+                                    <input type="hidden" name="user_email_<?php echo $value->id?>" id="user_email_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>">
+                                    <input type="hidden" name="sub_price_<?php echo $value->id?>" id="sub_price_<?php echo $value->id?>" value="<?php echo $value->subscription_amount?>">
+                                    <input type="hidden" name="sub_duration_<?php echo $value->id?>" id="sub_duration_<?php echo $value->id?>" value="<?php echo $value->subscription_duration?>">
+                                    <?php } ?>
                                 </div>
                             </div>
                             <?php $i++; }} else { ?>
@@ -195,7 +239,7 @@ $(document).ready(function(){
                 data:{user_id: user_id,sub_id: sub_id,sub_name: sub_name,user_email: user_email,sub_price: sub_price,sub_duration: sub_duration},
                 beforeSend : function(){
         			$("#loader").show();
-        			//$(".SignUp_Btn button").prop('disable','true');
+        			$(".getSubscription_<?php echo $value->id?>").text('Please wait..');
         		},
                 success:function(data) {
                     if (data == '1'){

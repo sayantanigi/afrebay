@@ -13,7 +13,7 @@ class Post_job_model extends My_Model {
         $this->db->from('postjob');
         $this->db->join('category','category.id=postjob.category_id');
         $this->db->join('users','users.userId=postjob.user_id');
-        $this->db->join('sub_category','sub_category.id=category.id');
+        $this->db->join('sub_category','sub_category.id=postjob.subcategory_id');
         // $this->db->where($cond);
 		$i = 0;
 
@@ -43,6 +43,7 @@ class Post_job_model extends My_Model {
             $this->db->limit($_POST['length'], $_POST['start']);
             $query = $this->db->get();
             // $this->db->where();
+            // echo $this->db->last_query();die;
         return $query->result();
     }
 
@@ -58,7 +59,7 @@ class Post_job_model extends My_Model {
     }
 
     function viewdata($con) {
-        $this->db->select('postjob.*,category.category_name,CONCAT(users.firstname," ",users.lastname) as fullname,users.username,users.address as user_address,sub_category.sub_category_name' );
+        $this->db->select('postjob.*,category.category_name,CONCAT(users.firstname," ",users.lastname) as fullname,users.username,users.address as user_address,sub_category.sub_category_name,users.userType' );
         $this->db->from('postjob');
         $this->db->join('category','category.id=postjob.category_id');
         $this->db->join('users','users.userId=postjob.user_id');

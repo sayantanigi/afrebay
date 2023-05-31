@@ -134,7 +134,7 @@ class Login extends CI_Controller {
 			if($this->Mymodel->check_record($email, $password)) {
 				$this->session->set_flashdata('message', 'Logged in successfully !');
 				if($_SESSION['afrebay']['userType'] == '1') {
-					redirect('profile');
+					redirect('jobbid');
 				} else if($_SESSION['afrebay']['userType'] == '2') {
 					$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
 					if(!empty($check_sub)) {

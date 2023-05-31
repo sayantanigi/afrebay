@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-3 col-sm-6 col-12">
+            <div class="col-xl-6 col-sm-6 col-12">
                 <a href="<?= admin_url('users')?>">
                     <div class="card">
                         <div class="card-body">
@@ -20,14 +20,14 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_user)?></h3>
-                                    <h6 class="text-muted">Users</h6>
+                                    <h6 class="text-dark">Users</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-xl-3 col-sm-6 col-12">
+            <div class="col-xl-6 col-sm-6 col-12">
                 <a href="<?= admin_url('category')?>">
                     <div class="card">
                         <div class="card-body">
@@ -37,14 +37,14 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_category)?></h3>
-                                    <h6 class="text-muted">Categories</h6>
+                                    <h6 class="text-dark">Categories</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-xl-3 col-sm-6 col-12">
+            <div class="col-xl-6 col-sm-6 col-12">
                 <a href="<?= admin_url('our-services')?>">
                     <div class="card">
                         <div class="card-body">
@@ -54,14 +54,14 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_service)?></h3>
-                                    <h6 class="text-muted">Our Services</h6>
+                                    <h6 class="text-dark">Our Services</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-xl-3 col-sm-6 col-12">
+            <div class="col-xl-6 col-sm-6 col-12">
                 <a href="<?= admin_url('payment')?>">
                     <div class="card">
                         <div class="card-body">
@@ -71,7 +71,7 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_subscription)?></h3>
-                                    <h6 class="text-muted">Vendors Subscription</h6>
+                                    <h6 class="text-dark">Vendors Subscriptions</h6>
                                 </div>
                             </div>
                         </div>

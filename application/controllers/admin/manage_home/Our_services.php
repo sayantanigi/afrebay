@@ -104,7 +104,7 @@ class Our_services extends MY_Controller {
 			);
 			//echo "<pre>"; print_r($data); die;
 			$this->db->insert('our_service',$data);
-			$this->session->set_flashdata('message', 'Our service added successfully');
+			$this->session->set_flashdata('message', 'Our service created successfully');
 			echo "1"; exit;
 		}
 		else{

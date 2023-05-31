@@ -15,7 +15,7 @@
     </div>
 </section>
 <section>
-    <div class="block remove-bottom">
+    <div class="block remove-bottom forgot-pass">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

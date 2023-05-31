@@ -35,7 +35,7 @@
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <label>From Date</label>
-                                    <div class="cal-icon">
+                                    <div class="cal-icon2">
                                         <!--  datetimepicker -->
                                         <input class="form-control  filter_search_data5" type="date" name="from_date" value="">
                                     </div>
@@ -44,14 +44,14 @@
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <label>To Date</label>
-                                    <div class="cal-icon">
+                                    <div class="cal-icon2">
                                         <input class="form-control  filter_search_data7" type="date" name="to_date" value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <a class="btn btn-primary btn-block" href="<?= admin_url('Category')?>">Refresh</a>
+                                    <a class="btn btn-primary btn-block" href="<?= admin_url('Category')?>" style="line-height: 35px;">Refresh</a>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div>
                                 <table id="table" class="table table-hover table-center mb-0 example_datatable" >
                                     <thead>
                                         <tr>

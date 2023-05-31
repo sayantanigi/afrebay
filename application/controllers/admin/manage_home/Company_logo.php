@@ -103,7 +103,7 @@ class Company_logo extends MY_Controller {
 		);
 
 		$this->db->insert('company_logo',$data);
-		$this->session->set_flashdata('message', 'Partner companies logo added successfully');
+		$this->session->set_flashdata('message', 'Partner companies logo created successfully');
 		echo "1"; exit;
 
 	}

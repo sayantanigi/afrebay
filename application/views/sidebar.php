@@ -6,7 +6,8 @@ redirect(base_url('login'));
 $seg1=$this->uri->segment(1);
 ?>
 <section class="dashboard-gig User_Sidemenu">
-    <div class="container-fluid display-table" style="display: block;">
+    <div class="container display-table" style="display: block;">
+        <div class="completeSub">Please activate a subscription package and complete your profile to proceed with further activities within your dashboard</div> 
         <div class="row display-table-row">
             <div class="col-md-12 col-md-12 col-sm-12 hidden-xs display-table-cell v-align box" id="navigation">
                 <div class="navi">
@@ -28,7 +29,7 @@ $seg1=$this->uri->segment(1);
                                 <span class="hidden-xs hidden-sm">Profile</span>
                             </a>
                             <?php } else { ?>
-                            <a href="javascript:void(0)"><i class="fa fa-user-circle" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-user-circle" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">Profile</span>
                             </a>
                             <?php } } else { ?>
@@ -55,14 +56,15 @@ $seg1=$this->uri->segment(1);
                         $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
                         if(!empty($get_sub_data)) {
                         $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-                        if(in_array('', $profile_check[0])) { ?>
+                        //if(in_array('', $profile_check[0])) {
+                            if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
                         <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-briefcase" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">My Jobs</span>
                             </a>
                         </li>
                         <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-tasks" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tasks" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">List of Bids</span>
                             </a>
                         </li>
@@ -79,31 +81,31 @@ $seg1=$this->uri->segment(1);
                         </li>
                         <?php } } else { ?>
                         <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-briefcase" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">My Jobs</span>
                             </a>
                         </li>
                         <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-tasks" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tasks" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">List of Bids</span>
                             </a>
                         </li>
                         <?php } } else { ?>
                         <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
                             <a href="<?= base_url('jobbid')?>"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                <span class="hidden-xs hidden-sm">List of Bids</span>
+                                <span class="hidden-xs hidden-sm">My Jobs</span>
                             </a>
                         </li>
                         <?php } ?>
-
 
                         <?php if(@$_SESSION['afrebay']['userType']=='2') {
                         $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
                         if(!empty($get_sub_data)) {
                         $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-                        if(in_array('', $profile_check[0])) { ?>
+                        //if(in_array('', $profile_check[0])) { 
+                        if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
                         <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-commenting" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">Messages</span>
                             </a>
                         </li>
@@ -115,7 +117,7 @@ $seg1=$this->uri->segment(1);
                         </li>
                         <?php } } else { ?>
                         <li <?php if($seg1=='chat') { ?>class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-commenting" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">Messages</span>
                             </a>
                         </li>
@@ -131,9 +133,10 @@ $seg1=$this->uri->segment(1);
                         $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
                         if(!empty($get_sub_data)) {
                             $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-                            if(in_array('', $profile_check[0])) { ?>
+                            //if(in_array('', $profile_check[0])) { 
+                            if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
                             <li <?php if($seg1=='product'){?>class="active" <?php } ?>>
-                                <a href="javascript:void(0)"><i class="fa fa-tags" aria-hidden="true"></i>
+                                <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tags" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Products</span>
                                 </a>
                             </li>
@@ -145,7 +148,7 @@ $seg1=$this->uri->segment(1);
                         </li>
                         <?php } } else { ?>
                         <li <?php if($seg1=='product') { ?>class="active" <?php } ?>>
-                            <a href="javascript:void(0)"><i class="fa fa-tags" aria-hidden="true"></i>
+                            <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tags" aria-hidden="true"></i>
                                 <span class="hidden-xs hidden-sm">Products</span>
                             </a>
                         </li>
@@ -153,3 +156,15 @@ $seg1=$this->uri->segment(1);
                     </ul>
                 </div>
             </div>
+<!-- <style>
+    .completeSub {display: none; text-align: center; margin-top: 20px; color: #fa5a1f; font-size: 20px;}
+</style>
+<script>
+function completeSub() {
+    $('.completeSub').show();
+    setTimeout(function(){
+        $('.completeSub').fadeOut('slow');
+    },4000);
+
+}
+</script> -->

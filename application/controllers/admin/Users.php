@@ -14,7 +14,7 @@ class Users extends MY_Controller {
 
         $header = array('title' => 'users');
         $data = array(
-            'heading' => 'Users List',
+            'heading' => 'Users',
         );
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');
@@ -41,6 +41,10 @@ class Users extends MY_Controller {
             } else {
                 $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
             }
+            $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>Edit</span>','target=_blank');
+
+            // $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>Edit</span>');
+
             $btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;">Delete</span>';
             if($row->userType==1)
             {

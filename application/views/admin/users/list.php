@@ -67,7 +67,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div>
                         <table id="table" class="table table-hover table-center mb-0 example_datatable" >
                             <thead>
                                 <tr>
@@ -76,7 +76,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Date</th>
+                                    <th>Created Date</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

@@ -46,9 +46,9 @@
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="cardak">
-                    <table class="table table-bordered">
-                        <thead>
+                <div class="cardak custom-cardak">
+                    <table class="table table-modific">
+                        <!-- <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Post Title</th>
@@ -57,34 +57,55 @@
                                 <th scope="col">Deadline</th>
                                 <th scope="col">Action</th>
                             </tr>
-                        </thead>
+                        </thead> -->
                         <tbody>
                             <?php
                             if(!empty($get_postjob)){
                                 $i=1;
                                 foreach ($get_postjob as $key) { ?>
-                                    <tr>
-                                        <th scope="row"><?= $i; ?></th>
-                                        <td>
-                                            <?php
-                                            $string = strip_tags($key->post_title);
-                                            if (strlen($string) > 100) {
-                                                $stringCut = substr($string, 0, 100);
-                                                $endPoint = strrpos($stringCut, ' ');
-                                                $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                                $string .= '...';
-                                            }
-                                            echo $string; ?>
-                                        </td>
-                                        <td><?=$key->duration." "."Month"; ?></td>
-                                        <td><?="USD"." ".$key->charges; ?></td>
-                                        <td><?=$key->appli_deadeline; ?></td>
-                                        <td>
-                                            <a href="<?php echo base_url('postdetail/'.base64_encode($key->id))?>" target="_blank"><i  class="fa fa-eye" aria-hidden="true"></i></a>
-                                            <a href="<?php echo base_url('update-postjob/'.base64_encode($key->id))?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="jobDelete(<?php echo $key->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                                     <td class="table-modific-td">
+                                                         <table class="custom-table">
+                                                              <tr>
+                                                                  <td class="heading">
+                                                                  <?php
+                                                                        $string = strip_tags($key->post_title);
+                                                                        if (strlen($string) > 100) {
+                                                                            $stringCut = substr($string, 0, 100);
+                                                                            $endPoint = strrpos($stringCut, ' ');
+                                                                            $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                                            $string .= '...';
+                                                                        }
+                                                                        echo $string;
+                                                                  ?>
+                                                                  </td>
+                                                                  <td class="btn-option">
+                                                                      <a href="<?php echo base_url('postdetail/'.base64_encode($key->id))?>" target="_blank"><i  class="fa fa-eye" aria-hidden="true"></i></a>
+                                                                    <a href="<?php echo base_url('update-postjob/'.base64_encode($key->id))?>"><i class="fa fa-edit" aria-hidden="true" style="padding-left: 10px;"></i></a>
+                                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="jobDelete(<?php echo $key->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="year">
+                                                                  <label>Duration:</label> <?=$key->duration." "; ?>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="year">
+                                                                  <label>Deadline:</label> <?=$key->appli_deadeline; ?>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="bid-amount">
+                                                                  <label>Remuneration ($):</label> <?="USD"." ".$key->charges; ?>
+                                                                  </td>
+                                                              </tr>
+                                                         </table>
+                                                     </td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td colspan="2" class="height"></td>
+                                                   </tr>
                                     <?php $i++; }}else{?>
                                         <tr>
                                             <td colspan="6">

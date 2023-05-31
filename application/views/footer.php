@@ -13,7 +13,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                     <div class="widget">
                         <div class="about_widget">
                             <div class="logo">
-                                <a href="javascript:void(0)" title=""><img
+                                <a href="<?=base_url(); ?>" title=""><img
                                         src="<?=base_url(); ?>uploads/logo/<?= $get_setting->flogo?>" alt="" /></a>
                             </div>
                             <?php if(!empty($get_setting->fabout)) { ?>
@@ -161,6 +161,7 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-tr.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        // alert(1);
         tail.select('#example',{
             startOpen: true,
             multiple: true,

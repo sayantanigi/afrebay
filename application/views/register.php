@@ -45,7 +45,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignUp_Right">
                                     <div id="register-messages" class="text-success-msg f-20">
                                         <h4>Successful Registration</h4>
-                                        <p style="color: #28a745;">We have sent an activation link to your account to continue wih the registration process.</p>
+                                        <p style="color: #28a745;">We have sent an activation link to your account to continue with the registration process.</p>
                                     </div>
                                     <div id="err-messages">
                                         <h4 style="color: red;">Error</h4>
@@ -87,7 +87,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Company Name <span style="color:red">*</span></label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="Company Name" name="company_name" id="company_name" onkeypress="only_specialAlphabets(event)" />
+                                                        <!-- <input type="text" placeholder="Company Name" name="company_name" id="company_name" onkeypress="only_specialAlphabets(event)" /> -->
+                                                        <input type="text" placeholder="Company Name" name="company_name" id="company_name"/>
                                                         <i class="la la-home"></i>
                                                     </div>
                                                 </div>

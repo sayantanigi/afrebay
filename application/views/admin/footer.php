@@ -47,17 +47,20 @@ $(document).ready(function() {
     $(".msghide").fadeOut(8000);
 
     table = $('.example_datatable').DataTable({
+
+        
+
+
         "oLanguage": {
             "sProcessing": "<img src='<?= base_url()?>dist/admin_assets/server_side/media/images/ajax-loader.gif'>"
         },
 
-        //"scrollX":true,
-        //"scrollX":false,
         "stateSave": true,
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
+         "order": [], //Initial no order.
         "lengthMenu" : [[10,25, 100,200,500,1000,2000], [10,25, 100,200,500,1000,2000 ]],"pageLength" : 10,
+        // "searching":true,
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": url,
@@ -80,15 +83,38 @@ $(document).ready(function() {
             }
 
         },
+        // "columns":[
+        // 	{
+        //     	"sortable": false
+        //     },
+        //     {
+        //     	"sortable": false
+        //     },
+        //     {
+        //     	"sortable": true
+        //     }
+            
+            
+        // ],
+        // "ordering": true,
 
         //Set column definition initialisation properties.
         "columnDefs": [
-            {
-                "targets": [ actioncolumn ], //first column / numbering column
-                "orderable": false, //set not orderable
+            {   
+               
+                
+                 "targets": [ actioncolumn ], //first column / numbering column
+              
+                
+                 "orderable": false, //set not orderable
 
             },
         ],
+    //     // "columnDefs" : [
+    //     // { "type": 'time-date-sort', 
+    //     //   "targets": [2],
+    //     // }
+    // ],       
         <?php if(!empty($show)){ ?>
             "fnDrawCallback": function() {
                 var api = this.api()
@@ -97,6 +123,9 @@ $(document).ready(function() {
                 // uni_array();
             },
             <?php } ?>
+
+            
+            
         });
 
         $(".filter_search_data4").change(function(){
@@ -136,6 +165,15 @@ $(document).ready(function() {
         });
 
     });
+//     $.fn.dataTableExt.oSort['time-date-sort-pre'] = function(value) {      
+//     return Date.parse(value);
+// };
+// $.fn.dataTableExt.oSort['time-date-sort-asc'] = function(a,b) {      
+//     return a-b;
+// };
+// $.fn.dataTableExt.oSort['time-date-sort-desc'] = function(a,b) {
+//     return b-a;
+// };
 
     function imageFile()
     {

@@ -20,11 +20,24 @@
 					<div class="card-body">
 						<div class="pricing-header">
 							<h2><?php echo @$key->subscription_name; ?></h2>
-							<p><?php echo ucfirst(@$key->subscription_type)?> Subscription (<b><?php echo $key->subscription_amount?></b>)</p>
+							<?php if(@$key->subscription_type=='free'){
+								
+								?>
+								<p><?php echo ucfirst(@$key->subscription_type)?> Subscription </p>
+
+
+								<?php
+							} else{
+								?>
+
+							<p><?php echo ucfirst(@$key->subscription_type)?> Subscription ($<b><?php echo $key->subscription_amount?></b>)</p>
+
+							<?php } ?>
+							
 						</div>
 						<div class="pricing-card-price">
 							<!-- <h3 class="heading2 price"><?php //echo 'USD'.' '.$key->subscription_amount; ?></h3> -->
-							<p>Duration: <span><?php echo $key->subscription_duration; ?> </span></p>
+							<p>Duration: <span><?php echo $key->subscription_duration." days"; ?> </span></p>
 						</div>
 						<div class="pricing-options">
 							<?php echo $key->subscription_description;?>

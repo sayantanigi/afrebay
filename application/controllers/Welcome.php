@@ -17,10 +17,20 @@ class Welcome extends CI_Controller {
 	}
 
 	function searchjob() {
+		$search_title = $this->input->post('search_title');
+		$country = $this->input->post('country');
+		$state = $this->input->post('state');
+		$city = $this->input->post('city');
+		if(!empty($search_title) || !empty($country) || !empty($state) || !empty($city)) {
+			$data['countries']=$this->Crud_model->GetData('countries',"","");
+			$data['states']= '';
+			$data['cities']= '';
+		} else {
+			$data['countries']=$this->Crud_model->GetData('countries',"","");
+			$data['states']= '';
+			$data['cities']= '';
+		}
 		$data['getcategory']=$this->Crud_model->GetData('category');
-		$data['countries']=$this->Crud_model->GetData('countries',"","");
-		$data['states']=$this->Crud_model->GetData('states',"","");
-		$data['cities']=$this->Crud_model->GetData('cities',"","");
 		$data['get_banner']=$this->Crud_model->get_single('banner',"id='2'");
 		$this->load->view('header');
 		$this->load->view('frontend/new_employees_list',$data);
@@ -100,6 +110,12 @@ class Welcome extends CI_Controller {
 	}
 
 	function employer_detail($user_id) {
+		if(empty($_SESSION['afrebay']['userId'])){
+			$type='admin';
+		}
+		else{
+			$type='user';
+		}
 		$userid=base64_decode($user_id);
 		$data['userdata']=$this->Crud_model->get_single('users',"userId='".$userid."'");
 		$data['get_post']=$this->Crud_model->GetData('postjob','',"user_id='".$userid."' AND is_delete = '0'");
@@ -110,7 +126,12 @@ class Welcome extends CI_Controller {
 			'view_count'=>$viewcount,
 		);
 		$this->Crud_model->SaveData('users',$insert_data,"userId='".$userid."'");
+		if($type=='admin'){
+			$this->load->view('admin_header',$data);
+			}
+			else{
 		$this->load->view('header');
+			}
 		$this->load->view('frontend/employer_detail',$data);
 		$this->load->view('footer');
 	}

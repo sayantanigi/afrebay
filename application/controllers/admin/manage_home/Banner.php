@@ -103,7 +103,7 @@ class Banner extends MY_Controller {
 		);
 
 		$this->db->insert('banner',$data);
-		$this->session->set_flashdata('message', 'Banner added successfully');
+		$this->session->set_flashdata('message', 'Banner created successfully');
 		echo "1"; exit;
 
 	}

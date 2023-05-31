@@ -301,17 +301,17 @@
 
                                         <div class="blog-head">
 
-                                            <h3 class="resk">
+                                            <!-- <h3 class="resk">
 
                                                 <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
 
                                                     title=""><?= $user->category_name?></a>
 
-                                            </h3>
+                                            </h3> -->
 
                                             <div class="row">
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
 
                                                     <ul class="gigasjh">
 
@@ -323,7 +323,7 @@
 
                                                 </div>
 
-                                                <div class="col-sm-6">
+                                                <!-- <div class="col-sm-6">
 
                                                     <ul class="gigasjh">
 
@@ -333,11 +333,11 @@
 
                                                     </ul>
 
-                                                </div>
+                                                </div> -->
 
                                             </div>
 
-                                            <p><?= ucfirst(strip_tags($shortbio))?></p>
+                                            <!-- <p><?= ucfirst(strip_tags($shortbio))?></p> -->
 
                                             <!-- <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p> -->
 
@@ -470,7 +470,7 @@
                                     <a href="javascript:void(0)" title="">
 
                                         <!-- <i class="<?= $item->icon?>"></i> -->
-                                        <img src="<?php echo base_url()?>/uploads/services/<?php echo $item->icon?>" style="width: 100%; height: 150px;">
+                                        <img src="<?php echo base_url()?>/uploads/services/<?php echo $item->icon?>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px;">
 
                                         <?php if(!empty($get_category->category_name)) { ?>
 

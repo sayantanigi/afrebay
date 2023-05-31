@@ -87,13 +87,15 @@ class Users_model extends My_Model {
     }
 
     function get_users() {
-        $this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,category.category_name,');
+        //$this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,category.category_name,');
+        $this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,');
         $this->db->from('users');
-        $this->db->join('category','category.id=users.serviceType','left');
+        //$this->db->join('category','category.id=users.serviceType','left');
         $this->db->join('employer_rating rt','rt.worker_id=users.userId','left');
         $this->db->where('users.userType','1');
-        $this->db->group_by('rt.worker_id');
-        $this->db->order_by('rate','DESC');
+        //$this->db->group_by('rt.worker_id');
+        $this->db->group_by('users.userId');
+        $this->db->order_by('users.userId','DESC');
         $this->db->limit(8);
         $query = $this->db->get();
         return $query->result();

@@ -9,8 +9,8 @@ class Subscription extends MY_Controller {
 
 	function index() {
 		$offersdata=$this->Crud_model->GetData('subscription','','');
-		$header = array('title' => 'Subscription Plans');
-		$data = array('heading' => 'Subscription Plans','offersdata' => $offersdata);
+		$header = array('title' => 'Freelancer Subscriptions'); 
+		$data = array('heading' => 'Freelancer Subscriptions','offersdata' => $offersdata);
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');
         $this->load->view('admin/subscription/list',$data);
@@ -64,7 +64,7 @@ class Subscription extends MY_Controller {
 			$this->Crud_model->SaveData('subscription_service',$log);
       	}*/
 		//$this->Crud_model->SaveData('subscription_service',$log);
-        $this->session->set_flashdata('message', 'Subscription created successfully');
+        $this->session->set_flashdata('message', 'Subscription plan created successfully');
         redirect(admin_url('subscription'));
 	}
 
@@ -120,7 +120,7 @@ class Subscription extends MY_Controller {
 			);
             $this->Crud_model->SaveData('subscription_service',$log);
 		}*/
-        $this->session->set_flashdata('message', 'Subscription update successfully');
+        $this->session->set_flashdata('message', 'Subscription plan update successfully');
         redirect(admin_url('subscription'));
 	}
 
@@ -128,11 +128,11 @@ class Subscription extends MY_Controller {
         if(isset($_POST['cid'])) {
 			$check_catData = $this->db->query("SELECT * FROM employer_subscription where subscription_id = '".$_POST['cid']."'")->num_rows();
 			if($check_catData > 0) {
-				$this->session->set_flashdata('message', 'Cannot Delete. User already subscribed with this subscription package.');
+				$this->session->set_flashdata('message', 'Cannot Delete. User already subscribed with this subscription plan.');
 				echo 1; exit;
 			} else {
 				$this->Crud_model->DeleteData('subscription',"id='".$_POST['cid']."'");
-				$this->session->set_flashdata('message', 'Subscription package deleted successfully');
+				$this->session->set_flashdata('message', 'Subscription plan deleted successfully');
 				echo 0; exit;
 			}
         }

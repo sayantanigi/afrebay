@@ -64,17 +64,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div>
                             <table id="table" class="table table-hover table-center mb-0 example_datatable" >
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Full Name</th>
+                                        <!-- <th>Full Name</th> -->
+                                        <th>Vendor Name</th>
+                                        <th>Freelancer Name</th>
                                         <th>Post Title</th>
                                         <th>Duration</th>
                                         <th>Cost</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
+                                        <th>Created Date</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

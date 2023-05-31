@@ -80,7 +80,7 @@
 
                 <label>From Date</label>
 
-                <div class="cal-icon">
+                <div class="cal-icon2">
 
                  <!--  datetimepicker -->
 
@@ -98,7 +98,7 @@
 
                 <label>To Date</label>
 
-                <div class="cal-icon">
+                <div class="cal-icon2">
 
                   <input class="form-control  filter_search_data7" type="date" name="to_date" value="">
 
@@ -136,7 +136,7 @@
 
           <div class="card-body">
 
-            <div class="table-responsive">
+            <div>
 
               <table id="table" class="table table-hover table-center mb-0 example_datatable" >
 

@@ -52,7 +52,7 @@
                                                         <?php if (!empty($get_user->firstname)) {
                                                             echo $get_user->firstname . ' ' . $get_user->lastname;
                                                         } else {
-                                                            echo $get_user->username;
+                                                            echo $get_user->companyname;
                                                         } ?></p>
                                                         <div id="status-options">
                                                             <ul>
@@ -93,6 +93,7 @@
                                                     <?php if (!empty($get_jobbid)) {
                                                     foreach ($get_jobbid as $user) {
                                                         if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
+                                                            $get_user = $this->Crud_model->get_single('users', "userId='" . $user->userid . "'");
                                                             $get_msg = $this->Crud_model->GetData('chat', '', "userto_id='" . $user->userid . "' and userfrom_id='" . $user->user_id . "'", '', 'id desc', '', '1');
                                                     ?>
                                                     <li class="contact" onclick="return getuser('<?= $user->userid ?>');">
@@ -105,10 +106,10 @@
                                                             <?php } ?>
                                                             <div class="meta">
                                                                 <p class="name">
-                                                                <?php if (!empty($user->username)) {
-                                                                    echo ucfirst($user->username);
+                                                                <?php if (!empty($get_user->firstname)) {
+                                                                    echo ucfirst($get_user->firstname . ' ' . $get_user->lastname);
                                                                 } else {
-                                                                    echo ucfirst($user->full_name);
+                                                                    echo ucfirst($get_user->companyname);
                                                                 } ?>
                                                                 </p>
                                                                 <p class="preview"><?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p>
@@ -129,11 +130,11 @@
                                                          <?php } ?>
                                                          <div class="meta">
                                                             <p class="name">
-                                                                <?php if (!empty($get_user->username)) {
-                                                                    echo ucfirst($get_user->username);
-                                                                              } else {
-                                                                                 echo ucfirst($get_user->firstname);
-                                                                              } ?></p>
+                                                            <?php if (!empty($get_user->firstname)) {
+                                                                echo ucfirst($get_user->firstname . ' ' . $get_user->lastname);
+                                                            } else {
+                                                                echo ucfirst($get_user->companyname);
+                                                            } ?></p>
                                                             <p class="preview"><?= !empty($get_msg1->message) ? $get_msg1->message : ''; ?></p>
 
                                                          </div>

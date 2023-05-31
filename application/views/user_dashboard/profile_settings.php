@@ -1,7 +1,12 @@
+<?php
+if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)) {
+    $banner_img=base_url("uploads/banner/".$get_banner->image);
+} else {
+    $banner_img=base_url("assets/images/resource/mslider1.jpg");
+} ?>
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= base_url('assets/images/resource/mslider1.jpg')?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
+        <div data-velocity="-.1" style="background: url('<?= $banner_img; ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <div class="container fluid">
             <div class="row">
                 <div class="col-lg-12">
@@ -19,7 +24,7 @@
                 <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
+                        <li class="breadcrumb-item active" aria-current="page">Subscription</li>
                     </ol>
                 </nav> -->
             </div>
@@ -27,10 +32,26 @@
     </div>
 </section>
 
-<?php $this->load->view('sidebar');?>
+<?php 
+// echo "test here code";die;
+// echo $data_request;die;
+if($data_request=='user'){
+
+$this->load->view('sidebar');
+$container='';
+
+}
+else{
+    $container='container';
+}
+// print_r($_SESSION['afrebay']);die;
+
+// echo "test here";die;
+?>
 <div class="col-md-12 col-sm-12 display-table-cell v-align">
-    <div class="user-dashboard Admin_Profile form-design">
+    <div class="user-dashboard Admin_Profile form-design <?php echo $container;  ?> ">
         <form class="form" action="<?php echo base_url('user/Dashboard/update_profile')?>" method="post" id="registrationForm" enctype="multipart/form-data">
+        <input type="hidden" name="from_data_request" value="<?=$data_request;?>">
             <div class="row row-sm">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="cardak">
@@ -46,11 +67,11 @@
                                 if(!empty($userinfo->profilePic)) {
                                     if(!file_exists('uploads/users/'.$userinfo->profilePic)) {
                                 ?>
-                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px; height: 60px; object-fit: cover;" />
                                 <?php } else { ?>
-                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/users/'.$userinfo->profilePic); ?>" style="width:60px;height: 60px;" />
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/users/'.$userinfo->profilePic); ?>" style="width:60px; height: 60px; object-fit: cover;" />
                                 <?php } } else { ?>
-                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px; height: 60px; object-fit: cover;" />
                                 <?php } ?>
                                 <input type="hidden" name="old_image" value="<?=$userinfo->profilePic ?>">
                                 <input type="hidden" name="id" value="<?=$userinfo->userId  ?>">
@@ -70,25 +91,26 @@
                                     <hr />
                                     <div class="form-group">
                                         <div class="row">
-                                            <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
+                                            <?php //if(@$_SESSION['afrebay']['userType']=='2') { ?>
+                                            <?php if(@$userinfo->userType=='2') { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Company Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company name" value="<?php echo $userinfo->companyname;?>" required/>
+                                                <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company name" value="<?php echo $userinfo->companyname;?>" />
                                             </div>
                                             <?php } else { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>First Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First name" value="<?php echo $userinfo->firstname;?>" required onkeypress="only_alphabets(event)" />
+                                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First name" value="<?php echo $userinfo->firstname;?>"  onkeypress="only_alphabets(event)" />
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Last Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last name" value="<?php echo $userinfo->lastname;?>" required onkeypress="only_alphabets(event)" />
+                                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last name" value="<?php echo $userinfo->lastname;?>"  onkeypress="only_alphabets(event)" />
                                             </div>
                                             <?php } ?>
                                             <div class="col-lg-6">
@@ -101,41 +123,55 @@
                                                 <label for="first_name">
                                                     <h4>Phone Number </h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Phone Number" value="<?php echo $userinfo->mobile;?>" required onkeypress="only_number(event)" maxlength="10" />
+                                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Phone Number" value="<?php echo $userinfo->mobile;?>" onkeypress="only_number(event)" maxlength="10" />
                                             </div>
 
-                                            <?php if(@$_SESSION['afrebay']['userType']=='1') { ?>
-                                            <div class="col-lg-6">
+                                            <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
+                                            <?php if(@$userinfo->userType=='1') { ?>
+                                            <div class="col-lg-6 gender">
                                                 <label for="first_name">
                                                     <h4>Gender<span style="color:red;">*</span></h4>
                                                 </label>
-                                                <select name="gender" class="form-control" required style="height: 32px;">
+                                                <select name="gender" id="gender" class="form-control"  style="height: 32px;">
                                                     <option value="">Gender</option>
                                                     <option value="Male" <?php if(@$userinfo->gender=='Male'){ echo "selected";}?>>Male</option>
                                                     <option value="Female" <?php if(@$userinfo->gender=='Female'){ echo "selected";}?>>Female</option>
                                                 </select>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <?php } ?>
+                                            <!-- <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Work Experience<span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="experience" required value="<?= @$userinfo->experience;?>" placeholder="Enter Experience" />
+                                                <input type="text" class="form-control" name="experience"  value="<?= @$userinfo->experience;?>" placeholder="Enter Experience" />
                                             </div>
-                                            <!-- <div class="col-lg-6">
+                                            <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Highest Qualification<span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="qualification" required value="<?= @$userinfo->qualification;?>" placeholder="Enter qualification" />
+                                                <input type="text" class="form-control" name="qualification"  value="<?= @$userinfo->qualification;?>" placeholder="Enter qualification" />
                                             </div> -->
                                             <!-- <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Skills<span style="color:red;">*</span></h4>
                                                 </label>
                                                 <br>
-                                                <input type="text" name="skills" required id="skills" class="form-control" value="<?= @$userinfo->skills?>" />
+                                                <input type="text" name="skills"  id="skills" class="form-control" value="<?= @$userinfo->skills?>" />
                                             </div> -->
-                                            <div class="col-lg-12">
-                                                <span class="pf-title1">Key Skills<span style="color:red;">*</span></span>
+                                            <div class="col-lg-6 location">
+                                                <label for="last_name">
+                                                    <h4>Legal Address <span style="color:red;">*</span></h4>
+                                                </label>
+                                                <input type="text" class="form-control" name="address" id="location" placeholder="Legal Address" value="<?= $userinfo->address ?>" style="height: 49px !important;" autocomplete="off" />
+                                                <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
+                                                <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
+                                            </div>
+                                            <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
+                                            <?php if(@$userinfo->userType=='1') { ?>
+
+                                                
+                                            <div class="col-lg-6 key-skill">
+                                                <span class="pf-title1">Key Skills</span>
                                                 <div class="pf-field">
                                                     <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
                                                     <?php
@@ -143,7 +179,7 @@
                                                     foreach($key_skills as $val) {?>
                                                         <option value="<?php echo $val->specialist_name; ?>"
                                                         <?php if(!empty($userinfo->skills)){
-                                                            $skills = explode(",", $userinfo->skills);
+                                                            $skills = explode(", ", $userinfo->skills);
                                                             for($i=0; $i<count($skills); $i++) {
                                                                 if($skills[$i] == $val->specialist_name){
                                                                     echo "selected";
@@ -155,24 +191,15 @@
                                                 </div>
                                             </div>
                                             <?php } ?>
-
+                                            <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
+                                            <?php if(@$userinfo->userType=='1') { ?>
                                             <div class="col-lg-6">
                                                 <label for="last_name">
-                                                    <h4>Legal Address <span style="color:red;">*</span></h4>
+                                                    <h4>Zip Code <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="address" id="location" placeholder="Legal Address" value="<?= $userinfo->address ?>" autocomplete="off" required/>
-                                                <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
-                                                <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
+                                                <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo @$userinfo->zip;?>" onkeypress="only_number(event)" maxlength="6" />
                                             </div>
-
-                                            <?php if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <!-- <div class="col-lg-6">
-                                                <label for="last_name">
-                                                    <h4>Zip Code</h4>
-                                                </label>
-                                                <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo @$userinfo->zip;?>" required onkeypress="only_number(event)" maxlength="6" />
-                                            </div> -->
-                                            <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Resume upload</h4>
                                                 </label>
@@ -182,7 +209,6 @@
                                                 if(!empty($userinfo->resume)){
                                                     if(!file_exists('uploads/users/resume/'.$userinfo->resume)){
                                                 ?>
-                                                <!-- <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" /> -->
                                                 <?php } else{?>
                                                 <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" />
                                                     <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:40px; color:red;"></i>
@@ -190,9 +216,8 @@
                                                 </a>
                                                 <input type="hidden" name="old_resume" value="<?= $userinfo->resume ?>">
                                                 <?php } }else { ?>
-                                                <!-- <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" /> -->
                                                 <?php }?>
-                                            </div>
+                                            </div> -->
                                             <!-- <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Additional Images</h4>
@@ -234,7 +259,8 @@
                                             </div> -->
                                             <?php } ?>
 
-                                            <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
+                                            <?php //if(@$_SESSION['afrebay']['userType']=='2') { ?>
+                                            <?php if(@$userinfo->userType=='2') { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Founded Year</h4>
@@ -245,7 +271,7 @@
                                                 <label for="first_name">
                                                     <h4>TAX ID <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="TAX ID" value="<?php echo $userinfo->teamsize;?>" required/>
+                                                <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="TAX ID" value="<?php echo $userinfo->teamsize;?>" />
                                             </div>
                                             <?php } ?>
 
@@ -253,7 +279,7 @@
                                                 <label for="last_name">
                                                     <h4>Short Bio <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" required><?= @$userinfo->short_bio ?></textarea>
+                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" ><?= @$userinfo->short_bio ?></textarea>
                                                 <div id="vld_shrtBio" style="color:red; margin-top: 10px;">Please enter short bio.</div>
                                             </div>
                                         </div>
@@ -261,6 +287,8 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 aksek">
                                             <button class="post-job-btn pull-right" type="submit">Save Changes</button>
+                                            <!-- <input type="hidden" name="utype" id="utype" value="<?= @$_SESSION['afrebay']['userType']?>"> -->
+                                            <input type="hidden" name="utype" id="utype" value="<?= @$userinfo->userType?>">
                                         </div>
                                     </div>
                                 </div>
@@ -277,6 +305,14 @@
 </section>
 <style>
     #vld_shrtBio {display: none;}
+    .container:before,
+    .container:after
+        { display: none !important; }
+    @media (min-width: 1250px) {
+        .container.Header_Menu_Nav {
+            width: 1250px !important;
+        }
+    }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
@@ -299,6 +335,45 @@ $('.key_skills').select2({
     placeholder: "Select or Type Skills"
 });
 $("form").submit( function(e) {
+    if($('#utype').val() == 1) {
+        if($('#firstname').val() == ''){
+            $('#firstname').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#lastname').val() == ''){
+            $('#lastname').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#gender').val() == ''){
+            $('#gender').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#location').val() == ''){
+            $('#location').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#key_skills').val() == ''){
+            $('#key_skills').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#zip').val() == ''){
+            $('#zip').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+    } else {
+        if($('#companyname').val() == ''){
+            $('#companyname').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#location').val() == ''){
+            $('#location').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+        if($('#teamsize').val() == ''){
+            $('#teamsize').focus().attr('placeholder', 'This field is required');
+            e.preventDefault();
+        }
+    }
     var messageLength = CKEDITOR.instances['short_bio'].getData().replace(/<[^>]*>/gi, '').length;
     if(!messageLength) {
         $('#vld_shrtBio').show();

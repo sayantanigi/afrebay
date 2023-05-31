@@ -79,9 +79,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 </div>
                                                 <div class="error text-left"><?php echo form_error('password'); ?></div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 SignIn_Remember">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 SignIn_Remember">
                                                 <p class="remember-label"><input type="checkbox" name="cb" id="cb1" /><label for="cb1">Remember me</label></p>
                                                 <!-- <a id="ForgotPassModal" title="">Forgot Password?</a> -->
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 SignIn_Remember">
                                                 <a href="<?= base_url('forgot-password')?>" title="">Forgot Password?</a>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignIn_Btn">

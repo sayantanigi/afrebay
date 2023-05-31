@@ -1,6 +1,6 @@
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url(images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url(<?php echo base_url()?>assets/images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
@@ -49,41 +49,30 @@
                                                     <h4>Job Title <span style="color: red">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="designation" placeholder="Enter Job Title"  value="<?= @$designation; ?>" required list="designation" autocomplete="off"/>
-                                                <datalist id="designation">
-                                                <?php if(!empty($get_designation)){ foreach($get_designation as $row){?>
-                                                    <option value="<?= $row->designation ?>">
-                                                    <?php } }?>
-                                                </datalist>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name"><h4>Company Name <span style="color: red">*</span></h4></label>
                                                 <input type="text" class="form-control" name="company_name" placeholder="Enter Company Name"  value="<?= @$company_name; ?>" required list="company_name" autocomplete="off"/>
-                                                <datalist id="company_name">
-                                                <?php if(!empty($get_companyname)){ foreach($get_companyname as $row){?>
-                                                    <option value="<?= $row->company_name ?>">
-                                                    <?php } }?>
-                                                </datalist>
                                             </div>
                                             <!-- <div class="col-lg-6">
                                                 <label for="first_name"><h4>Duration<span style="color: red">*</span></h4></label>
                                                 <input type="text" class="form-control" name="duration" placeholder="Enter Duration"  value="<?= $duration; ?>" required list="duration" autocomplete="off"/>
-                                                <datalist id="education">
-                                                <?php if(!empty($get_duration)){ foreach($get_duration as $row){?>
-                                                    <option value="<?= $row->duration ?>">
-                                                    <?php } }?>
-                                                </datalist>
                                             </div> -->
                                             <div class="col-lg-6">
                                                 <label for="first_name"><h4>From Date <span style="color: red">*</span></h4></label>
-                                                <input type="date" class="form-control" name="from_date" placeholder="From Date"  value="<?= $from_date; ?>" required/>
+                                                <input type="date" class="form-control" name="from_date" placeholder="From Date"  value="<?= $from_date; ?>" required onkeydown="return false" />
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name"><h4>To Date <span style="color: red">*</span></h4></label>
-                                                <input type="date" class="form-control" name="to_date" placeholder="To Date" value="<?= $to_date; ?>" required/>
+                                                <input type="date" class="form-control" name="to_date" placeholder="To Date" value="<?= $to_date; ?>" required onkeydown="return false" />
                                             </div>
                                             <div class="col-lg-12"><br>
                                                 <label for="first_name"><h4>Description </h4></label>
-                                                <textarea type="text" class="form-control" name="description" id="description" value="<?= $description; ?>" ><?= @$description; ?></textarea>
+                                                <textarea type="text" class="form-control" name="description" id="description" maxlength="500" value="<?= $description; ?>" ><?= @$description; ?></textarea>
+                                                <div id="the-count">
+                                                    <span id="current">0</span>
+                                                    <span id="maximum">/ 500</span>
+                                                </div>
                                             </div>
                                             <input type="hidden" name="id" value="<?= @$id; ?>">
                                         </div>
@@ -102,10 +91,43 @@
         </form>
     </div>
 </div>
-        <!-- </div>
+        </div>
     </div>
-</section> -->
+</section>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
-CKEDITOR.replace('description');
+//CKEDITOR.replace('description');
+$('#description').keyup(function() {  
+    var characterCount = $(this).val().length,
+        current = $('#current'),
+        maximum = $('#maximum'),
+        theCount = $('#the-count');
+    current.text(characterCount);
+
+    /*This isn't entirely necessary, just playin around*/
+    if (characterCount < 70) {
+    current.css('color', '#666');
+    }
+    if (characterCount > 70 && characterCount < 90) {
+    current.css('color', '#6d5555');
+    }
+    if (characterCount > 90 && characterCount < 100) {
+    current.css('color', '#793535');
+    }
+    if (characterCount > 100 && characterCount < 120) {
+    current.css('color', '#841c1c');
+    }
+    if (characterCount > 120 && characterCount < 139) {
+    current.css('color', '#8f0001');
+    }
+
+    if (characterCount >= 140) {
+    maximum.css('color', '#8f0001');
+    current.css('color', '#8f0001');
+    theCount.css('font-weight','bold');
+    } else {
+    maximum.css('color','#666');
+    theCount.css('font-weight','normal');
+    }
+});
 </script>

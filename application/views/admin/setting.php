@@ -153,15 +153,18 @@
 														</div>
 														<input type="hidden" name="id" value="<?php if(!empty($row->id)){echo $row->id;}?>">
 													</div>
+													<div class="col-lg-12">
+														<div class=" pt-0">
+															<button type="submit" class="btn btn-primary">Save Changes</button>
+															<a href="<?= admin_url('setting')?>" class="btn btn-outline-secondary">Cancel</a>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="card-body pt-0">
-									<button type="submit" class="btn btn-primary">Save Changes</button>
-									<a href="<?= admin_url('setting')?>" class="btn btn-link">Cancel</a>
-								</div>
+								
 							</div>
 						</form>
 					</div>
