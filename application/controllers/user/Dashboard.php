@@ -35,28 +35,17 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function profile() {
-		 $user_id=base64_decode($this->uri->segment(2));
-		// echo $user_id;die;
-		// echo "ghjhfg";die;
-		// echo $this->uri->segment(2);die;
+	 	$user_id=base64_decode($this->uri->segment(2));
 		if($user_id!=''){
 			$userid=$user_id;
 			$data_request='admin';
-		$this->load->view('admin_header');
-
-		}
-		else{
+			$this->load->view('admin_header');
+		} else {
 			$userid=$_SESSION['afrebay']['userId'];
 			$data_request='user';
-		$this->load->view('header');
-
-
-
+			$this->load->view('header');
 		}
-		// echo $userid;die;
-		// $user_info = $this->Crud_model->get_single('users', "userId='" . $_SESSION['afrebay']['userId'] . "'");
 		$user_info = $this->Crud_model->get_single('users', "userId='" . $userid . "'");
-		//   print_r($user_info);die;
 		$data = array(
 			'userinfo' => $user_info,
 			'data_request'=>$data_request,
@@ -201,7 +190,7 @@ class Dashboard extends CI_Controller {
 		}
 		else{
 
-		
+
 		$this->session->set_flashdata('message', 'Profile Updated Successfull !');
 		redirect(base_url('profile'));
 		}
@@ -798,7 +787,7 @@ class Dashboard extends CI_Controller {
 			'created_date' => $paymentDate,
 			'duration' => $this->input->post('sub_duration'),
 			'payment_status' => 'paid',
-			'expiry_date' => date("Y-m-d H:i:s", strtotime($this->input->post('sub_duration'), strtotime($paymentDate)))
+			'expiry_date' => date("Y-m-d", strtotime('+'.$this->input->post('sub_duration').'days'))
 		);
 		//print_r($data); die();
 		$this->Crud_model->SaveData('employer_subscription', $data);

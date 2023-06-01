@@ -80,8 +80,6 @@ $(function () {
                     <a href="<?=base_url(); ?>" title=""><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /></a>
                 </div>
                 <div class="menu-resaction">
-                    <!-- <div class="res-openmenu"><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /> Menu</div>
-                    <div class="res-closemenu"><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /> Close</div> -->
                     <div class="res-openmenu">Menu</div>
                     <div class="res-closemenu">Close</div>
                 </div>
@@ -242,7 +240,7 @@ $(function () {
                                             <?php $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
                                             if(empty($get_sub_data)) {
                                                 if(@$_SESSION['afrebay']['userType']=='1') { ?>
-                                                    <a href="<?=base_url(); ?>profile" title="">Dashboard</a>
+                                                    <a href="<?=base_url(); ?>subscription" title="">Subscribe</a>
                                                 <?php } else { ?>
                                                     <a href="<?=base_url(); ?>subscription" title="">Subscribe</a>
                                             <?php } } else { ?>
@@ -277,4 +275,3 @@ $(function () {
                 </div>
             </div>
         </header>
-
