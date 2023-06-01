@@ -798,6 +798,23 @@ class Dashboard extends CI_Controller {
 			echo '2';
 		}
 	}
+
+	function cancelSubscription() {
+		$id = $this->input->post('id');
+		$sub_id = $this->input->post('sub_id');
+		require 'vendor/autoload.php';
+		require_once APPPATH."third_party/stripe/init.php";
+		$stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
+		$cnclsubData = $stripe->subscriptions->cancel("$sub_id",[]);
+		if($cnclsubData['status'] == 'canceled') {
+			$subStatus = $this->db->query("UPDATE employer_subscription SET status = '2' WHERE `id` ='".$id."'");
+			if($subStatus) {
+				echo '1';
+			} else {
+				echo '2';
+			}
+		}
+	}
 	///////////////// End User Subscription //////////////////////////
 
 	///////////////// User Product //////////////////////////

@@ -25,6 +25,9 @@
     <div id="subscription-messages" class="text-success-msg f-20">
         <p style="color: #28a745;">Subscription Successful.</p>
     </div>
+    <div id="cnclsubscription-messages" class="text-success-msg f-20">
+        <p style="color: #28a745;">Successfully unsubsribed from the current plan.</p>
+    </div>
     <div id="err-messages">
         <h4 style="color: red;">Error</h4>
         <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
@@ -59,6 +62,7 @@
                                                             <td class="btn-option">
                                                                 <table class="plan-active-table">
                                                                     <tr>
+                                                                        <?php if($row->status == '1') { ?>
                                                                         <td class="active-plan">
                                                                         <?php
                                                                         $now_date = date('Y/m/d');
@@ -69,8 +73,13 @@
                                                                             echo "Active Plan";
                                                                         } ?>
                                                                         </td>
+                                                                        <?php } ?>
                                                                         <td style="width: 8%;"></td>
-                                                                        <td class="cnc-plan">Cancel Subscription</td>
+                                                                        <?php if($row->status == '1') { ?>
+                                                                        <td class="cnc-plan" id="cancelSubsription" onclick="cancelSubsription('<?php echo $row->id;?>','<?php echo $row->transaction_id;?>')">Cancel Subscription</td>
+                                                                        <?php } else { ?>
+                                                                        <td class="cnc-plan">Subscription Canceled</td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -114,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if(empty($subcriber_pack)) { ?>
+                <?php if($subcriber_pack[0]->status == '2') { ?>
                 <div class="cardak" style="background: #f2f2f2 !important; margin-top: 40px;">
                     <div style="display: inline-block; text-align: center;">
                         <h3>Pricing</h3>
@@ -198,6 +207,7 @@
 </section>
 <style>
 #subscription-messages{display: none; text-align: center;}
+#cnclsubscription-messages{display: none; text-align: center;}
 #err-messages{display: none; text-align: center;}
 </style>
 <script>
@@ -225,7 +235,6 @@ $(document).ready(function(){
                 success:function(data) {
                     if (data == '1'){
                         setTimeout(function () {
-                            $("#loader").hide();
                             window.scroll({top: 0, behavior: "smooth"});
                             $('#subscription-messages').show();
                         }, 10000);
@@ -251,6 +260,46 @@ $(document).ready(function(){
 
             })
         })
-        <?php $i++; } } ?>
-        })
-    </script>
+<?php $i++; } } ?>
+})
+
+function cancelSubsription(id,sub_id){
+    var id = id; alert(id);
+    var sub_id = sub_id; alert(sub_id);
+    var base_url = $('#base_url').val();
+    $.ajax({
+        url:base_url+"user/dashboard/cancelSubscription",
+        method:"POST",
+        data:{id: id, sub_id: sub_id},
+        beforeSend : function(){
+            $("#cancelSubsription").text('Please wait..');
+        },
+        success:function(data) {
+            if (data == '1'){
+                setTimeout(function () {
+                    window.scroll({top: 0, behavior: "smooth"});
+                    $('#cnclsubscription-messages').show();
+                }, 10000);
+                setTimeout(function () {
+                    $('#cnclsubscription-messages').hide();
+                }, 13000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 15000);
+            } else {
+                $('#err-messages').show();
+                setTimeout(function () {
+                    window.scroll({top: 0, behavior: "smooth"})
+                }, 5000);
+                setTimeout(function () {
+                    $('#err-messages').hide();
+                }, 6000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 7000);
+            }
+        }
+
+    })
+}
+</script>
