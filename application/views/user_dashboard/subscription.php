@@ -54,17 +54,25 @@
                                             <tr>
                                                 <td class="table-modific-td">
                                                     <table class="custom-table">
-                                                        <tr>
+                                                        <tr class="plan-active">
                                                             <td class="heading">Transaction ID: <?php echo $row->transaction_id;?></td>
                                                             <td class="btn-option">
-                                                                <?php
-                                                                $now_date = date('Y/m/d');
-                                                                $expire_date = date('Y/m/d', strtotime($row->expiry_date));
-                                                                if($expire_date < $now_date) {
-                                                                    echo "Expired";
-                                                                } else {
-                                                                    echo "Active";
-                                                                } ?>
+                                                                <table class="plan-active-table">
+                                                                    <tr>
+                                                                        <td class="active-plan">
+                                                                        <?php
+                                                                        $now_date = date('Y/m/d');
+                                                                        $expire_date = date('Y/m/d', strtotime($row->expiry_date));
+                                                                        if($expire_date < $now_date) {
+                                                                            echo "Plan Expired";
+                                                                        } else {
+                                                                            echo "Active Plan";
+                                                                        } ?>
+                                                                        </td>
+                                                                        <td style="width: 8%;"></td>
+                                                                        <td class="cnc-plan">Cancel Subscription</td>
+                                                                    </tr>
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <tr>
