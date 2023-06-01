@@ -6,24 +6,20 @@ class Payment_model extends My_Model {
 
     var $order = array('emp.id' => 'DESC');
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
     }
 
-    private function _get_datatables_query()
-    {
-        $this->db->select('emp.*,subscription.subscription_name,users.companyname');
+    private function _get_datatables_query() {
+        $this->db->select('emp.*,subscription.subscription_name,users.companyname,users.firstname,users.lastname');
         $this->db->from('employer_subscription as emp');
         $this->db->join('subscription',"subscription.id=emp.subscription_id",'left');
         $this->db->join('users',"users.userId=emp.employer_id");
         $i = 0;
 
-        if($_POST['search']['value']) // if datatable send POST for search
-        {
+        if($_POST['search']['value']) {
             $explode_string = explode(' ', $_POST['search']['value']);
-            foreach ($explode_string as $show_string)
-            {
+            foreach ($explode_string as $show_string) {
                 $cond  = " ";
                 $cond.=" ( emp.name_of_card LIKE '%".trim($show_string)."%' ";
                 $cond.=" OR  emp.email LIKE '%".trim($show_string)."%' ";
@@ -34,20 +30,15 @@ class Payment_model extends My_Model {
         }
         $i++;
 
-        if(isset($_POST['order'])) // here order processing
-        {
-            //print_r($this->column_order);exit;
+        if(isset($_POST['order'])) {
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        }
-        else if(isset($this->order))
-        {
+        } else if(isset($this->order)) {
             $order = $this->order;
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
 
-    function get_datatables()
-    {
+    function get_datatables() {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
@@ -56,15 +47,12 @@ class Payment_model extends My_Model {
         return $query->result();
     }
 
-    public function count_all()
-    {
+    public function count_all() {
         $this->_get_datatables_query();
         return $this->db->count_all_results();
     }
 
-
-    function count_filtered()
-    {
+    function count_filtered() {
         $this->_get_datatables_query();
         $query = $this->db->get();
         return $query->num_rows();
