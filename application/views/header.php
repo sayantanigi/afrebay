@@ -199,7 +199,7 @@ $(function () {
                         <?php
                         if(!empty($_SESSION['afrebay']['userId'])) {
                             if($_SESSION['afrebay']['userType'] == '2') {
-                                $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
+                                $get_sub_data = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND status = '1'")->result_array();
                                 if(empty($get_sub_data))
                                 {
                                     $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
@@ -237,7 +237,7 @@ $(function () {
                                     </a>
                                     <ul>
                                         <li>
-                                            <?php $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
+                                            <?php $get_sub_data = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND status = '1'")->result_array();
                                             if(empty($get_sub_data)) {
                                                 if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                                     <a href="<?=base_url(); ?>subscription" title="">Subscribe</a>

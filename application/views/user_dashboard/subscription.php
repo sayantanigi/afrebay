@@ -50,8 +50,7 @@
                             <div class="cardak custom-cardak">
                                 <table class="table table-modific">
                                     <tbody>
-                                        <?php
-                                        if(!empty($subcriber_pack)) {
+                                        <?php if(!empty($subcriber_pack)) {
                                             $i = 1;
                                             foreach ($subcriber_pack as $row) { ?>
                                             <tr>
@@ -62,23 +61,18 @@
                                                             <td class="btn-option">
                                                                 <table class="plan-active-table">
                                                                     <tr>
-                                                                        <?php if($row->status == '1') { ?>
-                                                                        <td class="active-plan">
                                                                         <?php
-                                                                        $now_date = date('Y/m/d');
-                                                                        $expire_date = date('Y/m/d', strtotime($row->expiry_date));
-                                                                        if($expire_date < $now_date) {
-                                                                            echo "Plan Expired";
-                                                                        } else {
-                                                                            echo "Active Plan";
-                                                                        } ?>
-                                                                        </td>
+                                                                        if($row->status == '1') { ?>
+                                                                        <td class="active-plan">Active Plan</td>
                                                                         <?php } ?>
                                                                         <td style="width: 8%;"></td>
-                                                                        <?php if($row->status == '1') { ?>
-                                                                        <td class="cnc-plan" id="cancelSubsription" onclick="cancelSubsription('<?php echo $row->id;?>','<?php echo $row->transaction_id;?>')">Cancel Subscription</td>
+                                                                        <?php
+                                                                        if($row->status == '1') { ?>
+                                                                        <td class="cnc-plan" id="cancelSubsription" onclick="cancelSubsription('<?php echo $row->id;?>','<?php echo $row->transaction_id;?>','<?php echo $row->amount?>')">Cancel Subscription</td>
+                                                                        <?php } else if($row->status == '2'){ ?>
+                                                                        <td class="cnc-plan">Subscription Cancelled</td>
                                                                         <?php } else { ?>
-                                                                        <td class="cnc-plan">Subscription Canceled</td>
+                                                                        <td class="cnc-plan">Subscription Expired</td>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </table>
@@ -123,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if($subcriber_pack[0]->status == '2') { ?>
+                <?php if(empty($subscription_check)) { ?>
                 <div class="cardak" style="background: #f2f2f2 !important; margin-top: 40px;">
                     <div style="display: inline-block; text-align: center;">
                         <h3>Pricing</h3>
@@ -263,14 +257,15 @@ $(document).ready(function(){
 <?php $i++; } } ?>
 })
 
-function cancelSubsription(id,sub_id){
-    var id = id; alert(id);
-    var sub_id = sub_id; alert(sub_id);
+function cancelSubsription(id,sub_id,amount){
+    var id = id;
+    var sub_id = sub_id;
+    var amount = amount;
     var base_url = $('#base_url').val();
     $.ajax({
         url:base_url+"user/dashboard/cancelSubscription",
         method:"POST",
-        data:{id: id, sub_id: sub_id},
+        data:{id: id, sub_id: sub_id, amount: amount},
         beforeSend : function(){
             $("#cancelSubsription").text('Please wait..');
         },

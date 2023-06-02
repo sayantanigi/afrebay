@@ -198,10 +198,8 @@ class Dashboard extends CI_Controller {
 
 	public function subscription() {
 		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
-		// print_r($data['get_subscription']);die;
-		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
-		//  print_r($data['subcriber_pack']);die;
-
+		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
+		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND status = '1'")->result_array();
 		$this->load->view('header');
 		$this->load->view('user_dashboard/subscription', $data);
 		$this->load->view('footer');
@@ -802,16 +800,61 @@ class Dashboard extends CI_Controller {
 	function cancelSubscription() {
 		$id = $this->input->post('id');
 		$sub_id = $this->input->post('sub_id');
-		require 'vendor/autoload.php';
-		require_once APPPATH."third_party/stripe/init.php";
-		$stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
-		$cnclsubData = $stripe->subscriptions->cancel("$sub_id",[]);
-		if($cnclsubData['status'] == 'canceled') {
+		$amount = $this->input->post('amount');
+		if($amount < '1') {
 			$subStatus = $this->db->query("UPDATE employer_subscription SET status = '2' WHERE `id` ='".$id."'");
 			if($subStatus) {
 				echo '1';
 			} else {
 				echo '2';
+			}
+		} else {
+			require 'vendor/autoload.php';
+			require_once APPPATH."third_party/stripe/init.php";
+			$stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
+			$cnclsubData = $stripe->subscriptions->cancel("$sub_id",[]);
+			if($cnclsubData['status'] == 'canceled') {
+				$subStatus = $this->db->query("UPDATE employer_subscription SET status = '2' WHERE `id` ='".$id."'");
+				if($subStatus) {
+					echo '1';
+				} else {
+					echo '2';
+				}
+			}
+		}
+	}
+
+	function checkSubscriptionForUser(){
+		//echo "SELECT * FROM employer_subscription WHERE status = '1'"; echo "<br>";
+		$getAllSubscription = $this->db->query("SELECT * FROM employer_subscription WHERE status = '1'")-> result_array();
+		foreach ($getAllSubscription as $value) {
+			$sub_id = $value['transaction_id'];
+			$now_date = date('Y-m-d');
+			$expiry_date = date('Y-m-d', strtotime($value['expiry_date']));
+			$amount = $value['amount'];
+
+			if($expire_date < $now_date) {
+				if($amount < '1') {
+					$subStatus = $this->db->query("UPDATE employer_subscription SET status = '3' where status = '1'");
+					if($subStatus) {
+						echo '1';
+					} else {
+						echo '2';
+					}
+				} else {
+					require 'vendor/autoload.php';
+					require_once APPPATH."third_party/stripe/init.php";
+					$stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
+					$cnclsubData = $stripe->subscriptions->cancel("$sub_id",[]);
+					if($cnclsubData['status'] == 'canceled') {
+						$subStatus = $this->db->query("UPDATE employer_subscription SET status = '3' where status = '1'");
+						if($subStatus) {
+							echo '1';
+						} else {
+							echo '2';
+						}
+					}
+				}
 			}
 		}
 	}
