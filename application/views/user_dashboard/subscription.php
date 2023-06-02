@@ -70,9 +70,9 @@
                                                                         if($row->status == '1') { ?>
                                                                         <td class="cnc-plan" id="cancelSubsription" onclick="cancelSubsription('<?php echo $row->id;?>','<?php echo $row->transaction_id;?>','<?php echo $row->amount?>')">Cancel Subscription</td>
                                                                         <?php } else if($row->status == '2'){ ?>
-                                                                        <td class="cnc-plan">Subscription Cancelled</td>
+                                                                        <td class="cnc-plan" style="font-size: 12px;">You have cancelled your subscription. Your afrebay subscription expires on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
                                                                         <?php } else { ?>
-                                                                        <td class="cnc-plan">Subscription Expired</td>
+                                                                        <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </table>
@@ -91,7 +91,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2" class="year">
-                                                                <label>Payment Date:</label> <?php echo date ('Y-m-d',strtotime($row->payment_date));?>
+                                                                <label>Payment Date:</label> <?php echo date ('d M Y',strtotime($row->payment_date));?>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -101,7 +101,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2" class="year">
-                                                                <label>Expiry Date:</label> <?php echo date ('Y-m-d',strtotime($row->expiry_date));?>
+                                                                <label>Expiry Date:</label> <?php echo date ('d M Y',strtotime($row->expiry_date));?>
                                                             </td>
                                                         </tr>
                                                     </table>

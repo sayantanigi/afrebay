@@ -833,7 +833,7 @@ class Dashboard extends CI_Controller {
 			$expiry_date = date('Y-m-d', strtotime($value['expiry_date']));
 			$amount = $value['amount'];
 
-			if($expire_date < $now_date) {
+			if($expire_date = $now_date) {
 				if($amount < '1') {
 					$subStatus = $this->db->query("UPDATE employer_subscription SET status = '3' where status = '1'");
 					if($subStatus) {
