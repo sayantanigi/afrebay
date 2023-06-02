@@ -202,13 +202,13 @@ $(function () {
                                 $get_sub_data = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
                                 if(empty($get_sub_data))
                                 {
-                                    $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                                    //$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                     // if(in_array('', $profile_check[0]))
-                                    if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {?>
+                                    //if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {?>
                                         <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Jobs<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
-                                    <?php } else { ?>
-                                        <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-                                    <?php } ?>
+                                    <?php //} else { ?>
+                                        <!-- <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a> -->
+                                    <?php //} ?>
                                 <?php } else if(!empty($get_sub_data)) {
                                     $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                     // if(in_array('', $profile_check[0]))
