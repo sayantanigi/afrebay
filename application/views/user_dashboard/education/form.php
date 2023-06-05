@@ -112,13 +112,13 @@ function only_number(event) {
         event.preventDefault();
     }
 }
-$('#description').keyup(function() {  
+$('#description').keyup(function() {
     var characterCount = $(this).val().length,
         current = $('#current'),
         maximum = $('#maximum'),
         theCount = $('#the-count');
     current.text(characterCount);
-    
+
     /*This isn't entirely necessary, just playin around*/
     if (characterCount < 70) {
         current.css('color', '#666');
