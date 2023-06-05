@@ -40,9 +40,8 @@
 								<label>Subscription Country</label>
 								<select class="form-control" name="subscription_country" id="subscription_country" required onclick="showpaystackField()">
 									<option value="">Choose an option</option>
-									<?php foreach ($countries as $value) { ?>
-									<option value="<?= $value->name?>" <?php if($value->name == $subscription_country) { echo "selected"; } ?>><?= $value->name?></option>
-									<?php } ?>
+									<option value="Nigeria" <?php if($subscription_country == 'Nigeria') { echo "selected"; } ?>>Nigeria</option>
+									<option value="Global" <?php if($subscription_country == 'Global') { echo "selected"; } ?>>Global</option>
 								</select>
 							</div>
 							<div class="form-group showSubPrice" >
