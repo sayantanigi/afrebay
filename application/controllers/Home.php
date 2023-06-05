@@ -134,11 +134,17 @@ class Home extends MY_Controller {
 	}
 
 	function pricing() {
-		$vis_ip = $this->getVisIPAddr(); // Store the IP address
-		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+		// $vis_ip = $this->getVisIPAddr(); // Store the IP address
+		// $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
 
-		echo 'Country Name: ' . $ipdat->geoplugin_countryName . "\n";
+		// $countryName = $ipdat->geoplugin_countryName;
+		// if($countryName == 'Nigeria') {
+		// 	$cond = " WHERE subscription_country = '".$countryName."'";
+		// } else {
+			
+		// }
 		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
+		//$data['get_subscription'] = $this->db->query("SELECT * FROM subscription WHERE subscription_country = '".$countryName."'")->result_array();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='11'");
 		$this->load->view('header');
