@@ -34,6 +34,16 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     <div id="subscription-messages" class="text-success-msg f-20">
                         <p style="color: #28a745;">You Already have an active subscription plan.</p>
                     </div>
+                    <div class="row pricing_filter">
+                        <label>Filter By</label>
+                        <div>
+                            <select class="form-control" name="userType_id" id="userType_id" onchange="filterByuserType(this.value)" required>
+                                <option>Choose an option</option>
+                                <option value="Freelancer">Freelancer</option>
+                                <option value="Vendors">Vendors</option>
+                            </select>
+                        </div>
+                    </div>
                     <!-- Heading -->
                     <div class="plans-sec">
                         <div class="row">
@@ -85,7 +95,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
                             <?php }} ?>
-
                         </div>
                     </div>
                 </div>
@@ -158,5 +167,44 @@ function sub_alert () {
     setTimeout(function () {
         $('#subscription-messages').hide();
     }, 13000);
+}
+
+function filterByuserType(id){
+    var id = $('#userType_id').val();
+    $.ajax({
+        url:base_url+"Welcome/filterByuserType",
+        method:"POST",
+        data:{user_type: id},
+        beforeSend : function(){
+            $("#loader").show();
+            $(".getSubscription_<?php echo $value->id?>").text('Please wait..');
+        },
+        success:function(data) {
+            if (data == '1'){
+                setTimeout(function () {
+                    window.scroll({top: 0, behavior: "smooth"});
+                    $('#subscription-messages').show();
+                }, 10000);
+                setTimeout(function () {
+                    $('#subscription-messages').hide();
+                }, 13000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 16000);
+            } else {
+                $('#err-messages').show();
+                setTimeout(function () {
+                    window.scroll({top: 0, behavior: "smooth"})
+                }, 5000);
+                setTimeout(function () {
+                    $('#err-messages').hide();
+                }, 8000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 9000);
+            }
+        }
+
+    })
 }
 </script>

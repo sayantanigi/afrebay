@@ -123,7 +123,21 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
+	function getVisIpAddr() {
+    	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        	return $_SERVER['HTTP_CLIENT_IP'];
+    	} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        	return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    	} else {
+        	return $_SERVER['REMOTE_ADDR'];
+    	}
+	}
+
 	function pricing() {
+		$vis_ip = $this->getVisIPAddr(); // Store the IP address
+		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+
+		echo 'Country Name: ' . $ipdat->geoplugin_countryName . "\n";
 		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "id='11'");
@@ -214,7 +228,7 @@ class Home extends MY_Controller {
 
 
 	function post_bidding($postid) {
-		
+
 		if(empty($_SESSION['afrebay']['userId'])){
 			$type='admin';
 		}

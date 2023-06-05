@@ -761,7 +761,7 @@ function displayLocation(latitude, longitude) {
         function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
-                    var add = results[0].formatted_address; alert(add);
+                    var add = results[0].formatted_address;
                     var value = add.split(",");
                     count = value.length;
                     country = value[count - 1];

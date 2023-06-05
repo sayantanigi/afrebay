@@ -385,4 +385,17 @@ class Welcome extends CI_Controller {
 		echo $html;
 
 	}
+
+	// public function filterByuserType() {
+	// 	$userType = $this->input->post('user_type');
+	// 	if(!empty($userType)) {
+	// 		$cond = " WHERE subscription_user_type =  '".$userType."'";
+	// 	} else {
+	// 		$cond = '';
+	// 	}
+	// 	$getfilterData = $this->db->query("SELECT * FROM subscription WHERE subscription_user_type =  '".$userType."'")->result_array();
+	// 	if(!empty($getfilterData)) {
+	// 		$html = "<div class='col-lg-3 col-md-6 col-sm-6 col-xs-12'><div class='pricetable style2'><div class='Price_Shadow'></div><div class='Price_Tag'><div class='Price_Tag_data'><h2>'".ucfirst($key->subscription_type)."'</h2><h2>'".$key->subscription_amount."'</h2><span>'".$key->subscription_duration."'</span></div></div><div class='pricetable-head'><img src='https://cdn-icons-png.flaticon.com/512/5673/5673647.png'><h3>'".ucfirst($key->subscription_name)."'</h3></div>";
+	// 	}
+	// }
 }

@@ -85,7 +85,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     </div>
 </footer>
 <input type="hidden" name="base_url" id="base_url" value="<?= base_url()?>">
-<input type="text" name="paymentLocation" id="paymentLocation" value="">
+<!-- <input type="text" name="paymentLocation" id="paymentLocation" value=""> -->
 <style>
 <?php $seg2 = $this->uri->segment(1);
     if($seg2 == 'register') { ?>
