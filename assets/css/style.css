@@ -39478,6 +39478,7 @@ footer .social {
    background: #fff;
 
    padding: 1.875rem;
+   margin-bottom: 20px;
 
 }
 
@@ -40439,5 +40440,5 @@ border: 0 !important;
 }
 
 .pricing_filter label {
-    margin: 0; padding-right: 15px; font-weight: 500;    
+    margin: 0; padding-right: 15px; font-weight: 500;
 }

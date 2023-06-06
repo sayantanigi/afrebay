@@ -196,8 +196,29 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+	function getVisIpAddr() {
+    	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        	return $_SERVER['HTTP_CLIENT_IP'];
+    	} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        	return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    	} else {
+        	return $_SERVER['REMOTE_ADDR'];
+    	}
+	}
+
 	public function subscription() {
-		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
+		$vis_ip = $this->getVisIPAddr(); // Store the IP address
+		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+
+		$countryName = $ipdat->geoplugin_countryName;
+		if($countryName == 'Nigeria') {
+			$cond = " WHERE subscription_country = 'Nigeria'";
+		} else {
+			$cond = " WHERE subscription_country = 'Global'";
+		}
+
+		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
+		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
 		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND status = '1'")->result_array();
 		$this->load->view('header');
