@@ -102,7 +102,7 @@ $route['success/(:any)'] = "stripe/payment_success/$1";
 $route['view_profile'] = "user/dashboard/view_profile";
 $route['update-postjob/(:any)'] = "welcome/update_post_job/$1";
 $route['checkSubscriptionForUser'] = "user/dashboard/checkSubscriptionForUser";
-$route['paystackCheckout/(:any)'] = "Home/paystackCheckout/$1";
+$route['paystackCheckout/(:any)/(:any)/(:any)'] = "Home/paystackCheckout/$1/$2/$3";
 
 //ADMIN URL
 $route['admin'] = 'admin/login/index';

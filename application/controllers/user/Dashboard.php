@@ -220,7 +220,7 @@ class Dashboard extends CI_Controller {
 		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
-		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND status = '1'")->result_array();
+		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
 		$this->load->view('header');
 		$this->load->view('user_dashboard/subscription', $data);
 		$this->load->view('footer');

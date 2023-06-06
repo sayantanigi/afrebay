@@ -701,12 +701,15 @@ class Home extends MY_Controller {
 		echo $html;
 	}
 
-	public function paystackCheckout($planCode) {
+	public function paystackCheckout($planCode,$price,$email) {
 		//echo $this->input->get('plan_code');
 		$plan_code = base64_decode($planCode);
-		$url = "https://api.paystack.co/subscription";
+		$price = base64_decode($price);
+		$email = base64_decode($email);
+		$url = "https://api.paystack.co/transaction/initialize";
 		$fields = [
-			//'customer' => "CUS_xnxdt6s1zg1f4nx",
+			'email' => $email,
+			'amount' => $price,
 			'plan' => $plan_code
 		];
 
@@ -721,7 +724,11 @@ class Home extends MY_Controller {
 		));
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);    //So that curl_exec returns the contents of the cURL; rather than echoing it
 		$result = curl_exec($ch);    //execute post
-		echo $result;
+		//echo $result;
+		$initialize_data = json_decode($result);
+		$initialization_url = $initialize_data->data->authorization_url;
+		if($result) {
+			header("Location: ".$initialization_url);
+		}
 	}
-
 }
