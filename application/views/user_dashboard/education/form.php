@@ -33,7 +33,7 @@
         <form class="form" action="<?= $action; ?>" method="post" id="registrationForm" enctype="multipart/form-data">
             <div class="row row-sm">
                 <div class="col-xl-12 col-lg-12 col-md-12">
-                    <div class="cardak">
+                    <div class="cardak profile-mobile">
                         <div class="container bootstrap snippet">
                             <div class="new-pro">
                                 <a href="#" class="pull-right"></a>
@@ -112,13 +112,13 @@ function only_number(event) {
         event.preventDefault();
     }
 }
-$('#description').keyup(function() {
+$('#description').keyup(function() {  
     var characterCount = $(this).val().length,
         current = $('#current'),
         maximum = $('#maximum'),
         theCount = $('#the-count');
     current.text(characterCount);
-
+    
     /*This isn't entirely necessary, just playin around*/
     if (characterCount < 70) {
         current.css('color', '#666');

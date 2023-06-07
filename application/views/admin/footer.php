@@ -80,24 +80,10 @@ $(document).ready(function() {
                 d.SearchData9 = $(".filter_search_data9").val();
                 d.SearchData10 = $(".filter_search_data10").val();
                 d.FormData = $(".filter_data_form").serializeArray();
-            }
+            },
 
         },
-        // "columns":[
-        // 	{
-        //     	"sortable": false
-        //     },
-        //     {
-        //     	"sortable": false
-        //     },
-        //     {
-        //     	"sortable": true
-        //     }
-            
-            
-        // ],
-        // "ordering": true,
-
+       
         //Set column definition initialisation properties.
         "columnDefs": [
             {   
@@ -119,6 +105,7 @@ $(document).ready(function() {
             "fnDrawCallback": function() {
                 var api = this.api()
                 var json = api.ajax.json();
+                // console.log(json);
                 $(".append_ids").val(json.ids);
                 // uni_array();
             },
@@ -174,6 +161,14 @@ $(document).ready(function() {
 // $.fn.dataTableExt.oSort['time-date-sort-desc'] = function(a,b) {
 //     return b-a;
 // };
+function view_detail(transaction_id,status){
+  
+    
+    $("#transaction_id").val(transaction_id);
+    $("#status").val(status);
+    
+    $("#payment_detail_modal").modal('show');
+}
 
     function imageFile()
     {
