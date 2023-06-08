@@ -12,9 +12,9 @@ class Sub_category extends MY_Controller {
 	{
 		$get_category=$this->Crud_model->GetData('category');
 		$get_subcategory=$this->Crud_model->GetData('sub_category');
-		$header = array('title' => 'Sub Category');
+		$header = array('title' => 'Subcategories');
 		$data = array(
-			'heading' => 'Sub Categories',
+			'heading' => 'Subcategories',
 			'get_category' => $get_category,
 			'get_subcategory' => $get_subcategory,
 		);

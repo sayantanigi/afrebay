@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label>Category</label>
                                 <select class="form-control select filter_search_data6" name="">
-                                    <option value="">Select Sub Category</option>
+                                    <option value="">Select Subcategories</option>
                                     <?php
                                     if(!empty($get_subcategory)){
                                         foreach($get_subcategory as $item){ ?>
