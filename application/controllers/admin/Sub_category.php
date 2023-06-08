@@ -31,7 +31,7 @@ class Sub_category extends MY_Controller {
 
 		$from_date = $_POST['SearchData5'];
 		//print_r($from_date); exit;
-		$to_date = $_POST['SearchData7'];
+		//$to_date = $_POST['SearchData7'];
 
 
 		if($sub_category!='')
@@ -42,10 +42,10 @@ class Sub_category extends MY_Controller {
 		{
 			$cond .=" and sub_category.created_date  >= '".date('Y-m-d',strtotime($from_date))."' ";
 		}
-		if($to_date!='')
-		{
-			$cond .=" and sub_category.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
-		}
+		// if($to_date!='')
+		// {
+		// 	$cond .=" and sub_category.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
+		// }
 		$GetData = $this->Subcategory_model->get_datatables($cond);
 		//print_r($GetData); exit;
 		if(empty($_POST['start']))
