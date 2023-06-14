@@ -142,3 +142,25 @@ $(document).ready(function(){
     })
 })
 </script>
+<script>
+$(window).scroll(function(){
+    var filter_inputs = $('#filter_inputs');
+    var table_wrapper = $('#table_wrapper .row:nth-child(1)');
+    var table_header = $('#table thead');
+    scroll = $(window).scrollTop();
+    if (scroll >= 100) {
+        filter_inputs.addClass('sticky_thead');
+        table_wrapper.addClass('sticky_thead1');
+        table_header.addClass('sticky_thead2');
+    } else {
+        filter_inputs.removeClass('sticky_thead');
+        table_wrapper.removeClass('sticky_thead1');
+        table_header.removeClass('sticky_thead2');
+    }
+});
+
+$('#refreshForm').click(function(){
+    $('#categorySearch').trigger("reset");
+    $('.filter_search_data6').val('').trigger('change');
+})
+</script>

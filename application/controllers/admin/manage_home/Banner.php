@@ -52,7 +52,8 @@ class Banner extends MY_Controller {
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;
-			$nestedData[] = $img.' '.ucwords($row->heading);
+			$nestedData[] = ucwords($row->page_name);
+			$nestedData[] = $img;
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
 		}
@@ -97,7 +98,8 @@ class Banner extends MY_Controller {
 		}
 
 		$data=array(
-			'heading'=>$this->input->post('name',TRUE),
+			//'heading'=>$this->input->post('name'),
+			'page_name'=>$this->input->post('page_name'),
 			'image'=>$image,
 			'created_date'=>date('Y-m-d H:i:s'),
 		);
@@ -131,7 +133,8 @@ class Banner extends MY_Controller {
 		}
 		$data=array(
 			'id'=>$banner_data->id,
-			'heading'=>$banner_data->heading,
+			//'heading'=>$banner_data->heading,
+			'page_name'=>$banner_data->page_name,
 			'image'=>$img,
 			'old_image'=>$banner_data->image,
 		);
@@ -170,7 +173,8 @@ class Banner extends MY_Controller {
 		}
 
 		$data = array(
-			'heading'=>$this->input->post('name',TRUE),
+			//'heading'=>$this->input->post('name'),
+			'page_name'=>$this->input->post('page_name'),
 			'image'=>$image,
 
 		);

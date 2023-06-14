@@ -155,7 +155,7 @@ class Welcome extends CI_Controller {
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['category']=$this->Crud_model->GetData('category','','');
 		$data['subcategory']=$this->Crud_model->GetData('sub_category','','');
-		$data['get_banner']=$this->Crud_model->get_single('banner',"id='8'");
+		$data['get_banner']=$this->Crud_model->get_single('banner',"page_name='Post Jobs'");
 		$this->load->view('header');
 		$this->load->view('frontend/post_job',$data);
 		$this->load->view('footer');
