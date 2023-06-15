@@ -275,7 +275,6 @@ class Home extends MY_Controller {
 	}
 
 
-
 	function post_bidding($postid) {
 		if(!empty($_SESSION['afrebay_admin']['id'])){
 			$type='admin';
