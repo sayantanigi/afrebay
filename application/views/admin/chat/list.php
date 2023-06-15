@@ -76,5 +76,5 @@
 </div>
 <script>
 var url = '<?= admin_url('Chat/ajax_manage_page')?>';
-var actioncolumn=3;
+var actioncolumn=4;
 </script>

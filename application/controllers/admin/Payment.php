@@ -67,7 +67,7 @@ class Payment extends MY_Controller {
                 $current_status='Inactive';
             }
             $btn = '<button data-transaction_id="'.$row->transaction_id.'" class="btn btn-sm bg-success-light mr-2" type="button"  onClick="view_detail(\''.$row->transaction_id.'\',\''.$current_status.'\');"><i class="far fa-eye mr-1"></i>view</button>';
-            
+
 
             $no++;
             $nestedData = array();

@@ -70,8 +70,8 @@
                                     <tr>
                                         <th>#</th>
                                         <!-- <th>Full Name</th> -->
-                                        <th>Vendor Name</th>
-                                        <th>Freelancer Name</th>
+                                        <th>Job Poster Name</th>
+                                        <th>Job Bidder Name</th>
                                         <th>Post Title</th>
                                         <th>Duration</th>
                                         <th>Cost</th>
@@ -92,7 +92,7 @@
 </div>
 <script>
     var url = '<?= admin_url('Jobsbidding/ajax_manage_page')?>';
-    var actioncolumn=5;
+    var actioncolumn=8;
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>

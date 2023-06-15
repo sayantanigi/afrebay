@@ -68,7 +68,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Specialization</th>
-                                            <th>Date</th>
+                                            <th>Created Date</th>
                                             <th>Manage</th>
                                         </tr>
                                     </thead>

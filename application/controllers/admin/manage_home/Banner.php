@@ -27,7 +27,6 @@ class Banner extends MY_Controller {
 		$get_data = $this->Banner_model->get_datatables();
 		if(empty($_POST['start']))
 		{
-
 			$no=0;
 		}
 		else{

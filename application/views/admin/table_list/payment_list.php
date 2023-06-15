@@ -30,7 +30,7 @@
                                     <option value="" selected>All</option>
                                     <option value="1">Freelancer</option>
                                     <option value="2">Vendor subscription</option>
-                                  
+
                                 </select>
                             </div>
                         </div>
@@ -74,12 +74,12 @@
                                         <th>Email</th>
                                         <th>User Type</th>
                                         <th>Amount</th>
-                                        <th>Date</th>
+                                        <th>Payment Date</th>
                                         <th>Expiry Date</th>
                                         <th>Payment Status</th>
                                         <th>Manage</th>
                                     </tr>
-                                </thead> 
+                                </thead>
                                 <tbody>
 
                                 </tbody>
@@ -123,7 +123,7 @@
 
 <script>
 var url = '<?= admin_url('Payment/ajax_manage_page')?>';
-var actioncolumn=7;
+var actioncolumn=9;
 </script>
 
 <script type="text/javascript" src="<?= base_url('dist/assets/custom_js/user.js')?>"></script>

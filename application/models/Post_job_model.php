@@ -22,6 +22,9 @@ class Post_job_model extends My_Model {
             foreach ($explode_string as $show_string) {
                 $cond  = " ";
                 $cond.=" (  postjob.post_title LIKE '%".trim($show_string)."%' ";
+                $cond.=" OR  category.category_name LIKE '%".trim($show_string)."%' ";
+                $cond.=" OR  postjob.duration LIKE '%".trim($show_string)."%' ";
+                $cond.=" OR  postjob.charges LIKE '%".trim($show_string)."%' ";
                 $cond.=" OR  postjob.status LIKE '%".trim($show_string)."%') ";
                 $this->db->where($cond);
             }

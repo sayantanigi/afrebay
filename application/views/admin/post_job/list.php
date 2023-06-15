@@ -47,7 +47,7 @@
 
 <script>
 var url = '<?= admin_url('Post_job/ajax_manage_page')?>';
-var actioncolumn=5;
+var actioncolumn=6;
 </script>
 
 <script type="text/javascript" src="<?= base_url('dist/assets/custom_js/rating_type.js')?>"></script>

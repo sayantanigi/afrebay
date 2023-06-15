@@ -167,7 +167,7 @@
 
 <script>
 var url = '<?= admin_url('manage_home/Banner/ajax_manage_page')?>';
-var actioncolumn=2;
+var actioncolumn=3;
 </script>
 
 <script type="text/javascript" src="<?= base_url('dist/assets/custom_js/banner.js')?>"></script>
