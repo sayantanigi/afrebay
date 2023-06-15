@@ -214,6 +214,6 @@ $('#refreshForm').click(function(){
     position: sticky;
     top: 96px;
     background: #fff;
-    z-index: 1100;
+    z-index: 100;
 }
 </style>

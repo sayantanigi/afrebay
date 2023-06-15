@@ -76,7 +76,7 @@
                                         <th>Amount</th>
                                         <th>Payment Date</th>
                                         <th>Expiry Date</th>
-                                        <th>Payment Status</th>
+                                        <!-- <th>Subscription Status</th> -->
                                         <th>Manage</th>
                                     </tr>
                                 </thead>
@@ -123,7 +123,7 @@
 
 <script>
 var url = '<?= admin_url('Payment/ajax_manage_page')?>';
-var actioncolumn=9;
+var actioncolumn=8;
 </script>
 
 <script type="text/javascript" src="<?= base_url('dist/assets/custom_js/user.js')?>"></script>
