@@ -109,7 +109,7 @@
             <input type="text" class="form-control" id="transaction_id" readonly>
           </div>
           <div class="form-group">
-            <label for="status" class="col-form-label">Status:</label>
+            <label for="status" class="col-form-label">Current Subscription Status:</label>
             <input type="text" class="form-control" id="status" readonly>
          </div>
         </form>

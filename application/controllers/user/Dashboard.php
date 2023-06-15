@@ -364,7 +364,7 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->SaveData('job_bid', $data);
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
-			$this->session->set_flashdata('message', 'Add Bid Successfully !');
+			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Vendor to approve your bid.');
 			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later.');

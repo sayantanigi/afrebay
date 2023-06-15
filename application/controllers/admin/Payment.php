@@ -68,7 +68,7 @@ class Payment extends MY_Controller {
             if($row->status == '1'){
                 $status = 'Active';
             } else if($row->status == '2') {
-                $status = 'Canceled';
+                $status = 'Cancelled';
             } else {
                 $status = 'Expired';
             }

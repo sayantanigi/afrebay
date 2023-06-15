@@ -24,10 +24,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Post Title</th>
+                                    <th style="width: 165px">Post Title</th>
                                     <th>Job Category</th>
                                     <th>Duration</th>
-                                    <th>Approximate Remuneration</th>
+                                    <th style="width: 95px;">Budget</th>
                                     <th>Status</th>
                                     <th>Manage</th>
                                 </tr>

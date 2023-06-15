@@ -119,3 +119,4 @@ $route['admin/our-services'] = 'admin/manage_home/Our_services/index';
 $route['admin/banner'] = 'admin/manage_home/Banner/index';
 $route['admin/email-template'] = 'admin/Email_template/index';
 $route['admin/chat_details/(:any)/(:any)'] = "admin/chat/adminShowMessage_list/$1/$2";
+$route['admin/deletepostdetail/(:any)'] = "admin/Post_job/deletepostdetail/$1";

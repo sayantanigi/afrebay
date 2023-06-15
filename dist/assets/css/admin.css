@@ -6069,3 +6069,20 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 table.dataTable thead .sorting_asc {
     background-image: url("uploads/sort_asc.png")
 }
+
+
+/*For admin*/
+
+#table_wrapper .col-sm-12 #table {
+	width: 100% !important;
+}
+
+@media only screen and (max-width: 425px) {
+  #table_wrapper .col-sm-12 {
+	overflow-x: auto;
+  }
+
+  #table_wrapper .col-sm-12 .sticky_thead2 {
+	position: unset;
+  }
+}
