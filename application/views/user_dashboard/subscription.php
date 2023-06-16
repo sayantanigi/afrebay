@@ -144,7 +144,7 @@
                                     </div>
                                     <div></div>
                                     <div><?= $value->subscription_description; ?></div>
-                                    <?php if($value->subscription_type == 'paid') { 
+                                    <?php if($value->subscription_type == 'paid') {
                                         if(!empty($value->product_key)) { ?>
                                             <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($value->price_key))?>">Subscribe</a>
                                             <?php } else { ?>
