@@ -109,9 +109,10 @@ $(document).ready(function() {
     });
 });
 
-function view_detail(transaction_id,status){
+function view_detail(transaction_id,status,invoice_pdf){
     $("#transaction_id").val(transaction_id);
     $("#status").val(status);
+    $("#download_invoice").attr("href", invoice_pdf);
     $("#payment_detail_modal").modal('show');
 }
 

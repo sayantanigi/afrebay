@@ -306,6 +306,7 @@ function only_number(event) {
         event.preventDefault();
     }
 }
+
 function only_numbers(event) {
     var x = event.which || event.keyCode;
     console.log(x);

@@ -217,8 +217,14 @@ class Dashboard extends CI_Controller {
 			$cond = " WHERE subscription_country = 'Global'";
 		}
 
+		if($_SESSION['afrebay']['usertype'] == '1') {
+			$uType = 'Freelancer';
+		} else {
+			$uType = 'Vendor';
+		}
+
 		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
-		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result();
+		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond." AND subscription_user_type = '".$uType."'")->result();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
 		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
 		$this->load->view('header');
@@ -355,6 +361,7 @@ class Dashboard extends CI_Controller {
 			'postjob_id' => $_POST['postjob_id'],
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'bid_amount' => $_POST['bid_amount'],
+			'currency' => $_POST['currency'],
 			'email' => $_POST['email'],
 			'duration' => $_POST['duration'],
 			'phone' => $_POST['phone'],
@@ -364,7 +371,7 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->SaveData('job_bid', $data);
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
-			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Vendor to approve your bid.');
+			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Vendor has approved your bid');
 			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later.');

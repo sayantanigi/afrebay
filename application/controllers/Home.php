@@ -278,7 +278,7 @@ class Home extends MY_Controller {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
 
-		$data['countryName'] = array('countryName' => $ipdat->geoplugin_countryName, );
+		$data['countryName'] = $ipdat->geoplugin_countryName;
 		if(!empty($_SESSION['afrebay_admin']['id'])){
 			$type='admin';
 		} else if(!empty($_SESSION['afrebay']['userId'])) {
@@ -301,7 +301,6 @@ class Home extends MY_Controller {
 			$this->load->view('header',$data);
 			$data['type']='';
 		}
-		echo "<pre>"; print_r($data); die;
 		$this->load->view('frontend/post_detail', $data);
 		$this->load->view('footer');
 	}

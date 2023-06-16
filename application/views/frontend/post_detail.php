@@ -147,7 +147,16 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Bid Amount</label>
-                                        <input type="text" class="form-control f1" placeholder="Your bid Amount" name="bid_amount" required>
+                                        <div style="width: 50px;">
+                                        <?php if($countryName == 'Nigeria') { ?>
+                                            <input type="text" class="form-control f1" name="currency" id="currency" value="NGN (₦)" readonly>
+                                        <?php } else { ?>
+                                            <input type="text" class="form-control f1" name="currency" id="currency" value="USD ($)" readonly>
+                                        <?php } ?>
+                                        </div>
+                                        <div style="display: inline-block;width: 82%; margin-left: 10px;">
+                                            <input type="text" class="form-control f1" placeholder="Your bid Amount" name="bid_amount" id="bid_amount" required>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Email</label>
@@ -191,3 +200,15 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
     </div>
 </div>
 </section>
+<script>
+$(document).ready(function(){
+    $("#bid_amount").on("keypress keyup blur", function (event) {
+        var patt = new RegExp(/(?<=\.\d\d).+/i);
+        $(this).val($(this).val().replace(patt, ''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+})
+
+</script>

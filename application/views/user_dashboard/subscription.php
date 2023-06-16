@@ -42,9 +42,11 @@
                             unset($_SESSION['message']);
                         } ?>
                     </span>
+                    <?php if(!empty($subcriber_pack)) { ?>
                     <div class="col-xl-12 col-lg-12 col-md-12" style="display: inline-block; text-align: center; padding-bottom: 15px;">
                         <h3>Current Plan</h3>
                     </div>
+                    <?php } ?>
                     <div class="row row-sm">
                         <div class="col-xl-12 col-lg-12 col-md-12">
                             <div class="cardak custom-cardak">
@@ -79,13 +81,19 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="2" class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
+                                                            <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
+                                                            <td class="btn-option"><a href="<?php echo $row->invoice_pdf?>" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; padding: 5px 25px; font-weight: 500; color: orange;">Download invoice</a></td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2" class="bid-amount">
                                                             <?php if($row->amount=='0') { ?>
                                                             <?php  } else{ ?>
-                                                                <label>Price ($):</label> <?php echo "$". number_format((float)$row->amount, 2, '.', '');?>
+                                                                <?php if ($key['subscription_country'] == 'Nigeria') {
+                                                                    $currency = '₦';
+                                                                } else {
+                                                                    $currency = '$';
+                                                                }?>
+                                                                <label>Price (<?php echo $currency?>):</label> <?php echo $currency.' '.number_format((float)$row->amount, 2, '.', '');?>
                                                             <?php } ?>
                                                             </td>
                                                         </tr>
@@ -94,11 +102,11 @@
                                                                 <label>Payment Date:</label> <?php echo date ('d M Y',strtotime($row->payment_date));?>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <!-- <tr>
                                                             <td colspan="2" class="year">
                                                                 <label>Duration:</label> <?php echo $row->duration." Days";?>
                                                             </td>
-                                                        </tr>
+                                                        </tr> -->
                                                         <tr>
                                                             <td colspan="2" class="year">
                                                                 <label>Expiry Date:</label> <?php echo date ('d M Y',strtotime($row->expiry_date));?>
@@ -133,7 +141,13 @@
                                     <div class="Sub_Head">
                                         <div class="Heading">
                                             <h1><?= $value->subscription_name; ?></h1>
-                                            <h2>Price: <?= ' '.$value->subscription_amount; ?><span></span></h2>
+                                            <h2>
+                                                <?php if ($key['subscription_country'] == 'Nigeria') {
+                                                        $currency = '₦';
+                                                    } else {
+                                                        $currency = '$';
+                                                    }?>
+                                                    Price: <?= $currency.''.$value->subscription_amount; ?><span></span></h2>
                                             <p style="text-align: justify;">Duration: <b><?= ' '.$value->subscription_duration." Days"; ?></b><span></span></p>
                                         </div>
                                         <div class="Icon">

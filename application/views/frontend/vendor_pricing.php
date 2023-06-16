@@ -28,8 +28,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading">
-                        <h2>Become A AfreBay Partner Today!</h2>
-                        <span>One of our jobs has some kind of flexibility option - such as telecommuting, a part-time schedule or a flexible or flextime schedule.</span>
+                        <h2>Become an AfreBay Partner Today!</h2>
+                        <span>Find the most appropriate freelancers for your job from a varity of resources and global workforce.</span>
                     </div>
                     <div id="subscription-messages" class="text-success-msg f-20">
                         <p style="color: #28a745;">You Already have an active subscription plan.</p>
@@ -57,8 +57,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <div class="Price_Tag1">
                                         <div class="Price_Tag_data">
                                             <p><?= ucfirst($key['subscription_type'])?> Subscription</p>
-                                            <!-- <h2><?= $key['subscription_amount']?>$</h2>
-                                            <span><?= $key['subscription_duration']?></span> -->
                                         </div>
                                     </div>
                                     <div class="pricetable-head" style="text-align: center;">
@@ -66,7 +64,15 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <h3><?= ucfirst($key['subscription_name'])?></h3>
                                         <div class="Price_Tag1">
                                             <div class="Price_Tag_data">
-                                                <p style="margin-bottom: 0px !important;">Price : <?= $key['subscription_amount']?>$</p>
+                                                <p style="margin-bottom: 0px !important;">
+                                                    Price : 
+                                                    <?php if ($key['subscription_country'] == 'Nigeria') {
+                                                        $currency = '₦';
+                                                    } else {
+                                                        $currency = '$';
+                                                    }
+                                                    echo $currency.' '.$key['subscription_amount']?> 
+                                                </p>
                                                 <span>Validity : 
                                                     <?php 
                                                     echo "For ".$key['subscription_duration'];                                                 

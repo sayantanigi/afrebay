@@ -72,7 +72,7 @@ class Payment extends MY_Controller {
             } else {
                 $status = 'Expired';
             }
-            $btn = '<button data-transaction_id="'.$row->transaction_id.'" class="btn btn-sm bg-success-light mr-2" type="button"  onClick="view_detail(\''.$row->transaction_id.'\',\''.$status.'\');"><i class="far fa-eye mr-1"></i>view</button>';
+            $btn = '<button data-transaction_id="'.$row->transaction_id.'" class="btn btn-sm bg-success-light mr-2" type="button"  onClick="view_detail(\''.$row->transaction_id.'\',\''.$status.'\',\''.$row->invoice_pdf.'\');"><i class="far fa-eye mr-1"></i>view</button>';
 
 
             $no++;

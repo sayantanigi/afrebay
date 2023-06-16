@@ -112,6 +112,7 @@
             <label for="status" class="col-form-label">Current Subscription Status:</label>
             <input type="text" class="form-control" id="status" readonly>
          </div>
+         <a href="" id="download_invoice">Download Invoice</a>
         </form>
       </div>
       <div class="modal-footer">
