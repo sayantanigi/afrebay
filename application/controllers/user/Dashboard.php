@@ -225,7 +225,8 @@ class Dashboard extends CI_Controller {
 
 		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond." AND subscription_user_type = '".$uType."'")->result();
-		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
+		$data['current_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
+		$data['expired_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status = '3'");
 		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
 		$this->load->view('header');
 		$this->load->view('user_dashboard/subscription', $data);
@@ -380,7 +381,8 @@ class Dashboard extends CI_Controller {
 
 	}
 
-	function changebiddingstatus() {
+	/*function changebiddingstatus() {
+		print_r($this->input->post()); die;
 		$get_data = $this->Crud_model->get_single('job_bid', "id='" . $_POST['jobbid_id'] . "'");
 		if ($get_data->bidding_status == 'Pending') {
 			$data1 = array(
@@ -401,6 +403,28 @@ class Dashboard extends CI_Controller {
 		}
 		echo "1";
 		exit;
+	}*/
+
+	function changebiddingstatus() {
+		$bidstatus = $this->input->post('bidstatus');
+		$jodBidid = $this->input->post('jodBidid');
+		$postJobid = $this->input->post('postJobid');
+		$data1 = array(
+			'bidding_status' => $bidstatus,
+		);
+		$this->Crud_model->SaveData('job_bid', $data1, "id='".$jodBidid."' AND postjob_id='".$postJobid."'");
+		if($bidstatus == "Selected") {
+			$this->Crud_model->SaveData('job_bid', $data1, "id='".$jodBidid."' AND postjob_id='".$postJobid."'");
+			$binddingstatus = $this->Crud_model->GetData('job_bid', '', "postjob_id = '".$postJobid."' and bidding_status IN ('Under Review','Short Listed')");
+			foreach ($binddingstatus as $row) {
+				$data = array(
+					'bidding_status' => 'Rejected',
+				);
+				$this->Crud_model->SaveData('job_bid', $data, "id='" . $row->id . "'");
+			}
+		}
+		echo "1";
+		exit;
 	}
 
 	/////////////////////////////////////////  End job bidding////////////////////
@@ -412,8 +436,9 @@ class Dashboard extends CI_Controller {
 
 	////////////////////////////////// start chat functionality////////////////
 	function chat() {
-		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='" . $_SESSION['afrebay']['userId'] . "'");
-		$cond = "job_bid.bidding_status='Accept'";
+		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='".$_SESSION['afrebay']['userId']."'");
+		//$cond = "job_bid.bidding_status='Accept'";
+		$cond = "job_bid.bidding_status IN ('Short Listed','Selected')";
 		$data['get_jobbid'] = $this->Users_model->get_jobbidding($cond);
 		$this->load->view('header');
 		$this->load->view('user_dashboard/chat', $data);

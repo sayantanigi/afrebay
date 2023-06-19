@@ -75,21 +75,22 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="chatList">
+                                                    <!-- <div class="chatList">
                                                         <?php if (!empty($get_user->firstname)) { ?>
                                                         <a href="javascript:void(0)" id="showBidList">My Bid List</a>
                                                         <?php } ?>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 <div id="search">
                                                    <!--  <span class="char-sea"><i class="fa fa-search" aria-hidden="true"></i></span> -->
-                                                   <input type="text" placeholder="Search contacts..." />
+                                                   <input type="text" placeholder="Search by Contacts and Job ID" />
                                                 </div>
                                                 <div id="contacts">
                                                     <ul>
                                                     <?php if (!empty($get_jobbid)) {
                                                     foreach ($get_jobbid as $user) {
-                                                        if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
+                                                        //if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
+                                                        if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && ($user->bidding_status == 'Selected' || $user->bidding_status == 'Short Listed')) {
                                                             $get_user = $this->Crud_model->get_single('users', "userId='" . $user->userid . "'");
                                                             $get_msg = $this->Crud_model->GetData('chat', '', "userto_id='" . $user->userid . "' and userfrom_id='" . $user->user_id . "'", '', 'id desc', '', '1');
                                                     ?>
@@ -109,11 +110,12 @@
                                                                     echo ucfirst($get_user->companyname);
                                                                 } ?>
                                                                 </p>
+                                                                <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
                                                                 <p class="preview"><?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p>
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <?php } else if ($user->postjob_id == $user->post_id && $user->userid == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
+                                                    <?php } else if ($user->postjob_id == $user->post_id && $user->userid == $_SESSION['afrebay']['userId'] && ($user->bidding_status == 'Selected' || $user->bidding_status == 'Short Listed')) {
                                                         $get_user = $this->Crud_model->get_single('users', "userId='" . $user->user_id . "'");
                                                         $get_msg1 = $this->Crud_model->GetData('chat', '', "userfrom_id='" . $user->user_id . "' and userto_id='" . $user->userid . "'", '', 'id desc', '', '1');
                                                     ?>
@@ -278,7 +280,7 @@ $(window).on('keydown', function(e) {
     }
 });
 //# sourceURL=pen.js
-   
+
 function getuser(user_id) {
     var displayProduct = 3;
     $('#message_list').html(createSkeleton(displayProduct));
