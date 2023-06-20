@@ -409,6 +409,8 @@ class Dashboard extends CI_Controller {
 		$bidstatus = $this->input->post('bidstatus');
 		$jodBidid = $this->input->post('jodBidid');
 		$postJobid = $this->input->post('postJobid');
+		$jobbiduserid = $this->input->post('jobbiduserid');
+		$jobpostuserid = $this->input->post('jobpostuserid');
 		$data1 = array(
 			'bidding_status' => $bidstatus,
 		);
@@ -421,6 +423,10 @@ class Dashboard extends CI_Controller {
 					'bidding_status' => 'Rejected',
 				);
 				$this->Crud_model->SaveData('job_bid', $data, "id='" . $row->id . "'");
+			}
+			$getChatData = $this->db->query("SELECT * FROM chat WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'")->result();
+			if(!empty($getChatData)) {
+				$updateChatData = $this->db->query("UPDATE chat SET is_delete = '2' WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'");
 			}
 		}
 		echo "1";
@@ -447,6 +453,7 @@ class Dashboard extends CI_Controller {
 
 	function showmessage_list() {
 		$user_id = $this->input->post('user_id');
+		$post_id = $this->input->post('post_id');
 		$get_data = $this->Users_model->getChat();
 		//print_r($get_data);
 		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
@@ -463,22 +470,22 @@ class Dashboard extends CI_Controller {
 		$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
 		if (!empty($get_data)) {
 			foreach ($get_data as $key) {
-				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
 					$from_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$from_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
-				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
 					$to_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
-				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id']) {
+				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
 					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p></li>';
 				} else {
 					$sent = '';
 				}
-				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id']) {
+				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
 					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p></li>';
 				} else {
 					$reply = '';
@@ -498,6 +505,7 @@ class Dashboard extends CI_Controller {
 				'userfrom_id' => $_SESSION['afrebay']['userId'],
 				'userto_id' => $this->input->post('userto_id'),
 				'message' => $this->input->post('message'),
+				'postjob_id' => $this->input->post('postjob_id'),
 				'created_date' => date('Y-m-d H:i:s'),
 			);
 			$this->db->insert('chat', $data);

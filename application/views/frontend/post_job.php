@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
     $banner_img=base_url("uploads/banner/".$get_banner->image);
 } else {
@@ -149,7 +150,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             <?php
                                             $get_country = $this->Crud_model->GetData('countries', 'id, name', "");
                                             foreach($get_country as $val) {?>
-                                                <option value="<?php echo $val->name; ?>" <?php if($val->name == $countries) {echo "selected"; }?>><?php echo $val->name;?></option>
+                                                <option value="<?php echo $val->name; ?>" <?php if($val->name == @$countries) {echo "selected"; }?>><?php echo $val->name;?></option>
                                             <?php } ?>
                                             </select>
                                             <input type="hidden" id="select_country_dropdown" value="<?php echo @$countries; ?>">
@@ -167,7 +168,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <?php
                                                 //$get_state = $this->Crud_model->GetData('states', 'id, name', "");
                                                 //foreach($get_state as $key) {?>
-                                                    <!-- <option value="<?= $key->name; ?>" <?php if($key->name == $state) {echo "selected"; }?>><?php echo $key->name;?></option> -->
+                                                    <!-- <option value="<?= $key->name; ?>" <?php if($key->name == @$state) {echo "selected"; }?>><?php echo $key->name;?></option> -->
                                                 <?php //} ?>
                                             <?php } ?>
                                             </select>
@@ -186,7 +187,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     <?php
                                                     //$get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
                                                     //foreach($get_cities as $key) {?>
-                                                        <!-- <option value="<?= $key->name; ?>" <?php if($key->name == $cities) {echo "selected"; }?>><?php echo $key->name;?></option> -->
+                                                        <!-- <option value="<?= $key->name; ?>" <?php if($key->name == @$cities) {echo "selected"; }?>><?php echo $key->name;?></option> -->
                                                     <?php //} ?>
                                                 <?php } ?>
                                             </select>

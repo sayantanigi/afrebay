@@ -72,6 +72,8 @@
                                                             </select>
                                                             <input type="hidden" name="jodBidid" id="jodBidid_<?php echo @$key->id?>" value="<?php echo @$key->id?>"/>
                                                             <input type="hidden" name="postJobid" id="postJobid_<?php echo @$key->id?>" value="<?php echo @$key->postjob_id?>"/>
+                                                            <input type="hidden" name="jobbiduserid" id="jobbiduserid_<?php echo @$key->id?>" value="<?php echo @$key->userid?>"/>
+                                                            <input type="hidden" name="jobpostuserid" id="jobpostuserid_<?php echo @$key->id?>" value="<?php echo @$key->user_id?>"/>
                                                         <?php } else {
                                                             echo @$key->bidding_status;
                                                         }
@@ -198,12 +200,14 @@ $(document).ready(function(){
 		var bidstatus = $('#change_biddingstatus_<?php echo $value->id?>').val();
 		var jodBidid = $('#jodBidid_<?php echo $value->id?>').val();
 		var postJobid = $('#postJobid_<?php echo $value->id?>').val();
+        var jobbiduserid = $('#jobbiduserid_<?php echo $value->id?>').val();
+        var jobpostuserid = $('#jobpostuserid_<?php echo $value->id?>').val();
         var cnf = confirm('Are you sure to change the status?');
         if(cnf==true) {
             $.ajax({
                 type:"POST",
                 url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
-                data:{bidstatus: bidstatus,jodBidid: jodBidid,postJobid: postJobid},
+                data:{bidstatus: bidstatus,jodBidid: jodBidid,postJobid: postJobid,jobbiduserid: jobbiduserid,jobpostuserid: jobpostuserid},
                 success:function(returndata) {
                     if(returndata==1){
                         location.reload();

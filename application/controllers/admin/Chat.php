@@ -31,17 +31,32 @@ class Chat extends MY_Controller {
 
 	function ajax_manage_page() {
 		$cond = "1=1";
-		$GetData = $this->db->query('SELECT `chat`.*, `users`.`username`, CONCAT(users.firstname, " ", users.lastname) as full_name, `users`.`profilePic`, `to_user`.`username` as `to_username`, CONCAT(to_user.firstname, " ", to_user.lastname) as to_fullname FROM `chat` JOIN `users` ON `users`.`userId`=`chat`.`userfrom_id` JOIN `users` `to_user` ON `to_user`.`userId`=`chat`.`userto_id` group by userfrom_id order by id DESC')->result_array();
+		//$GetData = $this->db->query('SELECT `chat`.*, `users`.`username`, CONCAT(users.firstname, " ", users.lastname) as full_name, `users`.`profilePic`, `to_user`.`username` as `to_username`, CONCAT(to_user.firstname, " ", to_user.lastname) as to_fullname FROM `chat` JOIN `users` ON `users`.`userId`=`chat`.`userfrom_id` JOIN `users` `to_user` ON `to_user`.`userId`=`chat`.`userto_id` group by userfrom_id order by id DESC')->result_array();
+		$GetData = $this->db->query('SELECT `chat`.* FROM `chat` JOIN `users` ON `users`.`userId`=`chat`.`userfrom_id` JOIN `users` `to_user` ON `to_user`.`userId`=`chat`.`userto_id` group by userfrom_id order by id DESC')->result_array();
 		$no=0;
 		$data = array();
 		foreach ($GetData as $row) {
 			$btn = '<span class="btn btn-sm bg-success-light mr-2" data-toggle="modal" data-target="#viewModal" onclick="view_data(3)" data-placement="right"><i class="far fa-eye mr-1"></i><a href="'.admin_url('chat_details/'.$row['userfrom_id'].'/'.$row['userto_id']).'">View Chat</a></span>';
-			
+
+			$getFromUser = $this->db->query("SELECT * FROM `users` WHERE userId = '".$row['userfrom_id']."'")->result_array();
+			if(!empty($getFromUser[0]['firstname'])) {
+				$fullname = $getFromUser[0]['firstname'].' '.$getFromUser[0]['lastname'];
+			} else {
+				$fullname = $getFromUser[0]['companyname'];
+			}
+
+			$gettoUser = $this->db->query("SELECT * FROM `users` WHERE userId = '".$row['userto_id']."'")->result_array();
+			if(!empty($gettoUser[0]['firstname'])) {
+				$fullname1 = $gettoUser[0]['firstname'].' '.$gettoUser[0]['lastname'];
+			} else {
+				$fullname1 = $gettoUser[0]['companyname'];
+			}
+
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;
-			$nestedData[] = ucwords($row['full_name']);
-			$nestedData[] = ucwords($row['to_fullname']);
+			$nestedData[] = ucwords($fullname1);
+			$nestedData[] = ucwords($fullname);
 			$nestedData[] = date('d-m-Y',strtotime($row['created_date']));
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
