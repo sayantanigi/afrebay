@@ -322,6 +322,7 @@ function getuser(user_id,post_id) {
         }
     });
 }
+
 function openVideoCallWindow(fid) {
 	var callPath = "<?php echo base_url('livevideo/video/');?>"+fid;
 	window.open(callPath, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=250,left=20,width=600,height=450");

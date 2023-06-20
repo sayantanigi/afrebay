@@ -428,6 +428,10 @@ class Dashboard extends CI_Controller {
 			if(!empty($getChatData)) {
 				$updateChatData = $this->db->query("UPDATE chat SET is_delete = '2' WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'");
 			}
+			$updatepost = array(
+				'is_delete' => 1,
+			);
+			$this->Crud_model->SaveData('postjob', $updatepost, "id='".$postJobid."'");
 		}
 		echo "1";
 		exit;
