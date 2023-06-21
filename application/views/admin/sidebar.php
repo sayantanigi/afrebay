@@ -54,7 +54,10 @@
 				<a href="#"><i class="fas fa-star"></i> <span>Ratings</span></a>
 			</li> -->
 			<li <?php if ($seg2 =='subscription') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('subscription')?>"><i class="far fa-calendar-alt"></i> <span>Subscription Plans</span></a>
+				<a href="<?= admin_url('subscription')?>"><i class="far fa-calendar-alt"></i>
+					<!-- <span>Subscription Plans</span> -->
+					<span>Freelancer Subscriptions</span>
+				</a>
 			</li>
 			<!-- <li <?php if ($seg2 =='Wallet') {?>class="active"<?php }?>>
 				<a href="#"><i class="fas fa-wallet"></i> <span> Wallet</span></a>

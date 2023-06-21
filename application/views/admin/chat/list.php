@@ -57,6 +57,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Job Title</th>
                                         <th>Vendor</th>
                                         <th>Freelancer</th>
                                         <th>Initiated Date</th>
