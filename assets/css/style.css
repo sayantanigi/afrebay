@@ -34621,7 +34621,7 @@ footer .bottom-line span {
 
 .Product-Details-Page .Product-Img .Product-Img-Container {
 
-   height: 100%;
+   height: 400px;
 
    position: relative;
 
@@ -34641,7 +34641,7 @@ footer .bottom-line span {
 
    width: 100%;
 
-   height: 420px;
+   height: 400px;
 
    object-fit: cover;
 
@@ -34654,17 +34654,12 @@ footer .bottom-line span {
 
 
 .Product-Details-Page .Product-Img .Product-Img-Container .Slider-All-Img {
-
    position: absolute;
-
-   bottom: 0;
-
+   bottom: 1px;
    margin: 0;
-
    left: 0;
-
    background: #0000004a;
-
+   height: 50px;
 }
 
 

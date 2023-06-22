@@ -209,7 +209,6 @@ class Dashboard extends CI_Controller {
 	public function subscription() {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
-
 		$countryName = $ipdat->geoplugin_countryName;
 		if($countryName == 'Nigeria') {
 			$cond = " WHERE subscription_country = 'Nigeria'";
@@ -217,7 +216,7 @@ class Dashboard extends CI_Controller {
 			$cond = " WHERE subscription_country = 'Global'";
 		}
 
-		if($_SESSION['afrebay']['usertype'] == '1') {
+		if($_SESSION['afrebay']['userType'] == '1') {
 			$uType = 'Freelancer';
 		} else {
 			$uType = 'Vendor';

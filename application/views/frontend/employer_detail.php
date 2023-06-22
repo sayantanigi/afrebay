@@ -82,11 +82,27 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="row">
                                 <div class="col-lg-8 col-md-12 col-sm-12 column">
                                     <div class="job-details">
-                                        <h3>About Business Network</h3>
+                                        <h3>About
+                                            <?php
+                                            $companyname=$userdata->companyname;
+                                            if(!empty($companyname)) {
+                                                echo ucwords($companyname);
+                                            } else {
+                                                echo $userdata->username;
+                                            } ?>
+                                        </h3>
                                         <p><?= @$userdata->short_bio;?></p>
                                     </div>
                                     <div class="recent-jobs">
-                                        <h3>Jobs from Business Network</h3>
+                                        <h3>Jobs from
+                                            <?php
+                                            $companyname=$userdata->companyname;
+                                            if(!empty($companyname)) {
+                                                echo ucwords($companyname);
+                                            } else {
+                                                echo $userdata->username;
+                                            } ?>
+                                        </h3>
                                         <div class="job-list-modern">
                                             <div class="job-listings-sec no-border">
                                                 <?php
@@ -99,18 +115,19 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     <div class="job-title-sec">
                                                         <h3 style="text-transform: uppercase;"><a href="<?php echo base_url()?>postdetail/<?php echo base64_encode($key->id)?>" title=""><?= $key->post_title; ?></a></h3>
                                                         <span><?php echo $key->required_key_skills; ?></span>
-                                                        <div class="job-lctn"><i class="la la-map-marker"></i><?= $key->location; ?></div>
+                                                        <div class="job-lctn"><i class="la la-map-marker"></i><?= ucwords($key->location); ?></div>
                                                     </div>
                                                     <div class="job-style-bx">
                                                         <span class="fav-job"><i class="la la-heart-o"></i></span>
                                                         <i>
                                                         <?php
-                                                            $insertdate=date('Y-m-d',strtotime($key->created_date));
-                                                            $date1 = new DateTime($insertdate);
-                                                            $current_date=date('Y-m-d');
-                                                            $date2 = new DateTime($current_date);
-                                                            $interval = $date1->diff($date2);
-                                                            echo $interval->y . " years, " . $interval->m." months, ".$interval->d." days ";
+                                                            echo date('d-m-Y',strtotime($key->created_date));
+                                                            // $insertdate=date('Y-m-d',strtotime($key->created_date));
+                                                            // $date1 = new DateTime($insertdate);
+                                                            // $current_date=date('Y-m-d');
+                                                            // $date2 = new DateTime($current_date);
+                                                            // $interval = $date1->diff($date2);
+                                                            // echo $interval->y . " years, " . $interval->m." months, ".$interval->d." days ";
                                                         ?>
                                                         </i>
                                                     </div>
@@ -136,25 +153,40 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </li>
                                             <li>
                                                 <i class="la la-map"></i>
-                                                <h3>Location</h3> <span><?= @$userdata->address;?></span>
+                                                <h3>Location</h3>
+                                                <span>
+                                                    <?php
+                                                    @$userdata->address;
+                                                    $splitAddress = explode(',', @$userdata->address);
+                                                    $numItems = count($splitAddress);
+                                                    $i = 0;
+                                                    foreach($splitAddress as $key=>$value) {
+                                                        if (0 === --$numItems) {
+                                                            echo $value;
+                                                        }
+                                                    }
+                                                    ?>
+                                                </span>
                                             </li>
 
                                             <?php
-                                            $skills = $this->db->query("SELECT group_concat(required_key_skills) as skill FROM postjob WHERE user_id = '".$userdata->userId."'")->result_array();
-                                            if(!empty($skills[0]['skill'])) { ?>
-                                            <li>
+                                            //$skills = $this->db->query("SELECT group_concat(required_key_skills) as skill FROM postjob WHERE user_id = '".$userdata->userId."'")->result_array();
+                                            //if(!empty($skills[0]['skill'])) { ?>
+                                            <!-- <li>
                                                 <i class="la la-bars"></i>
                                                 <h3>Skills</h3>
                                                 <span>
                                                 <?php echo $uniq_skill = implode(', ',array_unique(explode(',', $skills[0]['skill']))); ?>
                                                 </span>
-                                            </li>
-                                            <?php } ?>
+                                            </li> -->
+                                            <?php // } ?>
+                                            <?php if(!empty(@$userdata->foundedyear)) { ?>
                                             <li>
                                                 <i class="la la-clock-o"></i>
                                                 <h3>Since</h3>
                                                 <span><?= @$userdata->foundedyear;?></span>
                                             </li>
+                                            <?php } ?>
                                             <!-- <li>
                                                 <i class="la la-users"></i>
                                                 <h3>Team Size</h3>
@@ -166,14 +198,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     }
                                                     ?>
                                                 </span>
-                                            </li> -->
+                                            </li>
                                             <li>
                                                 <i class="la la-users"></i>
                                                 <h3>TAX ID</h3>
                                                 <span>
                                                     <?php echo $userdata->teamsize; ?>
                                                 </span>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                 </div>
