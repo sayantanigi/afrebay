@@ -75,8 +75,8 @@
                                     <th>Type</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
                                     <th>Created Date</th>
+                                    <th>Email Verified</th>
                                     <th>Status</th>
                                     <th>Manage</th>
                                 </tr>

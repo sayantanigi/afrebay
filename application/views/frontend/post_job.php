@@ -94,7 +94,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <div class="col-lg-6">
                                         <span class="pf-title">Approximate Remuneration ($)</span>
-                                        <div class="pf-field">
+                                        <div style="width: 75px;">
+                                        <?php if($countryName == 'Nigeria') { ?>
+                                            <input type="text" class="form-control f1" name="currency" id="currency" value="NGN (₦)" readonly style=" padding: 15px; ">
+                                        <?php } else { ?>
+                                            <input type="text" class="form-control f1" name="currency" id="currency" value="USD ($)" readonly style=" padding: 15px; ">
+                                        <?php } ?>
+                                        </div>
+                                        <div class="pf-field" style=" float: left; width: 85%; margin-left: 10px; ">
                                             <input type="text" placeholder="Enter Charges" name="charges" class="form-control " value="<?= @$charges; ?>"/>
                                         </div>
                                     </div>

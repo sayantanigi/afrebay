@@ -37,15 +37,15 @@ class Users extends MY_Controller {
         foreach ($GetData as $row)
         {
             if($row->userType == 1) {
-                $btn = ''.anchor(base_url('worker-detail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
+                $btn = ''.anchor(base_url('worker-detail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i></span>');
             } else {
-                $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>View</span>');
+                $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i></span>');
             }
-            $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>Edit</span>','target=_blank');
+            $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-edit mr-1"></i></span>','target=_blank');
 
             // $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>Edit</span>');
 
-            $btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;">Delete</span>';
+            $btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;"><i class="fa fa-trash mr-1"></i></span>';
             if($row->userType==1)
             {
                 $type='Freelancer';
@@ -53,6 +53,19 @@ class Users extends MY_Controller {
             elseif($row->userType==2){
                 $type='Vendor';
             }
+
+            if($row->email_verified=="1"){
+                $email_verified='<div class="status-toggle">
+                <input id="rating_\''.$row->userId.'\'" class="check" type="checkbox" checked onClick="email_verified('.$row->userId.');">
+                <label for="rating_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
+                </div>';
+            } else {
+                $email_verified='<div class="status-toggle">
+                <input id="rating_\''.$row->userId.'\'" class="check" type="checkbox" onClick="email_verified('.$row->userId.');">
+                <label for="rating_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
+                </div>';
+            }
+
             if($row->status=="1"){
                 $status='<div class="status-toggle">
                 <input id="rating_\''.$row->userId.'\'" class="check" type="checkbox" checked onClick="status('.$row->userId.');">
@@ -77,8 +90,9 @@ class Users extends MY_Controller {
             $nestedData[] = $type;
             $nestedData[] = $name;
             $nestedData[] = $row->email;
-            $nestedData[] = $row->mobile;
+            //$nestedData[] = $row->mobile;
             $nestedData[] = date('d-m-Y',strtotime($row->created));
+            $nestedData[] = $email_verified."<input type='hidden' id='email_verified".$row->userId."' value='".$row->email_verified."' />";
             $nestedData[] = $status."<input type='hidden' id='status".$row->userId."' value='".$row->status."' />";
             $nestedData[] = $btn;
             $data[] = $nestedData;
@@ -123,6 +137,22 @@ class Users extends MY_Controller {
         }
         $data=array(
             'status'=>$statuss,
+        );
+        $this->Crud_model->SaveData("users",$data,"userId='".$_POST['id']."'");
+
+    }
+
+    public function email_verification() {
+        if($_POST['email_verified']=='1') {
+            $email_verified='0';
+        } else if($_POST['email_verified']=='0'){
+            $email_verified='1';
+
+        }
+
+        $data=array(
+            'email_verified'=>$email_verified,
+            'status'=> '1',
         );
         $this->Crud_model->SaveData("users",$data,"userId='".$_POST['id']."'");
 

@@ -277,11 +277,11 @@ class Home extends MY_Controller {
 	function post_bidding($postid) {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
-
+		//print_r($_SESSION); die();
 		$data['countryName'] = $ipdat->geoplugin_countryName;
-		if(!empty($_SESSION['afrebay_admin']['id'])){
+		if(!empty($_SESSION['afrebay_admin'])){
 			$type='admin';
-		} else if(!empty($_SESSION['afrebay']['userId'])) {
+		} else if(!empty($_SESSION['afrebay'])) {
 			$type='user';
 		} else {
 			$type='nouser';
@@ -292,7 +292,7 @@ class Home extends MY_Controller {
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Post Jobs'");
 
 		if($type=='admin'){
-			$this->load->view('admin_header',$data);
+			$this->load->view('header',$data);
 			$data['type']='admin';
 		} else if($type=='user') {
 			$this->load->view('header',$data);

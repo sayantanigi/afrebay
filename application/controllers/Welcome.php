@@ -146,7 +146,20 @@ class Welcome extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	function getVisIpAddr() {
+    	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        	return $_SERVER['HTTP_CLIENT_IP'];
+    	} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        	return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    	} else {
+        	return $_SERVER['REMOTE_ADDR'];
+    	}
+	}
+
 	function post_job() {
+		$vis_ip = $this->getVisIPAddr(); // Store the IP address
+		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+		$data['countryName'] = $ipdat->geoplugin_countryName;
 		//$data['getkey_skills']=$this->Crud_model->GetData('specialist',"","status = 'Active'");
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['category']=$this->Crud_model->GetData('category','','');
@@ -175,6 +188,7 @@ class Welcome extends CI_Controller {
 			'key_skills' => $update_data->required_key_skills,
 			'duration' => $update_data->duration,
 			'charges' => $update_data->charges,
+			'currency' => $update_data->currency,
 			'category' => $update_data->category_id,
 			'subcategory' => $update_data->subcategory_id,
 			'appli_deadeline' => $update_data->appli_deadeline,
@@ -193,6 +207,7 @@ class Welcome extends CI_Controller {
 
 
 	public function edit_post_job() {
+		//echo "<pre>"; print_r($_SESSION); die();
 		$key_skills = $this->input->post('key_skills');
 		for ($i=0; $i < count($key_skills); $i++) {
 			$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
@@ -214,6 +229,7 @@ class Welcome extends CI_Controller {
 			'description'=>$this->input->post('description',TRUE),
 			'duration'=>$this->input->post('duration',TRUE),
 			'charges'=>$this->input->post('charges',TRUE),
+			'currency'=>$this->input->post('currency',TRUE),
 			'location'=>$this->input->post('location',TRUE),
 			'latitude'=>$this->input->post('latitude',TRUE),
 			'longitude'=>$this->input->post('longitude',TRUE),
@@ -226,7 +242,7 @@ class Welcome extends CI_Controller {
 		);
 		$this->Crud_model->SaveData('postjob', $data, "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Post Job Updated Successfully !');
-		if(!empty($_SESSION['afrebay']['afrebay_admin'])) {
+		if(!empty($_SESSION['afrebay_admin'])) {
 			redirect(base_url('admin/post_job'));
 		} else {
 			redirect(base_url('myjob'));
@@ -265,6 +281,7 @@ class Welcome extends CI_Controller {
 			'description'=>$this->input->post('description',TRUE),
 			'duration'=>$this->input->post('duration',TRUE),
 			'charges'=>$this->input->post('charges',TRUE),
+			'currency'=>$this->input->post('currency',TRUE),
 			'location'=>$this->input->post('location',TRUE),
 			'latitude'=>$this->input->post('latitude',TRUE),
 			'longitude'=>$this->input->post('longitude',TRUE),
@@ -278,7 +295,8 @@ class Welcome extends CI_Controller {
 		//echo "<pre>"; print_r($data); die;
 		$this->Crud_model->SaveData('postjob',$data);
 		$this->session->set_flashdata('message', 'Post Job Created Successfull !');
-		redirect(base_url("postjob"));
+		$insert_id = $this->db->insert_id();
+		redirect(base_url("postdetail/".base64_encode($insert_id)));
 	}
 
 	function post_jobinfo($id) {

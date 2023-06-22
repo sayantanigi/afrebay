@@ -116,7 +116,8 @@ class Login extends CI_Controller {
                 redirect(base_url('login'), 'refresh');
             }
         } else {
-            $this->session->set_flashdata('message', 'Sorry! Activation link is expired!');
+            //$this->session->set_flashdata('message', 'Sorry! Activation link is expired!');
+            $this->session->set_flashdata('message', 'Your Email Address is already verified. Please login.');
             redirect(base_url('login'), 'refresh');
         }
     }
