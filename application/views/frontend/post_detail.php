@@ -13,6 +13,16 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
     margin: 10px;
     font-size: 20px;
 }
+.cstm_viewbid_btn {background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+    border: 0;
+    border-radius: 35px;
+    letter-spacing: 0;
+    font-weight: 600;
+    width: 35%;
+    display: block;
+    margin: 30px 0px 0px 109px;
+    color: #fff;
+    padding: 10px;}
 </style>
 <section class="overlape">
     <div class="block no-padding">
@@ -46,7 +56,13 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
             <div class="col-md-12 col-sm-12 display-table-cell v-align">
                 <div class="user-dashboard">
                     <div class="row row-sm">
+                        <?php if (@$_SESSION['afrebay']['userType'] == '1') { ?>
                         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 col-12">
+                        <?php } else if(@$_SESSION['afrebay']['userType'] == '2'){ ?>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                        <?php } else { ?>
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 col-12">
+                        <?php } ?>
                             <div class="bid-dis">
                                 <ul>
                                     <li>
@@ -58,7 +74,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                         </a>
                                     </li>
                                     <?php if (!empty($post_data->description)) { ?>
-                                    <li><span>Description</span><?php echo $post_data->description; ?>
+                                    <li class="cstm_desc"><span>Description</span><?php echo $post_data->description; ?>
                                     <?php } ?>
                                     </li>
                                     <div class="Bid-Data">
@@ -89,7 +105,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                     </div>
                                     <div class="Bid-Data">
                                         <?php if (!empty($post_data->charges)) { ?>
-                                        <li><span>Charges </span><?php echo $post_data->charges; ?></li>
+                                        <li><span>Charges </span><?php echo $post_data->charges." ".$post_data->currency ?></li>
                                         <?php } ?>
                                         <?php if (!empty($post_data->duration)) { ?>
                                         <li><span>Duration </span><?php echo $post_data->duration; ?></li>
@@ -141,6 +157,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                 </ul>
                             </div>
                         </div>
+                        <?php if (@$_SESSION['afrebay']['userType'] == '1' || empty($_SESSION['afrebay']['userType'])) { ?>
                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
                             <form class="bd-form" action="<?= base_url('user/dashboard/save_postbid') ?>" method="post">
                                 <h3 class="job-bid">Job Bidding</h3>
@@ -158,18 +175,18 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                             <input type="text" class="form-control f1" placeholder="Your bid Amount" name="bid_amount" id="bid_amount" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Email</label>
                                         <input type="email" class="form-control f1" placeholder="Contact Email" name="email" required>
-                                    </div>
+                                    </div> -->
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Duration</label>
                                         <input type="text" class="form-control f1" placeholder="Duration" name="duration" required>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Phone Number</label>
                                         <input type="text" class="form-control f1" placeholder="Phone" name="phone" onkeypress="only_number(event)" required maxlength="10">
-                                    </div>
+                                    </div> -->
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="" class="form-label">Details</label>
                                         <textarea class="form-control" name="description" placeholder="Description"></textarea>
@@ -179,8 +196,12 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                         <div class="bid-btn">
                                             <?php if (!empty(@$_SESSION['afrebay']['userType'])) {
                                                 if (@$_SESSION['afrebay']['userType'] == '1') {
-                                            ?>
-                                            <input type="submit" name="">
+                                                    $userBidData = $this->db->query("SELECT * FROM `job_bid` WHERE postjob_id = '".$post_data->id."' and user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
+                                                    if(!empty($userBidData)) { ?>
+                                                        <a href="<?= base_url()?>jobbid" class="cstm_viewbid_btn"> View Bid</a>
+                                                    <?php } else { ?>
+                                                        <input type="submit" name="">
+                                                    <?php } ?>
                                             <?php } else { ?>
                                             <h2 class="job-bid" style="font-size:16px;">Verdors are not eligible to Bid for jobs</h2>
                                             <?php }
@@ -193,6 +214,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                 </div>
                             </form>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

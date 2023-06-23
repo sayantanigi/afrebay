@@ -362,9 +362,9 @@ class Dashboard extends CI_Controller {
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'bid_amount' => $_POST['bid_amount'],
 			'currency' => $_POST['currency'],
-			'email' => $_POST['email'],
+			//'email' => $_POST['email'],
 			'duration' => $_POST['duration'],
-			'phone' => $_POST['phone'],
+			//'phone' => $_POST['phone'],
 			'description' => $_POST['description'],
 			'created_date' => date('Y-m-d H:i:s'),
 		);

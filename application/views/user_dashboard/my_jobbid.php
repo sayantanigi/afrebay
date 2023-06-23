@@ -63,7 +63,7 @@
                                                     <?php
                                                     if($_SESSION['afrebay']['userType'] == '2') {
                                                         if(@$key->bidding_status != 'Rejected') {?>
-                                                            <select name="change_biddingstatus" id="change_biddingstatus_<?php echo @$key->id?>" >
+                                                            <select class="jobbid_select form-control"> name="change_biddingstatus" id="change_biddingstatus_<?php echo @$key->id?>" >
                                                                 <option value="">Select Option</option>
                                                                 <option value="Under Review" <?php if(@$key->bidding_status == 'Under Review'){echo "Selected"; }?>>Under Review</option>
                                                                 <option value="Short Listed" <?php if(@$key->bidding_status == 'Short Listed'){echo "Selected"; }?>>Short Listed</option>
@@ -93,15 +93,15 @@
                                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list-job-modal-col">
                                                                             <p>Bid Amount : <span>$ <?php echo $key->bid_amount?></span></p>
                                                                         </div>
-                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list-job-modal-col">
+                                                                        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list-job-modal-col">
                                                                             <p>Email : <span><?php echo $key->email?></span></p>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list-job-modal-col">
                                                                             <p>Duration : <span><?php echo $key->duration?></span></p>
                                                                         </div>
-                                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list-job-modal-col">
+                                                                        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 list-job-modal-col">
                                                                             <p>Phone Number : <span><?php echo $key->mobile?></span></p>
-                                                                        </div>
+                                                                        </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -111,7 +111,11 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="bid_contact-profile">
+                                                    <?php if(empty($key->profilePic)) { ?>
+                                                    <img src="<?php echo base_url()?>uploads/users/user.png" alt="" style="width: 60px; height: 60px; object-fit: cover;">
+                                                    <?php } else { ?>
                                                     <img src="<?php echo base_url()?>uploads/users/<?php echo $key->profilePic?>" alt="" style="width: 60px; height: 60px; object-fit: cover;">
+                                                    <?php } ?>
                                                     <a href="<?php echo base_url()?>worker-detail/<?php echo base64_encode($key->userid)?>" target="_blank"><p><?=$key->fullname; ?></p></a>
                                                 </td>
                                             </tr>

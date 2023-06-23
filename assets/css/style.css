@@ -6200,7 +6200,7 @@ header.style2 nav {
 
    text-align: center;
 
-   margin-top: 30px;
+/*   margin-top: 30px;*/
 
    background: #f4f5fa;
 
@@ -6230,11 +6230,11 @@ header.style2 nav {
 
 
 
-.pricetable:hover {
+/*.pricetable:hover {
 
    margin-top: 20px;
 
-}
+}*/
 
 
 
@@ -6360,7 +6360,7 @@ header.style2 nav {
 
    margin: 0;
 
-   margin-top: 30px;
+   margin-top: 15px;
 
 }
 
@@ -38229,7 +38229,7 @@ object-fit: cover;
 
    height: auto;
 
-   margin-top: 50px !important;
+/*   margin-top: 50px !important;*/
 
    padding: 15px !important;
 
@@ -38464,10 +38464,9 @@ object-fit: cover;
 
 
 .Pricing_Data .plans-sec .pricetable a.btn {
+position: relative;
 
    margin: 0 !important;
-
-   position: relative;
 
    z-index: 1;
 
@@ -39112,6 +39111,7 @@ footer .social {
 .User_Sidemenu .display-table-cell .user-dashboard .row {
 
    margin: 0 !important;
+   align-items: flex-start !important;
 
 }
 
@@ -39498,9 +39498,8 @@ footer .social {
 
    padding: 1.875rem;
    margin-bottom: 20px;
-
+   height: 100%;
 }
-
 
 
 .User_Sub .Sub_Block .Sub_Head {
@@ -39644,6 +39643,7 @@ footer .social {
    letter-spacing: 0;
 
    font-weight: 600;
+   position: relative;
 
 }
 
@@ -40461,4 +40461,20 @@ border: 0 !important;
 
 .pricing_filter label {
     margin: 0; padding-right: 15px; font-weight: 500;
+}
+
+.Bid-page .bid-dis li.cstm_desc ul li {
+   list-style: disc !important;
+   color: #000 !important;
+   font-weight: 400 !important;
+}
+
+.Bid-page .bid-dis li.cstm_desc ul {
+   padding-left: 30px !important;
+}
+
+.jobbid_select {
+   width: 40% !important;
+   display: inline-block !important;
+   margin-right: 10px;
 }
