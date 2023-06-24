@@ -62,7 +62,7 @@
                                                             <td class="heading">Transaction ID: <?php echo $row->transaction_id;?></td>
                                                             <td class="btn-option">
                                                                 <table class="plan-active-table">
-                                                                    <tr>
+                                                                    <!-- <tr>
                                                                         <?php
                                                                         if($row->status == '1') { ?>
                                                                         <td class="active-plan">Active Plan</td>
@@ -74,7 +74,16 @@
                                                                         <?php } else if($row->status == '2') { ?>
                                                                         <td class="cnc-plan" style="font-size: 12px;">You have cancelled your subscription. Your afrebay subscription expires on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
                                                                         <?php } else { ?>
-                                                                        <!-- <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td> -->
+                                                                        <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
+                                                                        <?php } ?>
+                                                                    </tr> -->
+                                                                    <tr>
+                                                                        <?php
+                                                                        if($row->status == '1') { ?>
+                                                                        <td class="active-plan"><span>Active Plan</span></td>
+                                                                        <?php } ?>
+                                                                        <?php if($row->status == '3') { ?>
+                                                                        <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
                                                                         <?php } ?>
                                                                     </tr>
                                                                 </table>
@@ -294,7 +303,10 @@
 #cnclsubscription-messages{display: none; text-align: center;}
 #err-messages{display: none; text-align: center;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" integrity="sha512-/bOVV1DV1AQXcypckRwsR9ThoCj7FqTV2/0Bm79bL3YSyLkVideFLE3MIZkq1u5t28ke1c0n31WYCOrO01dsUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+$('.Sub_Block').matchHeight();
+$('.Sub_Block ul').matchHeight();
 $(document).ready(function(){
     <?php
     if(!empty($get_subscription)) {

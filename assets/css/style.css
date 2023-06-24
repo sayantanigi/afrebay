@@ -40451,7 +40451,8 @@ border: 0 !important;
 }
 
 .plan-active-table {width: 100%;}
-.plan-active-table .active-plan {text-align: center; color: green; font-weight: 500; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; width: 46%;}
+.plan-active-table .active-plan {text-align: right;;}
+.plan-active-table .active-plan span {text-align: center; color: green; font-weight: 500; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; width: auto; display: inline-block; padding: 5px 25px;}
 .plan-active-table .cnc-plan {color: red; border-radius: 30px; text-align: center; font-weight: 500; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; width: 46%;}
 .plan-active-table .cnc-plan:hover {color: #fff; background: red; cursor: pointer;}
 

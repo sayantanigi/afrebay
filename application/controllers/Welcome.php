@@ -242,11 +242,12 @@ class Welcome extends CI_Controller {
 		);
 		$this->Crud_model->SaveData('postjob', $data, "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Post Job Updated Successfully !');
-		if(!empty($_SESSION['afrebay_admin'])) {
-			redirect(base_url('admin/post_job'));
-		} else {
-			redirect(base_url('myjob'));
-		}
+		redirect(base_url('myjob'));
+		// if(!empty($_SESSION['afrebay_admin'])) {
+		// 	redirect(base_url('admin/post_job'));
+		// } else {
+		// 	redirect(base_url('myjob'));
+		// }
 
 	}
 

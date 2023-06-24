@@ -32,7 +32,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     </div>
 </section>
 
-<?php 
+<?php
 // echo "test here code";die;
 // echo $data_request;die;
 if($data_request=='user'){
@@ -97,20 +97,23 @@ else{
                                                 <label for="first_name">
                                                     <h4>Company Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company name" value="<?php echo $userinfo->companyname;?>" />
+                                                <input type="text" class="form-control" name="companyname" id="companyname" placeholder="Company Name" value="<?php echo $userinfo->companyname;?>" />
+                                                <div id="vld_companyname" style="color:red; margin-top: 10px;">Please enter Company Name.</div>
                                             </div>
                                             <?php } else { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>First Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First name" value="<?php echo $userinfo->firstname;?>"  onkeypress="only_alphabets(event)" />
+                                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" value="<?php echo $userinfo->firstname;?>"  onkeypress="only_alphabets(event)" />
+                                                <div id="vld_firstname" style="color:red; margin-top: 10px;">Please enter First Name.</div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
                                                     <h4>Last Name <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last name" value="<?php echo $userinfo->lastname;?>"  onkeypress="only_alphabets(event)" />
+                                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" value="<?php echo $userinfo->lastname;?>"  onkeypress="only_alphabets(event)" />
+                                                <div id="vld_lastname" style="color:red; margin-top: 10px;">Please enter Last Name.</div>
                                             </div>
                                             <?php } ?>
                                             <div class="col-lg-6">
@@ -137,6 +140,7 @@ else{
                                                     <option value="Male" <?php if(@$userinfo->gender=='Male'){ echo "selected";}?>>Male</option>
                                                     <option value="Female" <?php if(@$userinfo->gender=='Female'){ echo "selected";}?>>Female</option>
                                                 </select>
+                                                <div id="vld_gender" style="color:red; margin-top: 10px;">Please Select Gender.</div>
                                             </div>
                                             <?php } ?>
                                             <!-- <div class="col-lg-6">
@@ -163,13 +167,14 @@ else{
                                                     <h4>Legal Address <span style="color:red;">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="address" id="location" placeholder="Legal Address" value="<?= $userinfo->address ?>" style="height: 49px !important;" autocomplete="off" />
+                                                <div id="vld_location" style="color:red; margin-top: 10px;">Please enter Legal Address.</div>
                                                 <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
                                                 <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
                                             </div>
                                             <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <?php if(@$userinfo->userType=='1') { ?>
 
-                                                
+
                                             <div class="col-lg-6 key-skill">
                                                 <span class="pf-title1">Key Skills</span>
                                                 <div class="pf-field">
@@ -195,7 +200,7 @@ else{
                                             <?php if(@$userinfo->userType=='1') { ?>
                                             <div class="col-lg-6">
                                                 <label for="last_name">
-                                                    <h4>Zip Code <span style="color:red;">*</span></h4>
+                                                    <h4>Zip Code</h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo @$userinfo->zip;?>" onkeypress="only_number(event)" maxlength="6" />
                                             </div>
@@ -272,6 +277,7 @@ else{
                                                     <h4>TAX ID <span style="color:red;">*</span></h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="TAX ID" value="<?php echo $userinfo->teamsize;?>" />
+                                                <div id="vld_teamsize" style="color:red; margin-top: 10px;">Please enter TAX ID.</div>
                                             </div>
                                             <?php } ?>
 
@@ -279,7 +285,11 @@ else{
                                                 <label for="last_name">
                                                     <h4>Short Bio <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" ><?= @$userinfo->short_bio ?></textarea>
+                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" maxlength="500"><?= @$userinfo->short_bio ?></textarea>
+                                                <div id="the-count">
+                                                    <span id="current">0</span>
+                                                    <span id="maximum">/ 500</span>
+                                                </div>
                                                 <div id="vld_shrtBio" style="color:red; margin-top: 10px;">Please enter short bio.</div>
                                             </div>
                                         </div>
@@ -304,7 +314,16 @@ else{
 </div>
 </section>
 <style>
+.Admin_Profile .cardak .gender select {margin-bottom: 0px !important;}
+.form-design form .cardak .profile-dsd input  {margin-bottom: 0px !important;}
+.col-lg-6 {margin-bottom: 20px !important;}
     #vld_shrtBio {display: none;}
+    #vld_firstname {display: none;}
+    #vld_lastname {display: none;}
+    #vld_gender {display: none;}
+    #vld_location {display: none;}
+    #vld_companyname {display: none;}
+    #vld_teamsize {display: none;}
     .container:before,
     .container:after
         { display: none !important; }
@@ -320,10 +339,8 @@ else{
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
-<script>
-CKEDITOR.replace('short_bio');
-</script>
 <script type="text/javascript">
+//CKEDITOR.replace('short_bio');
 $('#skills').tagsinput({
     confirmKeys: [13, 44],
     maxTags: 20,
@@ -334,52 +351,123 @@ $('.key_skills').select2({
     tokenSeparators: [','],
     placeholder: "Select or Type Skills"
 });
+
+$('#short_bio').keyup(function() {
+    var characterCount = $(this).val().length,
+    current = $('#current'),
+    maximum = $('#maximum'),
+    theCount = $('#the-count');
+
+    current.text(characterCount);
+
+    /*This isn't entirely necessary, just playin around*/
+    if (characterCount < 70) {
+        current.css('color', '#666');
+    }
+    if (characterCount > 70 && characterCount < 90) {
+        current.css('color', '#6d5555');
+    }
+    if (characterCount > 90 && characterCount < 100) {
+        current.css('color', '#793535');
+    }
+    if (characterCount > 100 && characterCount < 120) {
+        current.css('color', '#841c1c');
+    }
+    if (characterCount > 120 && characterCount < 139) {
+        current.css('color', '#8f0001');
+    }
+
+    if (characterCount >= 140) {
+        maximum.css('color', '#8f0001');
+        current.css('color', '#8f0001');
+        theCount.css('font-weight','bold');
+    } else {
+        maximum.css('color','#666');
+        theCount.css('font-weight','normal');
+    }
+});
 $("form").submit( function(e) {
     if($('#utype').val() == 1) {
         if($('#firstname').val() == ''){
             $('#firstname').focus().attr('placeholder', 'This field is required');
+            $('#vld_firstname').show();
+            $('#firstname').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_firstname").hide();},5000)
             e.preventDefault();
         }
         if($('#lastname').val() == ''){
             $('#lastname').focus().attr('placeholder', 'This field is required');
+            $('#vld_lastname').show();
+            $('#lastname').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_lastname").hide();},5000)
             e.preventDefault();
         }
         if($('#gender').val() == ''){
             $('#gender').focus().attr('placeholder', 'This field is required');
+            $('#vld_gender').show();
+            $('#gender').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_gender").hide();},5000)
             e.preventDefault();
         }
         if($('#location').val() == ''){
             $('#location').focus().attr('placeholder', 'This field is required');
+            $('#vld_location').show();
+            $('#location').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_location").hide();},5000)
             e.preventDefault();
         }
-        if($('#key_skills').val() == ''){
-            $('#key_skills').focus().attr('placeholder', 'This field is required');
+        if($('#short_bio').val() == ''){
+            $('#short_bio').focus().attr('placeholder', 'This field is required');
+            $('#vld_shrtBio').show();
+            $('#short_bio').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_shrtBio").hide();},5000)
             e.preventDefault();
         }
-        if($('#zip').val() == ''){
-            $('#zip').focus().attr('placeholder', 'This field is required');
-            e.preventDefault();
-        }
+        // if($('#key_skills').val() == ''){
+        //     $('#key_skills').focus().attr('placeholder', 'This field is required');
+        //     $('#key_skills').focus().css('border', '1px solid red');
+        //     e.preventDefault();
+        // }
+        // if($('#zip').val() == ''){
+        //     $('#zip').focus().attr('placeholder', 'This field is required');
+        //     e.preventDefault();
+        // }
     } else {
         if($('#companyname').val() == ''){
             $('#companyname').focus().attr('placeholder', 'This field is required');
+            $('#vld_companyname').show();
+            $('#companyname').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_companyname").hide();},5000)
             e.preventDefault();
         }
         if($('#location').val() == ''){
             $('#location').focus().attr('placeholder', 'This field is required');
+            $('#vld_location').show();
+            $('#location').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_location").hide();},5000)
             e.preventDefault();
         }
         if($('#teamsize').val() == ''){
             $('#teamsize').focus().attr('placeholder', 'This field is required');
+            $('#vld_teamsize').show();
+            $('#teamsize').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_teamsize").hide();},5000)
+            e.preventDefault();
+        }
+        if($('#short_bio').val() == ''){
+            $('#short_bio').focus().attr('placeholder', 'This field is required');
+            $('#vld_shrtBio').show();
+            $('#short_bio').focus().css('border', '1px solid red');
+            setTimeout(function(){$("#vld_shrtBio").hide();},5000)
             e.preventDefault();
         }
     }
-    var messageLength = CKEDITOR.instances['short_bio'].getData().replace(/<[^>]*>/gi, '').length;
-    if(!messageLength) {
-        $('#vld_shrtBio').show();
-        CKEDITOR.instances['short_bio'].focus();
-        setTimeout(function(){$("#vld_shrtBio").hide();},5000)
-        e.preventDefault();
-    }
+    // var messageLength = CKEDITOR.instances['short_bio'].getData().replace(/<[^>]*>/gi, '').length;
+    // if(!messageLength) {
+    //     $('#vld_shrtBio').show();
+    //     CKEDITOR.instances['short_bio'].focus();
+    //     setTimeout(function(){$("#vld_shrtBio").hide();},5000)
+    //     e.preventDefault();
+    // }
 });
 </script>

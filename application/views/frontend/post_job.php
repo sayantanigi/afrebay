@@ -62,7 +62,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <span class="pf-title">Required Key Skills <span style="color:red;">*</span></span>
+                                        <span class="pf-title">Required Skill Set <span style="color:red;">*</span></span>
                                         <div class="pf-field custom-select">
                                             <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
                                             <!-- <?php foreach($getkey_skills as $val) {?>
@@ -247,9 +247,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </section>
 
 
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/taginput.css')?>">
+<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/taginput.css')?>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js" integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js" integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg==" crossorigin="anonymous"></script> -->
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />

@@ -12,7 +12,7 @@ class Specialist extends MY_Controller {
     	$get_specialist=$this->Crud_model->GetData('specialist');
 		$header = array('title' => 'Specializations');
 		$data = array(
-			'heading' => 'Specializations',
+			'heading' => 'Skill Set',
             'get_specialist' => $get_specialist
         );
         $this->load->view('admin/header', $header);
@@ -108,7 +108,7 @@ class Specialist extends MY_Controller {
 				'created_date'=>date('Y-m-d H:i:s'),
 			);
 			$this->db->insert('specialist',$data);
-    		$this->session->set_flashdata('message', 'Specialization created successfully');
+    		$this->session->set_flashdata('message', 'Skill Set created successfully');
     		echo "1"; exit;
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
@@ -165,7 +165,7 @@ class Specialist extends MY_Controller {
 				'update_date'=>date('Y-m-d H:i:s'),
 			);
        		$this->Crud_model->SaveData('specialist',$data,"id='".$_POST['id']."'");
-        	$this->session->set_flashdata('message', 'Specialization updated successfully');
+        	$this->session->set_flashdata('message', 'Skill Set updated successfully');
        		echo 1; exit;
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');

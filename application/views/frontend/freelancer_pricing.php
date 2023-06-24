@@ -65,17 +65,17 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="Price_Tag1">
                                             <div class="Price_Tag_data">
                                                 <p style="margin-bottom: 0px !important;">
-                                                    Price : 
+                                                    Price :
                                                     <?php if ($key['subscription_country'] == 'Nigeria') {
                                                         $currency = '₦';
                                                     } else {
                                                         $currency = '$';
                                                     }
-                                                    echo $currency.' '.$key['subscription_amount']?> 
+                                                    echo $currency.' '.$key['subscription_amount']?>
                                                 </p>
-                                                <span>Validity : 
-                                                    <?php 
-                                                    echo "For ".$key['subscription_duration'];                                                 
+                                                <span>Validity :
+                                                    <?php
+                                                    echo "For ".$key['subscription_duration'];
                                                     if($key['subscription_duration'] > 1) {
                                                         echo " Days";
                                                     } else {
@@ -128,7 +128,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 <style>
 #subscription-messages{display: none; text-align: center;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" integrity="sha512-/bOVV1DV1AQXcypckRwsR9ThoCj7FqTV2/0Bm79bL3YSyLkVideFLE3MIZkq1u5t28ke1c0n31WYCOrO01dsUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
+$('.pricetable').matchHeight();
+$('.pricetable ul').matchHeight();
 $(document).ready(function(){
     <?php
     if(!empty($get_subscription)) {

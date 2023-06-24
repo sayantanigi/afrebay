@@ -18,11 +18,11 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
     border-radius: 35px;
     letter-spacing: 0;
     font-weight: 600;
-    width: 35%;
+    width: 100%;
     display: block;
-    margin: 30px 0px 0px 109px;
     color: #fff;
-    padding: 10px;}
+    padding: 10px;
+    text-align: center;}
 </style>
 <section class="overlape">
     <div class="block no-padding">
@@ -159,6 +159,10 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                         </div>
                         <?php if (@$_SESSION['afrebay']['userType'] == '1' || empty($_SESSION['afrebay']['userType'])) { ?>
                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+                            <?php $userBidData = $this->db->query("SELECT * FROM `job_bid` WHERE postjob_id = '".$post_data->id."' and user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
+                            if(!empty($userBidData)) { ?>
+                            <div class="bd-form"><a href="<?= base_url()?>jobbid" class="cstm_viewbid_btn"> View Bid</a></div>
+                            <?php } else { ?>
                             <form class="bd-form" action="<?= base_url('user/dashboard/save_postbid') ?>" method="post">
                                 <h3 class="job-bid">Job Bidding</h3>
                                 <div class="row">
@@ -196,12 +200,12 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                         <div class="bid-btn">
                                             <?php if (!empty(@$_SESSION['afrebay']['userType'])) {
                                                 if (@$_SESSION['afrebay']['userType'] == '1') {
-                                                    $userBidData = $this->db->query("SELECT * FROM `job_bid` WHERE postjob_id = '".$post_data->id."' and user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
-                                                    if(!empty($userBidData)) { ?>
-                                                        <a href="<?= base_url()?>jobbid" class="cstm_viewbid_btn"> View Bid</a>
-                                                    <?php } else { ?>
+                                                    //$userBidData = $this->db->query("SELECT * FROM `job_bid` WHERE postjob_id = '".$post_data->id."' and user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
+                                                    //if(!empty($userBidData)) { ?>
+                                                        <!-- <a href="<?= base_url()?>jobbid" class="cstm_viewbid_btn"> View Bid</a> -->
+                                                    <?php //} else { ?>
                                                         <input type="submit" name="">
-                                                    <?php } ?>
+                                                    <?php //} ?>
                                             <?php } else { ?>
                                             <h2 class="job-bid" style="font-size:16px;">Verdors are not eligible to Bid for jobs</h2>
                                             <?php }
@@ -214,7 +218,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                 </div>
                             </form>
                         </div>
-                        <?php } ?>
+                    <?php } }?>
                     </div>
                 </div>
             </div>

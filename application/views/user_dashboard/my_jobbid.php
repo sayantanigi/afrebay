@@ -47,7 +47,7 @@
                                         <table class="custom-table">
                                             <tr>
                                                 <td class="heading"><?=$key->post_title; ?></td>
-                                                <td class="btn-option">
+                                                <td class="btn-option" style="width: 205px;">
                                                     <!-- <?php if($_SESSION['afrebay']['userType'] == '2') { ?>
                                                     <?php if(@$key->bidding_status=='Pending'){?>
                                                     <a href="#" onclick="change_biddingstatus('<?= $key->id?>');"><span class="badge badge-warning" >
@@ -63,7 +63,7 @@
                                                     <?php
                                                     if($_SESSION['afrebay']['userType'] == '2') {
                                                         if(@$key->bidding_status != 'Rejected') {?>
-                                                            <select class="jobbid_select form-control"> name="change_biddingstatus" id="change_biddingstatus_<?php echo @$key->id?>" >
+                                                            <select class="jobbid_select form-control" name="change_biddingstatus" id="change_biddingstatus_<?php echo @$key->id?>" style="width: 80% !important;">
                                                                 <option value="">Select Option</option>
                                                                 <option value="Under Review" <?php if(@$key->bidding_status == 'Under Review'){echo "Selected"; }?>>Under Review</option>
                                                                 <option value="Short Listed" <?php if(@$key->bidding_status == 'Short Listed'){echo "Selected"; }?>>Short Listed</option>
