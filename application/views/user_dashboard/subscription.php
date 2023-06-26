@@ -80,7 +80,7 @@
                                                                     <tr>
                                                                         <?php
                                                                         if($row->status == '1') { ?>
-                                                                        <td class="active-plan"><span>Active Plan</span></td>
+                                                                        <td class="active-plan"><span style="width: 70%">Active Plan</span></td>
                                                                         <?php } ?>
                                                                         <?php if($row->status == '3') { ?>
                                                                         <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
@@ -89,10 +89,20 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="plan-active">
                                                             <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
-                                                            <td class="btn-option"><a href="<?php echo $row->invoice_pdf?>" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; padding: 5px 25px; font-weight: 500; color: orange;">Download invoice</a></td>
+                                                            <td class="btn-option">
+                                                            <table class="plan-active-table">
+                                                                <tr>
+                                                                    <td class="active-plan"><a href="<?php echo $row->invoice_pdf?>"><span style="width: 70%;color: #fb6e20;">Download invoice</span></a></td>
+                                                                </tr>
+                                                            </table>
+                                                            </td>
                                                         </tr>
+                                                        <!-- <tr>
+                                                            <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
+                                                            <td class="btn-option"><a href="<?php echo $row->invoice_pdf?>" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; padding: 7px 25px; font-weight: 500; color: orange;">Download invoice</a></td>
+                                                        </tr> -->
                                                         <tr>
                                                             <td colspan="2" class="bid-amount">
                                                             <?php if($row->amount=='0') { ?>

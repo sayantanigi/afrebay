@@ -61,8 +61,3 @@ function Delete(obj,cid)
       });
   }
 }
-
-
-
-
-

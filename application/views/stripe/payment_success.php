@@ -103,7 +103,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     $mail->send();
                                     // echo 'Message has been sent';
                                 } catch (Exception $e) {
-                                    $this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+                                    //$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+                                    $this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
                                 }?>
 					<?php }	}?>
 				</div>

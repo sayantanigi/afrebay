@@ -56,13 +56,13 @@ class Users extends MY_Controller {
 
             if($row->email_verified=="1"){
                 $email_verified='<div class="status-toggle">
-                <input id="rating_\''.$row->userId.'\'" class="check" type="checkbox" checked onClick="email_verified('.$row->userId.');">
-                <label for="rating_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
+                <input id="rating1_\''.$row->userId.'\'" class="check" type="checkbox" checked onClick="email_verified('.$row->userId.');">
+                <label for="rating1_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
                 </div>';
             } else {
                 $email_verified='<div class="status-toggle">
-                <input id="rating_\''.$row->userId.'\'" class="check" type="checkbox" onClick="email_verified('.$row->userId.');">
-                <label for="rating_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
+                <input id="rating1_\''.$row->userId.'\'" class="check" type="checkbox" onClick="email_verified('.$row->userId.');">
+                <label for="rating1_\''.$row->userId.'\'" class="checktoggle">checkbox</label>
                 </div>';
             }
 

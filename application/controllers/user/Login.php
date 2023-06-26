@@ -84,7 +84,8 @@ class Login extends CI_Controller {
 					$mail->send();
 					// echo 'Message has been sent';
 				} catch (Exception $e) {
-					$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+					//$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+					$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
 				}
 				$data=array('result'=>1,'data'=>1);
 			} else {

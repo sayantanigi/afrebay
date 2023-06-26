@@ -176,7 +176,7 @@ else{
 
 
                                             <div class="col-lg-6 key-skill">
-                                                <span class="pf-title1">Key Skills</span>
+                                                <span class="pf-title1">Skill Set</span>
                                                 <div class="pf-field">
                                                     <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
                                                     <?php

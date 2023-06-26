@@ -98,7 +98,8 @@ class Home extends MY_Controller {
 				$mail->send();
 				// echo 'Message has been sent';
 			} catch (Exception $e) {
-				$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				//$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
 			}
 			//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
 			$this->session->set_flashdata('message', 'Thank you for your message. Our team will connect you soon!');
@@ -652,7 +653,8 @@ class Home extends MY_Controller {
 
 			} catch (Exception $e) {
 
-				$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				//$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+				$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
 
 			}
 
