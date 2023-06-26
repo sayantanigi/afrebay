@@ -198,8 +198,9 @@
    .modal-dialog {max-width: 60% !important; margin: 0 !important; display: contents !important;}
    .modal-content {max-width: 80% !important;}
    .modal-content p {margin: 0px !important; padding: 4px 20px 0 20px !important;}
+   .social-media {display: none;}
 </style>
-<link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
+<!-- <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css"> -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
 <script>

@@ -128,9 +128,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 <style>
 #subscription-messages{display: none; text-align: center;}
 </style>
+<!-- <script type='text/javascript' src='https://code.jquery.com/jquery-1.12.4.min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js'></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" integrity="sha512-/bOVV1DV1AQXcypckRwsR9ThoCj7FqTV2/0Bm79bL3YSyLkVideFLE3MIZkq1u5t28ke1c0n31WYCOrO01dsUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
-$('.pricetable').matchHeight();
+$('.subscriptionFilteredData').matchHeight();
 $('.pricetable ul').matchHeight();
 $(document).ready(function(){
     <?php

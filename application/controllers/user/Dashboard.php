@@ -484,12 +484,12 @@ class Dashboard extends CI_Controller {
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
 				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
-					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p></li>';
+					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
 				} else {
 					$sent = '';
 				}
 				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
-					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p></li>';
+					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
 				} else {
 					$reply = '';
 				}

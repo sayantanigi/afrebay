@@ -200,7 +200,7 @@ class Users_model extends My_Model {
             if(isset($specialist) && !empty($specialist)) {
                 $query .= " AND instr(concat(',', skills, ','), ',$specialist,'))";
             }
-            $query .= " GROUP BY users.userId";
+            $query .= " AND users.status = 1 and users.email_verified = 1 GROUP BY users.userId";
             return $query;
         }
     }
@@ -231,7 +231,7 @@ class Users_model extends My_Model {
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         } else {
-            $query = "SELECT * FROM users WHERE status = '1' ORDER BY userId DESC";
+            $query = "SELECT * FROM users WHERE status = '1' AND email_verified = '1' ORDER BY userId DESC";
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         }
@@ -270,11 +270,11 @@ class Users_model extends My_Model {
     function workers_fetchdata($limit, $start, $title, $search_location, $specialist, $userType) {
         if(isset($title) || isset($search_location) || isset($specialist) || isset($userType)) {
             $query = $this->make_workers_query($title, $search_location, $specialist, $userType);
-            $query .= ' ORDER BY userId DESC';
+            $query .= ' AND users.status = 1 and users.email_verified = 1 ORDER BY userId DESC';
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         } else {
-            $query = "SELECT * FROM users WHERE status = '1' ORDER BY userId DESC";
+            $query = "SELECT * FROM users WHERE status = '1' AND email_verified = '1' ORDER BY userId DESC";
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);
         }
