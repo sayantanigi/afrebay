@@ -29638,6 +29638,16 @@ background: transparent !important;
 
 }
 
+#frame .content .messages ul li.replies {
+   position: relative;
+}
+
+#frame .content .messages ul li.replies div {
+   position: absolute;
+   right: 50px;
+   bottom: -15px;
+}
+
 
 
 #frame .content .messages ul li:nth-last-child(1) {
@@ -40152,7 +40162,7 @@ section.topak .job-search-sec .job-search form .custom-select .same-as-selected 
 .chosen_state {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
 
 .chosen_city {border-color: #f4794f; padding: 10px !important; position: relative; position: relative; display: inline-block; vertical-align: middle; font-size: 13px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; float: left; width: 100% !important; text-align: left; border-radius: 8px; box-shadow: none !important; border: 2px solid #f4794f;}
-.Employees_Search_List .emply-resume-info h3 a { width: 70%; display: block; }
+.Employees_Search_List .emply-resume-info h3 a { width: 62%; display: block; }
 
 .form-design form .cardak {
    box-shadow: none !important;

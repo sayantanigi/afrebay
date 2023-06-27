@@ -6077,6 +6077,18 @@ table.dataTable thead .sorting_asc {
 	width: 100% !important;
 }
 
+#frame .content .messages ul li.replies {
+	position: relative;
+	height: 80px;
+}
+
+#frame .content .messages ul li.replies div.replyTime {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	text-align: right;
+}
+
 @media only screen and (max-width: 425px) {
   #table_wrapper .col-sm-12 {
 	overflow-x: auto;

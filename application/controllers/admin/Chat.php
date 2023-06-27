@@ -79,43 +79,66 @@ class Chat extends MY_Controller {
 
 	function adminShowMessage_list($fromid,$toid) {
 		$get_data = $this->Commonmodel->getChat($fromid,$toid);
-		//echo "<pre>"; print_r($get_data);
 		$get_chatuser = $this->Crud_model->get_single('users', "userId IN ('".$fromid."','".$toid."')");
+
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;
 		} else {
 			$name = $get_chatuser->username;
 		}
+
 		if (@$get_chatuser->profilePic && file_exists('uploads/users/' . @$get_chatuser->profilePic)) {
 			$userpic = '<img src="' . base_url('uploads/users/' . @$get_chatuser->profilePic) . '" alt="" />';
 		} else {
 			$userpic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 		}
-		//$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
+
+		$getFromUser = $this->db->query("SELECT * FROM `users` WHERE userId = '".$fromid."'")->result_array();
+		if(!empty($getFromUser[0]['firstname'])) {
+			$fromName = $getFromUser[0]['firstname'].' '.$getFromUser[0]['lastname'];
+		} else {
+			$fromName = $getFromUser[0]['companyname'];
+		}
+
+		$gettoUser = $this->db->query("SELECT * FROM `users` WHERE userId = '".$toid."'")->result_array();
+		if(!empty($gettoUser[0]['firstname'])) {
+			$toName = $gettoUser[0]['firstname'].' '.$gettoUser[0]['lastname'];
+		} else {
+			$toName = $gettoUser[0]['companyname'];
+		}
+
 		$html_data = '';
 		//echo $fromid. "" .$toid; echo "<pre>"; print_r($get_data); die;
+		//echo "<pre>"; print_r($get_data); die;
 		if (!empty($get_data)) {
+			$html_data .= '<div class="chat-details">Message details of <b>'.ucwords($fromName).'</b> and <b>'.ucwords($toName).'</b></div>';
+			$getPostjobDetails = $this->db->query("SELECT * FROM afrebay.postjob WHERE id = '".$get_data[0]->postjob_id."'")->result_array();
+			$html_data .= '<div class="chat-post-title"><b>Job Title: </b>'.$getPostjobDetails[0]['post_title'].'</div><hr>';
 			foreach ($get_data as $key) {
 				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
 					$from_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$from_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
+
 				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
 					$to_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
+
 				if ($key->userfrom_id == $toid && $key->userto_id == $fromid) {
-					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p></li>';
+					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'<div style="font-size: 10px;">'.$toName.'</li>';
 				} else {
 					$sent = '';
 				}
+
 				if ($key->userto_id == $toid && $key->userfrom_id == $fromid) {
-					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p></li>';
+					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p><div class="replyTime" style="font-size: 10px;">'.$key->created_date.'<div style="font-size: 10px;">'.$fromName.'</li>';
 				} else {
 					$reply = '';
 				}
+
 				$html_data .= $sent . $reply;
 			}
 		} else {

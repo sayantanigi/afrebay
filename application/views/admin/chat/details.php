@@ -77,3 +77,7 @@
     </div>
 </div>
 </div>
+<style>
+.chat-post-title {text-align: center;}
+.chat-details {text-align: center; font-size: 26px}
+</style>
