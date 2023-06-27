@@ -53,6 +53,9 @@ var actioncolumn=6;
 <script type="text/javascript" src="<?= base_url('dist/assets/custom_js/rating_type.js')?>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
+$(document).ready(function(){
+    $("#table td a:nth-child(3)").attr("href", "javascript:void(0)")
+})
 $(window).scroll(function(){
     var filter_inputs = $('#filter_inputs');
     var table_wrapper = $('#table_wrapper .row:nth-child(1)');
@@ -71,6 +74,35 @@ $('#refreshForm').click(function(){
     $('#categorySearch').trigger("reset");
     $('.filter_search_data6').val('').trigger('change');
 })
+function deleteJobpost(jobid) {
+    var admin_url=$('#admin_url').val();
+    var jobid = jobid;
+    $.confirm({
+	    title: 'Confirm!',
+	    content: confirmTextDelete,
+	    buttons: {
+	        confirm: function () {
+				$(".id"+jobid).fadeOut();
+				var datastring="jobid="+jobid;
+				$.ajax({
+					type:"POST",
+					url:admin_url+'deletepostdetail',
+					data:datastring,
+					cache:false,
+					success:function(returndata) {
+						if(returndata = 1){
+							location.reload();
+							table.draw();
+						}
+					}
+				});
+	        },
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
+}
 </script>
 <style>
     .sticky_thead1 {

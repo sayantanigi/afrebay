@@ -17,6 +17,8 @@
 <!-- end server side table script -->
 <input type="hidden" name="admin_url" id="admin_url" value="<?= admin_url();?>">
 <script src="<?= base_url();?>dist/assets/notify/notify.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script type="text/javascript">
 // alert();
 $(document).ready(function(){
@@ -27,6 +29,10 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript" language="javascript" class="init">
+
+//Confirmation box for admin panel
+var confirmTextDelete = 'Are you sure you want to delete this record?';
+
 $(document).ready(function() {
     $(".msghide").fadeOut(8000);
     table = $('.example_datatable').DataTable({

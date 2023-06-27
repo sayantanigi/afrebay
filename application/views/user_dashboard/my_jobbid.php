@@ -206,20 +206,28 @@ $(document).ready(function(){
 		var postJobid = $('#postJobid_<?php echo $value->id?>').val();
         var jobbiduserid = $('#jobbiduserid_<?php echo $value->id?>').val();
         var jobpostuserid = $('#jobpostuserid_<?php echo $value->id?>').val();
-        var cnf = confirm('Are you sure to change the status?');
-        if(cnf==true) {
-            $.ajax({
-                type:"POST",
-                url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
-                data:{bidstatus: bidstatus,jodBidid: jodBidid,postJobid: postJobid,jobbiduserid: jobbiduserid,jobpostuserid: jobpostuserid},
-                success:function(returndata) {
-                    if(returndata==1){
-                        location.reload();
-                    }
-                }
-            });
-        }
-	})
+        $.confirm({
+    	    title: 'Confirm!',
+    	    content: confirmationText,
+    	    buttons: {
+    	        confirm: function () {
+                    $.ajax({
+                        type:"POST",
+                        url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
+                        data:{bidstatus: bidstatus,jodBidid: jodBidid,postJobid: postJobid,jobbiduserid: jobbiduserid,jobpostuserid: jobpostuserid},
+                        success:function(returndata) {
+                            if(returndata==1){
+                                location.reload();
+                            }
+                        }
+                    });
+    	        },
+    	        cancel: function () {
+    	            location.reload();
+    	        },
+    	    }
+    	});
+    })
     <?php $i++; } } ?>
 })
 </script>

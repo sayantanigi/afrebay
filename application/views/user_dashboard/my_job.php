@@ -146,46 +146,52 @@
 <script>
 function jobDelete(id) {
     var p_id = id;
-    if(confirm("Are you sure you want to delete this?")) {
-        var base_url = $('#base_url').val();
-        $.ajax({
-            url:base_url+"user/dashboard/delete_job",
-            method:"POST",
-            data:{id: p_id},
-            beforeSend : function(){
-                $("#loader").show();
-            },
-            success:function(data) {
-                if (data == '1'){
-                    setTimeout(function () {
-                        $("#loader").hide();
-                        window.scroll({top: 0, behavior: "smooth"});
-                        $('#product-messages').show();
-                    }, 7000);
-                    setTimeout(function () {
-                        $('#product-messages').hide();
-                    }, 9000);
-                    setTimeout(function () {
-                        location.reload(true);
-                    }, 10000);
-                } else {
-                    $('#err-messages').show();
-                    setTimeout(function () {
-                        window.scroll({top: 0, behavior: "smooth"})
-                    }, 7000);
-                    setTimeout(function () {
-                        $('#err-messages').hide();
-                    }, 9000);
-                    setTimeout(function () {
-                        location.reload(true);
-                    }, 10000);
-                }
-            }
+    $.confirm({
+	    title: 'Confirm!',
+	    content: confirmTextDelete,
+	    buttons: {
+	        confirm: function () {
+                var base_url = $('#base_url').val();
+                $.ajax({
+                    url:base_url+"user/dashboard/delete_job",
+                    method:"POST",
+                    data:{id: p_id},
+                    beforeSend : function(){
+                        $("#loader").show();
+                    },
+                    success:function(data) {
+                        if (data == '1'){
+                            setTimeout(function () {
+                                $("#loader").hide();
+                                window.scroll({top: 0, behavior: "smooth"});
+                                $('#product-messages').show();
+                            }, 7000);
+                            setTimeout(function () {
+                                $('#product-messages').hide();
+                            }, 9000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 10000);
+                        } else {
+                            $('#err-messages').show();
+                            setTimeout(function () {
+                                window.scroll({top: 0, behavior: "smooth"})
+                            }, 7000);
+                            setTimeout(function () {
+                                $('#err-messages').hide();
+                            }, 9000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 10000);
+                        }
+                    }
 
-        })
-    } else {
-        //return false;
-        location.reload(true);
-    }
+                })
+	        },
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
 }
 </script>

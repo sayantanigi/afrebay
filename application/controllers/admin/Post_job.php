@@ -52,7 +52,8 @@ class Post_job extends MY_Controller {
             }
 			$btn = ''.anchor(base_url('postdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2" title="View"><i class="far fa-eye mr-1"></i></span>');
 			$btn .= ''.anchor(base_url('admin/update-postjob/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2" title="Edit"><i class="far fa-edit mr-1"></i></span>');
-			$btn .= ''.anchor(base_url('admin/deletepostdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-danger-light mr-2" title="Delete" onclick="return confirm("Are you sure you want to delete this item?");"><i class="fa fa-trash mr-1"></i></span>');
+			// $btn .= ''.anchor(base_url('admin/deletepostdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-danger-light mr-2" title="Delete" onclick="return confirm(\'Are you sure you want to delete this item?\');"><i class="fa fa-trash mr-1"></i></span>');
+			$btn .= '<span class="btn btn-sm bg-danger-light mr-2" title="Delete" onclick="deleteJobpost('.$row->id.');"><i class="fa fa-trash mr-1"></i></span>';
 
 			$no++;
 			$nestedData = array();
@@ -185,14 +186,16 @@ class Post_job extends MY_Controller {
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/post_job/view',$data);
 		$this->load->view('admin/footer');
-	 }
+	}
 
-	 function deletepostdetail($id) {
-	 	$con="postjob.id='".base64_decode($id)."'";
-	 	$query = $this->db->query("DELETE FROM postjob WHERE ".$con."");
+	function deletepostdetail() {
+	 	$con = $this->input->post('jobid');
+	 	$query = $this->db->query("DELETE FROM postjob WHERE id = ".$con."");
 	 	if($query) {
-	 		redirect('admin/post_job');
-	 	}
+	 		echo '1';
+	 	} else {
+			echo '2';
+		}
 	 }
 }
 ?>

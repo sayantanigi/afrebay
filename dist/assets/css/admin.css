@@ -6089,6 +6089,8 @@ table.dataTable thead .sorting_asc {
 	text-align: right;
 }
 
+.jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons button.btn-default, .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons button.btn-default {background: #f67a49; color: #fff !important;}
+
 @media only screen and (max-width: 425px) {
   #table_wrapper .col-sm-12 {
 	overflow-x: auto;

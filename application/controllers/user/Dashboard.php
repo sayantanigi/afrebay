@@ -1046,7 +1046,7 @@ class Dashboard extends CI_Controller {
 
 	function delete_job() {
 		$p_id = $this->input->post('id');
-		$delete_prod = $this->db->query("UPDATE postjob SET is_delete = '1' WHERE id = '$p_id'");
+		$delete_prod = $this->db->query("DELETE FROM postjob WHERE id = '$p_id'");
 		if($delete_prod > 0){
 			echo '1';
 		} else {

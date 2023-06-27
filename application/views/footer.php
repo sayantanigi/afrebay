@@ -127,7 +127,7 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?= base_url('assets/js/slick.min.js')?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/parallax.js')?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/select-chosen.js')?>" type="text/javascript"></script>
-<script src="<?= base_url('assets/js/jquery.scrollbar.min.js')?>" type="text/javascript"></script>
+<!-- <script src="<?= base_url('assets/js/jquery.scrollbar.min.js')?>" type="text/javascript"></script> -->
 <script src="<?= base_url('assets/js/maps2.js')?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/bootstrap-datepicker.js')?>" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places&callback=initMap" async defer></script>
@@ -135,19 +135,19 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?= base_url();?>dist/assets/notify/notify.min.js"></script>
 <!-- multi Select option for worker list page-->
 <!-- Default Themes -->
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-dark-feather.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-dark.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-light-feather.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-light.min.css" />
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-dark-feather.min.css" /> -->
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-dark.min.css" /> -->
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-light-feather.min.css" /> -->
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/default/tail.select-light.min.css" /> -->
 <!-- Modern Themes -->
 <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-dark-feather.min.css" />
 <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-dark.min.css" />
 <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-light-feather.min.css" />
 <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/modern/tail.select-light.min.css" />
 <!-- Bootstrap themes -->
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap4/tail.select-THEME-NAME.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap3/tail.select-THEME-NAME.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap2/tail.select-THEME-NAME.min.css" />
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap4/tail.select-THEME-NAME.min.css" /> -->
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap3/tail.select-THEME-NAME.min.css" /> -->
+<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/multi_select/css/bootstrap2/tail.select-THEME-NAME.min.css" /> -->
 <!-- Core JavaScript -->
 <script src="<?php echo base_url()?>assets/multi_select/js/tail.select.min.js"></script>
 <!-- Languages -->
@@ -160,7 +160,14 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-pt_BR.js"></script>
 <script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-ru.js"></script>
 <script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-tr.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
 <script type="text/javascript">
+//Confirmation box for user panel
+var confirmTextDelete = 'Are you sure you want to delete this record?';
+var confirmationText = 'Are you sure you want to change this status?';
     $(document).ready(function () {
         // alert(1);
         tail.select('#example',{

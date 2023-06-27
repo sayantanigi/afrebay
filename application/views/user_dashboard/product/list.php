@@ -65,36 +65,36 @@
                                 foreach ($product_list as $value) {
                             ?>
                             <tr>
-                                                     <td class="table-modific-td">
-                                                         <table class="custom-table">
-                                                              <tr>
-                                                                  <td class="heading"><?php echo $value->prod_name;?></td>
-                                                                  <td class="btn-option">
-                                                                    <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                                    <a href="<?= base_url('update-product/'.base64_encode($value->id));?>" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true" style="padding-left: 10px;"></i></a>
-                                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="productDelete(<?php echo $value->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                  </td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td colspan="2" class="desc">
-                                                                  <?php
-                                                                    $string = strip_tags($value->prod_description);
-                                                                    if (strlen($string) > 200) {
-                                                                        $stringCut = substr($string, 0, 200);
-                                                                        $endPoint = strrpos($stringCut, ' ');
-                                                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                                                        $string .= '...';
-                                                                    }
-                                                                    echo $string;
-                                                                    ?>
-                                                                  </td>
-                                                              </tr>
-                                                         </table>
-                                                     </td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td colspan="2" class="height"></td>
-                                                   </tr>
+                                <td class="table-modific-td">
+                                    <table class="custom-table">
+                                        <tr>
+                                            <td class="heading"><?php echo $value->prod_name;?></td>
+                                            <td class="btn-option">
+                                                <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                <a href="<?= base_url('update-product/'.base64_encode($value->id));?>" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true" style="padding-left: 10px;"></i></a>
+                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="productDelete(<?php echo $value->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="desc">
+                                            <?php
+                                            $string = strip_tags($value->prod_description);
+                                            if (strlen($string) > 200) {
+                                                $stringCut = substr($string, 0, 200);
+                                                $endPoint = strrpos($stringCut, ' ');
+                                                $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                $string .= '...';
+                                            }
+                                            echo $string;
+                                            ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="height"></td>
+                            </tr>
                             <tr id="Product-Data-Block1_<?php echo $value->id;?>">
                                 <td colspan="4" class="Product-Details-Page" style="border: 0; padding: 0;">
                                     <div class="row Product-Block" style="margin-bottom: 20px !important;">
@@ -203,48 +203,54 @@ $(document).ready(function(){
 
 function productDelete(id) {
     var p_id = id;
-    if(confirm("Are you sure you want to delete this?")) {
-        var base_url = $('#base_url').val();
-        $.ajax({
-            url:base_url+"user/dashboard/delete_product",
-            method:"POST",
-            data:{id: p_id},
-            beforeSend : function(){
-                $("#loader").show();
-                //$(".SignUp_Btn button").prop('disable','true');
-            },
-            success:function(data) {
-                if (data == '1'){
-                    setTimeout(function () {
-                        $("#loader").hide();
-                        window.scroll({top: 0, behavior: "smooth"});
-                        $('#product-messages').show();
-                    }, 7000);
-                    setTimeout(function () {
-                        $('#product-messages').hide();
-                    }, 9000);
-                    setTimeout(function () {
-                        location.reload(true);
-                    }, 10000);
-                } else {
-                    $('#err-messages').show();
-                    setTimeout(function () {
-                        window.scroll({top: 0, behavior: "smooth"})
-                    }, 7000);
-                    setTimeout(function () {
-                        $('#err-messages').hide();
-                    }, 9000);
-                    setTimeout(function () {
-                        location.reload(true);
-                    }, 10000);
-                }
-            }
+    $.confirm({
+	    title: 'Confirm!',
+	    content: confirmTextDelete,
+	    buttons: {
+	        confirm: function () {
+                var base_url = $('#base_url').val();
+                $.ajax({
+                    url:base_url+"user/dashboard/delete_product",
+                    method:"POST",
+                    data:{id: p_id},
+                    beforeSend : function(){
+                        $("#loader").show();
+                        //$(".SignUp_Btn button").prop('disable','true');
+                    },
+                    success:function(data) {
+                        if (data == '1'){
+                            setTimeout(function () {
+                                $("#loader").hide();
+                                window.scroll({top: 0, behavior: "smooth"});
+                                $('#product-messages').show();
+                            }, 3000);
+                            setTimeout(function () {
+                                $('#product-messages').hide();
+                            }, 5000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 6000);
+                        } else {
+                            $('#err-messages').show();
+                            setTimeout(function () {
+                                window.scroll({top: 0, behavior: "smooth"})
+                            }, 3000);
+                            setTimeout(function () {
+                                $('#err-messages').hide();
+                            }, 5000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 6000);
+                        }
+                    }
 
-        })
-    } else {
-        //return false;
-        location.reload(true);
-    }
+                })
+	        },
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
 }
 </script>
 <script>

@@ -62,26 +62,38 @@
     margin-bottom: 0 !important;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" integrity="sha512-/bOVV1DV1AQXcypckRwsR9ThoCj7FqTV2/0Bm79bL3YSyLkVideFLE3MIZkq1u5t28ke1c0n31WYCOrO01dsUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+$('.card').matchHeight();
+$('.card ul').matchHeight();
 function subscriptionDelete(obj,cid) {
 	var admin_url=$('#admin_url').val();
-	var ask = confirm("Do you want to delete this record?");
-	if(ask==true) {
-		$(".id"+cid).fadeOut();
-		var datastring="cid="+cid;
-		$.ajax({
-			type:"POST",
-			url:admin_url+'Subscription/delete',
-			data:datastring,
-			cache:false,
-			success:function(returndata) {
-				if(returndata = 1) {
-					location.reload();
-					table.draw();
-				}
-			}
-		});
-	}
+	$.confirm({
+	    title: 'Confirm!',
+	    content: confirmTextDelete,
+	    buttons: {
+	        confirm: function () {
+				$(".id"+cid).fadeOut();
+				var datastring="cid="+cid;
+				$.ajax({
+					type:"POST",
+					url:admin_url+'Subscription/delete',
+					data:datastring,
+					cache:false,
+					success:function(returndata) {
+						if(returndata = 1) {
+							location.reload();
+							table.draw();
+						}
+					}
+				});
+	        },
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
 }
 
 </script>
