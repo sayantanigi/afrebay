@@ -282,13 +282,18 @@ function load_unseen_notification() {
         success:function(data) {
             console.log(userId);
             console.log(data);
-            if(data.userfrom_id != userId) {
-                $('.notificationf').show();
-                $('.notificationf').text(data.count);
-            }else {
-                $('.notificationv').show();
+            <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
                 $('.notificationv').text(data.count);
-            }
+            <?php } else { ?>
+                $('.notificationf').text(data.count);
+            <?php } ?>
+            // if(data.userfrom_id != userId) {
+            //     $('.notificationf').show();
+            //     $('.notificationf').text(data.count);
+            // }else {
+            //     $('.notificationv').show();
+            //     $('.notificationv').text(data.count);
+            // }
         }
     });
 }
