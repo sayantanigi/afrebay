@@ -454,6 +454,20 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	function showmessage_count() {
+		$user_id = $this->input->post('userId');
+		//echo "Select COUNT(id) as msgcount, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'";
+		$getUserType = $this->db->query("Select * FROM users WHERE userId ='".$user_id."'")->result();
+		$uType = $getUserType[0]->userType;
+		$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'")->result();
+		$data = array(
+			'userfrom_id' => $countMessage[0]->userfrom_id,
+			'userto_id' => $countMessage[0]->userto_id,
+			'count' => $countMessage[0]->msgcount,
+		);
+		echo json_encode($data);
+	}
+
 	function showmessage_list() {
 		$userdId = $_SESSION['afrebay']['userId'];
 		$user_id = $this->input->post('user_id');
