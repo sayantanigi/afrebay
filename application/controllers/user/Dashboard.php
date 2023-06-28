@@ -455,10 +455,11 @@ class Dashboard extends CI_Controller {
 	}
 
 	function showmessage_list() {
+		$userdId = $_SESSION['afrebay']['userId'];
 		$user_id = $this->input->post('user_id');
 		$post_id = $this->input->post('post_id');
 		$get_data = $this->Users_model->getChat();
-		//print_r($get_data);
+		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
 		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;

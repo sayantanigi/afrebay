@@ -26901,6 +26901,20 @@ ul {
 
 }
 
+.dashboard-gig span.notification {
+   width: 20px;
+   height: 20px;
+   border-radius: 50px;
+   background: #17ad16;
+   margin-left: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 10px;
+   color: #fff;
+   text-align: center;
+}
+
 
 
 .dashboard-gig .user-dashboard h1 {

@@ -112,7 +112,7 @@ class Chat extends MY_Controller {
 		//echo "<pre>"; print_r($get_data); die;
 		if (!empty($get_data)) {
 			$html_data .= '<div class="chat-details">Message details of <b>'.ucwords($fromName).'</b> and <b>'.ucwords($toName).'</b></div>';
-			$getPostjobDetails = $this->db->query("SELECT * FROM afrebay.postjob WHERE id = '".$get_data[0]->postjob_id."'")->result_array();
+			$getPostjobDetails = $this->db->query("SELECT * FROM postjob WHERE id = '".$get_data[0]->postjob_id."'")->result_array();
 			$html_data .= '<div class="chat-post-title"><b>Job Title: </b>'.$getPostjobDetails[0]['post_title'].'</div><hr>';
 			foreach ($get_data as $key) {
 				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic)) {
@@ -128,13 +128,13 @@ class Chat extends MY_Controller {
 				}
 
 				if ($key->userfrom_id == $toid && $key->userto_id == $fromid) {
-					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'<div style="font-size: 10px;">'.$toName.'</li>';
+					$sent = '<li class="sent">'.$from_pic.'<div class="Chat-Data"><p>'.$key->message.'</p><div style="font-size: 10px; margin-top: 5px;">'.$key->created_date.'<div style="font-size: 10px;">'.$toName.'</div></div></div></li>';
 				} else {
 					$sent = '';
 				}
 
 				if ($key->userto_id == $toid && $key->userfrom_id == $fromid) {
-					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p><div class="replyTime" style="font-size: 10px;">'.$key->created_date.'<div style="font-size: 10px;">'.$fromName.'</li>';
+					$reply = '<li class="replies"><div class="Chat-Data"><p>'.$key->message.'</p><div style="font-size: 10px; margin-top: 5px;">'.$key->created_date.'<div style="font-size: 10px;">'.$fromName.'</div></div></div>'.$to_pic.'</li>';
 				} else {
 					$reply = '';
 				}

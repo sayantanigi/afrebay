@@ -158,6 +158,11 @@ $seg1=$this->uri->segment(1);
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-commenting" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Messages</span>
+                                        <?php
+                                        // $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE (userfrom_id ='".$_SESSION['afrebay']['userId']."' OR userto_id ='".$_SESSION['afrebay']['userId']."') AND status = '0'")->result();
+                                        $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                        ?>
+                                        <span class="notification"><?php echo $countMessage[0]->msgcount;?></span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
@@ -165,6 +170,11 @@ $seg1=$this->uri->segment(1);
                                     <span class="cover"></span>
                                     <a href="<?= base_url('chat')?>"><i class="fa fa-commenting" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Messages</span>
+                                        <?php
+                                        // $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE (userfrom_id ='".$_SESSION['afrebay']['userId']."' OR userto_id ='".$_SESSION['afrebay']['userId']."') AND status = '0'")->result();
+                                        $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                        ?>
+                                        <span class="notification"><?php echo $countMessage[0]->msgcount;?></span>
                                     </a>
                                 </li>
                                 <?php } } else { ?>
@@ -172,6 +182,11 @@ $seg1=$this->uri->segment(1);
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-commenting" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Messages</span>
+                                        <?php
+                                        // $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE (userfrom_id ='".$_SESSION['afrebay']['userId']."' OR userto_id ='".$_SESSION['afrebay']['userId']."') AND status = '0'")->result();
+                                        $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                        ?>
+                                        <span class="notification"><?php echo $countMessage[0]->msgcount;?></span>
                                     </a>
                                 </li>
                                 <?php } } else {
@@ -183,6 +198,11 @@ $seg1=$this->uri->segment(1);
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-commenting" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Messages</span>
+                                        <?php
+                                        // $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE (userfrom_id ='".$_SESSION['afrebay']['userId']."' OR userto_id ='".$_SESSION['afrebay']['userId']."') AND status = '0'")->result();
+                                        $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                        ?>
+                                        <span class="notification"><?php echo $countMessage[0]->msgcount;?></span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
@@ -190,6 +210,11 @@ $seg1=$this->uri->segment(1);
                                     <span class="cover"></span>
                                     <a href="<?= base_url('chat')?>"><i class="fa fa-commenting" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Messages</span>
+                                        <?php
+                                        // $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE (userfrom_id ='".$_SESSION['afrebay']['userId']."' OR userto_id ='".$_SESSION['afrebay']['userId']."') AND status = '0'")->result();
+                                        $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                        ?>
+                                        <span class="notification"><?php echo $countMessage[0]->msgcount;?></span>
                                     </a>
                                 </li>
                                 <?php } } else { ?>
@@ -197,6 +222,11 @@ $seg1=$this->uri->segment(1);
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-commenting" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Messages</span>
+                                        <?php
+                                        // $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE (userfrom_id ='".$_SESSION['afrebay']['userId']."' OR userto_id ='".$_SESSION['afrebay']['userId']."') AND status = '0'")->result();
+                                        $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                        ?>
+                                        <span class="notification"><?php echo $countMessage[0]->msgcount;?></span>
                                     </a>
                                 </li>
                         <?php } } ?>
@@ -239,5 +269,21 @@ function completeSub() {
     setTimeout(function(){
         $('.completeSub').fadeOut('slow');
     },4000);
+}
+
+function load_unseen_notification(view = '') {
+    $.ajax({
+        url:"<?= base_url('user/dashboard/showmessage_count') ?>",
+        method:"POST",
+        data:{view:view},
+        dataType:"json",
+        success:function(data) {
+            $('.dropdown-menu').html(data.notification);
+            if(data.unseen_notification > 0)
+            {
+                $('.count').html(data.unseen_notification);
+            }
+        }
+    });
 }
 </script>
