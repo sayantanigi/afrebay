@@ -109,9 +109,16 @@
                                                                     } else {
                                                                         echo ucfirst($get_user->companyname);
                                                                     } ?>
+                                                                    <?php
+                                                                    $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                                                    if($countMessage[0]->msgcount != 0) { ?>
+                                                                    <span class="notification notificationv1"><?php echo $countMessage[0]->msgcount;?></span>
+                                                                    <?php } ?>
+                                                                    <span class="notification notificationv"><?php echo $countMessage[0]->msgcount;?></span>
                                                                     </p>
+
                                                                     <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
-                                                                    <p class="preview"><?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p>
+                                                                    <!-- <p class="preview"><?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p> -->
                                                                     <input type="hidden" name="postjob_id" id="postjob_id" value="<?= $user->post_id; ?>">
                                                                 </div>
                                                             </div>
@@ -135,9 +142,16 @@
                                                                     } else {
                                                                         echo ucfirst($get_user->companyname);
                                                                     } ?>
+                                                                    <?php
+                                                                    $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
+                                                                    if($countMessage[0]->msgcount != 0) { ?>
+                                                                    <span class="notification notificationf1"><?php echo $countMessage[0]->msgcount;?></span>
+                                                                    <?php } ?>
+                                                                    <span class="notification notificationf"><?php echo $countMessage[0]->msgcount;?></span>
                                                                     </p>
+
                                                                     <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
-                                                                    <p class="preview"><?= !empty($get_msg1->message) ? $get_msg1->message : ''; ?></p>
+                                                                    <!-- <p class="preview"><?= !empty($get_msg1->message) ? $get_msg1->message : ''; ?></p> -->
                                                                     <input type="hidden" name="postjob_id" id="postjob_id" value="<?= $user->post_id; ?>">
                                                                 </div>
                                                             </div>
@@ -199,6 +213,10 @@
    .modal-content {max-width: 80% !important;}
    .modal-content p {margin: 0px !important; padding: 4px 20px 0 20px !important;}
    .social-media {display: none;}
+   .notificationv {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+   .notificationf {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+   .notificationv1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+   .notificationf1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
 </style>
 <!-- <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css"> -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -336,7 +354,7 @@ $(function () {
 
     $('#showBidList').mouseout(function() {
         $(".modal").removeClass('showBidListContent');
-     });
+    });
 })
 
 </script>

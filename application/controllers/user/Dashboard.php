@@ -729,12 +729,12 @@ class Dashboard extends CI_Controller {
 		redirect(base_url('education-list'));
 	}
 
-	function delete_education($id)
-	{
-
+	function delete_education(){
+		$id = $this->input->post('id');
 		$this->Crud_model->DeleteData('user_education', "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Education Deleted successfully !');
-		redirect(base_url('education-list'));
+		echo '1';
+		//redirect(base_url('education-list'));
 	}
 
 	//////////////////////////////// end education ///////////////////////////
@@ -833,10 +833,12 @@ class Dashboard extends CI_Controller {
 		redirect(base_url('workexperience-list'));
 	}
 
-	function delete_workexperience($id) {
+	function delete_workexperience() {
+		$id = $this->input->post('id');
 		$this->Crud_model->DeleteData('user_workexperience', "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Work experience deleted successfully !');
-		redirect(base_url('workexperience-list'));
+		echo "1";
+		// redirect(base_url('workexperience-list'));
 	}
 
 	///////////////// end work experience //////////////////////////

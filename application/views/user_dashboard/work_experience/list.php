@@ -42,49 +42,35 @@
                         } ?>
                     </span>
                     <table class="table table-modific">
-                        <!-- <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Job Title</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">From Date</th>
-                                <th scope="col">To Date</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead> -->
                         <tbody>
                         <?php  if(!empty($workexperience_list)) {
                         $i=1;
                         foreach ($workexperience_list as $row) {
                         ?>
-
                         <tr>
-                                                     <td class="table-modific-td">
-                                                         <table class="custom-table">
-                                                              <tr>
-                                                                  <td class="heading"><?= ucfirst($row->designation); ?> <div>at</div> <?= ucfirst($row->company_name); ?></td>
-                                                                  <td class="btn-option">
-                                                                       <a href="<?= base_url('update-workexperience/'.base64_encode($row->id));?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                                                        <a href="<?= base_url('user/Dashboard/delete_workexperience/'.$row->id);?>" onclick="if(confirm('Are you sure you want to Delete?')) commentDelete(1); return false"><i                                     class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                  </td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td colspan="2" class="year">
-                                                                      <?= date('d-m-Y',strtotime($row->from_date)); ?> to <?= date('d-m-Y',strtotime($row->to_date)); ?>
-                                                                  </td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td colspan="2" class="desc">
-                                                                      <?= $row->description; ?>
-                                                                  </td>
-                                                              </tr>
-                                                         </table>
-                                                     </td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td colspan="2" class="height"></td>
-                                                   </tr>
-                            <?php $i++;} } else {?>
+                            <td class="table-modific-td">
+                                <table class="custom-table">
+                                    <tr>
+                                        <td class="heading"><?= ucfirst($row->designation); ?> <div>at</div> <?= ucfirst($row->company_name); ?></td>
+                                        <td class="btn-option">
+                                            <a href="<?= base_url('update-workexperience/'.base64_encode($row->id));?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                            <!-- <a href="<?= base_url('user/Dashboard/delete_workexperience/'.$row->id);?>" onclick="if(confirm('Are you sure you want to Delete?')) commentDelete(1); return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
+                                            <a href="javascript:void(0)" onclick="deleteWorkExperience(<?= $row->id?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="year"><?= date('d-m-Y',strtotime($row->from_date)); ?> to <?= date('d-m-Y',strtotime($row->to_date)); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="desc"><?= $row->description; ?></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="height"></td>
+                        </tr>
+                        <?php $i++;} } else {?>
                             <tr>
                                 <td colspan="6">
                                     <center>No Data Found</center>
@@ -101,3 +87,47 @@
     </div>
 </div>
 </section>
+<script>
+function deleteWorkExperience(id) {
+	var w_id = id;
+    $.confirm({
+	    title: 'Confirm!',
+	    content: confirmTextDelete,
+	    buttons: {
+	        confirm: function () {
+                var base_url = $('#base_url').val();
+                $.ajax({
+                    url:base_url+"user/dashboard/delete_workexperience",
+                    method:"POST",
+                    data:{id: w_id},
+                    beforeSend : function(){
+                        $("#loader").show();
+                    },
+                    success:function(data) {
+                        if (data == '1'){
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 3000);
+                        } else {
+                            $('#err-messages').show();
+                            setTimeout(function () {
+                                window.scroll({top: 0, behavior: "smooth"})
+                            }, 7000);
+                            setTimeout(function () {
+                                $('#err-messages').hide();
+                            }, 9000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 10000);
+                        }
+                    }
+
+                })
+	        },
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
+}
+</script>

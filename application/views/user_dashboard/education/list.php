@@ -55,7 +55,8 @@
 								  		<td class="heading"><?= $row->college_name; ?></td>
 									  	<td class="btn-option">
 									   		<a href="<?= base_url('update-education/'.base64_encode($row->id));?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-									   		<a href="<?= base_url('user/Dashboard/delete_education/'.$row->id);?>" onclick="if(confirm('Are you sure you want to Delete?')) commentDelete(1); return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+									   		<!-- <a href="<?= base_url('user/Dashboard/delete_education/'.$row->id);?>" onclick="if(confirm('Are you sure you want to Delete?')) commentDelete(1); return false"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
+											<a href="javascript:void(0)" onclick="deleteEducation(<?= $row->id?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 								  		</td>
 								  	</tr>
 								  	<tr>
@@ -85,3 +86,47 @@
 </div>
 </div>
 </section>
+<script>
+function deleteEducation(id) {
+	var e_id = id;
+    $.confirm({
+	    title: 'Confirm!',
+	    content: confirmTextDelete,
+	    buttons: {
+	        confirm: function () {
+                var base_url = $('#base_url').val();
+                $.ajax({
+                    url:base_url+"user/dashboard/delete_education",
+                    method:"POST",
+                    data:{id: e_id},
+                    beforeSend : function(){
+                        $("#loader").show();
+                    },
+                    success:function(data) {
+                        if (data == '1'){
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 3000);
+                        } else {
+                            $('#err-messages').show();
+                            setTimeout(function () {
+                                window.scroll({top: 0, behavior: "smooth"})
+                            }, 7000);
+                            setTimeout(function () {
+                                $('#err-messages').hide();
+                            }, 9000);
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 10000);
+                        }
+                    }
+
+                })
+	        },
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
+}
+</script>
