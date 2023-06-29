@@ -296,7 +296,7 @@ function newMessage() {
 
 function getMessage(userto_id,postjob_id){
     $.ajax({
-        url: '<?= base_url('user/dashboard/showmessage_list') ?>',
+        url: '<?= base_url('user/dashboard/showmessage_listS') ?>',
         type: 'POST',
         data: {
             user_id: userto_id,post_id: postjob_id
@@ -304,7 +304,6 @@ function getMessage(userto_id,postjob_id){
         dataType: 'json',
         success: function(result) {
             $('#message_list').html(result);
-
             $('.message-input').show();
             $('#frame').addClass('chat_frame');
             $(".messages").scrollTop(10000000);

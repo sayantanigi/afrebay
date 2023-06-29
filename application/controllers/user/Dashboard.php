@@ -517,7 +517,59 @@ class Dashboard extends CI_Controller {
 		exit;
 	}
 
+	function showmessage_listS() {
+		$userdId = $_SESSION['afrebay']['userId'];
+		$user_id = $this->input->post('user_id');
+		$post_id = $this->input->post('post_id');
+		$get_data = $this->Users_model->getChat();
+		//$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
+		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
+		if (!empty($get_chatuser->firstname)) {
+			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;
+		} else {
+			$name = $get_chatuser->companyname;
+		}
+		if (@$get_chatuser->profilePic && file_exists('uploads/users/' . @$get_chatuser->profilePic)) {
+			$userpic = '<img src="' . base_url('uploads/users/' . @$get_chatuser->profilePic) . '" alt="" />';
+		} else {
+			$userpic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
+		}
+		$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
+		if (!empty($get_data)) {
+			foreach ($get_data as $key) {
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
+					$from_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
+				} else {
+					$from_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
+				}
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
+					$to_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
+				} else {
+					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
+				}
+				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
+					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
+				} else {
+					$sent = '';
+				}
+				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
+					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
+				} else {
+					$reply = '';
+				}
+				$html_data .= $sent . $reply;
+			}
+		} else {
+			$html_data .= '<li class="sent"><center>No Messages</center></li>';
+		}
+		echo json_encode($html_data);
+		exit;
+	}
+
 	function sent_message() {
+		$userdId = $_SESSION['afrebay']['userId'];
+		$user_id = $this->input->post('userto_id');
+		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
 		if (!empty($this->input->post('userto_id'))) {
 			$data = array(
 				'userfrom_id' => $_SESSION['afrebay']['userId'],
