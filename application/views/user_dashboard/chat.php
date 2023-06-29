@@ -283,13 +283,34 @@ function newMessage() {
                 $('<li class="sent">' + returndata.userpic + '<p>' + message + '</p></li>').appendTo($('.messages ul'));
                 $('#message').val(null);
                 $('.contact.active .preview').html('<span>You: </span>' + message);
-                $(".messages").animate({
-                    scrollTop: $(document).height()
-                }, "fast");
+                $(".messages").scrollTop($(document).height());
+                //getMessage(userto_id,postjob_id);
             }
+            setInterval(function(){
+                getMessage(userto_id,postjob_id);
+            }, 5000);
+            $(".messages").scrollTop(10000000);
         }
     });
 };
+
+function getMessage(userto_id,postjob_id){
+    $.ajax({
+        url: '<?= base_url('user/dashboard/showmessage_list') ?>',
+        type: 'POST',
+        data: {
+            user_id: userto_id,post_id: postjob_id
+        },
+        dataType: 'json',
+        success: function(result) {
+            $('#message_list').html(result);
+
+            $('.message-input').show();
+            $('#frame').addClass('chat_frame');
+            $(".messages").scrollTop(10000000);
+        }
+    });
+}
 
 $('.submit').click(function() {
     newMessage();
@@ -336,6 +357,7 @@ function getuser(user_id,post_id) {
         dataType: 'json',
         success: function(result) {
             $('#message_list').html(result);
+            $(".messages").scrollTop(10000000);
             $('.message-input').show();
             $('#frame').addClass('chat_frame');
         }
