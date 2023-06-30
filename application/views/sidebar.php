@@ -289,7 +289,7 @@ function load_unseen_notification() {
         dataType:"json",
         success:function(data) {
             //console.log(userId);
-            console.log(data);
+            //console.log(data);
             <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
             if(data.count > 0) {
                 $('.notificationv').show();

@@ -171,7 +171,9 @@
                                                 </div>
                                                 <div class="message-input">
                                                     <div class="wrap">
-                                                        <input type="hidden" name="userto_id" id="userto_id" value="" />
+                                                        <input type="hidden" name="userfromid" id="userfromid" value="<?= $_SESSION['afrebay']['userId']?>" />
+                                                        <input type="hidden" name="usertoid" id="usertoid" value="" />
+                                                        <input type="hidden" name="postid" id="postid" value="" />
                                                         <input type="text" name="message" id="message" placeholder="Write your message..." />
                                                         <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
                                                         <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
@@ -263,9 +265,11 @@ $("#status-options ul li").click(function() {
 });
 function newMessage() {
     //message = $(".message-input input").val();
-    var userto_id = $('#userto_id').val();
+    var userfromid = $('#userfromid').val();
+    var usertoid = $('#usertoid').val();
+    var postid = $('#postid').val();
     var message = $('#message').val();
-    var postjob_id = $('#postjob_id').val();
+
     if ($.trim(message) == '') {
         return false;
     }
@@ -273,9 +277,10 @@ function newMessage() {
         url: '<?= base_url('user/dashboard/sent_message') ?>',
         type: 'POST',
         data: {
-            userto_id: userto_id,
-            message: message,
-            postjob_id: postjob_id
+            userfromid: userfromid,
+            usertoid: usertoid,
+            postid: postid,
+            message: message
         },
         dataType: 'json',
         success: function(returndata) {
@@ -284,28 +289,32 @@ function newMessage() {
                 $('#message').val(null);
                 $('.contact.active .preview').html('<span>You: </span>' + message);
                 $(".messages").scrollTop($(document).height());
-                //getMessage(userto_id,postjob_id);
             }
-            setInterval(function(){
-                getMessage(userto_id,postjob_id);
-            }, 5000);
-            $(".messages").scrollTop(10000000);
         }
     });
-};
+}
 
-function getMessage(userto_id,postjob_id){
+$("#message").mouseover(function(){
+    setInterval(function(){
+        getMessage();
+    }, 5000);
+  });
+
+
+function getMessage(){
+    var userfromid = $('#userfromid').val();
+    var usertoid = $('#usertoid').val();
+    var postid = $('#postid').val();
     $.ajax({
         url: '<?= base_url('user/dashboard/showmessage_listS') ?>',
         type: 'POST',
-        data: {
-            user_id: userto_id,post_id: postjob_id
-        },
+        data: {userfromid: userfromid, usertoid: usertoid, postid: postid},
         dataType: 'json',
         success: function(result) {
+            //console.log(result);
             $('#message_list').html(result);
-            $('.message-input').show();
-            $('#frame').addClass('chat_frame');
+            // $('.message-input').show();
+            // $('#frame').addClass('chat_frame');
             $(".messages").scrollTop(10000000);
         }
     });
@@ -323,7 +332,7 @@ $(window).on('keydown', function(e) {
 });
 //# sourceURL=pen.js
 
-function getuser(user_id,post_id) {
+function getuser(usert_id,post_id) {
     var displayProduct = 3;
     $('#message_list').html(createSkeleton(displayProduct));
     function createSkeleton(limit) {
@@ -346,12 +355,15 @@ function getuser(user_id,post_id) {
         }
         return skeletonHTML;
     }
-    $('#userto_id').val(user_id);
+    $('#usertoid').val(usert_id);
+    $('#postid').val(post_id);
+    $("#message_list").attr('class', '');
+    $('#message_list').toggleClass('messageDetails'+usert_id);
     $.ajax({
         url: '<?= base_url('user/dashboard/showmessage_list') ?>',
         type: 'POST',
         data: {
-            user_id: user_id,post_id: post_id
+            usert_id: usert_id,post_id: post_id
         },
         dataType: 'json',
         success: function(result) {

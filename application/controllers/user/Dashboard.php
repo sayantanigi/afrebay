@@ -189,8 +189,6 @@ class Dashboard extends CI_Controller {
 
 		}
 		else{
-
-
 		$this->session->set_flashdata('message', 'Profile Updated Successfull !');
 		redirect(base_url('profile'));
 		}
@@ -455,11 +453,13 @@ class Dashboard extends CI_Controller {
 	}
 
 	function showmessage_count() {
-		$user_id = $this->input->post('userId');
-		//echo "Select COUNT(id) as msgcount, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'";
+		$userfrom_id = $this->input->post('userfromid');
+		$user_id = $this->input->post('usertoid');
+		$post_id = $this->input->post('postid');
 		$getUserType = $this->db->query("Select * FROM users WHERE userId ='".$user_id."'")->result();
 		$uType = $getUserType[0]->userType;
-		$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'")->result();
+		//echo "Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."') AND postjob_id = '".$post_id."' AND status = 0";
+		$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."') AND postjob_id = '".$post_id."' AND status = 0")->result();
 		$data = array(
 			'userfrom_id' => $countMessage[0]->userfrom_id,
 			'userto_id' => $countMessage[0]->userto_id,
@@ -470,11 +470,11 @@ class Dashboard extends CI_Controller {
 
 	function showmessage_list() {
 		$userdId = $_SESSION['afrebay']['userId'];
-		$user_id = $this->input->post('user_id');
+		$usert_id = $this->input->post('usert_id');
 		$post_id = $this->input->post('post_id');
 		$get_data = $this->Users_model->getChat();
-		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
-		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
+		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$usert_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$usert_id."' AND userfrom_id ='".$userdId."')");
+		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['usert_id'] . "'");
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;
 		} else {
@@ -498,12 +498,12 @@ class Dashboard extends CI_Controller {
 				} else {
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
-				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
+				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['usert_id'] && $key->postjob_id == $_POST['post_id']) {
 					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
 				} else {
 					$sent = '';
 				}
-				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
+				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['usert_id'] && $key->postjob_id == $_POST['post_id']) {
 					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
 				} else {
 					$reply = '';
@@ -518,12 +518,12 @@ class Dashboard extends CI_Controller {
 	}
 
 	function showmessage_listS() {
-		$userdId = $_SESSION['afrebay']['userId'];
-		$user_id = $this->input->post('user_id');
-		$post_id = $this->input->post('post_id');
-		$get_data = $this->Users_model->getChat();
+		$userfrom_id = $this->input->post('userfromid');
+		$user_id = $this->input->post('usertoid');
+		$post_id = $this->input->post('postid');
+		$get_data = $this->Users_model->getCurrentChat($userfrom_id, $user_id, $post_id);
 		//$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
-		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $_POST['user_id'] . "'");
+		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $user_id . "'");
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;
 		} else {
@@ -537,22 +537,22 @@ class Dashboard extends CI_Controller {
 		$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
 		if (!empty($get_data)) {
 			foreach ($get_data as $key) {
-				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $post_id) {
 					$from_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$from_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
-				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
+				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $post_id) {
 					$to_pic = '<img src="' . base_url('uploads/users/' . @$key->profilePic) . '" alt="" />';
 				} else {
 					$to_pic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 				}
-				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
+				if ($key->userfrom_id == $_SESSION['afrebay']['userId'] && $key->userto_id == $user_id && $key->postjob_id == $post_id) {
 					$sent = '<li class="sent">' . $from_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
 				} else {
 					$sent = '';
 				}
-				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $_POST['user_id'] && $key->postjob_id == $_POST['post_id']) {
+				if ($key->userto_id == $_SESSION['afrebay']['userId'] && $key->userfrom_id == $user_id && $key->postjob_id == $post_id) {
 					$reply = '<li class="replies">' . $to_pic . '<p>' . $key->message . '</p><div style="font-size: 10px;">'.$key->created_date.'</li>';
 				} else {
 					$reply = '';
@@ -567,15 +567,15 @@ class Dashboard extends CI_Controller {
 	}
 
 	function sent_message() {
-		$userdId = $_SESSION['afrebay']['userId'];
-		$user_id = $this->input->post('userto_id');
-		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
-		if (!empty($this->input->post('userto_id'))) {
+		$userfromid = $this->input->post('userfromid');
+		$usertoid = $this->input->post('usertoid');
+		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."')");
+		if (!empty($this->input->post('usertoid'))) {
 			$data = array(
-				'userfrom_id' => $_SESSION['afrebay']['userId'],
-				'userto_id' => $this->input->post('userto_id'),
+				'userfrom_id' => $userfromid,
+				'userto_id' => $usertoid,
+				'postjob_id' => $this->input->post('postid'),
 				'message' => $this->input->post('message'),
-				'postjob_id' => $this->input->post('postjob_id'),
 				'created_date' => date('Y-m-d H:i:s'),
 			);
 			$this->db->insert('chat', $data);

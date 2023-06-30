@@ -69,6 +69,18 @@ class Users_model extends My_Model {
         return $query->result();
     }
 
+    function getCurrentChat($userfrom_id, $user_id, $post_id) {
+        $this->db->select('chat.*,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,to_user.username as to_username,CONCAT(to_user.firstname," ",to_user.lastname) as to_fullname');
+        $this->db->from('chat');
+        $this->db->join('users','users.userId=chat.userfrom_id');
+        $this->db->join('users to_user','to_user.userId=chat.userto_id');
+        // $this->db->where("chat.postjob_id = '".$post_id."' AND ((userfrom_id ='".$userfrom_id."' AND userto_id ='".$user_id."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userfrom_id."'))");
+        $this->db->where("chat.postjob_id = '".$post_id."'");
+        $query = $this->db->get();
+        // print_r($this->db->last_query());
+        return $query->result();
+    }
+
     function getmessage($con) {
         $this->db->select('chat.*,users.username,CONCAT(users.firstname," ",users.lastname) as full_name,users.profilePic,to_user.username as to_username,CONCAT(to_user.firstname," ",to_user.lastname) as to_fullname,to_user.profilePic as to_profile');
         $this->db->from('chat');
