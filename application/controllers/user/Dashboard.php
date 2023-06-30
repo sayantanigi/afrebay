@@ -452,14 +452,27 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	// function showmessage_count() {
+	// 	$userId = $this->input->post('userId');
+	// 	$user_id = $this->input->post('usertoid');
+	// 	$post_id = $this->input->post('postid');
+	// 	$getUserType = $this->db->query("Select * FROM users WHERE userId ='".$user_id."'")->result();
+	// 	$uType = $getUserType[0]->userType;
+	// 	$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."') AND postjob_id = '".$post_id."' AND status = 0")->result();
+	// 	$data = array(
+	// 		'userfrom_id' => $countMessage[0]->userfrom_id,
+	// 		'userto_id' => $countMessage[0]->userto_id,
+	// 		'count' => $countMessage[0]->msgcount,
+	// 	);
+	// 	echo json_encode($data);
+	// }
+
 	function showmessage_count() {
-		$userfrom_id = $this->input->post('userfromid');
-		$user_id = $this->input->post('usertoid');
-		$post_id = $this->input->post('postid');
+		$user_id = $this->input->post('userId');
+		//echo "Select COUNT(id) as msgcount, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'";
 		$getUserType = $this->db->query("Select * FROM users WHERE userId ='".$user_id."'")->result();
 		$uType = $getUserType[0]->userType;
-		//echo "Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."') AND postjob_id = '".$post_id."' AND status = 0";
-		$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."') AND postjob_id = '".$post_id."' AND status = 0")->result();
+		$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'")->result();
 		$data = array(
 			'userfrom_id' => $countMessage[0]->userfrom_id,
 			'userto_id' => $countMessage[0]->userto_id,
