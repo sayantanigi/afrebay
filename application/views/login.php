@@ -37,7 +37,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-12 col-sm-12 SignIn_Left">
                                     <h3>Login</h3>
-                                    <span>Lorem ipsum dolor sit amet consectetur adipiscing elit odio duis risus at lobortis ullamcorper</span>
+                                    <span>Get started by signing in using your existing accounts.</span>
 
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">

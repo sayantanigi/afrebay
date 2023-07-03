@@ -481,6 +481,19 @@ class Dashboard extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	function showmessageCountEach() {
+		$userfromid = $this->input->post('userfromid');
+		$usertoid = $this->input->post('usertoid');
+		$postid = $this->input->post('postid');
+		$getEachChatCount = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id, postjob_id FROM chat WHERE userto_id ='".$userfromid."' AND postjob_id ='".$postid."' AND status = '0'")->result();
+		$data = array(
+			'userfrom_id' => $getEachChatCount[0]->userfrom_id,
+			'userto_id' => $getEachChatCount[0]->userto_id,
+			'count' => $getEachChatCount[0]->msgcount,
+		);
+		echo json_encode($data);
+	}
+
 	function showmessage_list() {
 		$userdId = $_SESSION['afrebay']['userId'];
 		$usert_id = $this->input->post('usert_id');
@@ -535,7 +548,7 @@ class Dashboard extends CI_Controller {
 		$user_id = $this->input->post('usertoid');
 		$post_id = $this->input->post('postid');
 		$get_data = $this->Users_model->getCurrentChat($userfrom_id, $user_id, $post_id);
-		//$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$user_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userdId."')");
+		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$usert_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$usert_id."' AND userfrom_id ='".$userdId."')");
 		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $user_id . "'");
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;

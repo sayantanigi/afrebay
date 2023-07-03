@@ -110,11 +110,11 @@
                                                                         echo ucfirst($get_user->companyname);
                                                                     } ?>
                                                                     <?php
-                                                                    $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
-                                                                    if($countMessage[0]->msgcount != 0) { ?>
-                                                                    <span class="notification notificationv1"><?php echo $countMessage[0]->msgcount;?></span>
-                                                                    <?php } ?>
-                                                                    <span class="notification notificationv"><?php echo $countMessage[0]->msgcount;?></span>
+                                                                    //$countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0' AND postjob_id = '".$user->post_id."'")->result();
+                                                                    //if($countMessage[0]->msgcount != 0) { ?>
+                                                                    <!-- <span class="notification EachChatv"><?php echo $countMessage[0]->msgcount;?></span> -->
+                                                                    <?php //} ?>
+                                                                    <!-- <span class="notification EachvChat"></span> -->
                                                                     </p>
 
                                                                     <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
@@ -130,7 +130,7 @@
                                                         <li class="contact" onclick="return getuser('<?= $get_user->userId ?>','<?= $user->post_id ?>');">
                                                             <div class="wrap">
                                                                 <span class="contact-status online"></span>
-                                                                <?php if (@$get_user->profilePic && file_exists('uploads/users/' . @$get_user->profilePic)) { ?>
+                                                                <?php if (@$get_user->profilePic && file_exists('uploads/users/'. @$get_user->profilePic)) { ?>
                                                                 <img src="<?= base_url('uploads/users/' . @$get_user->profilePic) ?>" alt="" />
                                                                 <?php } else { ?>
                                                                 <img src="<?= base_url('uploads/users/user.png') ?>" alt="" />
@@ -143,11 +143,11 @@
                                                                         echo ucfirst($get_user->companyname);
                                                                     } ?>
                                                                     <?php
-                                                                    $countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0'")->result();
-                                                                    if($countMessage[0]->msgcount != 0) { ?>
-                                                                    <span class="notification notificationf1"><?php echo $countMessage[0]->msgcount;?></span>
-                                                                    <?php } ?>
-                                                                    <span class="notification notificationf"><?php echo $countMessage[0]->msgcount;?></span>
+                                                                    //$countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0' AND postjob_id = '".$user->post_id."'")->result();
+                                                                    //if($countMessage[0]->msgcount != 0) { ?>
+                                                                    <!-- <span class="notification EachChatf"><?php echo $countMessage[0]->msgcount;?></span> -->
+                                                                    <?php //} ?>
+                                                                    <!-- <span class="notification EachfChat"></span> -->
                                                                     </p>
 
                                                                     <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
@@ -208,17 +208,19 @@
 </div>
 
 <style>
-   .message-input{display: none;}
-   .chatList {display: block !important; text-align: center !important;}
-   .showBidListContent {display: block !important; opacity: 1 !important; top: 58% !important; left: 8% !important;}
-   .modal-dialog {max-width: 60% !important; margin: 0 !important; display: contents !important;}
-   .modal-content {max-width: 80% !important;}
-   .modal-content p {margin: 0px !important; padding: 4px 20px 0 20px !important;}
-   .social-media {display: none;}
-   .notificationv {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
-   .notificationf {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
-   .notificationv1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
-   .notificationf1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+    .message-input{display: none;}
+    .chatList {display: block !important; text-align: center !important;}
+    .showBidListContent {display: block !important; opacity: 1 !important; top: 58% !important; left: 8% !important;}
+    .modal-dialog {max-width: 60% !important; margin: 0 !important; display: contents !important;}
+    .modal-content {max-width: 80% !important;}
+    .modal-content p {margin: 0px !important; padding: 4px 20px 0 20px !important;}
+    .social-media {display: none;}
+    .notificationv {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+    .notificationf {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+    .notificationv1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+    .notificationf1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
+    .EachvChat{display: none;}
+    .EachfChat{display: none;}
 </style>
 <!-- <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css"> -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -284,6 +286,9 @@ function newMessage() {
         },
         dataType: 'json',
         success: function(returndata) {
+            setInterval(function(){
+                getMessageCount();
+            }, 5000);
             if (returndata.result == 1) {
                 $('<li class="sent">' + returndata.userpic + '<p>' + message + '</p></li>').appendTo($('.messages ul'));
                 $('#message').val(null);
@@ -295,10 +300,18 @@ function newMessage() {
 }
 
 $("#message").mouseover(function(){
+    $('.EachvChat').hide();
+    $('.EachfChat').hide();
     setInterval(function(){
         getMessage();
+        getMessageCount();
     }, 5000);
-  });
+});
+
+$(document).ready(function(){
+    $('.EachvChat').hide();
+    $('.EachfChat').hide();
+});
 
 
 function getMessage(){
@@ -316,6 +329,40 @@ function getMessage(){
             // $('.message-input').show();
             // $('#frame').addClass('chat_frame');
             $(".messages").scrollTop(10000000);
+        }
+    });
+}
+
+function getMessageCount(){
+    var userfromid = $('#userfromid').val();
+    var usertoid = $('#usertoid').val();
+    var postid = $('#postid').val();
+    $.ajax({
+        url: '<?= base_url('user/dashboard/showmessageCountEach') ?>',
+        type: 'POST',
+        data: {userfromid: userfromid, usertoid: usertoid, postid: postid},
+        dataType: 'json',
+        success: function(result) {
+            //console.log(result);
+            <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
+            if(result.count > 0) {
+                $('.EachChatv').hide();
+                $('.EachvChat').show();
+                $('.EachvChat').text(result.count);
+            } else {
+                $('.EachvChat').hide();
+                $('.EachChatv').hide();
+            }
+            <?php } else { ?>
+            if(result.count > 0) {
+                $('.EachChatf').hide();
+                $('.EachfChat').show();
+                $('.EachfChat').text(result.count);
+            } else {
+                $('.EachChatf').hide();
+                $('.EachfChat').hide();
+            }
+            <?php } ?>
         }
     });
 }
