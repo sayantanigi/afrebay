@@ -122,3 +122,50 @@ $route['admin/chat_details/(:any)/(:any)'] = "admin/chat/adminShowMessage_list/$
 // $route['admin/deletepostdetail/(:any)'] = "admin/Post_job/deletepostdetail/$1";
 $route['admin/deletepostdetail'] = "admin/Post_job/deletepostdetail";
 $route['admin/update-postjob/(:any)'] = "admin/Post_job/update_post_job/$1";
+
+
+//API URLS
+$route['api/registration'] = 'api/Authentication/registration';
+$route['api/login'] = 'api/Authentication/login';
+$route['api/send_forget_password'] = 'api/Authentication/send_forget_password';
+$route['api/logout'] = 'api/Authentication/logout';
+
+$route['api/home_list'] = 'api/Home/home_list';
+$route['api/post_details/(:any)'] = 'api/Home/post_details/$1';
+$route['api/vendor_detail/(:any)'] = "api/Home/vendor_details/$1";
+$route['api/product_detail/(:any)'] = "api/Home/product_details/$1";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//$route['api/home_list'] = 'api/Home/home_list';

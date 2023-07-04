@@ -35,16 +35,16 @@ class Jobsbidding extends MY_Controller {
             } else {
                 $name= $row->username;
             }
-            if(!empty($row->bidding_status=='Accept')){
-                $bidding_status='Accepted';
-            }
-            else if(!empty($row->bidding_status=='Reject')){
-                $bidding_status='Rejected';
+            // if(!empty($row->bidding_status=='Accept')){
+            //     $bidding_status='Accepted';
+            // }
+            // else if(!empty($row->bidding_status=='Reject')){
+            //     $bidding_status='Rejected';
 
-            }
-            else {
-                $bidding_status= $row->bidding_status;
-            }
+            // }
+            // else {
+            //     $bidding_status= $row->bidding_status;
+            // }
             $no++;
             $nestedData = array();
             $nestedData[] = $no;
@@ -57,7 +57,7 @@ class Jobsbidding extends MY_Controller {
             $nestedData[] = $row->duration;
             $nestedData[] = 'USD'.' '.$row->bid_amount;
             $nestedData[] = date('d-m-Y',strtotime($row->created_date));
-            $nestedData[] = $bidding_status;
+            $nestedData[] = $row->bidding_status;
             $nestedData[] = $btn;
             $data[] = $nestedData;
         }

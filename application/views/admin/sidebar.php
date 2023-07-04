@@ -38,14 +38,12 @@
 			<!-- <li <?php if ($seg2 =='services') {?>class="active"<?php }?>>
 				<a href="<?=admin_url('services'); ?>"><i class="fas fa-bullhorn"></i> <span> Services</span></a>
 			</li> -->
+			<li <?php if ($seg2 =='jobsbidding') {?>class="active"<?php }?>>
+				<a href="<?= admin_url('jobsbidding')?>"><i class="far fa-calendar-check"></i> <span> Jobs Bidding</span></a>
+			</li>
 			<li <?php if ($seg2 =='payment') {?>class="active"<?php }?>>
 				<!-- <a href="<?= admin_url('payment')?>"><i class="fas fa-hashtag"></i> <span>Vendors Subscription</span></a> -->
 				<a href="<?= admin_url('payment')?>"><i class="fas fa-hashtag"></i><span>List of Subscriptions</span></a>
-
-
-			</li>
-			<li <?php if ($seg2 =='jobsbidding') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('jobsbidding')?>"><i class="far fa-calendar-check"></i> <span> Jobs Bidding</span></a>
 			</li>
 			<!-- <li <?php if ($seg2 =='rating_type') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('rating_type')?>"><i class="fas fa-star-half-alt"></i> <span>Rating Type</span></a>
@@ -55,8 +53,8 @@
 			</li> -->
 			<li <?php if ($seg2 =='subscription') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('subscription')?>"><i class="far fa-calendar-alt"></i>
-					<!-- <span>Subscription Plans</span> -->
-					<span>Freelancer Subscriptions</span>
+					<span>Subscription Plans</span>
+					<!-- <span>Freelancer Subscriptions</span> -->
 				</a>
 			</li>
 			<!-- <li <?php if ($seg2 =='Wallet') {?>class="active"<?php }?>>

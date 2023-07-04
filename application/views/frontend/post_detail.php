@@ -157,9 +157,9 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                 </ul>
                             </div>
                         </div>
-                        <?php if (@$_SESSION['afrebay']['userType'] == '1' || empty($_SESSION['afrebay']['userType'])) { ?>
+                        <?php if (@$_SESSION['afrebay']['userType'] == '1' || empty(@$_SESSION['afrebay']['userType'])) { ?>
                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
-                            <?php $userBidData = $this->db->query("SELECT * FROM `job_bid` WHERE postjob_id = '".$post_data->id."' and user_id = '".$_SESSION['afrebay']['userId']."'")->result_array();
+                            <?php $userBidData = $this->db->query("SELECT * FROM `job_bid` WHERE postjob_id = '".$post_data->id."' and user_id = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                             if(!empty($userBidData)) { ?>
                             <div class="bd-form"><a href="<?= base_url()?>jobbid" class="cstm_viewbid_btn"> View Bid</a></div>
                             <?php } else { ?>

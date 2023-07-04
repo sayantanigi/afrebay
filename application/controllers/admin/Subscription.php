@@ -9,8 +9,10 @@ class Subscription extends MY_Controller {
 
 	function index() {
 		$offersdata=$this->Crud_model->GetData('subscription','','');
-		$header = array('title' => 'Freelancer Subscriptions');
-		$data = array('heading' => 'Freelancer Subscriptions','offersdata' => $offersdata);
+		/*$header = array('title' => 'Freelancer Subscriptions');
+		$data = array('heading' => 'Freelancer Subscriptions','offersdata' => $offersdata);*/
+		$header = array('title' => 'Subscription Plans');
+		$data = array('heading' => 'Subscription Plans','offersdata' => $offersdata);
         $this->load->view('admin/header', $header);
         $this->load->view('admin/sidebar');
         $this->load->view('admin/subscription/list',$data);
@@ -84,7 +86,7 @@ class Subscription extends MY_Controller {
 		$header=array('title'=>'update');
 		// $data=array('heading'=>'Edit Subscription', 'button'=>'Update', 'subscription_name'=>set_value('subscription_name',$update_sub->subscription_name), 'subscription_amount'=>set_value('subscription_amount',$update_sub->subscription_amount), 'subscription_duration'=>set_value('subscription_duration',$update_sub->subscription_duration), 'id'=>$sub_id, 'sub_offer'=>$sub_offer);
 		$data=array(
-			'heading'=>'Edit Subscription',
+			'heading'=>'Edit Subscription Plan',
 			'button'=>'Update',
 			'subscription_name'=>set_value('subscription_name',$update_sub->subscription_name),
 			'subscription_user_type' =>set_value('subscription_user_type',$update_sub->subscription_user_type),
