@@ -13284,8 +13284,8 @@ aside .widget.border:first-child {
 
    color: #888888;
 
-   padding: 15px 25px;
-
+   /*padding: 15px 25px;*/
+   padding: 0px;
    font-family: Open Sans;
 
    margin-bottom: 15px;
