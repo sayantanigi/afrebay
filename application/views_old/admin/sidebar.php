@@ -18,7 +18,7 @@
 				<a href="<?= admin_url('category')?>"><i class="fas fa-layer-group"></i> <span>Categories</span></a>
 			</li>
 			<li <?php if ($seg2 =='sub_category') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('sub_category')?>"><i class="fab fa-buffer"></i> <span>Sub Categories</span></a>
+				<a href="<?= admin_url('sub_category')?>"><i class="fab fa-buffer"></i> <span>Subcategories</span></a>
 			</li>
 			<li <?php if ($seg2 =='specialist') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('specialist')?>"><i class="fab fa-teamspeak"></i> <span>Specializations</span></a>
@@ -39,7 +39,10 @@
 				<a href="<?=admin_url('services'); ?>"><i class="fas fa-bullhorn"></i> <span> Services</span></a>
 			</li> -->
 			<li <?php if ($seg2 =='payment') {?>class="active"<?php }?>>
-				<a href="<?= admin_url('payment')?>"><i class="fas fa-hashtag"></i> <span>Vendors Subscription</span></a>
+				<!-- <a href="<?= admin_url('payment')?>"><i class="fas fa-hashtag"></i> <span>Vendors Subscription</span></a> -->
+				<a href="<?= admin_url('payment')?>"><i class="fas fa-hashtag"></i><span>List of Subscriptions</span></a>
+
+				
 			</li>
 			<li <?php if ($seg2 =='jobsbidding') {?>class="active"<?php }?>>
 				<a href="<?= admin_url('jobsbidding')?>"><i class="far fa-calendar-check"></i> <span> Jobs Bidding</span></a>
@@ -60,7 +63,7 @@
 				<a href="#"><i class="fas fa-user-tie"></i> <span> Service Providers</span></a>
 			</li> -->
 			<li <?php if ($seg2 =='users') {?>class="active"<?php }?>>
-				<a href="<?=admin_url(); ?>users"><i class="fas fa-user"></i> <span>Users List</span></a>
+				<a href="<?=admin_url(); ?>users"><i class="fas fa-user"></i> <span>Users</span></a>
 			</li>
 			<li <?php if ($seg2 =='our-services') {?>class="active"<?php }?>>
 				<a href="<?=admin_url(); ?>our-services"><i class="fas fa-bullhorn"></i> <span>Our Services</span></a>

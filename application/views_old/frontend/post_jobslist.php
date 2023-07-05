@@ -22,7 +22,7 @@
     </div>
 </section>
 
-<section>
+<section class="max_height">
     <!-- <div class="block no-padding Our_Jobs Employees_Search_List"> -->
     <div class="block no-padding Employees_Search_List">
         <div class="container">
@@ -71,7 +71,7 @@
                             <div class="widget">
                                 <h3 class="sb-title closed">Country</h3>
                                 <div class="specialism_widget">
-                                    <select class="chosen_country" name="country" id="country" onchange="getState(this.value);filter_job();">
+                                    <select class="chosen_country" name="country" id="country" onchange="getState(this.value);filter_job();" style="color: #888; font-size: 13px;">
                                         <option value="">Select Country</option>
                                         <?php if(!empty($getcountry)){ foreach($getcountry as $item){?>
                                         <option value="<?= $item->name ?>"><?= ucfirst($item->name)?></option>

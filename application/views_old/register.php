@@ -25,7 +25,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     </div>
 </section>
 
-<section>
+<section class="max_height">
     <div class="block remove-bottom Sign_Up">
         <div class="container">
             <div class="row justify-content-md-center">
@@ -45,7 +45,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignUp_Right">
                                     <div id="register-messages" class="text-success-msg f-20">
                                         <h4>Successful Registration</h4>
-                                        <p style="color: #28a745;">We have sent an activation link to your account to continue wih the registration process.</p>
+                                        <p style="color: #28a745;">We have sent an activation link to your account to continue with the registration process.</p>
                                     </div>
                                     <div id="err-messages">
                                         <h4 style="color: red;">Error</h4>
@@ -87,7 +87,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Company Name <span style="color:red">*</span></label>
                                                     <div class="cfield_Input">
-                                                        <input type="text" placeholder="Company Name" name="company_name" id="company_name" onkeypress="only_alphabets(event)" />
+                                                        <!-- <input type="text" placeholder="Company Name" name="company_name" id="company_name" onkeypress="only_specialAlphabets(event)" /> -->
+                                                        <input type="text" placeholder="Company Name" name="company_name" id="company_name"/>
                                                         <i class="la la-home"></i>
                                                     </div>
                                                 </div>
@@ -103,7 +104,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 </div>
                                                 <div class="error text-left" id="err_email"></div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile">
+                                            <!-- <div class="col-lg-6 col-md-6 col-sm-6 mobile">
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Phone Number</label>
                                                     <div class="cfield_Input">
@@ -112,6 +113,18 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     </div>
                                                 </div>
                                                 <div class="error text-left" id="err_mobile"></div>
+                                            </div> -->
+                                            <div class="col-lg-6 col-md-6 col-sm-6 addrss">
+                                                <div class="cfield cfield_top">
+                                                    <label for="" class="form-label">Legal Address <span style="color:red;">*</span></label>
+                                                    <div class="cfield_Input">
+                                                        <input type="text" class="form-control" name="address" id="location" placeholder="Legal Address" autocomplete="off" required/>
+                                                        <input type="hidden" name="latitude" id="search_lat" value="">
+                                                        <input type="hidden" name="longitude" id="search_lon" value="">
+                                                        <i class="la la-address-card"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="error text-left" id="err_address"></div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 pass">
                                                 <div class="cfield cfield_top">
@@ -154,8 +167,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </div> -->
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignUp_Btn">
                                                 <input type="hidden" name="user_type" id="user_type">
-                                                <button type="button" class="btn btn-info" onclick="return btn_register();">Sign up</button>
-                                                <img src="<?php echo base_url()?>uploads/loading.gif" id="loader">
+                                                <button type="button" class="btn btn-info" id="rSignUp" onclick="return btn_register();">Sign up</button>
+                                                <!-- <button type="button" class="btn btn-info" id="please_wait" onclick="return">Please Wait...</button> -->
+                                                <!-- <img src="<?php echo base_url()?>uploads/loading.gif" id="loader"> -->
                                             </div>
                                             <!-- <div class="col-lg-12 col-md-12 col-sm-12 d-none">
                                                 <div class="extra-login">
@@ -195,7 +209,7 @@ $(document).ready(function(){
             $('.email').show();
             $('.pass').show();
             $('.c_pass').show();
-            $('.mobile').show();
+            $('.addrss').show();
         } else {
             $('.company_name').show();
             $('.first_name').hide();
@@ -203,7 +217,7 @@ $(document).ready(function(){
             $('.email').show();
             $('.pass').show();
             $('.c_pass').show();
-            $('.mobile').show();
+            $('.addrss').show();
         }
     }
 </script>

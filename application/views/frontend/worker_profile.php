@@ -62,7 +62,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                         <li><a href="#about" title="">About</a></li>
                         <li><a href="#education" title="">Education</a></li>
                         <li><a href="#experience" title="">Work Experience</a></li>
-                        <li><a href="#skills" title="">Professional Skills</a></li>
+                        <li><a href="#skills" title="">Professional Skill Set</a></li>
                     </ul>
                     <div class="cand-details-sec">
                         <div class="row">
@@ -101,7 +101,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <?php } }?>
                                     </div>
                                     <div class="progress-sec" id="skills">
-                                        <h2>Professional Skills</h2>
+                                        <h2>Professional Skill Set</h2>
                                         <div class="progress-sec" style="text-transform: uppercase;">
                                             <span><?= @$user_detail->skills ?></span>
                                         </div>

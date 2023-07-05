@@ -1,6 +1,6 @@
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url(images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url(assets/images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">

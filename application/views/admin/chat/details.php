@@ -60,7 +60,7 @@
                                         <div class="content">
                                             <div id="message_list" style="height:650px;  overflow-y: scroll;overflow-y: hidden;">
                                                 <div class="messages">
-                                                    <ul>
+                                                    <ul style="padding: 0;">
                                                     <?php echo $chat_detail;?>
                                                     </ul>
                                                 </div>

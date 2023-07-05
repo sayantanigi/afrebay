@@ -15,12 +15,6 @@
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
                 <h2 class="breadcrumb-title">Subscription</h2>
-                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Subscription</li>
-                    </ol>
-                </nav> -->
             </div>
         </div>
     </div>
@@ -31,6 +25,9 @@
     <div id="subscription-messages" class="text-success-msg f-20">
         <p style="color: #28a745;">Subscription Successful.</p>
     </div>
+    <div id="cnclsubscription-messages" class="text-success-msg f-20">
+        <p style="color: #28a745;">Successfully unsubsribed from the current plan.</p>
+    </div>
     <div id="err-messages">
         <h4 style="color: red;">Error</h4>
         <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
@@ -38,58 +35,89 @@
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="cardak" style="background: #f2f2f2 !important;">
+                <div class="cardak custom-cardak">
                     <span class="text-success-msg f-20" style="text-align: center;">
-                    <?php if($this->session->flashdata('message')) {
-                        echo $this->session->flashdata('message');
-                        unset($_SESSION['message']);
-                    } ?>
+                        <?php if($this->session->flashdata('message')) {
+                            echo $this->session->flashdata('message');
+                            unset($_SESSION['message']);
+                        } ?>
                     </span>
-                    <div style="display: inline-block; text-align: center;">
+                    <?php if(!empty($subcriber_pack)) { ?>
+                    <div class="col-xl-12 col-lg-12 col-md-12" style="display: inline-block; text-align: center; padding-bottom: 15px;">
                         <h3>Current Plan</h3>
                     </div>
+                    <?php } ?>
                     <div class="row row-sm">
                         <div class="col-xl-12 col-lg-12 col-md-12">
-                            <div class="cardak">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Transaction ID</th>
-                                            <th scope="col">Plan Name</th>
-                                            <th scope="col">Price ($)</th>
-                                            <th scope="col">Payment Date</th>
-                                            <th scope="col">Duration</th>
-                                            <th scope="col">Expiry Date</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
+                            <div class="cardak custom-cardak">
+                                <table class="table table-modific">
                                     <tbody>
-                                        <?php
-                                        if(!empty($subcriber_pack)) {
+                                        <?php if(!empty($subcriber_pack)) {
                                             $i = 1;
                                             foreach ($subcriber_pack as $row) { ?>
-                                        <tr>
-                                            <td scope="row"><?php echo $i?></th>
-                                            <td><?php echo $row->transaction_id;?></td>
-                                            <td><?php echo $row->name_of_card;?></td>
-                                            <td><?php echo "$". number_format((float)$row->amount, 2, '.', '');?></td>
-                                            <td><?php echo date ('Y-m-d',strtotime($row->payment_date));?></td>
-                                            <td><?php echo $row->duration;?></td>
-                                            <td><?php echo date ('Y-m-d',strtotime($row->expiry_date));?></td>
-                                            <td>
-                                                <?php
-                                                $now_date = date('Y/m/d');
-                                                $expire_date = date('Y/m/d', strtotime($row->expiry_date));
-                                                if($expire_date < $now_date) {
-                                                    echo "Expired";
-                                                } else {
-                                                    echo "Active";
-                                                } ?>
-                                            </td>
-                                            <td><button type="button">Cancel</button></td>
-                                        </tr>
+                                            <tr>
+                                                <td class="table-modific-td">
+                                                    <table class="custom-table">
+                                                        <tr class="plan-active">
+                                                            <td class="heading">Transaction ID: <?php echo $row->transaction_id;?></td>
+                                                            <td class="btn-option">
+                                                                <table class="plan-active-table">
+                                                                    <tr>
+                                                                        <?php
+                                                                        if($row->status == '1') { ?>
+                                                                        <td class="active-plan">Active Plan</td>
+                                                                        <?php } ?>
+                                                                        <td style="width: 8%;"></td>
+                                                                        <?php
+                                                                        if($row->status == '1') { ?>
+                                                                        <td class="cnc-plan" id="cancelSubsription" onclick="cancelSubsription('<?php echo $row->id;?>','<?php echo $row->transaction_id;?>','<?php echo $row->amount?>')">Cancel Subscription</td>
+                                                                        <?php } else if($row->status == '2'){ ?>
+                                                                        <td class="cnc-plan" style="font-size: 12px;">You have cancelled your subscription. Your afrebay subscription expires on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
+                                                                        <?php } else { ?>
+                                                                        <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
+                                                                        <?php } ?>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
+                                                            <td class="btn-option"><a href="<?php echo $row->invoice_pdf?>" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; padding: 5px 25px; font-weight: 500; color: orange;">Download invoice</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" class="bid-amount">
+                                                            <?php if($row->amount=='0') { ?>
+                                                            <?php  } else{ ?>
+                                                                <?php if ($key['subscription_country'] == 'Nigeria') {
+                                                                    $currency = '₦';
+                                                                } else {
+                                                                    $currency = '$';
+                                                                }?>
+                                                                <label>Price (<?php echo $currency?>):</label> <?php echo $currency.' '.number_format((float)$row->amount, 2, '.', '');?>
+                                                            <?php } ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" class="year">
+                                                                <label>Payment Date:</label> <?php echo date ('d M Y',strtotime($row->payment_date));?>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- <tr>
+                                                            <td colspan="2" class="year">
+                                                                <label>Duration:</label> <?php echo $row->duration." Days";?>
+                                                            </td>
+                                                        </tr> -->
+                                                        <tr>
+                                                            <td colspan="2" class="year">
+                                                                <label>Expiry Date:</label> <?php echo date ('d M Y',strtotime($row->expiry_date));?>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="height"></td>
+                                            </tr>
                                         <?php $i++; }  } ?>
                                     </tbody>
                                 </table>
@@ -97,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if(empty($subcriber_pack)) { ?>
+                <?php if(empty($subscription_check)) { ?>
                 <div class="cardak" style="background: #f2f2f2 !important; margin-top: 40px;">
                     <div style="display: inline-block; text-align: center;">
                         <h3>Pricing</h3>
@@ -106,27 +134,45 @@
                         <div class="row text-center align-items-end">
                             <!-- Pricing Table-->
                             <?php if(!empty($get_subscription)) {
-                                $i=1;
-                                foreach ($get_subscription as $value) { ?>
+                            $i=1;
+                            foreach ($get_subscription as $value) { ?>
                             <div class="col-lg-4 mb-5 mb-lg-0">
                                 <div class="Sub_Block">
                                     <div class="Sub_Head">
                                         <div class="Heading">
                                             <h1><?= $value->subscription_name; ?></h1>
-                                            <h2>Price: <?= ' '.$value->subscription_amount; ?><span></span></h2>
-                                            <p style="text-align: justify;">Duration: <b><?= ' '.$value->subscription_duration; ?></b><span></span></p>
+                                            <h2>
+                                                <?php if ($key['subscription_country'] == 'Nigeria') {
+                                                        $currency = '₦';
+                                                    } else {
+                                                        $currency = '$';
+                                                    }?>
+                                                    Price: <?= $currency.''.$value->subscription_amount; ?><span></span></h2>
+                                            <p style="text-align: justify;">Duration: <b><?= ' '.$value->subscription_duration." Days"; ?></b><span></span></p>
                                         </div>
                                         <div class="Icon">
                                             <span>
-                                                <!-- <img src="https://cdn-icons-png.flaticon.com/512/5673/5673647.png"> -->
                                                 <img src="<?php echo base_url()?>uploads/logo/3397_favicon.png" />
                                             </span>
                                         </div>
                                     </div>
                                     <div></div>
                                     <div><?= $value->subscription_description; ?></div>
-                                    <!-- <a href="javascript:void(0);" class="btn btn-primary" id="getSubscription_<?php echo $value->id?>">Subscribe</a> -->
-                                    <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($value->price_key))?>">Subscribe</a>
+                                    <?php if($value->subscription_type == 'paid') {
+                                        if(!empty($value->product_key)) { ?>
+                                            <a class="btn btn-info" href="<?= base_url('stripe/'.base64_encode($value->price_key))?>">Subscribe</a>
+                                            <?php } else { ?>
+                                                <a class="btn btn-info" href="<?= base_url('paystackCheckout/'.base64_encode($value->plan_code).'/'.base64_encode($value->subscription_amount).'/'.base64_encode($_SESSION['afrebay']['userEmail']))?>">Subscribe</a>
+                                            <?php } ?>
+                                    <?php } else { ?>
+                                    <a href="javascript:void(0);" class="btn btn-primary getSubscription_<?php echo $value->id?>" id="getSubscription_<?php echo $value->id?>">Subscribe</a>
+                                    <input type="hidden" name="user_id_<?php echo $value->id?>" id="user_id_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userId']?>">
+                                    <input type="hidden" name="sub_id_<?php echo $value->id?>" id="sub_id_<?php echo $value->id?>" value="<?php echo $value->id?>">
+                                    <input type="hidden" name="sub_name_<?php echo $value->id?>" id="sub_name_<?php echo $value->id?>" value="<?php echo $value->subscription_name?>">
+                                    <input type="hidden" name="user_email_<?php echo $value->id?>" id="user_email_<?php echo $value->id?>" value="<?php echo $_SESSION['afrebay']['userEmail']?>">
+                                    <input type="hidden" name="sub_price_<?php echo $value->id?>" id="sub_price_<?php echo $value->id?>" value="<?php echo $value->subscription_amount?>">
+                                    <input type="hidden" name="sub_duration_<?php echo $value->id?>" id="sub_duration_<?php echo $value->id?>" value="<?php echo $value->subscription_duration?>">
+                                    <?php } ?>
                                 </div>
                             </div>
                             <?php $i++; }} else { ?>
@@ -173,6 +219,7 @@
 </section>
 <style>
 #subscription-messages{display: none; text-align: center;}
+#cnclsubscription-messages{display: none; text-align: center;}
 #err-messages{display: none; text-align: center;}
 </style>
 <script>
@@ -194,13 +241,12 @@ $(document).ready(function(){
                 method:"POST",
                 data:{user_id: user_id,sub_id: sub_id,sub_name: sub_name,user_email: user_email,sub_price: sub_price,sub_duration: sub_duration},
                 beforeSend : function(){
-        			$("#loader").show();
-        			//$(".SignUp_Btn button").prop('disable','true');
-        		},
+                    $("#loader").show();
+                    $(".getSubscription_<?php echo $value->id?>").text('Please wait..');
+                },
                 success:function(data) {
                     if (data == '1'){
                         setTimeout(function () {
-                            $("#loader").hide();
                             window.scroll({top: 0, behavior: "smooth"});
                             $('#subscription-messages').show();
                         }, 10000);
@@ -226,6 +272,47 @@ $(document).ready(function(){
 
             })
         })
-    <?php $i++; } } ?>
+<?php $i++; } } ?>
 })
+
+function cancelSubsription(id,sub_id,amount){
+    var id = id;
+    var sub_id = sub_id;
+    var amount = amount;
+    var base_url = $('#base_url').val();
+    $.ajax({
+        url:base_url+"user/dashboard/cancelSubscription",
+        method:"POST",
+        data:{id: id, sub_id: sub_id, amount: amount},
+        beforeSend : function(){
+            $("#cancelSubsription").text('Please wait..');
+        },
+        success:function(data) {
+            if (data == '1'){
+                setTimeout(function () {
+                    window.scroll({top: 0, behavior: "smooth"});
+                    $('#cnclsubscription-messages').show();
+                }, 10000);
+                setTimeout(function () {
+                    $('#cnclsubscription-messages').hide();
+                }, 13000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 15000);
+            } else {
+                $('#err-messages').show();
+                setTimeout(function () {
+                    window.scroll({top: 0, behavior: "smooth"})
+                }, 5000);
+                setTimeout(function () {
+                    $('#err-messages').hide();
+                }, 6000);
+                setTimeout(function () {
+                    location.reload(true);
+                }, 7000);
+            }
+        }
+
+    })
+}
 </script>

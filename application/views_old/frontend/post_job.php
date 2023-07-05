@@ -1,12 +1,13 @@
 <?php
 if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
     $banner_img=base_url("uploads/banner/".$get_banner->image);
-} else{
+} else {
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
+
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?php $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
@@ -39,12 +40,12 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 } ?>
                             </span>
                         </div>
-                        <div class="profile-form-edit">
+                        <div class="profile-form-edit post-job-page">
                             <?php $seg1=$this->uri->segment(1);
                             if($seg1 == 'update-postjob') { ?>
-                            <form method="post" action="<?php echo base_url('Welcome/edit_post_job')?>" enctype="multipart/form-data" >
+                            <form method="post" action="<?php echo base_url('Welcome/edit_post_job')?>" enctype="multipart/form-data" style="padding: 0 !important;" >
                             <?php } else { ?>
-                                <form method="post" action="<?php echo base_url('Welcome/save_postjob')?>" enctype="multipart/form-data" >
+                                <form method="post" action="<?php echo base_url('Welcome/save_postjob')?>" enctype="multipart/form-data"  style="padding: 0 !important;">
                             <?php } ?>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -61,7 +62,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <div class="col-lg-12">
                                         <span class="pf-title">Required Key Skills<span style="color:red;">*</span></span>
-                                        <div class="pf-field">
+                                        <div class="pf-field custom-select">
                                             <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
                                             <!-- <?php foreach($getkey_skills as $val) {?>
                                                 <option value="<?php echo $val->specialist_name; ?>"><?php echo $val->specialist_name;?></option>

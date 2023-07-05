@@ -26,7 +26,7 @@ class Category extends MY_Controller {
 		$category = $_POST['SearchData6'];
 		$from_date = $_POST['SearchData5'];
 		//print_r($from_date); exit;
-		$to_date = $_POST['SearchData7'];
+		//$to_date = $_POST['SearchData7'];
 
 		if($category!='') {
 			$cond .=" and category.id  = '".$category."' ";
@@ -36,9 +36,9 @@ class Category extends MY_Controller {
 			$cond .=" and category.created_date  >= '".date('Y-m-d',strtotime($from_date))."' ";
 		}
 
-		if($to_date!='') {
-			$cond .=" and category.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
-		}
+		// if($to_date!='') {
+		// 	$cond .=" and category.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
+		// }
 
 		$GetData = $this->Categorymodel->get_datatables($cond);
 		if(empty($_POST['start'])) {
@@ -64,7 +64,7 @@ class Category extends MY_Controller {
 			$nestedData = array();
 			$nestedData[] = $no;
 			$nestedData[] = $img.' '.ucwords($row->category_name);
-			$nestedData[] = date('d-M-Y',strtotime($row->created_date));
+			$nestedData[] = date('d-m-Y',strtotime($row->created_date));
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
 		}

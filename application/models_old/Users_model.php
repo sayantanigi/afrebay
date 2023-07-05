@@ -22,7 +22,10 @@ class Users_model extends My_Model {
                 $cond  = " ";
                 $cond.=" ( users.username LIKE '%".trim($show_string)."%' ";
                 $cond.=" OR  users.email LIKE '%".trim($show_string)."%' ";
-                $cond.=" OR  users.mobile LIKE '%".trim($show_string)."%') ";
+                $cond.=" OR  users.mobile LIKE '%".trim($show_string)."%' ";
+                $cond.=" OR  users.created LIKE '%".trim(date('Y-m-d',strtotime($show_string)))."%') ";
+
+
                 $this->db->where($cond);
             }
         }
@@ -87,13 +90,15 @@ class Users_model extends My_Model {
     }
 
     function get_users() {
-        $this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,category.category_name,');
+        //$this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,category.category_name,');
+        $this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,');
         $this->db->from('users');
-        $this->db->join('category','category.id=users.serviceType','left');
+        //$this->db->join('category','category.id=users.serviceType','left');
         $this->db->join('employer_rating rt','rt.worker_id=users.userId','left');
         $this->db->where('users.userType','1');
-        $this->db->group_by('rt.worker_id');
-        $this->db->order_by('rate','DESC');
+        //$this->db->group_by('rt.worker_id');
+        $this->db->group_by('users.userId');
+        $this->db->order_by('users.userId','DESC');
         $this->db->limit(8);
         $query = $this->db->get();
         return $query->result();
@@ -254,7 +259,7 @@ class Users_model extends My_Model {
                 } else {
                     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Post Job '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Posts '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';

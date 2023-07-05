@@ -29,6 +29,45 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <meta property="og:description" content="ShareThis is its people. It's imperative that we hire smart,innovative people who can work intelligently as we continue to disrupt the very category we created. Come join us!" />
     <meta property="og:site_name" content="ShareThis" />
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6163c52d38f8310012c86621&product=inline-share-buttons' async='async'></script>
+    <style>
+    .completeSub {display: none; text-align: center; margin-top: 20px; color: #fa5a1f; font-size: 20px;}
+    #completeSub {
+  position: relative;
+  display: inline-block;
+}
+
+#completeSub #completeSubtext {
+  visibility: hidden;
+      width: max-content;
+    background-color: white;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    font-size: 13px;
+    right: 0;
+}
+
+#completeSub:hover #completeSubtext {
+  visibility: visible;
+}
+    </style>
+<script>
+function completeSub() {
+    $('.completeSub').show();
+    setTimeout(function(){
+        $('.completeSub').fadeOut('slow');
+    },4000);
+}
+$(function () {
+    $('#completeSub').mouseover(function(){
+        $("#completeSub").css("background-color", "yellow");
+    });
+})
+</script>
 </head>
 <body>
     <div class="page-loading">
@@ -41,8 +80,6 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                     <a href="<?=base_url(); ?>" title=""><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /></a>
                 </div>
                 <div class="menu-resaction">
-                    <!-- <div class="res-openmenu"><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /> Menu</div>
-                    <div class="res-closemenu"><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /> Close</div> -->
                     <div class="res-openmenu">Menu</div>
                     <div class="res-closemenu">Close</div>
                 </div>
@@ -110,7 +147,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                 </div>
             </div>
         </div>
-        <header class="stick-top forsticky">
+        <header class="stick-top forsticky ">
             <div class="menu-sec">
                 <div class="container Header_Menu_Nav">
                     <div class="logo">
@@ -162,21 +199,21 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                         <?php
                         if(!empty($_SESSION['afrebay']['userId'])) {
                             if($_SESSION['afrebay']['userType'] == '2') {
-                                $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
+                                $get_sub_data = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
                                 if(empty($get_sub_data))
                                 {
-                                    $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-                                    if(in_array('', $profile_check[0]))
-                                    {?>
-                                        <a href="javascript:void(0)" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-                                    <?php } else { ?>
-                                        <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
-                                    <?php } ?>
+                                    //$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                                    // if(in_array('', $profile_check[0]))
+                                    //if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {?>
+                                        <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Jobs<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
+                                    <?php //} else { ?>
+                                        <!-- <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a> -->
+                                    <?php //} ?>
                                 <?php } else if(!empty($get_sub_data)) {
                                     $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-                                    if(in_array('', $profile_check[0]))
-                                    { ?>
-                                        <a href="javascript:void(0)" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                                    // if(in_array('', $profile_check[0]))
+                                    if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
+                                        <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Jobs<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                     <?php } else { ?>
                                         <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
                                     <?php } ?>
@@ -200,14 +237,19 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
                                     </a>
                                     <ul>
                                         <li>
-                                            <?php $get_sub_data = $this->db->query("SELECT * FROM employer_subscription where employer_id = ".$_SESSION['afrebay']['userId']." and payment_status = 'paid'")->result_array();
+                                            <?php $get_sub_data = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
                                             if(empty($get_sub_data)) {
                                                 if(@$_SESSION['afrebay']['userType']=='1') { ?>
-                                                    <a href="<?=base_url(); ?>profile" title="">Dashboard</a>
+                                                    <a href="<?=base_url(); ?>subscription" title="">Subscribe</a>
                                                 <?php } else { ?>
                                                     <a href="<?=base_url(); ?>subscription" title="">Subscribe</a>
-                                            <?php } } else { ?>
-                                                <a href="<?=base_url(); ?>profile" title="">Dashboard</a>
+                                            <?php } } else { 
+                                                $profile_check = $this->db->query("SELECT * FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                                                if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
+                                                <a href="<?=base_url(); ?>profile" title="">Profile</a>
+                                                <?php } else { ?>
+                                                <a href="<?=base_url(); ?>dashboard" title="">Dashboard</a>
+                                                <?php } ?>
                                             <?php } ?>
                                         </li>
                                         <li>

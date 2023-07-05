@@ -46,48 +46,58 @@
     <div class="user-dashboard">
         <div class="row row-sm">
             <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 10px; text-align: right;">
-                <a href="<?php echo base_url('add-product')?>" class="btn btn-primary Education_Btn">Add Product</a>
+                <a href="<?php echo base_url('add-product')?>" class="btn btn-primary Education_Btn" style="border-radius: 40px; letter-spacing: 0;">Add Product</a>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="cardak">
-                    <table class="table table-bordered Dash-Product">
-                        <thead>
+                <div class="cardak custom-cardak">
+                    <table class="table table-modific Dash-Product">
+                        <!-- <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Product Desctiption</th>
                                 <th scope="col">Action</th>
                             </tr>
-                        </thead>
+                        </thead> -->
                         <tbody>
                             <?php if (!empty($product_list)) {
                                 $i=1;
                                 foreach ($product_list as $value) {
                             ?>
                             <tr>
-                                <th scope="row"><?php echo $i?></th>
-                                <td><?php echo $value->prod_name;?></td>
-                                <td>
-                                    <?php
-                                    $string = strip_tags($value->prod_description);
-                                    if (strlen($string) > 200) {
-                                        $stringCut = substr($string, 0, 200);
-                                        $endPoint = strrpos($stringCut, ' ');
-                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                        $string .= '...';
-                                    }
-                                    echo $string;
-                                    ?>
-                                </td>
-                                <td class="d-flex justify-content-around" style="height: 73px;">
-                                    <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    <a href="<?= base_url('update-product/'.base64_encode($value->id));?>" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="productDelete(<?php echo $value->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
+                                                     <td class="table-modific-td">
+                                                         <table class="custom-table">
+                                                              <tr>
+                                                                  <td class="heading"><?php echo $value->prod_name;?></td>
+                                                                  <td class="btn-option">
+                                                                    <a href="javascript:void(0)" id="View1_<?php echo $value->id;?>" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                                    <a href="<?= base_url('update-product/'.base64_encode($value->id));?>" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true" style="padding-left: 10px;"></i></a>
+                                                                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" onclick="productDelete(<?php echo $value->id;?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2" class="desc">
+                                                                  <?php
+                                                                    $string = strip_tags($value->prod_description);
+                                                                    if (strlen($string) > 200) {
+                                                                        $stringCut = substr($string, 0, 200);
+                                                                        $endPoint = strrpos($stringCut, ' ');
+                                                                        $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                                        $string .= '...';
+                                                                    }
+                                                                    echo $string;
+                                                                    ?>
+                                                                  </td>
+                                                              </tr>
+                                                         </table>
+                                                     </td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td colspan="2" class="height"></td>
+                                                   </tr>
                             <tr id="Product-Data-Block1_<?php echo $value->id;?>">
-                                <td colspan="4" class="Product-Details-Page">
-                                    <div class="row Product-Block">
+                                <td colspan="4" class="Product-Details-Page" style="border: 0; padding: 0;">
+                                    <div class="row Product-Block" style="margin-bottom: 20px !important;">
                                         <div class="col-lg-4 col-md-12 col-sm-12 column Product-Img">
                                             <div class="Product-Img-Container">
                                                 <?php $product_image = $this->db->query("SELECT * FROM user_product_image WHERE prod_id = '".$value->id."'")->result_array();
@@ -115,9 +125,9 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-12 col-sm-12 column Product-Data">
-                                            <div><h2><?php echo $value->prod_name;?></h2></div>
+                                            <div><h2 style="font-size: 20px;"><?php echo $value->prod_name;?></h2></div>
                                             <hr>
-                                            <div class="prod_desc"><?php echo $value->prod_description; ?></div>
+                                            <div class="prod_desc" style="margin-top: 0 !important;"><?php echo $value->prod_description; ?></div>
                                         </div>
                                         <div class="col-lg-4 column Product-Contact">
                                         <?php $product_contact = $this->db->query("SELECT * FROM product_contact WHERE product_id = '".$value->id."'")->result_array();

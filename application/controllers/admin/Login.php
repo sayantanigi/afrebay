@@ -30,7 +30,6 @@ class Login extends MY_Controller {
 					"name"=>$checkLoginUser->name,
 					"email_id"=>$checkLoginUser->email,
 					"status"=>$checkLoginUser->status,
-					"type"=>$checkLoginUser->type,
 				);
 				$this->session->set_userdata($sess);
 				$this->session->set_flashdata('message', 'Successfully logged in.');

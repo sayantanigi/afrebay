@@ -12,9 +12,9 @@ class Sub_category extends MY_Controller {
 	{
 		$get_category=$this->Crud_model->GetData('category');
 		$get_subcategory=$this->Crud_model->GetData('sub_category');
-		$header = array('title' => 'Sub Category');
+		$header = array('title' => 'Subcategories');
 		$data = array(
-			'heading' => 'Sub Categories',
+			'heading' => 'Subcategories',
 			'get_category' => $get_category,
 			'get_subcategory' => $get_subcategory,
 		);
@@ -31,7 +31,7 @@ class Sub_category extends MY_Controller {
 
 		$from_date = $_POST['SearchData5'];
 		//print_r($from_date); exit;
-		$to_date = $_POST['SearchData7'];
+		//$to_date = $_POST['SearchData7'];
 
 
 		if($sub_category!='')
@@ -42,10 +42,10 @@ class Sub_category extends MY_Controller {
 		{
 			$cond .=" and sub_category.created_date  >= '".date('Y-m-d',strtotime($from_date))."' ";
 		}
-		if($to_date!='')
-		{
-			$cond .=" and sub_category.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
-		}
+		// if($to_date!='')
+		// {
+		// 	$cond .=" and sub_category.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
+		// }
 		$GetData = $this->Subcategory_model->get_datatables($cond);
 		//print_r($GetData); exit;
 		if(empty($_POST['start']))
@@ -86,7 +86,7 @@ class Sub_category extends MY_Controller {
 			$nestedData[] = $img.' '.ucwords($row->sub_category_name);
 			$nestedData[] = ucwords($row->category_name);
 
-			$nestedData[] = date('d-M-Y',strtotime($row->created_date));
+			$nestedData[] = date('d-m-Y',strtotime($row->created_date));
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
 		}
@@ -134,7 +134,7 @@ class Sub_category extends MY_Controller {
 				'created_date'=>date('Y-m-d H:i:s'),
 			);
 			$this->db->insert('sub_category',$data);
-			$this->session->set_flashdata('message', 'Sub Category created successfully');
+			$this->session->set_flashdata('message', 'Subcategory created successfully');
 			echo "1"; exit;
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
@@ -216,7 +216,7 @@ class Sub_category extends MY_Controller {
 
 			);
 			$this->Crud_model->SaveData('sub_category',$data,"id='".$_POST['id']."'");
-			$this->session->set_flashdata('message', 'Sub Category updated successfully');
+			$this->session->set_flashdata('message', 'Subcategory updated successfully');
 
 			echo 1; exit;
 		}
@@ -236,7 +236,7 @@ class Sub_category extends MY_Controller {
 				echo 1; exit;
 			} else {
 				$this->Crud_model->DeleteData('sub_category',"id='".$_POST['cid']."'");
-				$this->session->set_flashdata('message', 'Sub category deleted successfully');
+				$this->session->set_flashdata('message', 'Subcategory deleted successfully');
 				echo 0; exit;
 			}
         }

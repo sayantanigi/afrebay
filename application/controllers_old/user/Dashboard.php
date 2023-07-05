@@ -35,11 +35,21 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function profile() {
-		$user_info = $this->Crud_model->get_single('users', "userId='" . $_SESSION['afrebay']['userId'] . "'");
+	 	$user_id=base64_decode($this->uri->segment(2));
+		if($user_id!=''){
+			$userid=$user_id;
+			$data_request='admin';
+			$this->load->view('admin_header');
+		} else {
+			$userid=$_SESSION['afrebay']['userId'];
+			$data_request='user';
+			$this->load->view('header');
+		}
+		$user_info = $this->Crud_model->get_single('users', "userId='" . $userid . "'");
 		$data = array(
 			'userinfo' => $user_info,
+			'data_request'=>$data_request,
 		);
-		$this->load->view('header');
 		$this->load->view('user_dashboard/profile_settings', $data);
 		$this->load->view('footer');
 	}
@@ -66,7 +76,7 @@ class Dashboard extends CI_Controller {
 			$image  = $_POST['old_image'];
 		}
 
-		if ($_FILES['additional_image']['name'] != '') {
+		/*if ($_FILES['additional_image']['name'] != '') {
 			$_POST['additional_image'] = rand(0000, 9999) . "_" . $_FILES['additional_image']['name'];
 			$config2['image_library'] = 'gd2';
 			$config2['source_image'] =  $_FILES['additional_image']['tmp_name'];
@@ -91,27 +101,27 @@ class Dashboard extends CI_Controller {
 			}
 		}
 
-		// if ($_FILES['video']['error'] == '') {
-		// 	$file_element_name = 'video';
-		// 	$config['upload_path'] = getcwd() . '/uploads/video/';
-		// 	$config['allowed_types'] = '*';
-		// 	$config['encrypt_name'] = TRUE;
-		// 	$this->load->library('upload', $config);
-		// 	$this->upload->initialize($config);
-		// 	if (!$this->upload->do_upload($file_element_name)) {
-		// 		$error = $this->upload->display_errors('<p style="color:#AF5655;">', '</p>');
-		// 		$data = array('error' => $error);
-		// 	}
-		// 	$upload_quotation_file = $this->upload->data();
-		// 	$video = $upload_quotation_file['file_name'];
-		// 	@unlink('uploads/video/' . $_POST['old_video']);
-		// } else {
-		// 	if(!empty($_POST['old_video'])) {
-		// 		$video = $_POST['old_video'];
-		// 	} else {
-		// 		$video  = '';
-		// 	}
-		// }
+		if ($_FILES['video']['error'] == '') {
+			$file_element_name = 'video';
+			$config['upload_path'] = getcwd() . '/uploads/video/';
+			$config['allowed_types'] = '*';
+			$config['encrypt_name'] = TRUE;
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			if (!$this->upload->do_upload($file_element_name)) {
+				$error = $this->upload->display_errors('<p style="color:#AF5655;">', '</p>');
+				$data = array('error' => $error);
+			}
+			$upload_quotation_file = $this->upload->data();
+			$video = $upload_quotation_file['file_name'];
+			@unlink('uploads/video/' . $_POST['old_video']);
+		} else {
+			if(!empty($_POST['old_video'])) {
+				$video = $_POST['old_video'];
+			} else {
+				$video  = '';
+			}
+		}
 
 		if ($_FILES['resume']['name'] != '') {
 			$src = $_FILES['resume']['tmp_name'];
@@ -129,7 +139,7 @@ class Dashboard extends CI_Controller {
 			} else {
 				$resume  = '';
 			}
-		}
+		}*/
 
 		if(!empty($this->input->post('key_skills'))) {
 			$key_skills = $this->input->post('key_skills');
@@ -155,12 +165,12 @@ class Dashboard extends CI_Controller {
 			'email' => $_POST['email'],
 			'mobile' => $_POST['mobile'],
 			'gender' => $this->input->post('gender', TRUE),
-			'experience' => $this->input->post('experience', TRUE),
+			//'experience' => $this->input->post('experience', TRUE),
 			//'qualification' => $this->input->post('qualification', TRUE),
 			'skills' => $skills,
 			'profilePic' => $image,
 			'additional_image' => $additional_image,
-			//'zip' => $_POST['zip'],
+			'zip' => $_POST['zip'],
 			'address' => $_POST['address'],
 			'foundedyear' => $_POST['foundedyear'],
 			'teamsize' => $_POST['teamsize'],
@@ -172,13 +182,51 @@ class Dashboard extends CI_Controller {
 		);
 		//print_r($data); exit;
 		$this->Crud_model->SaveData('users', $data, "userId='" . $_POST['id'] . "'");
+		// echo $_POST['from_data_request'];die;
+		if($_POST['from_data_request']=='admin'){
+		$this->session->set_flashdata('message', 'Profile Updated Successfull !');
+		redirect(base_url('admin/users'));
+
+		}
+		else{
+
+
 		$this->session->set_flashdata('message', 'Profile Updated Successfull !');
 		redirect(base_url('profile'));
+		}
+	}
+
+	function getVisIpAddr() {
+    	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        	return $_SERVER['HTTP_CLIENT_IP'];
+    	} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        	return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    	} else {
+        	return $_SERVER['REMOTE_ADDR'];
+    	}
 	}
 
 	public function subscription() {
-		$data['get_subscription'] = $this->Crud_model->GetData('subscription');
-		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
+		$vis_ip = $this->getVisIPAddr(); // Store the IP address
+		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+
+		$countryName = $ipdat->geoplugin_countryName;
+		if($countryName == 'Nigeria') {
+			$cond = " WHERE subscription_country = 'Nigeria'";
+		} else {
+			$cond = " WHERE subscription_country = 'Global'";
+		}
+
+		if($_SESSION['afrebay']['usertype'] == '1') {
+			$uType = 'Freelancer';
+		} else {
+			$uType = 'Vendor';
+		}
+
+		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
+		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond." AND subscription_user_type = '".$uType."'")->result();
+		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."'");
+		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
 		$this->load->view('header');
 		$this->load->view('user_dashboard/subscription', $data);
 		$this->load->view('footer');
@@ -272,7 +320,8 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function myjob() {
-		$data['get_postjob'] = $this->Crud_model->GetData('postjob', '', "user_id='".$_SESSION['afrebay']['userId']."' AND is_delete = '0'");
+		$data['get_postjob'] = $this->Crud_model->GetData('postjob', '', "user_id='".$_SESSION['afrebay']['userId']."' ");
+		//print_r($data); die();
 		$this->load->view('header');
 		$this->load->view('user_dashboard/my_job', $data);
 		$this->load->view('footer');
@@ -294,7 +343,13 @@ class Dashboard extends CI_Controller {
 	////////////////////////////////////////// start job bidding//////////////////
 	function jobbid() {
 		$this->load->model('Post_job_model');
-		$cond = "postjob.user_id='" . $_SESSION['afrebay']['userId'] . "'";
+		if($_SESSION['afrebay']['userType'] == '1'){
+			//$data['get_postjob'] = $this->db->query("SELECT postjob.*, job_bid.*, users.* from job_bid JOIN postjob ON job_bid.postjob_id = postjob.id JOIN users ON job_bid.user_id = users.userId WHERE postjob.user_id ='".$_SESSION['afrebay']['userId']."'")
+			$cond = "job_bid.user_id='" . $_SESSION['afrebay']['userId'] . "'";
+		} else {
+			//$data['get_postjob'] = $this->db->query("SELECT postjob.*, job_bid.*, users.* from job_bid JOIN postjob ON job_bid.postjob_id = postjob.id JOIN users ON job_bid.user_id = users.userId WHERE postjob.user_id =")
+			$cond = "postjob.user_id='" . $_SESSION['afrebay']['userId'] . "'";
+		}
 		$data['get_postjob'] = $this->Post_job_model->postjob_bid($cond);
 		$this->load->view('header');
 		$this->load->view('user_dashboard/my_jobbid', $data);
@@ -306,6 +361,7 @@ class Dashboard extends CI_Controller {
 			'postjob_id' => $_POST['postjob_id'],
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'bid_amount' => $_POST['bid_amount'],
+			'currency' => $_POST['currency'],
 			'email' => $_POST['email'],
 			'duration' => $_POST['duration'],
 			'phone' => $_POST['phone'],
@@ -315,7 +371,7 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->SaveData('job_bid', $data);
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
-			$this->session->set_flashdata('message', 'Add Bid Successfully !');
+			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Vendor has approved your bid');
 			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later.');
@@ -372,7 +428,7 @@ class Dashboard extends CI_Controller {
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;
 		} else {
-			$name = $get_chatuser->username;
+			$name = $get_chatuser->companyname;
 		}
 		if (@$get_chatuser->profilePic && file_exists('uploads/users/' . @$get_chatuser->profilePic)) {
 			$userpic = '<img src="' . base_url('uploads/users/' . @$get_chatuser->profilePic) . '" alt="" />';
@@ -722,13 +778,13 @@ class Dashboard extends CI_Controller {
 			'description' => $this->input->post('description', TRUE),
 		);
 		$this->Crud_model->SaveData('user_workexperience', $data, "id='" . $id . "'");
-		$this->session->set_flashdata('message', 'Work Updated Successfully !');
+		$this->session->set_flashdata('message', 'Work experience updated successfully !');
 		redirect(base_url('workexperience-list'));
 	}
 
 	function delete_workexperience($id) {
 		$this->Crud_model->DeleteData('user_workexperience', "id='" . $id . "'");
-		$this->session->set_flashdata('message', 'Item deleted successfully !');
+		$this->session->set_flashdata('message', 'Work experience deleted successfully !');
 		redirect(base_url('workexperience-list'));
 	}
 
@@ -736,10 +792,15 @@ class Dashboard extends CI_Controller {
 
 	///////////////// User Subscription //////////////////////////
 	function userSubscription(){
-		//print_r($this->input->post()); die;
-		// $duration = $this->input->post('sub_duration');
-		// $intDuration = preg_replace('/\D/', '', $duration);
 		$paymentDate = date('Y-m-d H:i:s');
+		$n=24;
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$randomString = '';
+		for ($i = 0; $i < $n; $i++) {
+			$index = rand(0, strlen($characters) - 1);
+			$randomString .= $characters[$index];
+		}
+		;
 		$data = array(
 			'employer_id' => $this->input->post('user_id'),
 			'subscription_id' => $this->input->post('sub_id'),
@@ -747,19 +808,82 @@ class Dashboard extends CI_Controller {
 			'email' => $this->input->post('user_email'),
 			'amount' => $this->input->post('sub_price'),
 			'duration' => $this->input->post('sub_duration'),
-			'transaction_id' => 'transaction_001',
+			'transaction_id' => "sub_".$randomString,
 			'payment_date' => $paymentDate,
 			'created_date' => $paymentDate,
 			'duration' => $this->input->post('sub_duration'),
-			'payment_status' => 'succeeded',
-			'expiry_date' => date("Y-m-d H:i:s", strtotime($this->input->post('sub_duration'), strtotime($paymentDate)))
+			'payment_status' => 'paid',
+			'expiry_date' => date("Y-m-d", strtotime('+'.$this->input->post('sub_duration').'days'))
 		);
+		//print_r($data); die();
 		$this->Crud_model->SaveData('employer_subscription', $data);
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
 			echo '1';
 		} else {
 			echo '2';
+		}
+	}
+
+	function cancelSubscription() {
+		$id = $this->input->post('id');
+		$sub_id = $this->input->post('sub_id');
+		$amount = $this->input->post('amount');
+		if($amount < '1') {
+			$subStatus = $this->db->query("UPDATE employer_subscription SET status = '2' WHERE `id` ='".$id."'");
+			if($subStatus) {
+				echo '1';
+			} else {
+				echo '2';
+			}
+		} else {
+			require 'vendor/autoload.php';
+			require_once APPPATH."third_party/stripe/init.php";
+			$stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
+			$cnclsubData = $stripe->subscriptions->cancel("$sub_id",[]);
+			if($cnclsubData['status'] == 'canceled') {
+				$subStatus = $this->db->query("UPDATE employer_subscription SET status = '2' WHERE `id` ='".$id."'");
+				if($subStatus) {
+					echo '1';
+				} else {
+					echo '2';
+				}
+			}
+		}
+	}
+
+	function checkSubscriptionForUser(){
+		//echo "SELECT * FROM employer_subscription WHERE status = '1'"; echo "<br>";
+		$getAllSubscription = $this->db->query("SELECT * FROM employer_subscription WHERE status = '1'")-> result_array();
+		foreach ($getAllSubscription as $value) {
+			$sub_id = $value['transaction_id'];
+			$now_date = date('Y-m-d');
+			$expiry_date = date('Y-m-d', strtotime($value['expiry_date']));
+			$amount = $value['amount'];
+
+			if($expire_date > $now_date) {
+				if($amount < '1') {
+					$subStatus = $this->db->query("UPDATE employer_subscription SET status = '3' where status = '1'");
+					if($subStatus) {
+						echo '1';
+					} else {
+						echo '2';
+					}
+				} else {
+					require 'vendor/autoload.php';
+					require_once APPPATH."third_party/stripe/init.php";
+					$stripe = new \Stripe\StripeClient('sk_test_835fqzvcLuirPvH0KqHeQz9K');
+					$cnclsubData = $stripe->subscriptions->cancel("$sub_id",[]);
+					if($cnclsubData['status'] == 'canceled') {
+						$subStatus = $this->db->query("UPDATE employer_subscription SET status = '3' where status = '1'");
+						if($subStatus) {
+							echo '1';
+						} else {
+							echo '2';
+						}
+					}
+				}
+			}
 		}
 	}
 	///////////////// End User Subscription //////////////////////////

@@ -192,11 +192,11 @@ if(empty($_SESSION['afrebay_admin']['id'])) {
                 <li class="nav-item dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle user-link  nav-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="<?=base_url(); ?>dist/assets/img/user.jpg" width="40" alt="Admin">
+                            <img class="rounded-circle" src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" width="40" alt="Admin">
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="<?= admin_url('profile'); ?>">Profile</a>
+                        <a class="dropdown-item" href="<?= admin_url('profile'); ?>">Change Password</a>
                         <a class="dropdown-item" href="<?= admin_url(); ?>login/logout" >Logout</a>
                     </div>
                 </li>

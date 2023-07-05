@@ -27,7 +27,6 @@ class Banner extends MY_Controller {
 		$get_data = $this->Banner_model->get_datatables();
 		if(empty($_POST['start']))
 		{
-
 			$no=0;
 		}
 		else{
@@ -52,7 +51,8 @@ class Banner extends MY_Controller {
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;
-			$nestedData[] = $img.' '.ucwords($row->heading);
+			$nestedData[] = ucwords($row->page_name);
+			$nestedData[] = $img;
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
 		}
@@ -97,13 +97,14 @@ class Banner extends MY_Controller {
 		}
 
 		$data=array(
-			'heading'=>$this->input->post('name',TRUE),
+			//'heading'=>$this->input->post('name'),
+			'page_name'=>$this->input->post('page_name'),
 			'image'=>$image,
 			'created_date'=>date('Y-m-d H:i:s'),
 		);
 
 		$this->db->insert('banner',$data);
-		$this->session->set_flashdata('message', 'Banner added successfully');
+		$this->session->set_flashdata('message', 'Banner created successfully');
 		echo "1"; exit;
 
 	}
@@ -131,7 +132,8 @@ class Banner extends MY_Controller {
 		}
 		$data=array(
 			'id'=>$banner_data->id,
-			'heading'=>$banner_data->heading,
+			//'heading'=>$banner_data->heading,
+			'page_name'=>$banner_data->page_name,
 			'image'=>$img,
 			'old_image'=>$banner_data->image,
 		);
@@ -170,7 +172,8 @@ class Banner extends MY_Controller {
 		}
 
 		$data = array(
-			'heading'=>$this->input->post('name',TRUE),
+			//'heading'=>$this->input->post('name'),
+			'page_name'=>$this->input->post('page_name'),
 			'image'=>$image,
 
 		);

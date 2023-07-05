@@ -64,17 +64,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div>
                             <table id="table" class="table table-hover table-center mb-0 example_datatable" >
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Full Name</th>
+                                        <!-- <th>Full Name</th> -->
+                                        <th>Job Poster Name</th>
+                                        <th>Job Bidder Name</th>
                                         <th>Post Title</th>
                                         <th>Duration</th>
                                         <th>Cost</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
+                                        <th>Created Date</th>
+                                        <th>Status</th>
+                                        <th>Manage</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -89,5 +92,34 @@
 </div>
 <script>
     var url = '<?= admin_url('Jobsbidding/ajax_manage_page')?>';
-    var actioncolumn=5;
+    var actioncolumn=8;
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(window).scroll(function(){
+    var filter_inputs = $('#filter_inputs');
+    var table_wrapper = $('#table_wrapper .row:nth-child(1)');
+    var table_header = $('#table thead');
+    scroll = $(window).scrollTop();
+    if (scroll >= 100) {
+        table_wrapper.addClass('sticky_thead');
+        table_header.addClass('sticky_thead1');
+    } else {
+        table_wrapper.removeClass('sticky_thead');
+        table_header.removeClass('sticky_thead1');
+    }
+});
+
+$('#refreshForm').click(function(){
+    $('#categorySearch').trigger("reset");
+    $('.filter_search_data6').val('').trigger('change');
+})
+</script>
+<style>
+    .sticky_thead1 {
+    position: sticky;
+    top: 96px;
+    background: #fff;
+    z-index: 100;
+}
+</style>

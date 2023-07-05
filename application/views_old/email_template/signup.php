@@ -1,82 +1,33 @@
-<?php $settings=$this->Crud_model->get_single('setting'); ?>
+<?php $settings = $this->Crud_model->get_single('setting');
+//print_r($settings); die();
+?>
 <!DOCTYPE html>
 <html>
 <head>
-   <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<title>Sign Up</title>
+	<meta charset="utf-8">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-</style>
 <body>
-   <div style="width:600px;margin: 0 auto;background: #fff;font-family: 'Poppins', sans-serif; border: 1px solid #e6e6e6; font-size:13px;">
-      <div style="padding: 30px 30px 15px 30px;box-sizing: border-box;">
-        <div style="border-bottom:2px solid grey;">
-         <img src="<?=base_url('assets/images/gig-work01.jpg')?>" style="width:100%;margin-top: 0 auto;">
-</div>
-
-         <p style="font-size:15px;color:blue;">Thank you for your Joining GreatGigz!</p>
-         <p>
-             <table>
-				 <thead>				
-				 <tr>
-				 <th colspan='2'><p style='font-size:12px;list-style: none;'>Please click on the link below to activate your new listing.</p></th>
-				 </tr>
-				 <tr>
-				 <th><p style='font-size:12px;list-style: none;'><a href='#'>Greatgigz</a></p></th>
-				 </tr>
-				 <tr>
-				 <th col span='2'> <p style='color:blue;'>Your Login Details</p></th>
-
-				 </tr>
-					 <tr>
-						 <th style='border:1px solid grey'>
-							 Username
-						 </th>
-						 <th style='border:1px solid grey'>
-							 <?= @$email?>
-						 </th>
-					 </tr>
-				 </thead>
-				 <tbody>
-					 <tr>
-						 <th style='border:1px solid grey'>
-							 Pasword
-						 </th>
-						 <th style='border:1px solid grey'>
-						<?= @$password?>
-						 </th>
-					 </tr>
-				 </tbody>
-			 </table>
-         </p>
-          <p>If you need any  assitance while using our website, please reply directly to this mail.</p>
-          <p>Thank You</p>
-          <!--<p>David kassiance</p>-->
-          <p><a href="base_url()"> GreatGigz</a></p>
-          <p><a href="#">E-mail: <?=@$settings->email?></a></p>
-          <!--<p><a href="< ?= base_url('unsubscribe/'.$email)?>" style="color:#000; text-decoration:none;">unsubscribe</a></p>-->
-         </div>
-         <!-- <footer style="height:25px;width:100%;"><span style="width: 100%; padding:20px; box-sizing: border-box; display: block;
-    background: #ffffff;"><a href="< ?= base_url('unsubscribe/'.$email)?>">unsubscribe</a></span></footer> -->
-      </div>
-
-   </body>
-   </html>
+	<div style="width:600px;margin: 0 auto;background: #fff;font-family: 'Poppins', sans-serif; border: 1px solid #e6e6e6;">
+		<div style="padding: 30px 30px 15px 30px;box-sizing: border-box;">
+		 	<img src="<?= base_url('uploads/logo/'.@$settings->logo)?>" style="width:100px;float: right;margin-top: 0 auto;">
+			<h3 style="padding-top:40px; line-height: 30px;">Greetings from<span style="font-weight: 900;font-size: 35px;color: #F44C0D; display: block;">Afrebay</span></h3>
+			<p style="font-size:24px;">Hello <?php echo $fullname?>,</p>
+			<p style="font-size:24px;">Thank you for registration on Afrebay.</p>
+			<p style="font-size:24px;">Please click the button below to verify your email address.</p>
+			<p style="text-align: center;">
+				<a href="<?= $activationURL?>" style="height: 50px; width: 300px; background: rgb(253,179,2); background: linear-gradient(0deg, rgba(253,179,2,1) 0%, rgba(244,77,9,1) 100%); text-align: center; font-size: 18px; color: #fff; border-radius: 12px; display: inline-block; line-height: 50px; text-decoration: none; text-transform: uppercase; font-weight: 600;">ACTIVATE</a>
+			</p>
+    		<p style="font-size:20px;">Thank you!</p>
+    		<p style="font-size:20px;list-style: none;">Sincerly</p>
+    		<p style="list-style: none;"><b>Afrebay</b></p>
+	    	<p style="list-style:none;"><b>Visit us:</b> <span><?= @$settings->address?></span></p>
+	    	<p style="list-style:none"><b>Email us:</b> <span><?= @$settings->email?></span></p>
+        </div>
+        <footer style="height:25px;width:100%;background: #F44C0D;"><span style="padding-left: 10px; width:100%; display: block; margin-bottom: 20px; text-align: center;"> Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.</span></footer>
+	</div>
+</body>
+</html>

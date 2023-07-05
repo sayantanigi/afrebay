@@ -17,10 +17,20 @@ class Welcome extends CI_Controller {
 	}
 
 	function searchjob() {
+		$search_title = $this->input->post('search_title');
+		$country = $this->input->post('country');
+		$state = $this->input->post('state');
+		$city = $this->input->post('city');
+		if(!empty($search_title) || !empty($country) || !empty($state) || !empty($city)) {
+			$data['countries']=$this->Crud_model->GetData('countries',"","");
+			$data['states']= '';
+			$data['cities']= '';
+		} else {
+			$data['countries']=$this->Crud_model->GetData('countries',"","");
+			$data['states']= '';
+			$data['cities']= '';
+		}
 		$data['getcategory']=$this->Crud_model->GetData('category');
-		$data['countries']=$this->Crud_model->GetData('countries',"","");
-		$data['states']=$this->Crud_model->GetData('states',"","");
-		$data['cities']=$this->Crud_model->GetData('cities',"","");
 		$data['get_banner']=$this->Crud_model->get_single('banner',"id='2'");
 		$this->load->view('header');
 		$this->load->view('frontend/new_employees_list',$data);
@@ -44,7 +54,7 @@ class Welcome extends CI_Controller {
 			$total_count=$this->post_job_model->subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city);
 			//print_r($total_count);
 		} else {
-			$get_product=$this->Crud_model->GetData('postjob','',"subcategory_id='".$post_id."' and is_delete='0'");
+			$get_product=$this->Crud_model->GetData('postjob','',"subcategory_id='".$post_id."' and is_delete='0' AND status = 'Active'");
 			$total_count=count($get_product);
 			//print_r($get_product);
 		}
@@ -100,6 +110,12 @@ class Welcome extends CI_Controller {
 	}
 
 	function employer_detail($user_id) {
+		if(empty($_SESSION['afrebay']['userId'])){
+			$type='admin';
+		}
+		else{
+			$type='user';
+		}
 		$userid=base64_decode($user_id);
 		$data['userdata']=$this->Crud_model->get_single('users',"userId='".$userid."'");
 		$data['get_post']=$this->Crud_model->GetData('postjob','',"user_id='".$userid."' AND is_delete = '0'");
@@ -110,7 +126,12 @@ class Welcome extends CI_Controller {
 			'view_count'=>$viewcount,
 		);
 		$this->Crud_model->SaveData('users',$insert_data,"userId='".$userid."'");
+		if($type=='admin'){
+			$this->load->view('admin_header',$data);
+			}
+			else{
 		$this->load->view('header');
+			}
 		$this->load->view('frontend/employer_detail',$data);
 		$this->load->view('footer');
 	}
@@ -134,7 +155,7 @@ class Welcome extends CI_Controller {
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['category']=$this->Crud_model->GetData('category','','');
 		$data['subcategory']=$this->Crud_model->GetData('sub_category','','');
-		$data['get_banner']=$this->Crud_model->get_single('banner',"id='8'");
+		$data['get_banner']=$this->Crud_model->get_single('banner',"page_name='Post Jobs'");
 		$this->load->view('header');
 		$this->load->view('frontend/post_job',$data);
 		$this->load->view('footer');
@@ -189,7 +210,7 @@ class Welcome extends CI_Controller {
 		}
 		$id = $_POST['id'];
 		$data=array(
-			'user_id'=>$_SESSION['afrebay']['userId'],
+			//'user_id'=>$_SESSION['afrebay']['userId'],
 			'required_key_skills'=>implode(", ",$this->input->post('key_skills',TRUE)),
 			'category_id'=>$this->input->post('category_id',TRUE),
 			'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
@@ -209,7 +230,12 @@ class Welcome extends CI_Controller {
 		);
 		$this->Crud_model->SaveData('postjob', $data, "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Post Job Updated Successfully !');
-		redirect(base_url('myjob'));
+		if(!empty($_SESSION['afrebay']['afrebay_admin'])) {
+			redirect(base_url('admin/post_job'));
+		} else {
+			redirect(base_url('myjob'));
+		}
+
 	}
 
 	public function get_subcategory() {
@@ -261,7 +287,7 @@ class Welcome extends CI_Controller {
 
 	function post_jobinfo($id) {
 		$post_id=base64_decode($id);
-		$con="postjob.id='".$post_id."' and postjob.is_delete='0'";
+		$con="postjob.id='".$post_id."' and postjob.is_delete='0' AND postjob.status = 'Active'";
 		$data['get_postjob']=$this->post_job_model->viewdata($con);
 		$this->load->view('header');
 		$this->load->view('user_dashboard/jobinfo',$data);
@@ -296,7 +322,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function filter_job() {
-		$con="postjob.is_delete='0'";
+		$con="postjob.is_delete='0' AND postjob.status = 'Active'";
 		if(isset($_POST['title_keyword'])&& !empty($_POST['title_keyword'])) {
 			$con .=" and postjob.post_title like '%".$_POST['title_keyword']."%'";
 		}

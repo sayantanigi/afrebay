@@ -13,7 +13,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                     <div class="widget">
                         <div class="about_widget">
                             <div class="logo">
-                                <a href="javascript:void(0)" title=""><img
+                                <a href="<?=base_url(); ?>" title=""><img
                                         src="<?=base_url(); ?>uploads/logo/<?= $get_setting->flogo?>" alt="" /></a>
                             </div>
                             <?php if(!empty($get_setting->fabout)) { ?>
@@ -32,7 +32,8 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                                 <div class="col-lg-6">
                                     <a href="<?= base_url('employer-list')?>" title="Vendors">Vendors</a>
                                     <a href="<?= base_url('workers-list')?>" title="Freelancers">Freelancers</a>
-                                    <a href="<?= base_url('pricing')?>" title="">Pricing</a>
+                                    <a href="<?= base_url('vendor_pricing')?>" title="">Vendors Pricing</a>
+                                    <a href="<?= base_url('freelancer_pricing')?>" title="">Freelancers Pricing</a>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +86,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     </div>
 </footer>
 <input type="hidden" name="base_url" id="base_url" value="<?= base_url()?>">
-
+<!-- <input type="text" name="paymentLocation" id="paymentLocation" value=""> -->
 <style>
 <?php $seg2 = $this->uri->segment(1);
     if($seg2 == 'register') { ?>
@@ -129,7 +130,7 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?= base_url('assets/js/jquery.scrollbar.min.js')?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/maps2.js')?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/bootstrap-datepicker.js')?>" type="text/javascript"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places&callback=initMap" async defer></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places&callback=initMap" async defer></script>
 <script type="text/javascript" src="<?= base_url('assets/custom_js/validation.js')?>"></script>
 <script src="<?= base_url();?>dist/assets/notify/notify.min.js"></script>
 <!-- multi Select option for worker list page-->
@@ -161,6 +162,7 @@ if(!empty($_SESSION['afrebay']['userId'])){
 <script src="<?php echo base_url()?>assets/multi_select/langs/tail.select-tr.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        // alert(1);
         tail.select('#example',{
             startOpen: true,
             multiple: true,

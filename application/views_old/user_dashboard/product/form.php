@@ -1,6 +1,6 @@
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url(images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
+        <div data-velocity="-.1" style="background: url(<?= base_url()?>assets/images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
@@ -50,7 +50,7 @@
                                 <div class="tab-pane active" style="padding: 0px;">
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="new-pro">
+                                            <div class="new-pro" style="padding-right: 20px;">
                                                 <div class="profile-ak">
                                                     <h6>Upload a different photo...</h6>
                                                     <input type="file" name="prod_image[]" multiple class="text-center center-block file-upload" />
@@ -93,6 +93,9 @@
         </form>
     </div>
 </div>
+</div>
+</div>
+</section>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('prod_description');
