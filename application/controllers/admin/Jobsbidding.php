@@ -50,8 +50,8 @@ class Jobsbidding extends MY_Controller {
             $nestedData[] = $no;
             // $nestedData[] =ucfirst($name);
             $btn = ''.anchor(base_url('postdetail/'.base64_encode($row->post_job_id)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i></span>','target=_blank');
-            $nestedData[] =ucfirst($row->job_bid_name);
             $nestedData[] =ucfirst($row->post_job_name);
+            $nestedData[] =ucfirst($row->job_bid_name);
             //$nestedData[] = ucfirst($row->post_title).$btn;
             $nestedData[] = ucfirst($row->post_title);
             $nestedData[] = $row->duration;

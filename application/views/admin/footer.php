@@ -32,6 +32,8 @@ $(document).ready(function(){
 
 //Confirmation box for admin panel
 var confirmTextDelete = 'Are you sure you want to delete this record?';
+var confirmChangeStatus = 'Are you sure you want to change the status?';
+var userEmailVerification = 'Are you sure you want to verify this user?';
 
 $(document).ready(function() {
     $(".msghide").fadeOut(8000);

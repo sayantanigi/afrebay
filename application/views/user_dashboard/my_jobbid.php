@@ -62,7 +62,7 @@
                                                     } ?> -->
                                                     <?php
                                                     if($_SESSION['afrebay']['userType'] == '2') {
-                                                        if(@$key->bidding_status != 'Rejected') {?>
+                                                        if(@$key->bidding_status == 'Under Review' || @$key->bidding_status == 'Short Listed' || empty(@$key->bidding_status)) {?>
                                                             <select class="jobbid_select form-control" name="change_biddingstatus" id="change_biddingstatus_<?php echo @$key->id?>" style="width: 80% !important;">
                                                                 <option value="">Select Option</option>
                                                                 <option value="Under Review" <?php if(@$key->bidding_status == 'Under Review'){echo "Selected"; }?>>Under Review</option>
@@ -169,21 +169,21 @@
     </div>
 </section>
 <script type="text/javascript">
-function change_biddingstatus(jobbid_id) {
-    var cnf = confirm('Are you sure to change the status?');
-    if(cnf==true) {
-        $.ajax({
-            type:"POST",
-            url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
-            data:{jobbid_id:jobbid_id},
-            success:function(returndata) {
-                if(returndata==1){
-                    location.reload();
-                }
-            }
-        });
-    }
-}
+// function change_biddingstatus(jobbid_id) {
+//     var cnf = confirm('Are you sure to change the status?');
+//     if(cnf==true) {
+//         $.ajax({
+//             type:"POST",
+//             url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
+//             data:{jobbid_id:jobbid_id},
+//             success:function(returndata) {
+//                 if(returndata==1){
+//                     location.reload();
+//                 }
+//             }
+//         });
+//     }
+// }
 $(document).ready(function(){
     <?php if(!empty($get_postjob)) {
     $i=1;
@@ -216,6 +216,7 @@ $(document).ready(function(){
                         url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
                         data:{bidstatus: bidstatus,jodBidid: jodBidid,postJobid: postJobid,jobbiduserid: jobbiduserid,jobpostuserid: jobpostuserid},
                         success:function(returndata) {
+                            console.log(returndata);
                             if(returndata==1){
                                 location.reload();
                             }

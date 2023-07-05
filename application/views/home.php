@@ -220,203 +220,98 @@
 
 
 <section>
-
     <div class="block Worker-Block">
-
-        <!-- <div data-velocity="-.1"
-
-            style="background: url('<?=base_url(); ?>assets/images/resource/parallax3.jpg') 50% -62.7px repeat scroll transparent;"
-
-            class="parallax scrolly-invisible no-parallax"></div> -->
-
+        <!-- <div data-velocity="-.1" style="background: url('<?=base_url(); ?>assets/images/resource/parallax3.jpg') 50% -62.7px repeat scroll transparent;" class="parallax scrolly-invisible no-parallax"></div> -->
         <div data-velocity="-.1" style="background: #F9FAFC" class="parallax scrolly-invisible no-parallax"></div>
-
         <!-- PARALLAX BACKGROUND IMAGE -->
-
         <div class="container">
-
             <div class="row">
-
                 <div class="col-lg-12">
-
                     <div class="heading">
-
                         <h2>Available AfreBay Freelancers</h2>
-
                         <span>Find the most eligible freelancers within the portal.</span>
-
                     </div>
-
                     <div class="blog-sec">
-
                         <div class="row">
-
                             <?php
-
                             if(!empty($get_users)){
-
                                 foreach($get_users as $user){
-
                                 if(strlen($user->short_bio)>200) {
-
                                     $shortbio=substr($user->short_bio,0,200).'...';
-
                                 } else {
-
                                     $shortbio=$user->short_bio;
-
                                 }
-
-                                ?>
-
+                            if(!empty($user->firstname) && !empty($user->lastname) && !empty($user->email) && !empty($user->gender) && !empty($user->address) && !empty($user->short_bio)) {
+                            ?>
                             <div class="col-lg-3 col-md-6 col-sm-12">
-
                                 <div class="my-blog">
-
                                     <div class="blog-thumbak">
-
-                                        <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
-
-                                            title="">
-
+                                        <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
                                             <?php if(!empty($user->profilePic)&& file_exists('uploads/users/'.$user->profilePic)){?>
-
-                                            <img src="<?=base_url('uploads/users/'.$user->profilePic); ?>" alt=""
-
-                                                style="height: 300px;" />
-
+                                            <img src="<?=base_url('uploads/users/'.$user->profilePic); ?>" alt="" style="height: 300px;" />
                                             <?php } else{?>
-
-                                            <img src="<?=base_url('uploads/no_image.png'); ?>" alt=""
-
-                                                style="height: 300px;" />
-
+                                            <img src="<?=base_url('uploads/no_image.png'); ?>" alt="" style="height: 300px;" />
                                             <?php } ?>
-
                                         </a>
-
                                     </div>
-
                                     <div class="blog-details">
-
                                         <div class="blog-head">
-
                                             <!-- <h3 class="resk">
-
-                                                <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>"
-
-                                                    title=""><?= $user->category_name?></a>
-
+                                                <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title=""><?= $user->category_name?></a>
                                             </h3> -->
-
                                             <div class="row">
-
                                                 <div class="col-sm-12">
-
                                                     <ul class="gigasjh">
-
                                                         <li>Member Since</li>
-
                                                         <li><?php echo date('m/d/Y', strtotime(@$user->created));?></li>
-
                                                     </ul>
-
                                                 </div>
-
                                                 <!-- <div class="col-sm-6">
-
                                                     <ul class="gigasjh">
-
                                                         <li>Work Experience</li>
-
                                                         <li><?php echo @$user->experience;?></li>
-
                                                     </ul>
-
                                                 </div> -->
-
                                             </div>
-
                                             <!-- <p><?= ucfirst(strip_tags($shortbio))?></p> -->
-
                                             <!-- <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p> -->
-
                                         </div>
-
+                                        <?php 
+                                        $user_rating = $this->db->query("SELECT AVG(rt.rating) as rate FROM employer_rating rt WHERE rt.worker_id = '".@$user->userId."'")->result();
+                                        ?>
                                         <div class="staak">
-
-                                            <span><?= !empty($user->rate)?round($user->rate)."Star AfreBay":'Not Rated Yet';?></span>
-
-                                            <?php if(!empty($user->rate)){
-
-                                                for ($i = 0; $i < $user->rate; $i++) {
-
+                                            <?php 
+                                            if($user_rating[0]->rate > 0) {
+                                                for ($i = 0; $i < $user_rating[0]->rate; $i++) {
                                             ?>
-
                                             <span class="fa fa-star checked"></span>
-
-                                            <?php }} else { ?>
-
-                                            <!-- <span class="fa fa-star-o checked"></span>
-
-                                            <span class="fa fa-star-o checked"></span>
-
-                                            <span class="fa fa-star-o checked"></span>
-
-                                            <span class="fa fa-star-o checked"></span>
-
-                                            <span class="fa fa-star-o checked"></span> -->
-
-                                            <span class=""></span>
-
+                                            <?php }
+                                            } else { ?>
+                                            <span class="">Not Rated Yet</span>
                                             <?php } ?>
-
                                         </div>
-
                                         <h3 class="nkash">
-
                                             <a type="button" class="btn" href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
-
                                                 <?php if(!empty($user->firstname)){ echo $user->firstname.' '.$user->lastname; } else{ echo ucfirst($user->username);}?>
-
                                             </a>
-
                                         </h3>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
-                            <?php }} ?>
-
+                            <?php }}} ?>
                         </div>
-
                     </div>
-
                 </div>
-
                 <?php if(count($get_users) > 8) { ?>
-
                 <div class="col-lg-12">
-
                     <div class="browse-all-cat">
-
                         <a href="<?= base_url('workers-list')?>" title="">View More</a>
-
                     </div>
-
                 </div>
-
                 <?php } ?>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 

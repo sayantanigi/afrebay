@@ -101,7 +101,7 @@ class Users_model extends My_Model {
         return $query->result();
     }
 
-    function get_users() {
+    /*function get_users() {
         //$this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,category.category_name,');
         $this->db->select('users.*,rt.worker_id,AVG(rt.rating) as rate,');
         $this->db->from('users');
@@ -113,6 +113,12 @@ class Users_model extends My_Model {
         $this->db->order_by('users.userId','DESC');
         $this->db->limit(8);
         $query = $this->db->get();
+        return $query->result();
+    }*/
+
+    function get_users() {
+        // $query = $this->db->query("SELECT users.*, employer_subscription.*, rt.worker_id, AVG(rt.rating) as rate FROM users LEFT JOIN employer_subscription ON employer_subscription.employer_id = users.userId LEFT JOIN employer_rating rt ON rt.worker_id=users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' GROUP BY rt.worker_id ORDER BY users.userId DESC");
+        $query = $this->db->query("SELECT users.*, employer_subscription.* FROM users JOIN employer_subscription ON employer_subscription.employer_id = users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC");
         return $query->result();
     }
 
