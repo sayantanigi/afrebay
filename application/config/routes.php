@@ -134,8 +134,10 @@ $route['api/home_list'] = 'api/Home/home_list';
 $route['api/post_details/(:any)'] = 'api/Home/post_details/$1';
 $route['api/vendor_detail/(:any)'] = "api/Home/vendor_details/$1";
 $route['api/product_detail/(:any)'] = "api/Home/product_details/$1";
-
-
+$route['api/user_subscription_details'] = "api/User_dashboard/subscription_details";
+$route['api/user_subscription'] = "api/User_dashboard/userSubscription";
+$route['api/user_profile'] = "api/User_dashboard/profile_settings";
+$route['api/update_profile'] = "api/User_dashboard/update_profile";
 
 
 

@@ -167,7 +167,7 @@ class Authentication extends CI_Controller {
 
     public function logout() {
 	    unset($_SESSION['afrebay']);
-        $response = array('status'=> 1,'msg'=> 'You have logged out.');
+        $response = array('status'=> 'success','msg'=> 'You have logged out.');
 		echo json_encode($response);
 	}
 }
