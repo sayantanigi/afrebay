@@ -138,20 +138,21 @@ $route['api/user_subscription_details'] = "api/User_dashboard/subscription_detai
 $route['api/user_subscription'] = "api/User_dashboard/userSubscription";
 $route['api/user_profile'] = "api/User_dashboard/profile_settings";
 $route['api/update_profile'] = "api/User_dashboard/update_profile";
+$route['api/education_list'] = "api/User_dashboard/education_list";
+$route['api/save_education'] = "api/User_dashboard/save_education";
+$route['api/get_educationDetails'] = "api/User_dashboard/get_educationDetails";
+$route['api/update_education'] = "api/User_dashboard/update_education";
+$route['api/delete_education'] = "api/User_dashboard/delete_education";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+$route['api/workexperience_list'] = "api/User_dashboard/workexperience_list";
+$route['api/save_workexperience'] = "api/User_dashboard/save_workexperience";
+$route['api/get_workexperience'] = "api/User_dashboard/get_workexperience";
+$route['api/update_workexperience'] = "api/User_dashboard/update_workexperience";
+$route['api/delete_workexperience'] = "api/User_dashboard/delete_workexperience";
+$route['api/myjob'] = "api/User_dashboard/myjob";
+$route['api/save_postbid'] = "api/User_dashboard/save_postbid";
+$route['api/jobbid'] = "api/User_dashboard/jobbid";
+$route['api/delete_job'] = "api/User_dashboard/delete_job";
 
 
 
