@@ -23,41 +23,37 @@ class User_dashboard extends CI_Controller {
 	}
 
     public function subscription_details() {
-		$user_id = $_GET['user_id'];
-		if(!empty(@$user_id)) {
-			try {
-				$vis_ip = $this->getVisIPAddr(); // Store the IP address
-				$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
-				$countryName = $ipdat->geoplugin_countryName;
-				if($countryName == 'Nigeria') {
-					$cond = " WHERE subscription_country = 'Nigeria'";
-				} else {
-					$cond = " WHERE subscription_country = 'Global'";
-				}
-
-				if($_SESSION['afrebay']['userType'] == '1') {
-					$uType = 'Freelancer';
-				} else {
-					$uType = 'Vendor';
-				}
-
-				$subscription_check = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".@$user_id."' AND (status = '1' OR status = '2')")->result_array();
-				if(!empty($subscription_check)) {
-					$data['current_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".@$user_id."' AND status IN (1,2)");
-					$data['expired_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".@$user_id."' AND status = '3'");
-				} else {
-					$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond." AND subscription_user_type = '".$uType."'")->result();
-				}
-				$response = array('status'=> 'success','result'=> $data);
-			} catch (\Exception $e) {
-				$response = array('status'=> 'error','result'=> $e->getMessage());
+		try {
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$user_id = $formdata['user_id'];
+			$vis_ip = $this->getVisIPAddr(); // Store the IP address
+			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+			$countryName = $ipdat->geoplugin_countryName;
+			if($countryName == 'Nigeria') {
+				$cond = " WHERE subscription_country = 'Nigeria'";
+			} else {
+				$cond = " WHERE subscription_country = 'Global'";
 			}
-			echo json_encode($response);
-		} else {
-			$response = array('status'=> 'error','result'=> 'Oops, You are logged out');
-			echo json_encode($response);
+
+			if($_SESSION['afrebay']['userType'] == '1') {
+				$uType = 'Freelancer';
+			} else {
+				$uType = 'Vendor';
+			}
+
+			$subscription_check = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".@$user_id."' AND (status = '1' OR status = '2')")->result_array();
+			if(!empty($subscription_check)) {
+				$data['current_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".@$user_id."' AND status IN (1,2)");
+				$data['expired_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".@$user_id."' AND status = '3'");
+			} else {
+				$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond." AND subscription_user_type = '".$uType."'")->result();
+			}
+			$response = array('status'=> 'success','result'=> $data);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error','result'=> $e->getMessage());
 		}
-    }
+		echo json_encode($response);
+	}
 
 	public function userSubscription() {
 		if(!empty(@$_SESSION['afrebay']['userId'])) {
@@ -470,10 +466,24 @@ class User_dashboard extends CI_Controller {
 			$user_id = $formdata['user_id'];
 			$product_list = $this->Crud_model->GetData('user_product', '', "user_id='".$user_id."' AND status = 1 and is_delete = 1");
 			if(!empty($product_list)) {
-				$response = array('status'=> 'success', 'msg'=> $product_list);
+				$productList = array();
+				foreach ($product_list as $key => $value) {
+					$productList[$key]['id'] = $value->id;
+					$productList[$key]['user_id'] = $value->user_id;
+					$productList[$key]['prod_name'] = $value->prod_name;
+					$productList[$key]['prod_description'] = $value->prod_description;
+					$productList[$key]['status'] = $value->status;
+					$productList[$key]['is_delete'] = $value->is_delete;
+					$pro_Img = $this->db->query("SELECT * FROM user_product_image where prod_id = '".$value->id."'")->result_array();
+					foreach ($pro_Img as $img) {
+						$productList[$key]['prod_image'][] = $img['prod_image'];
+					}
+				}
+				$response = array('status'=> 'success', 'msg'=> $productList);
 			} else {
 				$response = array('status'=> 'success', 'msg'=> 'No data found');
 			}
+			echo json_encode($response);
 		} catch(\Exception $e) {
 			$response = array('status'=> 'success', 'msg'=> $e->getMessage());
 			echo json_encode($response);
@@ -484,7 +494,7 @@ class User_dashboard extends CI_Controller {
 		try{
 			if(!empty($this->input->post())){
 				$data = array(
-					'user_id' => $_SESSION['afrebay']['userId'],
+					'user_id' => $this->input->post('user_id'),
 					'prod_name' => $this->input->post('prod_name'),
 					'prod_description' => $this->input->post('prod_description'),
 					'created_date' => date("Y-m-d H:i:s"),
@@ -500,15 +510,16 @@ class User_dashboard extends CI_Controller {
 							$config2['source_image'] =  $_FILES['prod_image']['tmp_name'][$i];
 							$config2['new_image'] =   getcwd() . '/uploads/products/'.$_POST['prod_image'];
 							$config2['upload_path'] =  getcwd() . '/uploads/products/';
-							$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
-							$config2['maintain_ratio'] = FALSE;
+							$config2['allowed_types'] = 'jpg|png|jpeg|PNG|JPEG';
+							$config2['maintain_ratio'] = TRUE;
+							$this->load->library('image_lib', $config2);
 							$this->image_lib->initialize($config2);
 							if (!$this->image_lib->resize()) {
 								echo ('<pre>');
 								echo ($this->image_lib->display_errors());
 								exit;
 							} else {
-								$image  = $_POST['prod_image'];
+								$image = $_POST['prod_image'];
 								@unlink('uploads/products/' . $_POST['old_image']);
 							}
 							$data_image = array(
@@ -522,26 +533,42 @@ class User_dashboard extends CI_Controller {
 					}
 				}
 			}
-			echo json_encode($responce);
+			echo json_encode($response);
 		} catch(\Exception $e) {
 			$response = array('status'=> 'success', 'msg'=> $e->getMessage());
 			echo json_encode($response);
 		}
 	}
 
-	public function update_product($id) {
-		$product_id = base64_decode($id);
-		$update_product = $this->Crud_model->get_single('user_product', "id='" . $product_id . "'");
-		$data = array(
-			'button' => 'update',
-			'action' => base_url('user/Dashboard/edit_product'),
-			'product' => $update_product->prod_name,
-			'description' => $update_product->prod_description,
-			'id' => $update_product->id,
-		);
-		$this->load->view('header');
-		$this->load->view('user_dashboard/product/form', $data);
-		$this->load->view('footer');
+	public function edit_product() {
+		try{
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$prod_id = $formdata['id'];
+			//$product_list = $this->Crud_model->GetData('user_product', '', "user_id='".$user_id."' AND status = 1 and is_delete = 1");
+			$product_list = $this->db->query("SELECT * FROM user_product WHERE id='".$prod_id."'")->result_array();
+			if(!empty($product_list)) {
+				$productList = array();
+				foreach ($product_list as $key => $value) {
+					$productList[$key]['id'] = $value['id'];
+					$productList[$key]['user_id'] = $value['user_id'];
+					$productList[$key]['prod_name'] = $value['prod_name'];
+					$productList[$key]['prod_description'] = $value['prod_description'];
+					$productList[$key]['status'] = $value['status'];
+					$productList[$key]['is_delete'] = $value['is_delete'];
+					$pro_Img = $this->db->query("SELECT * FROM user_product_image where prod_id = '".$value['id']."'")->result_array();
+					foreach ($pro_Img as $img) {
+						$productList[$key]['prod_image'][] = $img['prod_image'];
+					}
+				}
+				$response = array('status'=> 'success', 'msg'=> $productList);
+			} else {
+				$response = array('status'=> 'success', 'msg'=> 'No data found');
+			}
+			echo json_encode($response);
+		} catch(\Exception $e) {
+			$response = array('status'=> 'success', 'msg'=> $e->getMessage());
+			echo json_encode($response);
+		}
 	}
 
 

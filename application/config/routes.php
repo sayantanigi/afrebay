@@ -153,8 +153,9 @@ $route['api/myjob'] = "api/User_dashboard/myjob";
 $route['api/save_postbid'] = "api/User_dashboard/save_postbid";
 $route['api/jobbid'] = "api/User_dashboard/jobbid";
 $route['api/delete_job'] = "api/User_dashboard/delete_job";
-
-
+$route['api/products'] = "api/User_dashboard/products";
+$route['api/add_product'] = "api/User_dashboard/add_product";
+$route['api/edit_product'] = "api/User_dashboard/edit_product";
 
 
 
