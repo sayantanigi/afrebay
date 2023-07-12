@@ -515,8 +515,7 @@ class User_dashboard extends CI_Controller {
 							$this->load->library('image_lib', $config2);
 							$this->image_lib->initialize($config2);
 							if (!$this->image_lib->resize()) {
-								echo ('<pre>');
-								echo ($this->image_lib->display_errors());
+								$response = array('status'=> 'error', 'msg'=> $this->image_lib->display_errors());
 								exit;
 							} else {
 								$image = $_POST['prod_image'];
@@ -535,7 +534,7 @@ class User_dashboard extends CI_Controller {
 			}
 			echo json_encode($response);
 		} catch(\Exception $e) {
-			$response = array('status'=> 'success', 'msg'=> $e->getMessage());
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
 			echo json_encode($response);
 		}
 	}
@@ -572,61 +571,82 @@ class User_dashboard extends CI_Controller {
 	}
 
 
-	/*public function update_product() {
+	public function update_product() {
 		try{
-			$id = $_POST['id'];
-			$data = array(
-				'prod_name' => $this->input->post('prod_name', TRUE),
-				'prod_description' => $this->input->post('prod_description', TRUE),
-			);
-			$updateQuery = $this->Crud_model->SaveData('user_product', $data, "id='".$id."'");
-			if (!empty($_FILES['prod_image']['name'][0])) {
-				$cpt = count($_FILES['prod_image']['name']);
-				for($i=0; $i<$cpt; $i++) {
-					$_POST['prod_image'] = rand(0000, 9999) . "_" . $_FILES['prod_image']['name'][$i];
-					$config2['image_library'] = 'gd2';
-					$config2['source_image'] =  $_FILES['prod_image']['tmp_name'][$i];
-					$config2['new_image'] =   getcwd() . '/uploads/products/'.$_POST['prod_image'];
-					$config2['upload_path'] =  getcwd() . '/uploads/products/';
-					$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
-					$config2['maintain_ratio'] = FALSE;
-					$this->image_lib->initialize($config2);
-					if (!$this->image_lib->resize()) {
-						echo ('<pre>');
-						echo ($this->image_lib->display_errors());
-						exit;
-					} else {
-						$image  = $_POST['prod_image'];
-						@unlink('uploads/products/' . $_POST['old_image']);
+			if(!empty($this->input->post())){
+				$data = array(
+					'prod_name' => $this->input->post('prod_name'),
+					'prod_description' => $this->input->post('prod_description'),
+					'id' =>  $this->input->post('id')
+				);
+				$updateQuery = $this->Crud_model->SaveData('user_product', $data, "id='".$id."'");
+				if (!empty($_FILES['prod_image']['name'][0])) {
+					$cpt = count($_FILES['prod_image']['name']);
+					for($i=0; $i<$cpt; $i++) {
+						$_POST['prod_image'] = rand(0000, 9999) . "_" . $_FILES['prod_image']['name'][$i];
+						$config2['image_library'] = 'gd2';
+						$config2['source_image'] =  $_FILES['prod_image']['tmp_name'][$i];
+						$config2['new_image'] =   getcwd() . '/uploads/products/'.$_POST['prod_image'];
+						$config2['upload_path'] =  getcwd() . '/uploads/products/';
+						$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
+						$config2['maintain_ratio'] = FALSE;
+						$this->image_lib->initialize($config2);
+						if (!$this->image_lib->resize()) {
+							$this->image_lib->display_errors();
+							$response = array('status'=> 'error', 'msg'=> $this->image_lib->display_errors());
+							exit;
+						} else {
+							$image  = $_POST['prod_image'];
+							@unlink('uploads/products/' . $_POST['old_image']);
+						}
+						$data_image = array(
+							'prod_id' => $_POST['id'],
+							'prod_image' => $image,
+							'created_date' => date("Y-m-d H:i:s"),
+						);
+						$this->Crud_model->SaveData('user_product_image', $data_image);
+						$response = array('status'=> 'success', 'msg'=> 'Product Created Successfully !');
 					}
-					$data_image = array(
-						'prod_id' => $_POST['id'],
-						'prod_image' => $image,
-						'created_date' => date("Y-m-d H:i:s"),
-					);
-					$this->Crud_model->SaveData('user_product_image', $data_image);
 				}
 			}
-			$this->session->set_flashdata('message', 'Product Updated Successfully !');
-			redirect(base_url('product'));
+			echo json_encode($response);
 		} catch(\Exception $e) {
-			$response = array('status'=> 'success', 'msg'=> $e->getMessage());
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
 			echo json_encode($response);
 		}
 	}
 
 	function delete_product() {
-		$p_id = $this->input->post('id');
-		$delete_prod = $this->db->query("UPDATE user_product SET is_delete = '2' WHERE id = '$p_id'");
-		if($delete_prod > 0){
-			echo '1';
-		} else {
-			echo '2';
+		try{
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$p_id = $formdata['id'];
+			$delete_prod = $this->db->query("UPDATE user_product SET is_delete = '2' WHERE id = '$p_id'");
+			if($delete_prod > 0){
+				$response = array('status'=> 'success', 'msg'=> 'Product Deleted Successfully');
+			} else {
+				$response = array('status'=> 'error', 'msg'=> 'Oops! Something went wrong Please try again later.');
+			}
+			echo json_encode($response);
+		} catch(\Exception $e) {
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
+			echo json_encode($response);
 		}
 	}
 
 	function delete_product_image() {
-		$p_id = $this->input->post('id');
-		$delete_prod = $this->db->query("DELETE FROM user_product_image WHERE id = '$p_id'");
-	}*/
+		try {
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$pi_id = $this->input->post('id');
+			$delete_prod = $this->db->query("DELETE FROM user_product_image WHERE id = '$pi_id'");
+			if($delete_prod > 0){
+				$response = array('status'=> 'success', 'msg'=> 'Product image deleted');
+			} else {
+				$response = array('status'=> 'error', 'msg'=> 'Oops! Something went wrong Please try again later.');
+			}
+			echo json_encode($response);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
+			echo json_encode($response);
+		}
+	}
 }

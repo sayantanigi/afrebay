@@ -156,8 +156,9 @@ $route['api/delete_job'] = "api/User_dashboard/delete_job";
 $route['api/products'] = "api/User_dashboard/products";
 $route['api/add_product'] = "api/User_dashboard/add_product";
 $route['api/edit_product'] = "api/User_dashboard/edit_product";
-
-
+$route['api/update_product'] = "api/User_dashboard/update_product";
+$route['api/delete_product'] = "api/User_dashboard/delete_product";
+$route['api/delete_product_image'] = "api/User_dashboard/delete_product_image";
 
 
 
