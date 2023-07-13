@@ -26,6 +26,7 @@ class User_dashboard extends CI_Controller {
 		try {
 			$formdata = json_decode(file_get_contents('php://input'), true);
 			$user_id = $formdata['user_id'];
+			$userType = $formdata['user_type'];
 			$vis_ip = $this->getVisIPAddr(); // Store the IP address
 			$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
 			$countryName = $ipdat->geoplugin_countryName;
@@ -188,24 +189,19 @@ class User_dashboard extends CI_Controller {
 	}
 
 	public function education_list() {
-		$userid = @$_GET['user_id'];
-		if(!empty($userid)){
-			try {
-				$education_list = $this->Crud_model->GetData('user_education', '', "user_id='".@$userid."' order by id DESC");
-				if(!empty($education_list)) {
-					$response = array('status'=> 'success','msg'=> $education_list);
-				} else {
-					$response = array('status'=> 'error','msg'=> 'No Data Found');
-				}
-				echo json_encode($response);
-			} catch (\Exception $e) {
-				$response = array('status'=> 'error','msg'=> $e->getMessage());
-				echo json_encode($response);
+		try {
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$userid = $formdata['user_id'];
+			$education_list = $this->Crud_model->GetData('user_education', '', "user_id='".@$userid."' order by id DESC");
+			if(!empty($education_list)) {
+				$response = array('status'=> 'success','msg'=> $education_list);
+			} else {
+				$response = array('status'=> 'error','msg'=> 'No Data Found');
 			}
-		} else {
-			$response = array('status'=> 'error','result'=> 'Oops, You are logged out');
-			echo json_encode($response);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error','msg'=> $e->getMessage());
 		}
+		echo json_encode($response);
 	}
 
 	public function save_education() {
@@ -230,7 +226,8 @@ class User_dashboard extends CI_Controller {
 
 	public function get_educationDetails() {
 		try {
-			$education_id = $_GET['id'];
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$education_id = $formdata['id'];
 			$get_education = $this->Crud_model->get_single('user_education', "id='" . $education_id . "'");
 			$response = array('status'=> 'success', 'msg'=> $get_education);
 		} catch (\Exception $e) {
@@ -272,6 +269,7 @@ class User_dashboard extends CI_Controller {
 
 	public function workexperience_list() {
 		try {
+			$formdata = json_decode(file_get_contents('php://input'), true);
 			$user_id = $_GET['user_id'];
 			$workexperience_list = $this->Crud_model->GetData('user_workexperience', '', "user_id='".$user_id."' order by id DESC");
 			if(!empty($workexperience_list)) {
@@ -308,7 +306,8 @@ class User_dashboard extends CI_Controller {
 
 	public function get_workexperience() {
 		try {
-			$work_id = $_GET['id'];
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$work_id = $formdata['id'];
 			$get_workexperience = $this->Crud_model->get_single('user_workexperience', "id='".$work_id."'");
 			$response = array('status'=> 'success', 'msg'=> $get_workexperience);
 		} catch (\Exception $e) {
@@ -377,10 +376,12 @@ class User_dashboard extends CI_Controller {
 	public function jobbid() {
 		$this->load->model('Post_job_model');
 		try{
-			if(@$_SESSION['afrebay']['userType'] == '1'){
-				$cond = "job_bid.user_id='".@$_SESSION['afrebay']['userId']."'";
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$userType = $formdata['user_type'];
+			if($userType == '1'){
+				$cond = "job_bid.user_id='".@$formdata['user_id']."'";
 			} else {
-				$cond = "postjob.user_id='".@$_SESSION['afrebay']['userId']."'";
+				$cond = "postjob.user_id='".@$formdata['user_id']."'";
 			}
 			$get_postjob = $this->Post_job_model->postjob_bid($cond);
 			if(!empty($get_postjob)) {
@@ -421,6 +422,84 @@ class User_dashboard extends CI_Controller {
 			} else {
 				$response = array('status'=> 'success', 'msg'=> 'No data found');
 			}
+			echo json_encode($response);
+		} catch(\Exception $e) {
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
+			echo json_encode($response);
+		}
+	}
+
+	public function edit_post_job() {
+		try{
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$postid = $formdata['post_id'];
+			$update_data = $this->Crud_model->get_single('postjob', "id='".$postid."'");
+			if(!empty($update_data)) {
+				$data = array(
+					'post_title' => $update_data->post_title,
+					'description' => $update_data->description,
+					//'duration' => $update_data->duration,
+					'key_skills' => $update_data->required_key_skills,
+					'duration' => $update_data->duration,
+					'charges' => $update_data->charges,
+					'currency' => $update_data->currency,
+					'category' => $update_data->category_id,
+					'subcategory' => $update_data->subcategory_id,
+					'appli_deadeline' => $update_data->appli_deadeline,
+					'countries' => $update_data->country,
+					'state' => $update_data->state,
+					'cities' => $update_data->city,
+					'location' => $update_data->location,
+					'latitude' => $update_data->latitude,
+					'longitude' => $update_data->longitude,
+					'id' => $postid,
+				);
+				$response = array('status'=> 'success', 'msg'=> $data);
+			} else {
+				$response = array('status'=> 'error', 'msg'=> 'No data found');
+			}
+			echo json_encode($response);
+		} catch(\Exception $e) {
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
+			echo json_encode($response);
+		}
+	}
+
+	public function update_post_job() {
+		try{
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			$key_skills = $formdata['key_skills'];
+			for ($i=0; $i < count($key_skills); $i++) {
+			 	$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
+			 	if(empty($get_specialist)) {
+			 		$insrt = array(
+			 			'specialist_name'=>ucfirst($key_skills[$i]),
+			 			'created_date'=>date('Y-m-d H:i:s'),
+			 		);
+			 		$this->db->insert('specialist',$insrt);
+			 	}
+			}
+			$data=array(
+				'id'=> $formdata['id'],
+				'post_title'=> $formdata['post_title'],
+				'description'=> $formdata['description'],
+				'required_key_skills'=> implode(", ",$formdata['key_skills']),
+				'duration'=> $formdata['duration'],
+				'currency'=> $formdata['currency'],
+				'charges'=> $formdata['charges'],
+				'category_id'=> $formdata['category_id'],
+				'subcategory_id'=> $formdata['subcategory_id'],
+				'appli_deadeline'=> $formdata['appli_deadeline'],
+				'country'=> $formdata['country'],
+				'state'=> $formdata['state'],
+				'city'=> $formdata['city'],
+				'location'=> $formdata['location'],
+				'latitude'=> $formdata['latitude'],
+				'longitude'=> $formdata['longitude'],
+				'created_date'=>date('Y-m-d H:i:s'),
+			);
+			$this->Crud_model->SaveData('postjob', $data, "id='".$formdata['id']."'");
+			$response = array('status'=> 'success', 'msg'=> 'Post Job Updated Successfully !');
 			echo json_encode($response);
 		} catch(\Exception $e) {
 			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
@@ -475,9 +554,9 @@ class User_dashboard extends CI_Controller {
 					$productList[$key]['status'] = $value->status;
 					$productList[$key]['is_delete'] = $value->is_delete;
 					$pro_Img = $this->db->query("SELECT * FROM user_product_image where prod_id = '".$value->id."'")->result_array();
-					foreach ($pro_Img as $img) {
-						$productList[$key]['prod_image'][] = $img['prod_image'];
-					}
+					$productList[$key]['prod_image'][] = $pro_Img;
+					$pro_contact = $this->db->query("SELECT * FROM product_contact where product_id = '".$value->id."'")->result_array();
+					$productList[$key]['prod_inquery'][] = $pro_contact;
 				}
 				$response = array('status'=> 'success', 'msg'=> $productList);
 			} else {
@@ -570,7 +649,6 @@ class User_dashboard extends CI_Controller {
 		}
 	}
 
-
 	public function update_product() {
 		try{
 			if(!empty($this->input->post())){
@@ -648,5 +726,9 @@ class User_dashboard extends CI_Controller {
 			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
 			echo json_encode($response);
 		}
+	}
+
+	public function message() {
+
 	}
 }

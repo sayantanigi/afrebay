@@ -64,6 +64,56 @@ class Home extends MY_Controller {
         echo json_encode($data);
 	}
 
+	function vendor_lists() {
+		try {
+			$getdata['getcategory']=$this->Crud_model->GetData('category');
+			$title = $this->input->post('title_keyword');
+			$category_id = $this->input->post('category');
+			$subcategory_id = $this->input->post('subcategory');
+			$search_location = $this->input->post('location');
+			$days = $this->input->post('days');
+			$userType = 2;
+			$this->load->library('pagination');
+			$config = array();
+			$config['base_url'] = '#';
+			$config['total_rows'] = count($this->Users_model->get_employercount());
+			$config['per_page'] = 10;
+			$config['uri_segment'] = 3;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = '<ul class="pagination">';
+			$config['full_tag_close'] = '</ul>';
+			$config['first_tag_open'] = '<li>';
+			$config['first_tag_close'] = '</li>';
+			$config['last_tag_open'] = '<li>';
+			$config['last_tag_close'] = '</li>';
+			$config['next_link'] = '&gt;';
+			$config['next_tag_open'] = '<li>';
+			$config['next_tag_close'] = '</li>';
+			$config['prev_link'] = '&lt;';
+			$config['prev_tag_open'] = '<li>';
+			$config['prev_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='active'><a href='#'>";
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['num_links'] = 3;
+			$this->pagination->initialize($config);
+			$page = 1;
+			$start = ($page - 1) * $config['per_page'];
+
+			if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days) || isset($userType)) {
+				$getdata['vendor_list']=$this->Users_model->employer_fetchdataForAPI($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days, $userType);
+			} else {
+				$getdata['vendor_list']=$this->Users_model->employer_fetchdataForAPI($config["per_page"], $start, $title, $category_id, $subcategory_id, $search_location, $days, $userType);
+			}
+			$response = array('status'=> 'success', 'msg'=> $getdata);
+			echo json_encode($response);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error', 'msg'=> $e->getMessage());
+			echo json_encode($response);
+		}
+	}
+
     function vendor_details($user_id) {
 		$userid = base64_decode($user_id);
 		$data['userdata'] = $this->Crud_model->get_single('users',"userId='".$userid."'");

@@ -328,4 +328,18 @@ class Users_model extends My_Model {
         return $output;
     }
     ////////////////////// end ajax list employer///////////////////////
+
+    function employer_fetchdataForAPI($limit, $start, $title, $category_id, $subcategory_id, $search_location, $days, $userType) {
+        if(isset($title) || isset($category_id) || isset($subcategory_id) || isset($search_location) || isset($days) || isset($userType)) {
+            $query = $this->make_query($title, $category_id, $subcategory_id, $search_location, $days, $userType);
+            $query .= ' ORDER BY userId DESC';
+            $query .= ' LIMIT '.$start.', ' . $limit;
+            $data = $this->db->query($query)->result_array();
+        } else {
+            $query = "SELECT * FROM users WHERE status = '1' AND email_verified = '1' ORDER BY userId DESC";
+            $query .= ' LIMIT '.$start.', ' . $limit;
+            $data = $this->db->query($query)->result_array();
+        }
+        return $data;
+    }
 }

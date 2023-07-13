@@ -82,26 +82,27 @@ class Authentication extends CI_Controller {
             $formdata = json_decode(file_get_contents('php://input'), true);
             $email = $formdata["email"];
     		$password = $formdata["password"];
-            if($this->Mymodel->check_record($email, $password)) {
+			$check_user = $this->db->query("SELECT * FROM users WHERE email = '".$email."' AND password = '".md5($password)."' AND status = '1'")->result_array();
+			if(!empty($check_user)) {
                 $msg = 'Logged in successfully';
-                if($_SESSION['afrebay']['userType'] == '1') {
-    				$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
+                if($check_user['0']['userType'] == '1') {
+    				$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$check_user['0']['userId']."' AND status IN (1,2)");
     				if(empty($check_sub)) {
                         $msg = 'Please subscribe first';
     				} else {
-    					$profile_check = $this->db->query("SELECT `firstname`, `lastname`, `email`, `gender`, `address`, `zip`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+    					$profile_check = $this->db->query("SELECT `firstname`, `lastname`, `email`, `gender`, `address`, `zip`, `short_bio` FROM `users` WHERE userId = '".@$check_user['0']['userId']."'")->result_array();
     					if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['zip']) || empty($profile_check[0]['short_bio'])) {
                             $msg = 'Please update your profile';
     					} else {
                             $msg = 'Please update your profile';
                         }
     				}
-    			} else if ($_SESSION['afrebay']['userType'] == '2') {
-    				$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
+    			} else if ($check_user['0']['userType'] == '2') {
+    				$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$check_user['0']['userId']."' AND status IN (1,2)");
     				if(empty($check_sub)) {
                         $msg = 'Please subscribe first';
                     } else {
-                    	$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+                    	$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$check_user['0']['userId']."'")->result_array();
                         if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {
                         	$msg = 'Please update your profile';
                     	} else {
