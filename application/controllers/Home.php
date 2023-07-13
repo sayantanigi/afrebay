@@ -206,73 +206,39 @@ class Home extends MY_Controller {
 	}
 
 	function ourjob_fetchdata() {
-
 		sleep(1);
-
 		$this->load->library('pagination');
-
 		$config = array();
-
 		$config['base_url'] = '#';
-
 		$config['total_rows'] = count($this->post_job_model->getcount());
-
 		$config['per_page'] = 10;
-
 		$config['uri_segment'] = 3;
-
 		$config['use_page_numbers'] = TRUE;
-
 		$config['full_tag_open'] = '<ul class="pagination">';
-
 		$config['full_tag_close'] = '</ul>';
-
 		$config['first_tag_open'] = '<li>';
-
 		$config['first_tag_close'] = '</li>';
-
 		$config['last_tag_open'] = '<li>';
-
 		$config['last_tag_close'] = '</li>';
-
 		$config['next_link'] = '&gt;';
-
 		$config['next_tag_open'] = '<li>';
-
 		$config['next_tag_close'] = '</li>';
-
 		$config['prev_link'] = '&lt;';
-
 		$config['prev_tag_open'] = '<li>';
-
 		$config['prev_tag_close'] = '</li>';
-
 		$config['cur_tag_open'] = "<li class='active'><a href='#'>";
-
 		$config['cur_tag_close'] = '</a></li>';
-
 		$config['num_tag_open'] = '<li>';
-
 		$config['num_tag_close'] = '</li>';
-
 		$config['num_links'] = 3;
-
 		$this->pagination->initialize($config);
-
 		$page = $this->uri->segment(3);
-
 		$start = ($page - 1) * $config['per_page'];
-
 		$output = array(
-
 			'pagination_link'  => $this->pagination->create_links(),
-
 			'product_list'   => $this->post_job_model->fetchdata($config["per_page"], $start)
-
 		);
-
 		echo json_encode($output);
-
 	}
 
 	function post_bidding($postid) {
@@ -306,8 +272,6 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
-
-
 	function workers_list() {
 		$data['get_specialist'] = $this->Crud_model->GetData('specialist');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancers'");
@@ -315,8 +279,6 @@ class Home extends MY_Controller {
 		$this->load->view('frontend/workers_list', $data);
 		$this->load->view('footer');
 	}
-
-
 
 	function workerlist_fetchdata() {
 		sleep(1);
@@ -368,26 +330,15 @@ class Home extends MY_Controller {
 		echo json_encode($output);
 	}
 
-
-
 	public function worker_detail($user_id) {
-
 		$cond = "users.userType='1' and users.userId='" . base64_decode($user_id) . "'";
-
 		$data['user_detail'] = $this->Users_model->users_detail($cond);
-
 		$data['user_education'] = $this->Crud_model->GetData('user_education', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
-
 		$data['user_work'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
-
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Frelancer Details'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/worker_profile', $data);
-
 		$this->load->view('footer');
-
 	}
 
 	function employer_list() {
@@ -447,229 +398,62 @@ class Home extends MY_Controller {
 		echo json_encode($output);
 	}
 
-
-
 	function career_tip($id) {
-
 		$data['get_career'] = $this->Crud_model->get_single('career_tips', "id='".base64_decode($id)."'");
-
 		$this->load->view('header');
-
 		$this->load->view('frontend/career_tip', $data);
-
 		$this->load->view('footer');
-
 	}
 
-
-
 	function product_contact() {
-
 		$data=array(
-
 			'product_id' => $this->input->post('p_id'),
-
 			'product_name' => $this->input->post('p_name'),
-
 			'c_name' => $this->input->post('name'),
-
 			'c_email' => $this->input->post('email'),
-
 			'c_description' => $this->input->post('details'),
-
 			'created_date'=> date('Y-m-d H:i:s')
-
 		);
 
-
-
 		$result = $this->Mymodel->insert('product_contact', $data);
-
-
-
 		$insert_id = $this->db->insert_id();
-
 		$get_setting=$this->Crud_model->get_single('setting');
-
 		if(!empty($insert_id)) {
-
-			$subject = 'Product Query Form';
-
-			$imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
-
-			$message = "
-
-			<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'>
-
-   				<tbody>
-
-					<tr>
-
-					 	<td align='center'>
-
-						    <table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'>
-
-						       	<tbody>
-
-									<tr>
-
-									 	<td height='35'></td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'><img src='".$imagePath."' style='width: 250px'/></td>
-
-									</tr>
-
-									<tr>
-
-									 	<td height='35'></td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello Admin,</td>
-
-									</tr>
-
-							</tbody>
-
-						    </table>
-
-					 	</td>
-
-					</tr>
-
-					<tr>
-
-					 	<td align='center'>
-
-					    	<table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'>
-
-					       		<tbody>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'> Please find the below details for product related queries</td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'> Product Name: ".$this->input->post('p_name')."<br/> </td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'> Customer Name: ".$this->input->post('name')."<br/> </td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'> Customer Email: ".$this->input->post('email')."<br/> </td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: bold;'> Message: ".$this->input->post('details')."<br/> </td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:16px; color:#232323; line-height:24px; font-weight: 700;'> Thank you! </td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'> Sincerely </td>
-
-									</tr>
-
-									<tr>
-
-									 	<td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>".$this->input->post('name')."</td>
-
-									</tr>
-
-					       		</tbody>
-
-					    	</table>
-
-					 	</td>
-
-					</tr>
-
-   				</tbody>
-
-			</table>";
-
+			$subject = 'New Product Inquiry';
+			// $imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
+			// $message = "";
+			// $message = $this->load->view('email_template/signup',$data,TRUE);
+			$message = $this->load->view('email_template/product_query',$data,TRUE);
 			require 'vendor/autoload.php';
-
 			$mail = new PHPMailer(true);
-
 			try {
-
 				//Server settings
-
 				$mail->CharSet = 'UTF-8';
-
 				$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
-
 				$mail->AddAddress($_POST['email']);
-
 				$mail->IsHTML(true);
-
 				$mail->Subject = $subject;
-
 				$mail->Body = $message;
-
 				//Send email via SMTP
-
 				$mail->IsSMTP();
-
 				$mail->SMTPAuth   = true;
-
 				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
 				$mail->Host       = "smtp.gmail.com";
-
 				$mail->Port       = 587; //587 465
-
 				$mail->Username   = "no-reply@goigi.com";
-
 				$mail->Password   = "wj8jeml3eu0z";
-
 				$mail->send();
-
 				// echo 'Message has been sent';
-
 			} catch (Exception $e) {
-
 				//$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
 				$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
-
 			}
-
 			//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
-
 			$res = 1;
-
 		} else {
-
 			$res = 2;
-
 		}
-
 		echo $res; exit;
-
 	}
 
 	public function filterByuserType() {
