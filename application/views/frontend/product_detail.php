@@ -152,7 +152,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 			success: function(result) {
                 console.log(result);
                 $("#productQuery_form")[0].reset();
-                if(result == '1'){
+                if(result == '1' || result == '0'){
                     $('#register-messages').show();
     				setTimeout(function () {
                      	$('#register-messages').hide();
