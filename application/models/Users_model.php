@@ -17,7 +17,7 @@ class Users_model extends My_Model {
         $i = 0;
         $new_str = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['search']['value']);
         if($new_str) {
-            $explode_string = explode(' ', $_POST['search']['value']);
+            $explode_string = explode(' ', $new_str);
             foreach ($explode_string as $show_string) {
                 $cond  = " ";
                 $cond.=" ( users.username LIKE '%".trim($show_string)."%' ";

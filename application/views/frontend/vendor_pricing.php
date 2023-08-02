@@ -52,7 +52,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             $get_service=$this->Crud_model->GetData('subscription_service','',"subscription_id='".$key['id']."'");
                             ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                                <div class="pricetable style2">
+                                <div class="pricetable style2" style="margin-top: 50px;">
                                     <div class="Price_Shadow"></div>
                                     <div class="Price_Tag1">
                                         <div class="Price_Tag_data">
@@ -127,7 +127,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </section>
 <style>
 #subscription-messages{display: none; text-align: center;}
-.pricetable .pricing-options ul li {line-height: 15px !important;}
+.Pricing_Data .plans-sec .pricetable a.btn {margin-top: 55px !important;}
+.pricing-options p {float: left; width: 100%; margin: 0; margin-top: 15px;}
 </style>
 <!-- <script type='text/javascript' src='https://code.jquery.com/jquery-1.12.4.min.js' crossorigin = "anonymous"></script>
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js' crossorigin = "anonymous"></script> -->
@@ -147,7 +148,6 @@ $(".pricetable ul").each(function(){
 $(".pricetable-head").matchHeight();
 $(".pricetable ul").height(maxHeight);
 $(".pricing-options p").height(maxHeight);
-
 $(document).ready(function(){
     <?php
     if(!empty($get_subscription)) {

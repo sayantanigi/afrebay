@@ -20,8 +20,8 @@ var $column_order = array(null,'emp.employer_id','emp.service_name','emp.categor
         $this->db->join('sub_category','sub_category.id=emp.subcategory_id','left');
       // $this->db->where($cond);
 		$i = 0;
-        $new_str = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['search']['value']);
-        if($new_str) // if datatable send POST for search
+     
+        if($_POST['search']['value']) // if datatable send POST for search
             {
                 $explode_string = explode(' ', $_POST['search']['value']);
                 foreach ($explode_string as $show_string) 

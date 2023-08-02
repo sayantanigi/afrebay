@@ -331,7 +331,7 @@ class User_dashboard extends CI_Controller {
 	public function workexperience_list() {
 		try {
 			$formdata = json_decode(file_get_contents('php://input'), true);
-			$user_id = $formdata['user_id'];
+			$user_id = $_GET['user_id'];
 			$workexperience_list = $this->Crud_model->GetData('user_workexperience', '', "user_id='".$user_id."' order by id DESC");
 			if(!empty($workexperience_list)) {
 				$response = array('status'=> 'success','result'=> $workexperience_list);
@@ -723,7 +723,6 @@ class User_dashboard extends CI_Controller {
 						if (!$this->image_lib->resize()) {
 							$this->image_lib->display_errors();
 							$response = array('status'=> 'error', 'result'=> $this->image_lib->display_errors());
-							echo json_encode($response);
 							exit;
 						} else {
 							$image  = $_POST['prod_image'];
@@ -735,20 +734,14 @@ class User_dashboard extends CI_Controller {
 							'created_date' => date("Y-m-d H:i:s"),
 						);
 						$this->Crud_model->SaveData('user_product_image', $data_image);
-						$response = array('status'=> 'success', 'result'=> 'Product Updated Successfully !');
-						echo json_encode($response);
+						$response = array('status'=> 'success', 'result'=> 'Product Created Successfully !');
 					}
-				} else {
-					$this->Crud_model->SaveData('user_product', $data);
-					$response = array('status'=> 'success', 'result'=> 'Product Updated Successfully !');
-					echo json_encode($response);
 				}
 			}
 		} catch(\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());
-			echo json_encode($response);
 		}
-		//echo json_encode($response);
+		echo json_encode($response);
 	}
 
 	public function delete_product() {

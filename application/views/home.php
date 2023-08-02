@@ -86,138 +86,71 @@
 </section>
 
 <section>
-
     <div class="block Opp_Block">
-
         <div class="container">
-
             <div class="row">
-
                 <div class="col-lg-12">
-
                     <div class="heading">
-
                         <h2>AfreBay Opportunities</h2>
-
                         <span>Look for the latest jobs and projects posted on the portal.</span>
-
                     </div>
-
                     <div class="blog-sec">
-
                         <div class="row">
-
                             <?php if(!empty($get_post)) {
-
                             foreach($get_post as $row){
-
                             if(strlen($row->description)>200) {
-
                                 $desc=substr($row->description,0,200).'...';
-
                             } else {
-
                                 $desc=$row->description;
-
-                            }
-
-                            ?>
-
+                            } ?>
+                            <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array(); ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-
                                 <div class="my-blog"
-
                                     onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
-
                                     <div class="blog-details">
-
                                         <div class="Blog-Emp-Details">
-
                                             <div class="Blog-Emp-Img">
-
-                                                <img
-
-                                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=688&amp;q=80">
-
+                                                <?php if (!empty($get_user[0]['profilePic'])) { ?>
+                                                <img src="<?php echo base_url('uploads/users/'.$get_user[0]['profilePic']);?>">
+                                                <?php } else {?>
+                                                <img src="<?php echo base_url('uploads/users/user.png');?>">
+                                                <?php } ?>
                                             </div>
-
                                             <div class="Blog-Emp-Data">
-
-                                                <?php
-
-                                                if(!empty($row->post_title)) {
-
+                                                <?php if(!empty($row->post_title)) {
                                                     if(strlen($row->post_title)>30) {
-
                                                         $title = substr($row->post_title,0,30).'...';
-
                                                     } else {
-
                                                         $title = $row->post_title;
-
                                                     }
-
                                                 } else {
-
                                                     $title = '';
-
-                                                }
-
-                                                ?>
-
+                                                } ?>
                                                 <p><?= ucfirst($title)?></p>
-
                                                 <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array();?>
-
                                                 <p>By <?php echo $get_user[0]['companyname']?></p>
-
                                             </div>
-
                                         </div>
-
                                         <h3 class="nkash"><a href="javascript:void(0)" title="">Description</a></h3>
-
                                         <p><?= ucfirst(strip_tags($desc))?></p>
-
-
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                             <?php } } ?>
-
                         </div>
-
                     </div>
-
                 </div>
-
                 <?php if(count($get_post) > 6) { ?>
-
                 <div class="col-lg-12">
-
                     <div class="browse-all-cat">
-
                         <a href="<?= base_url('ourjobs')?>" title="">View More</a>
-
                     </div>
-
                 </div>
-
                 <?php } ?>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
-
 
 <section>
     <div class="block Worker-Block">

@@ -27,13 +27,13 @@
 	    	<p style="font-size: 15px; list-style: none; padding: 0; margin: 18px 0 0 0;">Visit us: <span><?= @$settings->address?></span></p>
 	    	<p style="font-size: 15px; list-style: none; padding: 0; margin: 0;">Email us: <span><?= @$settings->email?></span></p>
         </div>
-        <table style="width: 100%">
-        	<tbody>
-				<tr>
-        			<td style="height: 25px; width: 100%; background: red; padding: 10px 0px; font-size: 13px; color: #fff; text-align: center">Copyright © 2023 Afrebay. All rights reserved.</td>
-        		</tr>
-        	</tbody>
-		</table>
+        <table style="width: 100%;">
+        	<tr>
+        		<td style="height:30px;width:100%; background: red;padding: 10px 0px; font-size:13px; color: #fff; text-align: center;">
+        			Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.
+        		</td>
+        	</tr>
+        </table>
 	</div>
 </body>
 </html>

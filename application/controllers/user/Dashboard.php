@@ -707,14 +707,15 @@ class Dashboard extends CI_Controller {
 	////////////////////////////////// end rating /////////////////////////////////////
 
 	//////////////////////////////// start education ///////////////////////////
-	function education_list() {
+	function education_list()
+	{
 		$data['education_list'] = $this->Crud_model->GetData('user_education', '', "user_id='".$_SESSION['afrebay']['userId']."' order by id DESC");
 		$this->load->view('header');
 		$this->load->view('user_dashboard/education/list', $data);
 		$this->load->view('footer');
 	}
-
-	function add_education() {
+	function add_education()
+	{
 		$get_education = $this->Crud_model->GetData('user_education', 'id,education', "");
 		$get_passing = $this->Crud_model->GetData('user_education', 'id,passing_of_year', "");
 		$get_college = $this->Crud_model->GetData('user_education', 'id,college_name', "");
@@ -740,7 +741,8 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function save_education() {
+	public function save_education()
+	{
 		$data = array(
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'education' => $this->input->post('education', TRUE),
@@ -756,7 +758,10 @@ class Dashboard extends CI_Controller {
 		redirect(base_url('education-list'));
 	}
 
-	public function update_education($id) {
+
+
+	public function update_education($id)
+	{
 		$education_id = base64_decode($id);
 
 		$update_education = $this->Crud_model->get_single('user_education', "id='" . $education_id . "'");
@@ -785,7 +790,9 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function edit_education() {
+
+	public function edit_education()
+	{
 		$id = $_POST['id'];
 		$data = array(
 			'education' => $this->input->post('education', TRUE),
@@ -809,6 +816,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	//////////////////////////////// end education ///////////////////////////
+
 
 	///////////////// start work experience //////////////////////////
 

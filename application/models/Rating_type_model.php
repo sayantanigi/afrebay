@@ -17,8 +17,8 @@ var $column_order = array(null,null,'rating_type.rating_type','rating_type.statu
         $this->db->from('rating_type');
       // $this->db->where($cond);
 		$i = 0;
-        $new_str = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['search']['value']);
-        if($new_str) // if datatable send POST for search
+     
+        if($_POST['search']['value']) // if datatable send POST for search
             {
                 $explode_string = explode(' ', $_POST['search']['value']);
                 foreach ($explode_string as $show_string) 

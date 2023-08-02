@@ -17,7 +17,7 @@ var $column_order = array(null,'sub_category.sub_category_name','category.catego
 		$this->db->select('sub_category.*,category.category_name');
         $this->db->from('sub_category');
         $this->db->join('category','category.id=sub_category.category_id');
-       $this->db->where($cond);
+        $this->db->where($cond);
 		$i = 0;
         $new_str = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['search']['value']);
         if($new_str) // if datatable send POST for search
