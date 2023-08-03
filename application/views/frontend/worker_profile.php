@@ -100,12 +100,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </div>
                                         <?php } }?>
                                     </div>
+                                    <?php if(!empty($user_detail->skills)) { ?>
                                     <div class="progress-sec" id="skills">
                                         <h2>Professional Skill Set</h2>
                                         <div class="progress-sec" style="text-transform: uppercase;">
                                             <span><?= @$user_detail->skills ?></span>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="col-lg-4 column">

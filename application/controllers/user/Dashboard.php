@@ -414,17 +414,17 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->SaveData('job_bid', $data1, "id='".$jodBidid."' AND postjob_id='".$postJobid."'");
 		if($bidstatus == "Selected") {
 			$this->Crud_model->SaveData('job_bid', $data1, "id='".$jodBidid."' AND postjob_id='".$postJobid."'");
-			$binddingstatus = $this->Crud_model->GetData('job_bid', '', "postjob_id = '".$postJobid."' and bidding_status IN ('Under Review','Short Listed')");
+			$binddingstatus = $this->Crud_model->GetData('job_bid', '', "postjob_id = '".$postJobid."' and bidding_status IN ('Pending','Under Review','Short Listed')");
 			foreach ($binddingstatus as $row) {
 				$data = array(
 					'bidding_status' => 'Rejected',
 				);
 				$this->Crud_model->SaveData('job_bid', $data, "id='" . $row->id . "'");
 			}
-			$getChatData = $this->db->query("SELECT * FROM chat WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'")->result();
-			if(!empty($getChatData)) {
-				$updateChatData = $this->db->query("UPDATE chat SET is_delete = '2' WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'");
-			}
+			// $getChatData = $this->db->query("SELECT * FROM chat WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'")->result();
+			// if(!empty($getChatData)) {
+			// 	$updateChatData = $this->db->query("UPDATE chat SET is_delete = '2' WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'");
+			// }
 			$updatepost = array(
 				'is_delete' => 1,
 			);

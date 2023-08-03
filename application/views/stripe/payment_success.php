@@ -67,11 +67,19 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             'expiry_date' => $expire_date,
                             'invoice_url' => $invoice['hosted_invoice_url'],
                             'invoice_pdf' => $invoice['invoice_pdf'],
-                            'duration' => $month,
+                            'duration' => $subQuery[0]['subscription_duration'],
 							'created_date' => date('Y-m-d'),
 						);
 						$this->db->insert('employer_subscription', $dataDB);
-						if($this->db->insert_id()) { ?>
+						if($this->db->insert_id()) { 
+                            $userDetails = $this->db->query("SELECT * FROM users where userId = '".$_SESSION['afrebay']['userId']."'")->result_array();
+                            if(!empty($userDetails[0]['firstname'])){
+                                $fullName = $userDetails[0]['firstname'].' '.$fullName = $userDetails[0]['lastname'];
+                            } else {
+                                $fullName = $userDetails[0]['companyname'];
+                            }
+                            
+                        ?>
 							<div class="heading">
 								<h4 class="card-title">Payment Successful.</h4>
 								<p class="card-text">We received your payment on your purchase <b>#<?php echo $session['subscription']; ?></b>, check your email for more information.</p>
@@ -89,7 +97,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     //Server settings
                                     $mail->CharSet = 'UTF-8';
                                     $mail->SetFrom('no-reply@goigi.com', 'Afrebay');
-                                    $mail->AddAddress($userEmail);
+                                    $mail->AddAddress($userDetails[0]['email']);
                                     $mail->IsHTML(true);
                                     $mail->Subject = $subject;
                                     $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
