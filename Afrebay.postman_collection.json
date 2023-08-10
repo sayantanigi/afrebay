@@ -3,7 +3,8 @@
 		"_postman_id": "dcfda70c-1918-4992-9c4e-c070d6031460",
 		"name": "Afrebay",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28322663"
+		"_exporter_id": "28322663",
+		"_collection_link": "https://winter-station-333675.postman.co/workspace/New-Team-Workspace~f2f7af83-fa66-437e-aae8-72df8fdd5d4f/collection/28322663-dcfda70c-1918-4992-9c4e-c070d6031460?action=share&creator=28322663&source=collection_link"
 	},
 	"item": [
 		{
@@ -19,7 +20,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/home/home_list",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/home/home_list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -48,7 +49,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/vendor_lists",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/vendor_lists",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,7 +79,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/vendor_detail",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/vendor_detail",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -108,7 +109,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/product_details",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/product_details",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -136,7 +137,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/freelancer_lists",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/freelancer_lists",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -166,7 +167,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/freelancer_detail",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/freelancer_detail",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -210,7 +211,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/home/post_details",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/home/post_details",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -244,7 +245,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/vendor_pricing",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/vendor_pricing",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -277,7 +278,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/home/freelancer_pricing",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/home/freelancer_pricing",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -299,7 +300,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/about",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/about",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -320,7 +321,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/contact",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/contact",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -350,7 +351,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/save_contact",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/save_contact",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -371,7 +372,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/privacy",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/privacy",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -392,7 +393,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/term_and_conditions",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/term_and_conditions",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -422,7 +423,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/careertips_details",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/careertips_details",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -452,7 +453,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/search_job",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/search_job",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -485,7 +486,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/registration",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/registration",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -518,7 +519,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/login",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -539,7 +540,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/logout",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/logout",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -564,7 +565,7 @@
 					"raw": "{\r\n    \"email\":\"sayantan@goigi.in\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/send_forget_password",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/send_forget_password",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -600,7 +601,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/user_subscription_details",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/user_subscription_details",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -625,7 +626,7 @@
 					"raw": "{\r\n    \"user_id\" : \"8\",\r\n    \"sub_id\": \"1\",\r\n    \"sub_name\" : \"Trial Period for Freelancers\",\r\n    \"user_email\": \"sayantan@goigi.in\",\r\n    \"sub_price\" : \"0\",\r\n    \"sub_duration\": \"30\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/user_subscription",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/user_subscription",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -655,7 +656,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/user_profile",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/user_profile",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -761,7 +762,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/update_profile",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/update_profile",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -791,7 +792,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/education_list",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/education_list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -821,7 +822,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/save_education",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/save_education",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -851,7 +852,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/get_educationDetails",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/get_educationDetails",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -881,7 +882,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/update_education",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/update_education",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -911,7 +912,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/delete_education",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/delete_education",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -941,7 +942,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/workexperience_list",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/workexperience_list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -966,7 +967,7 @@
 					"raw": "{\r\n    \"user_id\" : \"8\",\r\n    \"designation\" : \"Associate System Engineer 1\",\r\n    \"company_name\" : \"Demo Company 1\",\r\n    \"from_date\" : \"2022-07-10\",\r\n    \"to_date\" : \"2023-07-10\",\r\n    \"description\" : \"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/save_workexperience",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/save_workexperience",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -996,7 +997,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/get_workexperience",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/get_workexperience",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1021,7 +1022,7 @@
 					"raw": "{\r\n    \"designation\" : \"Associate System Engineer I\",\r\n    \"company_name\" : \"Demo Company 1\",\r\n    \"from_date\" : \"2023-07-10\",\r\n    \"to_date\" : \"2023-07-10\",\r\n    \"description\" : \"In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.1\",\r\n    \"id\" : \"4\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/update_workexperience",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/update_workexperience",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1051,7 +1052,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/delete_workexperience",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/delete_workexperience",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1081,7 +1082,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/save_postbid",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/save_postbid",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1111,7 +1112,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/myjob",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/myjob",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1141,7 +1142,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/edit_post_job",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/edit_post_job",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1163,7 +1164,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"2\",\r\n    \"post_title\": \"IT Support Engineer, L2\",\r\n    \"description\": \"IT Support Engineer, L2 Description\",\r\n    \"duration\": \"2 month\",\r\n    \"currency\": \"USD ($)\",\r\n    \"charges\": \"2501\",\r\n    \"category_id\": \"2\",\r\n    \"subcategory_id\": \"1\",\r\n    \"appli_deadeline\": \"2023-06-24\",\r\n    \"country\": \"India\",\r\n    \"state\": \"West Bengal\",\r\n    \"city\": \"Kolkata\",\r\n    \"location\": \"India, West Bengal, Kolkata\",\r\n    \"latitude\": \"22.5726\",\r\n    \"longitude\": \"88.3639\"\r\n}",
+					"raw": "{\r\n    \"id\": \"2\",\r\n    \"post_title\": \"IT Support Engineer, L2\",\r\n    \"description\": \"IT Support Engineer, L2 Description\",\r\n    \"duration\": \"2 month\",\r\n    \"key_skills\": [1,2,3],\r\n    \"currency\": \"USD ($)\",\r\n    \"charges\": \"2501\",\r\n    \"category_id\": \"2\",\r\n    \"subcategory_id\": \"1\",\r\n    \"appli_deadeline\": \"2023-06-24\",\r\n    \"country\": \"India\",\r\n    \"state\": \"West Bengal\",\r\n    \"city\": \"Kolkata\",\r\n    \"location\": \"India, West Bengal, Kolkata\",\r\n    \"latitude\": \"22.5726\",\r\n    \"longitude\": \"88.3639\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1171,7 +1172,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/update_post_job",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/update_post_job",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1201,7 +1202,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/jobbid",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/jobbid",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1231,7 +1232,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/products",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/products",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1277,7 +1278,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/add_product",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/add_product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1307,7 +1308,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/edit_product",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/edit_product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1337,7 +1338,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/update_product",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/update_product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1367,7 +1368,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/delete_product",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/delete_product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1397,7 +1398,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/delete_job",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/delete_job",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1427,7 +1428,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/delete_product_image",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/delete_product_image",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1457,7 +1458,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/save_employer_rating",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/save_employer_rating",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1487,7 +1488,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/chatUser_list",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/chatUser_list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1517,7 +1518,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/showmessage_count",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/showmessage_count",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1547,7 +1548,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/showmessageCountEach",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/showmessageCountEach",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1577,7 +1578,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/afrebay/web/api/showmessage_list",
+					"raw": "https://prod-elb-1830820535.us-east-2.elb.amazonaws.com/api/showmessage_list",
 					"protocol": "http",
 					"host": [
 						"localhost"
