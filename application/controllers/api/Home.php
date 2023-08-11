@@ -14,7 +14,8 @@ class Home extends MY_Controller {
 
 	public function home_list() {
 		try {
-			$data['get_post'] = $this->Crud_model->GetData('postjob', 'id,post_title,description,user_id', "is_delete='0'", '', '(id)desc', '6');
+			//$data['get_post'] = $this->Crud_model->GetData('postjob', 'id,post_title,description,user_id', "is_delete='0'", '', '(id)desc', '6');
+			$data['get_post'] = $this->db->query("SELECT postjob.id,postjob.post_title,postjob.description,postjob.user_id, users.companyname as company_name, users.profilePic as user_image FROM postjob JOIN users ON postjob.user_id = users.userId WHERE postjob.is_delete = '0' ORDER BY postjob.id DESC LIMIT 0,6")->result_array();
 			$data['countries']=$this->Crud_model->GetData('countries',"","");
 			$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
 			$data['get_users'] = $this->Users_model->get_users();
