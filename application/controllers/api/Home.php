@@ -18,7 +18,7 @@ class Home extends MY_Controller {
 			$data['get_post'] = $this->db->query("SELECT postjob.id,postjob.post_title,postjob.description,postjob.user_id, users.companyname as company_name, users.profilePic as user_image FROM postjob JOIN users ON postjob.user_id = users.userId WHERE postjob.is_delete = '0' ORDER BY postjob.id DESC LIMIT 0,6")->result_array();
 			$data['countries']=$this->Crud_model->GetData('countries',"","");
 			$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
-			$data['get_users'] = $this->Users_model->get_users();
+			$data['get_users'] = $this->db->query("SELECT * FROM users WHERE userType = '2'")->result();
 			$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
 			$data['get_company'] = $this->Crud_model->GetData('company_logo', '', "status='Active'", '', '', '');
 			$data['get_career'] = $this->Crud_model->GetData('career_tips', '', "status='Active'", '', '', '3');

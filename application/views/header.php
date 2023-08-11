@@ -32,28 +32,28 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <style>
     .completeSub {display: none; text-align: center; margin-top: 20px; color: #fa5a1f; font-size: 20px;}
     #completeSub {
-        position: relative;
-        display: inline-block;
-    }
+  position: relative;
+  display: inline-block;
+}
 
-    #completeSub #completeSubtext {
-        visibility: hidden;
-        width: max-content;
-        background-color: white;
-        color: #000;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 10px;
-        position: absolute;
-        z-index: 1;
-        top: 50px;
-        font-size: 13px;
-        right: 0;
-    }
+#completeSub #completeSubtext {
+  visibility: hidden;
+      width: max-content;
+    background-color: white;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    font-size: 13px;
+    right: 0;
+}
 
-    #completeSub:hover #completeSubtext {
-        visibility: visible;
-    }
+#completeSub:hover #completeSubtext {
+  visibility: visible;
+}
 </style>
 <script>
 function completeSub() {
