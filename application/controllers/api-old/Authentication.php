@@ -18,7 +18,6 @@ class Authentication extends CI_Controller {
 			$validate = $this->Crud_model->get_single('users',"email = '".$formdata['email']."'");
 			if(!empty($validate)) {
 				$msg = 'Sorry this member already exist, try with another email.';
-				$response = array('status'=> 'error','result'=> $msg);
 			} else {
 				$data=array(
 					'userType' => $formdata['user_type'],
@@ -67,12 +66,11 @@ class Authentication extends CI_Controller {
 					$mail->Password = "wj8jeml3eu0z";
 					$mail->send();
 					$msg = "We have sent an activation link to your account to continue with the registration process.";
-					$response = array('status'=> 'success','result'=> $msg);
 				} else {
 					$msg = "Something went wrong. Please, try again later.";
-					$response = array('status'=> 'error','result'=> $msg);
 				}
 			}
+			$response = array('status'=> 'success','result'=> $msg);
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error','result'=> $e->getMessage());
 	    }
@@ -90,41 +88,34 @@ class Authentication extends CI_Controller {
                 if($check_user['0']['userType'] == '1') {
     				$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$check_user['0']['userId']."' AND status IN (1,2)");
     				if(empty($check_sub)) {
-						$response = array('status'=> 'success','result'=> $check_user);
-						$response = array_merge($response, array("subscription"=> "0"));
+                        $msg = 'Please subscribe first';
     				} else {
     					$profile_check = $this->db->query("SELECT `firstname`, `lastname`, `email`, `gender`, `address`, `zip`, `short_bio` FROM `users` WHERE userId = '".@$check_user['0']['userId']."'")->result_array();
     					if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['zip']) || empty($profile_check[0]['short_bio'])) {
-                            $response = array('status'=> 'success','result'=> $check_user);
-                            $response = array_merge($response, array("profile"=> "0"));
+                            $msg = 'Please update your profile';
     					} else {
-                            $response = array('status'=> 'success','result'=> $check_user);
-                            $response = array_merge($response, array("profile"=> "1"));
+                            $msg = 'Please update your profile';
                         }
     				}
     			} else if ($check_user['0']['userType'] == '2') {
     				$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$check_user['0']['userId']."' AND status IN (1,2)");
     				if(empty($check_sub)) {
-                        $response = array('status'=> 'success','result'=> $check_user);
-                        $response = array_merge($response, array("subscription"=> "0"));
+                        $msg = 'Please subscribe first';
                     } else {
                     	$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$check_user['0']['userId']."'")->result_array();
                         if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {
-                        	$response = array('status'=> 'success','result'=> $check_user);
-                        	$response = array_merge($response, array("profile"=> "0"));
+                        	$msg = 'Please update your profile';
                     	} else {
-                            $response = array('status'=> 'success','result'=> $check_user);
-                            $response = array_merge($response, array("profile"=> "1"));
+                            $msg = 'Redirecting to dashboard Page';
                     	}
                     }
     			} else {
-                    $response = array('status'=> 'success','result'=> $check_user);
-                    $response = array_merge($response, array("profile"=> "1"));
+                    $msg = 'Redirecting to dashboard Page';
     			}
             } else {
                 $msg = 'Invalid Email Address or Password';
-                $response = array('status'=> 'error','result'=> $msg);
             }
+            $response = array('status'=> 'success', 'result'=> $msg);
         } catch (\Exception $e) {
             $response = array('status'=> 'error', 'result'=> $e->getMessage());
         }
@@ -161,19 +152,16 @@ class Authentication extends CI_Controller {
     					$mail->Password = "wj8jeml3eu0z";
     					$mail->send();
     					$msg = 'Please check your inbox. We have sent you an email to reset your password.';
-    					$response = array('status'=> 'success','result'=> $msg);
     				} catch (Exception $e) {
     					$msg = 'Something went wrong. Please try again later!';
-    					$response = array('status'=> 'error','result'=> $msg);
     				}
              	} else {
        				$msg = 'Invalid Email Id!';
-       				$response = array('status'=> 'error','result'=> $msg);
        			}
     		} else {
 				$msg = 'Please enter a valid email address';
-				$response = array('status'=> 'error','result'=> $msg);
 			}
+        	$response = array('status'=> 'success','result'=> $msg);
         } catch (\Exception $e) {
             $response = array('status'=> 'error','result'=> $e->getMessage());
         }

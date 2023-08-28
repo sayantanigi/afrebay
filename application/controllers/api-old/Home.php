@@ -457,30 +457,4 @@ class Home extends MY_Controller {
 		}
 		echo json_encode($response);
 	}
-
-	public function states_by_country() {
-		try {
-			$formdata = json_decode(file_get_contents('php://input'), true);
-			@$c_name = $formdata['country_name'];
-			$get_cid = $this->db->query("SELECT * FROM countries WHERE name = '".$c_name."'")->result_array();
-			$state_list = $this->db->query("SELECT id, name, country_id FROM states WHERE country_id = '".$get_cid[0]['id']."'")->result_array();
-			$response = array('status'=> 'success', 'result'=> $state_list);
-		} catch (\Exception $e) {
-			$response = array('status'=> 'error', 'result'=> $e->getMessage());
-		}
-		echo json_encode($response);
-	}
-
-	public function cities_by_state() {
-		try {
-			$formdata = json_decode(file_get_contents('php://input'), true);
-			@$s_name = $formdata['state_name'];
-			$get_sid = $this->db->query("SELECT * FROM states WHERE name = '".$s_name."'")->result_array();
-			$cities_list = $this->db->query("SELECT * FROM cities WHERE state_id = '".$get_sid[0]['id']."'")->result_array();
-			$response = array('status'=> 'success', 'result'=> $cities_list);
-		} catch (\Exception $e) {
-			$response = array('status'=> 'error', 'result'=> $e->getMessage());
-		}
-		echo json_encode($response);
-	}
 }

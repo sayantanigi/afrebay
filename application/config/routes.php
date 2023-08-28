@@ -148,6 +148,7 @@ $route['api/search_job'] = 'api/Home/search_job';
 
 $route['api/user_subscription_details'] = "api/User_dashboard/subscription_details";
 $route['api/user_subscription'] = "api/User_dashboard/userSubscription";
+$route['api/getUserSubscriptionDetails'] = "api/User_dashboard/getUserSubscriptionDetails";
 $route['api/user_profile'] = "api/User_dashboard/profile_settings";
 $route['api/update_profile'] = "api/User_dashboard/update_profile";
 $route['api/education_list'] = "api/User_dashboard/education_list";
@@ -162,6 +163,7 @@ $route['api/get_workexperience'] = "api/User_dashboard/get_workexperience";
 $route['api/update_workexperience'] = "api/User_dashboard/update_workexperience";
 $route['api/delete_workexperience'] = "api/User_dashboard/delete_workexperience";
 $route['api/myjob'] = "api/User_dashboard/myjob";
+$route['api/save_postjob'] = "api/User_dashboard/save_postjob";
 $route['api/edit_post_job'] = "api/User_dashboard/edit_post_job";
 $route['api/update_post_job'] = "api/User_dashboard/update_post_job";
 $route['api/save_postbid'] = "api/User_dashboard/save_postbid";

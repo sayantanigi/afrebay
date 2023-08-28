@@ -165,19 +165,6 @@ class User_dashboard extends CI_Controller {
 		echo json_encode($response);
 	}
 
-	public function getUserSubscriptionDetails() {
-		try {
-			$formdata = json_decode(file_get_contents('php://input'), true);
-			$userid = $formdata['userid'];
-			$usersubinfo = $this->db->query("SELECT `employer_subscription`.*, `users`.`firstname`, `users`.`lastname`, `users`.`companyname` FROM `employer_subscription` JOIN users ON `users`.`userId` = `employer_subscription`.`employer_id` WHERE `employer_subscription`.`employer_id` = '".$userid."'")->result_array();
-			$data['usersubinfo'] = $usersubinfo;
-			$response = array('status'=> 'success', 'result'=> $data);
-		} catch(\Exception $e) {
-			$response = array('status'=> 'error','result'=> $e->getMessage());
-		}
-		echo json_encode($response);
-	}
-
 	public function profile_settings() {
 		try {
 			$formdata = json_decode(file_get_contents('php://input'), true);
