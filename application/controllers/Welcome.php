@@ -108,11 +108,11 @@ class Welcome extends CI_Controller {
 	}
 
 	function employer_detail($user_id) {
-		if(empty($_SESSION['afrebay']['userId'])){
+		/*if(empty($_SESSION['afrebay']['userId'])){
 			$type='admin';
 		} else {
 			$type='user';
-		}
+		}*/
 		$userid=base64_decode($user_id);
 		$data['userdata']=$this->Crud_model->get_single('users',"userId='".$userid."'");
 		$data['get_post']=$this->Crud_model->GetData('postjob','',"user_id='".$userid."' AND is_delete = '0'");
@@ -123,11 +123,12 @@ class Welcome extends CI_Controller {
 			'view_count'=>$viewcount,
 		);
 		$this->Crud_model->SaveData('users',$insert_data,"userId='".$userid."'");
-		if($type=='admin'){
+		/*if($type=='admin'){
 			$this->load->view('admin_header',$data);
 		} else {
 			$this->load->view('header');
-		}
+		}*/
+		$this->load->view('header');
 		$this->load->view('frontend/employer_detail',$data);
 		$this->load->view('footer');
 	}
