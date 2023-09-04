@@ -36,6 +36,35 @@ var confirmChangeStatus = 'Are you sure you want to change the status?';
 var userEmailVerification = 'Are you sure you want to verify this user?';
 
 $(document).ready(function() {
+    $("#required_subscription").click(function(){
+        if($('#required_subscription').not(':checked').length){
+            $.confirm({
+                title: 'Confirm!',
+                content: "Are you sure you want to deactivate subscription?",
+                buttons: {
+                    confirm: function () {
+                        var value = $('#required_subscription').val('0');
+                    },
+                    cancel: function () {
+                        location.reload();
+                    },
+                }
+            });
+        } else {
+            $.confirm({
+                title: 'Confirm!',
+                content: "Are you sure you want to activate subscription?",
+                buttons: {
+                    confirm: function () {
+                        var value = $('#required_subscription').val('1');
+                    },
+                    cancel: function () {
+                        location.reload();
+                    },
+                }
+            });
+        }
+    })
     $(".msghide").fadeOut(8000);
     table = $('.example_datatable').DataTable({
         dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -200,6 +229,22 @@ $('.datepicker_date1').datepicker({
     changeYear: true,
     autoclose: true
 });
+
+/*function rSubscription(id) {
+	alert(id);
+	$.confirm({
+	    title: 'Confirm!',
+	    content: "Are you sure you want to change this?",
+	    buttons: {
+	        confirm: function () {
+				var value = $('#required_subscription').val(id);
+			},
+	        cancel: function () {
+	            location.reload();
+	        },
+	    }
+	});
+}*/
 </script>
 
 </body>

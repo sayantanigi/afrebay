@@ -83,8 +83,8 @@ class Setting extends MY_Controller {
         } else {
         	$favicon  = $_POST['old_favicon'];
         }
-
-    	$data = array(
+        
+        $data = array(
 			'website_name' => ucwords($this->input->post('website_name')),
           	'phone' => $this->input->post('phone'),
           	'email' => $this->input->post('email'),
@@ -101,7 +101,9 @@ class Setting extends MY_Controller {
           	'logo' => $logo,
 			'flogo' => $flogo,
           	'favicon' => $favicon,
+            'required_subscription' => $this->input->post('required_subscription'),
       	);
+        //print_r($data); die;
     	$id=$this->input->post('id');
     	$this->Crud_model->SaveData("setting",$data,"id='".$id."'");
     	$this->session->set_flashdata('message', 'Settings has been updated successfully');
