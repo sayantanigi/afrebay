@@ -32,8 +32,13 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                                 <div class="col-lg-6">
                                     <a href="<?= base_url('employer-list')?>" title="Vendors">Vendors</a>
                                     <a href="<?= base_url('workers-list')?>" title="Freelancers">Freelancers</a>
+                                    <?php if($get_setting->required_subscription == '1') { ?>
                                     <a href="<?= base_url('vendor_pricing')?>" title="">Vendors Pricing</a>
                                     <a href="<?= base_url('freelancer_pricing')?>" title="">Freelancers Pricing</a>
+                                    <?php } else { ?>
+                                    <a href="<?= base_url('register')?>" title="">Sign up</a>
+                                    <a href="<?= base_url('login')?>" title="">Login</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

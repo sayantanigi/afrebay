@@ -155,7 +155,7 @@
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>Required Subscription</label>
+															<label>Subscription Required?</label>
 															<label class="switch">
 																<input type="checkbox" id = "required_subscription" name = "required_subscription" <?php if($row->required_subscription == '1') { echo 'checked';}?>>
 																<span class="slider round"></span>
