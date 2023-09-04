@@ -26,8 +26,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*$config['base_url'] = 'https://igiapp.com/greatgigz/';
 $config['admin_url'] = 'https://igiapp.com/greatgigz/admin/';*/
 
-$config['base_url'] = 'http://localhost/afrebay/web/';
-$config['admin_url'] = 'http://localhost/afrebay/web/admin/';
+$config['base_url'] = 'http://localhost/afrebay/';
+$config['admin_url'] = 'http://localhost/afrebay/admin/';
 
 
 /*

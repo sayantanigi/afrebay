@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+error_reporting(0);
 class Jobsbidding extends MY_Controller {
 
     public function __construct() {
@@ -27,6 +27,7 @@ class Jobsbidding extends MY_Controller {
             $no =$_POST['start'];
         }
         $data = array();
+        //print_r($GetData); die();
         foreach ($GetData as $row) {
             //$btn = ''.anchor(admin_url('jobsbidding/view/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>view</span>');
             //$btn .= ' | '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')">Delete</span>';

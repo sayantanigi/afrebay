@@ -89,6 +89,11 @@ class Post_job extends MY_Controller {
 	public function update_post_job($id) {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
+		if(!empty($ipdat->geoplugin_countryName)) {
+			$countryName = $ipdat->geoplugin_countryName;
+		} else {
+			$countryName = '';
+		}
 		$work_id = base64_decode($id);
 		$update_data = $this->Crud_model->get_single('postjob', "id='" . $work_id . "'");
 		//$get_keySkills = $this->Crud_model->GetData('specialist', 'id, specialist_name', "");
@@ -118,7 +123,7 @@ class Post_job extends MY_Controller {
 			'longitude' => $update_data->longitude,
 			'id' => $work_id,
 			'heading' => 'Job Posts',
-			'countryName' => $ipdat->geoplugin_countryName,
+			'countryName' => $countryName,
 		);
 		$header = array('title' => 'Job Posts');
 		$this->load->view('admin/header', $header);

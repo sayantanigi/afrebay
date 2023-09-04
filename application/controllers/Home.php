@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
+error_reporting(0);
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -181,7 +181,6 @@ class Home extends MY_Controller {
 	function freelancer_pricing() {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
-
 		$countryName = $ipdat->geoplugin_countryName;
 		if($countryName == 'Nigeria') {
 			$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Freelancer'";

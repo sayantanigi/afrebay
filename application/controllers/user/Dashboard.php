@@ -931,6 +931,7 @@ class Dashboard extends CI_Controller {
 			$index = rand(0, strlen($characters) - 1);
 			$randomString .= $characters[$index];
 		}
+		;
 		$data = array(
 			'employer_id' => $this->input->post('user_id'),
 			'subscription_id' => $this->input->post('sub_id'),
