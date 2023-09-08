@@ -266,9 +266,9 @@ class Home extends MY_Controller {
 			}
 			$countryName = $formdata['country_name'];
 			if($countryName == 'Nigeria') {
-				$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Vendor'";
+				$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Business'";
 			} else {
-				$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Vendor'";
+				$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Business'";
 			}
 			$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 			$response = array('status'=> 'success', 'result'=> $data);

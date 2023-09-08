@@ -29,7 +29,7 @@
                                     <option value="" disabled >Select Type</option>
                                     <option value="" selected>All</option>
                                     <option value="1">Freelancer</option>
-                                    <option value="2">Vendor subscription</option>
+                                    <option value="2">Business subscription</option>
 
                                 </select>
                             </div>
@@ -136,7 +136,7 @@ $(document).ready(function(){
         if(value == '1') {
             $('.changeName').text('Freelance Name');
         } else if (value == '2') {
-            $('.changeName').text('Vendor Name');
+            $('.changeName').text('Business Name');
         } else {
             $('.changeName').text('Users Name');
         }

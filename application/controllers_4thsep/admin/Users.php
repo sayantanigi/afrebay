@@ -51,7 +51,7 @@ class Users extends MY_Controller {
                 $type='Freelancer';
             }
             elseif($row->userType==2){
-                $type='Vendor';
+                $type='Business';
             }
 
             if($row->email_verified=="1"){

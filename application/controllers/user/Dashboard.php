@@ -217,7 +217,7 @@ class Dashboard extends CI_Controller {
 		if($_SESSION['afrebay']['userType'] == '1') {
 			$uType = 'Freelancer';
 		} else {
-			$uType = 'Vendor';
+			$uType = 'Business';
 		}
 
 		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
@@ -369,7 +369,7 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->SaveData('job_bid', $data);
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
-			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Vendor has approved your bid');
+			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Business has approved your bid');
 			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later.');

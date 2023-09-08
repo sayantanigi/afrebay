@@ -56,7 +56,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12 column Product-Data">
                         <div><h2><?php echo $prod_details[0]['prod_name'];?></h2></div>
-                        <p style="text-align: center;"><span>Vendor:</span>
+                        <p style="text-align: center;"><span>Business:</span>
                             <span>
                                 <?php
                                 $usr_data = $this->db->query("SELECT * FROM users WHERE userId = '".$prod_details[0]['user_id']."'")->result_array();

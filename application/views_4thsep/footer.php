@@ -30,9 +30,9 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         <div class="link_widgets">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="<?= base_url('employer-list')?>" title="Vendors">Vendors</a>
+                                    <a href="<?= base_url('employer-list')?>" title="Businesses">Businesses</a>
                                     <a href="<?= base_url('workers-list')?>" title="Freelancers">Freelancers</a>
-                                    <a href="<?= base_url('vendor_pricing')?>" title="">Vendors Pricing</a>
+                                    <a href="<?= base_url('vendor_pricing')?>" title="">Businesses Pricing</a>
                                     <a href="<?= base_url('freelancer_pricing')?>" title="">Freelancers Pricing</a>
                                 </div>
                             </div>

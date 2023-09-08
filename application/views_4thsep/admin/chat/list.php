@@ -58,7 +58,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Job Title</th>
-                                        <th>Vendor</th>
+                                        <th>Business</th>
                                         <th>Freelancer</th>
                                         <th>Initiated Date</th>
                                         <th>Manage</th>

@@ -40,7 +40,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <select class="form-control" name="userType_id" id="userType_id" onchange="filterByuserType(this.value)" required>
                                 <option value=''>Choose user type</option>
                                 <option value="Freelancer">Freelancer</option>
-                                <option value="Vendor">Vendors</option>
+                                <option value="Business">Business</option>
                             </select>
                         </div>
                     </div> -->

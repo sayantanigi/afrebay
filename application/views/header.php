@@ -249,12 +249,12 @@ OneSignal.push(function() {
                             <li class="menu-item-has-children">
                                 <a href="#" title="">Become a AfreBay Partner</a>
                                 <ul>
-                                    <li><a href="<?= base_url('employer-list')?>" title="">Vendors</a></li>
+                                    <li><a href="<?= base_url('employer-list')?>" title="">Business</a></li>
                                     <li><a href="<?= base_url('workers-list')?>" title="">Freelancers</a></li>
                                 </ul>
                             </li> -->
                             <li class="">
-                                <a href="<?= base_url('employer-list')?>" title="">Vendors</a>
+                                <a href="<?= base_url('employer-list')?>" title="">Businesses</a>
                             </li>
                             <li class="">
                                 <a href="<?= base_url('workers-list')?>" title="">Freelancers</a>

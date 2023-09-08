@@ -86,7 +86,7 @@ class Payment extends MY_Controller {
                 $usertype_name='Freelancer';
             }
             else{
-                $usertype_name='Vendor';
+                $usertype_name='Business';
             }
 
             $nestedData[] = $usertype_name;

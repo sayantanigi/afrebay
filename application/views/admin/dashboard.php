@@ -71,7 +71,7 @@
                                 </span>
                                 <div class="dash-widget-info">
                                     <h3><?= count($total_subscription)?></h3>
-                                    <h6 class="text-dark">Vendors Subscriptions</h6>
+                                    <h6 class="text-dark">Businesses Subscriptions</h6>
                                 </div>
                             </div>
                         </div>

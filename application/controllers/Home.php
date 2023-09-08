@@ -164,9 +164,9 @@ class Home extends MY_Controller {
 
 		$countryName = $ipdat->geoplugin_countryName;
 		if($countryName == 'Nigeria') {
-			$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Vendor'";
+			$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Business'";
 		} else {
-			$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Vendor'";
+			$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Business'";
 		}
 
 		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
@@ -343,7 +343,7 @@ class Home extends MY_Controller {
 	}
 
 	function employer_list() {
-		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Vendors'");
+		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Business'");
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$this->load->view('header');
 		$this->load->view('frontend/employer_list', $data);

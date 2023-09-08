@@ -40,7 +40,7 @@ class User_dashboard extends CI_Controller {
 			if($userType == '1') {
 				$uType = 'Freelancer';
 			} else {
-				$uType = 'Vendor';
+				$uType = 'Business';
 			}
 
 			$subscription_check = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".@$user_id."' AND (status = '1' OR status = '2')")->result_array();
@@ -435,7 +435,7 @@ class User_dashboard extends CI_Controller {
 			$this->Crud_model->SaveData('job_bid', $data);
 			$insert_id = $this->db->insert_id();
 			if(!empty($insert_id)) {
-				$response = array('status'=> 'success', 'result'=> 'Bid Submitted Successfully! You will be notified once the Vendor has approved your bid');
+				$response = array('status'=> 'success', 'result'=> 'Bid Submitted Successfully! You will be notified once the Business has approved your bid');
 			} else {
 				$response = array('status'=> 'error', 'result'=> 'Something went wrong. Please try again later.');
 			}

@@ -501,7 +501,7 @@ Footer-->
       </div>
       <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
         <div class="footer-link">
-          <h5 class="text-dark mb-4">For Vendors</h5>
+          <h5 class="text-dark mb-4">For Businesses</h5>
           <ul class="list-unstyled">
             <li><a href="#">Browse Candidates</a></li>
             <li><a href="#">Browse Categories</a></li>
