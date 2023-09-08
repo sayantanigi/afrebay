@@ -336,7 +336,7 @@ class Home extends MY_Controller {
 		$data['user_detail'] = $this->Users_model->users_detail($cond);
 		$data['user_education'] = $this->Crud_model->GetData('user_education', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
 		$data['user_work'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
-		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Frelancer Details'");
+		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancer Details'");
 		$this->load->view('header');
 		$this->load->view('frontend/worker_profile', $data);
 		$this->load->view('footer');
