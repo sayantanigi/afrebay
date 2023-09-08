@@ -42,10 +42,10 @@ class Users extends MY_Controller {
                 $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i></span>');
             }
             $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-edit mr-1"></i></span>','target=_blank');
-
             // $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>Edit</span>');
-
             $btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;"><i class="fa fa-trash mr-1"></i></span>';
+            $btn .= ' | '.anchor(base_url('admin/uploads/users/resume/'.base64_encode($row->resume)),'<span class="btn btn-sm bg-success-light mr-2"><i class="fa fa-download" style="font-size:24px"></i></span>','target=_blank');
+            //$btn .= ' | '.anchor(base_url('uploads/users/resume/'.$row->resume)),'<span class="btn btn-sm bg-success-light mr-2"><i class="fa fa-download" style="font-size:24px"></i></span>','target=_blank');
             if($row->userType==1)
             {
                 $type='Freelancer';

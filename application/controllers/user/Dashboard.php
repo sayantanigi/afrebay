@@ -121,7 +121,7 @@ class Dashboard extends CI_Controller {
 			} else {
 				$video  = '';
 			}
-		}
+		}*/
 
 		if ($_FILES['resume']['name'] != '') {
 			$src = $_FILES['resume']['tmp_name'];
@@ -139,7 +139,7 @@ class Dashboard extends CI_Controller {
 			} else {
 				$resume  = '';
 			}
-		}*/
+		}
 
 		if(!empty($this->input->post('key_skills'))) {
 			$key_skills = $this->input->post('key_skills');

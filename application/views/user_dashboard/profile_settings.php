@@ -45,9 +45,10 @@ else{
     $container='container';
 }
 // print_r($_SESSION['afrebay']);die;
-
-// echo "test here";die;
 ?>
+<style>
+    .new-pro {width: 50%; float: left;}
+</style>
 <div class="col-md-12 col-sm-12 display-table-cell v-align">
     <div class="user-dashboard Admin_Profile form-design <?php echo $container;  ?> ">
         <form class="form" action="<?php echo base_url('user/Dashboard/update_profile')?>" method="post" id="registrationForm" enctype="multipart/form-data">
@@ -84,6 +85,30 @@ else{
                                     <input type="file" name="profilePic" class="text-center center-block file-upload" />
                                 </div>
                             </div>
+                            <?php if(@$userinfo->userType=='1') { ?>
+                            <div class="new-pro">
+                                <?php
+                                if(!empty($userinfo->resume)) {
+                                    if(!file_exists('uploads/users/resume/'.$userinfo->resume)) {
+                                ?>
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no-resume.jpg')?>" style="width:60px; height: 60px; object-fit: cover;" />
+                                <?php } else { ?>
+                                <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" target = "_blank"><img class="img-circle img-responsive" src="<?php echo base_url('uploads/download.png'); ?>" style="width:60px; height: 60px; object-fit: cover;" /></a>
+                                <?php } } else { ?>
+                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no-resume.jpg')?>" style="width:60px; height: 60px; object-fit: cover;" />
+                                <?php } ?>
+                                <input type="hidden" name="old_image" value="<?=$userinfo->resume ?>">
+                                <input type="hidden" name="id" value="<?=$userinfo->userId  ?>">
+                                <div class="profile-ak">
+                                    <?php if(!empty($userinfo->resume)) { ?>
+                                    <h6>Upload a different Resume</h6>
+                                    <?php } else { ?>
+                                        <h6>Upload your resume</h6>
+                                    <?php } ?>
+                                    <input type="file" name="resume" class="text-center center-block file-upload" />
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
                         <div class="profile-dsd">
                             <div class="tab-content">
