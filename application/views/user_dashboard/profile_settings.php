@@ -93,7 +93,7 @@ else{
                                 ?>
                                 <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no-resume.jpg')?>" style="width:60px; height: 60px; object-fit: cover;" />
                                 <?php } else { ?>
-                                <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" target = "_blank"><img class="img-circle img-responsive" src="<?php echo base_url('uploads/download.png'); ?>" style="width:60px; height: 60px; object-fit: cover;" /></a>
+                                <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" download="<?php echo $userinfo->firstname."_".$userinfo->lastname ."_resume"?>"><img class="img-circle img-responsive" src="<?php echo base_url('uploads/download.png'); ?>" style="width:60px; height: 60px; object-fit: cover;" /></a>
                                 <?php } } else { ?>
                                 <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no-resume.jpg')?>" style="width:60px; height: 60px; object-fit: cover;" />
                                 <?php } ?>
