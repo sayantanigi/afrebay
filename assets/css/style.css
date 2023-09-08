@@ -38251,9 +38251,9 @@ object-fit: cover;
 
    position: relative;
 
-   /* height: auto; */
+   height: auto;
 
-   margin-top: 50px !important;
+/*   margin-top: 50px !important;*/
 
    padding: 15px !important;
 
