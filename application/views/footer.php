@@ -36,8 +36,8 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                                     <a href="<?= base_url('vendor_pricing')?>" title="">Businesses Pricing</a>
                                     <a href="<?= base_url('freelancer_pricing')?>" title="">Freelancers Pricing</a>
                                     <?php } else { ?>
-                                    <a href="<?= base_url('register')?>" title="">Sign up</a>
-                                    <a href="<?= base_url('login')?>" title="">Login</a>
+                                    <a href="<?= base_url('register')?>" title="">Business Sign up</a>
+                                    <a href="<?= base_url('register')?>" title="">Freelancer Sign up</a>
                                     <?php } ?>
                                 </div>
                             </div>
