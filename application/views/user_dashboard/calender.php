@@ -322,7 +322,7 @@ if(!empty($_SESSION['gigwork']['userId']))
 
                                                 <!--<a href="javascript:void(0)" title="">Our Services</a>-->
 
-                                                <a href="<?= base_url('employer-list')?>" title="Employer">Business</a>
+                                                <a href="<?= base_url('employer-list')?>" title="Employer">Vendors</a>
 
                                                <!--  <a href="javascript:void(0)" title="Employees">Employees</a> -->
 

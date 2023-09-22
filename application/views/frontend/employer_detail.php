@@ -211,7 +211,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 column">
                                     <div class="Product_Details">
+                                        <?php if(!empty($prod_list)) { ?>
                                         <h3 class="mt-5 mb-5">Products</h3>
+                                        <?php } ?>
                                         <div class="row">
                                             <?php if(!empty($prod_list)) {
                                                 $i = 1;

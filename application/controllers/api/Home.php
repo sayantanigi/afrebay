@@ -266,9 +266,9 @@ class Home extends MY_Controller {
 			}
 			$countryName = $formdata['country_name'];
 			if($countryName == 'Nigeria') {
-				$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Business'";
+				$cond = " WHERE subscription_country = 'Nigeria' AND subscription_user_type = 'Vendor'";
 			} else {
-				$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Business'";
+				$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Vendor'";
 			}
 			$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 			$response = array('status'=> 'success', 'result'=> $data);
@@ -343,7 +343,7 @@ class Home extends MY_Controller {
 				$mail = new PHPMailer(true);
 				$mail->CharSet = 'UTF-8';
 				$mail->SetFrom($formdata['email']);
-				$mail->AddAddress('sayantan@goigi.in', 'sayantan bhakta');
+				$mail->AddAddress('admin@afrebay.com', 'Afrebay');
 				$mail->IsHTML(true);
 				$mail->Subject = $subject;
 				$mail->Body = $message;
@@ -478,6 +478,38 @@ class Home extends MY_Controller {
 			$get_sid = $this->db->query("SELECT * FROM states WHERE name = '".$s_name."'")->result_array();
 			$cities_list = $this->db->query("SELECT * FROM cities WHERE state_id = '".$get_sid[0]['id']."'")->result_array();
 			$response = array('status'=> 'success', 'result'=> $cities_list);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error', 'result'=> $e->getMessage());
+		}
+		echo json_encode($response);
+	}
+
+	public function categoryList() {
+		try {
+			$get_catList = $this->db->query("SELECT id, category_name FROM category WHERE status = 'Active'")->result_array();
+			$response = array('status'=> 'success', 'result'=> $get_catList);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error', 'result'=> $e->getMessage());
+		}
+		echo json_encode($response);
+	}
+
+	public function subcategory_by_category() {
+		try {
+			$formdata = json_decode(file_get_contents('php://input'), true);
+			@$id = $formdata['id'];
+			$get_subcatList = $this->db->query("SELECT id, sub_category_name FROM sub_category WHERE category_id = '".$id."' AND status = 'Active'")->result_array();
+			$response = array('status'=> 'success', 'result'=> $get_subcatList);
+		} catch (\Exception $e) {
+			$response = array('status'=> 'error', 'result'=> $e->getMessage());
+		}
+		echo json_encode($response);
+	}
+
+	public function getKeySkills() {
+		try {
+			$getKeySkills = $this->db->query("SELECT id, specialist_name FROM specialist WHERE status = 'Active'")->result_array();
+			$response = array('status'=> 'success', 'result'=> $getKeySkills);
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());
 		}

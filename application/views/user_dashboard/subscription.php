@@ -91,7 +91,6 @@
                                                         </tr>
                                                         <tr class="plan-active">
                                                             <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
-                                                            <?php if(!empty($row->invoice_pdf)) { ?>
                                                             <td class="btn-option">
                                                             <table class="plan-active-table">
                                                                 <tr>
@@ -99,7 +98,6 @@
                                                                 </tr>
                                                             </table>
                                                             </td>
-                                                            <?php } ?>
                                                         </tr>
                                                         <!-- <tr>
                                                             <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>

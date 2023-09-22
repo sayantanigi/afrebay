@@ -60,7 +60,7 @@
                                     <option value="">Select Page Name Page</option>
                                     <option value="Home Top">Home Top Page</option>
                                     <option value="Home Middle">Home Middle Page</option>
-                                    <option value="Business">Business Page</option>
+                                    <option value="Businesses">Businesses Page</option>
                                     <option value="Freelancers">Freelancers Page</option>
                                     <option value="Our Jobs">Our Jobs Page</option>
                                     <option value="Pricing">Pricing Page</option>
@@ -73,7 +73,7 @@
                                     <option value="Login">Login Page</option>
                                     <option value="Post Jobs">Post Jobs Page</option>
                                     <option value="Business Details">Business Details Page</option>
-                                    <option value="Freelancer Details">Freelancer Details Page</option>
+                                    <option value="Frelancer Details">Frelancer Details Page</option>
                                     <option value="Post Job Details">Post Job Details Page</option>
                                 </select>
                             </div>
@@ -120,7 +120,7 @@
                                     <option value="">Select Page Name Page</option>
                                     <option value="Home Top">Home Top Page</option>
                                     <option value="Home Middle">Home Middle Page</option>
-                                    <option value="Business">Business Page</option>
+                                    <option value="Businesses">Businesses Page</option>
                                     <option value="Freelancers">Freelancers Page</option>
                                     <option value="Our Jobs">Our Jobs Page</option>
                                     <option value="Pricing">Pricing Page</option>
@@ -133,7 +133,7 @@
                                     <option value="Login">Login Page</option>
                                     <option value="Post Jobs">Post Jobs Page</option>
                                     <option value="Business Details">Business Details Page</option>
-                                    <option value="Freelancer Details">Freelancer Details Page</option>
+                                    <option value="Frelancer Details">Frelancer Details Page</option>
                                     <option value="Post Job Details">Post Job Details Page</option>
                                 </select>
                             </div>

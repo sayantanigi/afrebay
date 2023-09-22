@@ -35,10 +35,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-12 col-sm-12 SignUp_Left">
                                     <h3>Sign Up</h3>
-                                    <span>Let's create your account! Choose to sign up as either a Freelancer or a Business.</span>
+                                    <span>Let's create your account! Choose to sign up as either a Freelancer or a Vendor.</span>
                                     <div class="select-user">
                                         <span class="user-tab active" user_type="1" onclick="get_value(1)">Freelancer</span>
-                                        <span class="user-tab" user_type="2" onclick="get_value(2)">Business</span>
+                                        <span class="user-tab" user_type="2" onclick="get_value(2)">Vendor</span>
                                     </div>
                                     <div class="error" id="err_usertype"></div>
                                 </div>

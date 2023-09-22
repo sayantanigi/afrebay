@@ -1,6 +1,6 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+error_reporting(0);
 class Post_job_model extends My_Model {
     var $column_order = array(null,'postjob.post_title','category.category_name','postjob.duration','postjob.charges',null); //set column field database for datatable orderable
     var $order = array('postjob.id' => 'DESC');
@@ -238,6 +238,7 @@ class Post_job_model extends My_Model {
         if($data->num_rows() > 0) {
             foreach($data->result_array() as $row) {
                 $get_users=$this->Crud_model->get_single('users',"userId='".$row['user_id']."'");
+                //print_r($get_users);
                 if($get_users->userType == 1){
                     $name = $get_users->firstname.' '.$get_users->lastname;
                 } else {

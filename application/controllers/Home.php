@@ -29,6 +29,11 @@ class Home extends MY_Controller {
 		$this->load->view('footer');
 	}
 
+	public function addSubscription_id() {
+		$subscription_id = $this->input->post('subscription_id');
+		$subscription_id = $this->db->query("UPDATE users set onesignal_notification = '".@$subscription_id."' WHERE userId = '".@$_SESSION['afrebay']['userId']."'");
+	}
+
 	public function signup() {
 		$data['get_category'] = $this->Crud_model->GetData('category');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Sign Up'");
@@ -83,8 +88,7 @@ class Home extends MY_Controller {
 				//Server settings
 				$mail->CharSet = 'UTF-8';
 				$mail->SetFrom($_POST['email']);
-				$mail->AddAddress('no-reply@goigi.com', 'Afrebay');
-				//$mail->AddAddress('sayantan@goigi.in', 'sayantan bhakta');
+				$mail->AddAddress('admin@afrebay.com', 'Afrebay');
 				$mail->IsHTML(true);
 				$mail->Subject = $subject;
 				$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
@@ -336,14 +340,14 @@ class Home extends MY_Controller {
 		$data['user_detail'] = $this->Users_model->users_detail($cond);
 		$data['user_education'] = $this->Crud_model->GetData('user_education', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
 		$data['user_work'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
-		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancer Details'");
+		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Frelancer Details'");
 		$this->load->view('header');
 		$this->load->view('frontend/worker_profile', $data);
 		$this->load->view('footer');
 	}
 
 	function employer_list() {
-		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Business'");
+		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Businesses'");
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$this->load->view('header');
 		$this->load->view('frontend/employer_list', $data);
@@ -428,7 +432,7 @@ class Home extends MY_Controller {
 			try {
 				//Server settings
 				$mail->CharSet = 'UTF-8';
-				$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+				$mail->SetFrom('admin@afrebay.com', 'Afrebay');
 				$mail->AddAddress($_POST['email']);
 				$mail->IsHTML(true);
 				$mail->Subject = $subject;

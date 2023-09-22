@@ -12,7 +12,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>Business Plan</h3>
+                        <h3>Businesses Plan</h3>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <select class="form-control" name="userType_id" id="userType_id" onchange="filterByuserType(this.value)" required>
                                 <option value=''>Choose user type</option>
                                 <option value="Freelancer">Freelancer</option>
-                                <option value="Business">Businesses</option>
+                                <option value="Vendor">Vendors</option>
                             </select>
                         </div>
                     </div> -->

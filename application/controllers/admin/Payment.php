@@ -23,29 +23,11 @@ class Payment extends MY_Controller {
 
         $cond = "1=1";
 	    $specialist = $_POST['SearchData6'];
-        // echo $specialist;die;
-        // $from_date = $_POST['SearchData5'];
-        //print_r($from_date); exit;
-        // $to_date = $_POST['SearchData7'];
-
-		if($specialist!='') {
+        if($specialist!='') {
             $cond .=" and users.userType  = '".$specialist."' ";
         }
 
-        // if($from_date!='') {
-        //     $cond .=" and specialist.created_date  >= '".date('Y-m-d',strtotime($from_date))."' ";
-        // }
-
-        // if($to_date!='') {
-        //     $cond .=" and specialist.created_date  <= '".date('Y-m-d',strtotime($to_date))."' ";
-        // }
-
-
-
-
-
         $GetData = $this->Payment_model->get_datatables($cond);
-        // $GetData = $this->Payment_model->get_datatables();
         if(empty($_POST['start'])) {
             $no=0;
         } else {

@@ -138,7 +138,7 @@ class User_dashboard extends CI_Controller {
 					$mail = new PHPMailer(true);
 					//Server settings
 					$mail->CharSet = 'UTF-8';
-					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+					$mail->SetFrom('admin@afrebay.com', 'Afrebay');
 					$mail->AddAddress($userEmail);
 					$mail->IsHTML(true);
 					$mail->Subject = $subject;
@@ -270,7 +270,7 @@ class User_dashboard extends CI_Controller {
 			if(!empty($education_list)) {
 				$response = array('status'=> 'success','result'=> $education_list);
 			} else {
-				$response = array('status'=> 'success','result'=> 'No Data Found');
+				$response = array('status'=> 'error','result'=> 'No Data Found');
 			}
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error','result'=> $e->getMessage());
@@ -349,7 +349,7 @@ class User_dashboard extends CI_Controller {
 			if(!empty($workexperience_list)) {
 				$response = array('status'=> 'success','result'=> $workexperience_list);
 			} else {
-				$response = array('status'=> 'success','result'=> 'No Data Found');
+				$response = array('status'=> 'error','result'=> 'No Data Found');
 			}
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error','result'=> $e->getMessage());
@@ -435,7 +435,7 @@ class User_dashboard extends CI_Controller {
 			$this->Crud_model->SaveData('job_bid', $data);
 			$insert_id = $this->db->insert_id();
 			if(!empty($insert_id)) {
-				$response = array('status'=> 'success', 'result'=> 'Bid Submitted Successfully! You will be notified once the Business has approved your bid');
+				$response = array('status'=> 'success', 'result'=> 'Bid Submitted Successfully! You will be notified once the Vendor has approved your bid');
 			} else {
 				$response = array('status'=> 'error', 'result'=> 'Something went wrong. Please try again later.');
 			}
@@ -459,7 +459,7 @@ class User_dashboard extends CI_Controller {
 			if(!empty($get_postjob)) {
 				$response = array('status'=> 'success', 'result'=> $get_postjob);
 			} else {
-				$response = array('status'=> 'success', 'result'=> 'No Data Found');
+				$response = array('status'=> 'error', 'result'=> 'No Data Found');
 			}
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());
@@ -475,7 +475,7 @@ class User_dashboard extends CI_Controller {
 			if($delete_prod > 0){
 				$response = array('status'=> 'success','result'=> 'Job deleted successfully');
 			} else {
-				$response = array('status'=> 'success','result'=> 'Something went wrong. Please try again later');
+				$response = array('status'=> 'error','result'=> 'Something went wrong. Please try again later');
 			}
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error','result'=> $e->getMessage());
@@ -491,7 +491,7 @@ class User_dashboard extends CI_Controller {
 			if(!empty($get_postjob)) {
 				$response = array('status'=> 'success', 'result'=> $get_postjob);
 			} else {
-				$response = array('status'=> 'success', 'result'=> 'No data found');
+				$response = array('status'=> 'error', 'result'=> 'No data found');
 			}
 		} catch(\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());
@@ -668,7 +668,7 @@ class User_dashboard extends CI_Controller {
 				}
 				$response = array('status'=> 'success', 'result'=> $productList);
 			} else {
-				$response = array('status'=> 'success', 'result'=> 'No data found');
+				$response = array('status'=> 'error', 'result'=> 'No data found');
 			}
 		} catch(\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());
@@ -746,7 +746,7 @@ class User_dashboard extends CI_Controller {
 				}
 				$response = array('status'=> 'success', 'result'=> $productList);
 			} else {
-				$response = array('status'=> 'success', 'result'=> 'No data found');
+				$response = array('status'=> 'error', 'result'=> 'No data found');
 			}
 		} catch(\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());
@@ -914,10 +914,10 @@ class User_dashboard extends CI_Controller {
 			if(!empty($get_data)){
 				$response = array('status'=> 'success', 'result'=> $get_data);
 			} else {
-				$response = array('status'=> 'success', 'result'=> 'No Message');
+				$response = array('status'=> 'error', 'result'=> 'No Message');
 			}
 		} catch (\Exception $e) {
-
+			$response = array('status'=> 'error', 'result'=> $e->getMessage());
 		}
 		echo json_encode($response);
 	}

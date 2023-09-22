@@ -122,7 +122,7 @@ OneSignal.push(function() {
         console.log("Push notifications are not supported.");
     }
 });
-</script> -->
+</script>
 
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
 <script>
@@ -136,6 +136,55 @@ OneSignal.push(function() {
       },
     });
   });
+</script> -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+        appId: "3730b45f-709e-49b5-b77a-defdd7fe63b4",
+        safari_web_id: "web.onesignal.auto.45da02f8-0e2a-491b-9d85-c6fbaf55a283",
+        notifyButton: {
+          enable: true,
+        },
+        promptOptions: {
+            slidedown: {
+                prompts: [{
+                    type: "push",
+                    autoPrompt: true,
+                    text: {
+                        acceptButton: "Ok",
+                        cancelButton: "No Thanks",
+                        actionMessage: "We would like to show you notifications for the updates and latest news",
+                        confirmMessage: "Thank You!",
+                    },
+                    delay: {
+                        pageViews: 1,
+                        timeDelay: 20
+                    },
+                }]
+            }
+        }
+    });
+    OneSignal.push(function()  {
+        OneSignal.Notifications.addEventListener('permissionChange', function (isSubscribed) {
+        //let isSubscribed = await OneSignal.Notifications.permission
+        //console.log("The user's subscription state is now:",isSubscribed);
+        //alert();
+        if(!isSubscribed) return;
+        OneSignal.push(async function() {
+            //alert();
+            let url = "<?php base_url('Home/addSubscription_id')?>";
+            let formData = new FormData();
+            formData.append("subscription_id", OneSignal.User.PushSubscription.id);
+            let response = await fetch(url, {
+                method: "POST",
+                body: formData
+            })
+        });
+    });
+    })
+});
 </script>
 </head>
 <body>

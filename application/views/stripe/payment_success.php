@@ -96,7 +96,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 try {
                                     //Server settings
                                     $mail->CharSet = 'UTF-8';
-                                    $mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+                                    $mail->SetFrom('admin@afrebay.com', 'Afrebay');
                                     $mail->AddAddress($userDetails[0]['email']);
                                     $mail->IsHTML(true);
                                     $mail->Subject = $subject;

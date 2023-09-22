@@ -54,7 +54,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading light">
-                        <h2>Reviews submitted by our business</h2>
+                        <h2>Reviews submitted by our vendors</h2>
                         <span>What other people thought about the service provided by Afrebay</span>
                     </div>
                     <div class="reviews-sec" id="reviews-carousel">

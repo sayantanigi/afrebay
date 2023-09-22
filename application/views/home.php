@@ -263,7 +263,7 @@
 
                         <h2>Our Services</h2>
 
-                        <span>The marketplace for the most eligible freelancers and businesses. <br> Find the latest jobs in the industry globally.</span>
+                        <span>The marketplace for the most eligible freelancers and business. <br> Find the latest jobs in the industry globally.</span>
 
                     </div>
 
