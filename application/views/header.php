@@ -6,8 +6,12 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?php if($this->uri->segment(1) == 'postdetail') { ?>
+    <title><?php echo $post_data->post_title?> - <?php echo $get_setting->website_name?></title>
+    <?php } else { ?>
     <title><?php echo $title?> - <?php echo $get_setting->website_name?></title>
-    <meta name="description" content="<?php echo $description?>">
+    <?php } ?>
+    <meta name="description" content="<?php echo @$description?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<?=base_url(); ?>uploads/logo/<?= $get_setting->favicon?>" />
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/css/bootstrap-grid.css" />
