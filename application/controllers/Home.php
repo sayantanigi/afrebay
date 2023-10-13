@@ -33,7 +33,8 @@ class Home extends MY_Controller {
 		$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Home Top'");
 		$data['get_banner_middle'] = $this->Crud_model->get_single('banner', "page_name='Home Middle'");
-		$data['title'] = 'Home';
+		$data['title'] = 'Find Jobs, Employment & Career Opportunities in USA';
+		$data['description'] = 'Discover US job opportunities with our nationwide employer network. We connect job seekers with top US employers. Find your dream job in the USA today!';
 		$this->load->view('header', $data);
 		$this->load->view('home', $data);
 		$this->load->view('footer');
@@ -48,6 +49,7 @@ class Home extends MY_Controller {
 		$data['get_category'] = $this->Crud_model->GetData('category');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Sign Up'");
 		$data['title'] = 'Registration';
+		$data['description'] = 'Unlock a world of possibilities – Register with Afrebay today! Join our vibrant community, access exclusive benefits, and take the first step towards a brighter future. Sign up now!';
 		$this->load->view('header', $data);
 		$this->load->view('register', $data);
 		$this->load->view('footer');
@@ -67,6 +69,7 @@ class Home extends MY_Controller {
 		$data['get_banner_middle'] = $this->Crud_model->get_single('banner', "page_name='About Us Middle'");
 		$data['get_employer'] = $this->Crud_model->GetData('users', '', "userType='2'", '', '(userId)desc', '4');
 		$data['title'] = 'About Us';
+		$data['description'] = 'Discover Our Story - Your Trusted Recruitment Partner | Welcome to Afrebay, where expertise meets opportunity. Explore our \'About Us\' page now!';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/about_us', $data);
 		$this->load->view('footer');
@@ -76,6 +79,7 @@ class Home extends MY_Controller {
 		$data['get_data'] = $this->Crud_model->get_single('setting');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Contact Us'");
 		$data['title'] = 'Contact Us';
+		$data['description'] = 'Connect with our dedicated team at Afrebay- Your Bridge to career opportunities. Contact us today to start your journey toward a brighter future. Our experts are here to guide you in finding your dream job.';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/contact_us', $data);
 		$this->load->view('footer');
@@ -134,6 +138,7 @@ class Home extends MY_Controller {
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='3'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Privacy policy'");
 		$data['title'] = 'Privacy Policy';
+		$data['description'] = 'Discover how our recruitment company prioritizes your data security and privacy. Read our comprehensive privacy policy to understand how we safeguard your personal information throughout the hiring process. Your trust matters to us.';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/privacy_policy', $data);
 		$this->load->view('footer');
@@ -143,6 +148,7 @@ class Home extends MY_Controller {
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='1'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Term and conditions'");
 		$data['title'] = 'Term and Conditions';
+		$data['description'] = 'Discover our recruitment company\'s terms and conditions - Your guide to a successful partnership. Learn about our policies, expectations, and commitments. Join us in shaping the future of your career!';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/term_and_conditions', $data);
 		$this->load->view('footer');
@@ -300,6 +306,7 @@ class Home extends MY_Controller {
 		$data['get_specialist'] = $this->Crud_model->GetData('specialist');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancers'");
 		$data['title'] = 'List of Freelancers';
+		$data['description'] = 'Explore our dedicated team of skilled professionals! Get to know the backbone of our company with our comprehensive workers list. Discover the talent driving our success and innovation.';
 		$this->load->view('header',$data);
 		$this->load->view('frontend/workers_list', $data);
 		$this->load->view('footer');
@@ -371,6 +378,7 @@ class Home extends MY_Controller {
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Businesses'");
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['title'] = 'List of Businesses';
+		$data['description'] = 'Discover the Top Employers at Afrebay – Where Exceptional Talent Thrives! Explore our talented team, job opportunities, and learn why we\'re the ideal place for your career.';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/employer_list', $data);
 		$this->load->view('footer');

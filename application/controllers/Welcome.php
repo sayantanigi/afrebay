@@ -137,7 +137,8 @@ class Welcome extends CI_Controller {
 	function product_detail($id) {
 		$prod_id = base64_decode($id);
 		$data['prod_details']=$this->db->query("SELECT * FROM user_product WHERE status = 1 AND is_delete = 1 AND id='".$prod_id."'")->result_array();
-		$this->load->view('header');
+		$data['title'] = 'Product Details';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/product_detail', $data);
 		$this->load->view('footer');
 	}

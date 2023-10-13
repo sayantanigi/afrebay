@@ -199,7 +199,8 @@ class Login extends CI_Controller {
 	}
 
     function forgot_password() {
-   	   	$this->load->view('header');
+		$data['title'] = 'Forgot Password';
+   	   	$this->load->view('header', $data);
 		$this->load->view('forgot_password');
 		$this->load->view('footer');
    	}
