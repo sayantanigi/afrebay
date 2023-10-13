@@ -22,6 +22,8 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 ">
     <?php } else if ($this->uri->segment(1) == 'productdetail') { ?>
     <meta name="description" content="<?php echo $prod_details[0]['prod_description']; ?>">
+    <?php } else if ($this->uri->segment(1) == 'ourjobs') { ?>
+    <meta name="description" content="Your Bridge to career opportunities. Contact us today to start your journey toward a brighter future. Our experts are here to guide you in finding your dream job">
     <?php } else { ?>
     <meta name="description" content="<?php echo @$description?>">
     <?php } ?>
