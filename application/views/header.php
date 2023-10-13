@@ -7,11 +7,24 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php if($this->uri->segment(1) == 'postdetail') { ?>
-    <title><?php echo $post_data->post_title?> - <?php echo $get_setting->website_name?></title>
+    <title><?php echo @$post_data->post_title?> - <?php echo @$get_setting->website_name?></title>
     <?php } else { ?>
-    <title><?php echo $title?> - <?php echo $get_setting->website_name?></title>
+    <title><?php echo $title?> - <?php echo @$get_setting->website_name?></title>
     <?php } ?>
+    <?php if($this->uri->segment(1) == 'employerdetail') { ?>
+    <meta name="description" content="<?php echo @$userdata->short_bio?>">
+    <?php } else if($this->uri->segment(1) == 'worker-detail') { ?>
+    <meta name="description" content="<?php echo @$user_detail->short_bio?>">
+    <?php } else if($this->uri->segment(1) == 'postdetail') { ?>
+    <meta name="description" content="<?php echo @$post_data->description?>">
+    <?php } else if($this->uri->segment(1) == 'about-us') { ?>
+    <meta name="description" content="Afrebay embarked on its transformative journey in 2013 with an unwavering commitment to bridging the gap in the African and American workforce and trade economies. Rooted in the belief that collaboration knows no boundaries, we've tirelessly worked to create a platform that fosters connections, empowers entrepreneurs and businesses, and opens doors to a world of possibilities.
+">
+    <?php } else if ($this->uri->segment(1) == 'productdetail') { ?>
+    <meta name="description" content="<?php echo $prod_details[0]['prod_description']; ?>">
+    <?php } else { ?>
     <meta name="description" content="<?php echo @$description?>">
+    <?php } ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<?=base_url(); ?>uploads/logo/<?= $get_setting->favicon?>" />
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/css/bootstrap-grid.css" />
