@@ -173,9 +173,7 @@ else{
                                             </div>
                                             <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <?php if(@$userinfo->userType=='1') { ?>
-
-
-                                            <div class="col-lg-6 key-skill">
+                                            <div class="col-lg-12 key-skill">
                                                 <span class="pf-title1">Skill Set</span>
                                                 <div class="pf-field">
                                                     <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
@@ -204,9 +202,9 @@ else{
                                                 </label>
                                                 <input type="text" class="form-control" name="zip" id="zip" placeholder="Zip Code" value="<?php echo @$userinfo->zip;?>" onkeypress="only_number(event)" maxlength="6" />
                                             </div>
-                                            <!-- <div class="col-lg-6">
+                                            <div class="col-lg-6">
                                                 <label for="last_name">
-                                                    <h4>Resume upload</h4>
+                                                    <h4>Resume upload <span style="font-weight: 500; font-size: 13px !important;">(Please upload '.doc, .docx, .pdf' only)</span></h4>
                                                 </label>
                                                 <input type="file" class="form-control" name="resume" id="resume" />
                                                 <br>
@@ -217,12 +215,13 @@ else{
                                                 <?php } else{?>
                                                 <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" />
                                                     <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:40px; color:red;"></i>
-                                                    <span><?php if(strlen($userinfo->resume)>30){ echo substr($userinfo->resume, 0,30);}else{ echo $userinfo->resume; }?></span>
+                                                    <!-- <span><?php //if(strlen($userinfo->resume)>30){ echo substr($userinfo->resume, 0,30);}else{ echo $userinfo->resume; }?></span> -->
+                                                    <span><?php echo $userinfo->resume; ?></span>
                                                 </a>
                                                 <input type="hidden" name="old_resume" value="<?= $userinfo->resume ?>">
-                                                <?php } }else { ?>
-                                                <?php }?>
-                                            </div> -->
+                                                <?php } } else { ?>
+                                                <?php } ?>
+                                            </div>
                                             <!-- <div class="col-lg-6">
                                                 <label for="last_name">
                                                     <h4>Additional Images</h4>

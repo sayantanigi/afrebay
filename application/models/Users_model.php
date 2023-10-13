@@ -117,8 +117,9 @@ class Users_model extends My_Model {
     }*/
 
     function get_users() {
-        // $query = $this->db->query("SELECT users.*, employer_subscription.*, rt.worker_id, AVG(rt.rating) as rate FROM users LEFT JOIN employer_subscription ON employer_subscription.employer_id = users.userId LEFT JOIN employer_rating rt ON rt.worker_id=users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' GROUP BY rt.worker_id ORDER BY users.userId DESC");
-        $query = $this->db->query("SELECT users.*, employer_subscription.* FROM users JOIN employer_subscription ON employer_subscription.employer_id = users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC");
+        //$query = $this->db->query("SELECT users.*, employer_subscription.*, rt.worker_id, AVG(rt.rating) as rate FROM users LEFT JOIN employer_subscription ON employer_subscription.employer_id = users.userId LEFT JOIN employer_rating rt ON rt.worker_id=users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' GROUP BY rt.worker_id ORDER BY users.userId DESC");
+        $query = $this->db->query("SELECT users.*, employer_subscription.* FROM users JOIN employer_subscription ON employer_subscription.employer_id = users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC limit 8");
+        //$query = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC limit 8");
         return $query->result();
     }
 
@@ -165,7 +166,13 @@ class Users_model extends My_Model {
                 } else {
                     $desc= $row['short_bio'];
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3> <span>'.$row['category_name'].'</span> <p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.strip_tags($desc).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list">
+                                <div class="emply-resume-list-block">
+                                    <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3> <span>'.$row['category_name'].'</span> <p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.strip_tags($desc).'</p> </div>
+                                    <div class="shortlists" style="width:50px;"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div>
+                                    <div class="Profile_View_Button"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile</a> </div>
+                                </div>
+                            </div>';
             }
         } else {
             $output .= ' <div class="emply-resume-list">
@@ -281,7 +288,13 @@ class Users_model extends My_Model {
                 } else {
                     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Posts : '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list">                
+                                <div class="emply-resume-list-block">
+                                    <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Posts : '.count($get_post).'</p> </div>
+                                    <div class="shortlists" style="width:50px;"> <a href="'.base_url('employerdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div>
+                                    <div class="Profile_View_Button"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile</a> </div>
+                                </div>
+                            </div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
@@ -324,7 +337,13 @@ class Users_model extends My_Model {
                 } else {
                     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Bids : '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list">
+                                <div class="emply-resume-list-block">
+                                    <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Bids : '.count($get_post).'</p> </div>
+                                    <div class="shortlists" style="width:50px;"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div>
+                                    <div class="Profile_View_Button"> <a href="'.base_url('worker-detail/'.base64_encode($row['userId'])).'" title="">View Profile</a> </div>
+                                </div>
+                            </div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
@@ -361,3 +380,4 @@ class Users_model extends My_Model {
         return $data;
     }
 }
+

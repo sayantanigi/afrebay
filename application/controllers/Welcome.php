@@ -128,7 +128,8 @@ class Welcome extends CI_Controller {
 		} else {
 			$this->load->view('header');
 		}*/
-		$this->load->view('header');
+		$data['title'] = 'Business Details';
+		$this->load->view('header',$data);
 		$this->load->view('frontend/employer_detail',$data);
 		$this->load->view('footer');
 	}

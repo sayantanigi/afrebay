@@ -163,5 +163,16 @@ $(document).ready(function () {
         filter_data(1);
     });
 });
+$(window).load(function(){
+    $(window).resize(function() {
+        if (window.innerWidth <= 425) { 
+            console.log('inside if');
+            $('.emply-resume-list').addClass('col-6');
+        } else { 
+            console.log('inside else');
+            $('.emply-resume-list').removeClass('col-6');
+        }
+    });
+});
 </script>
 <script type="text/javascript" src="<?= base_url('assets/custom_js/postjob_list.js')?>"></script>

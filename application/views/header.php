@@ -6,7 +6,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $get_setting->website_name?></title>
+    <title><?php echo $title?> - <?php echo $get_setting->website_name?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<?=base_url(); ?>uploads/logo/<?= $get_setting->favicon?>" />
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/css/bootstrap-grid.css" />
@@ -68,75 +68,6 @@ $(function () {
     });
 })
 </script>
-<!-- <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
-<script>
-var OneSignal = window.OneSignal || [];
-OneSignal.push(["init", {
-    appId: "3730b45f-709e-49b5-b77a-defdd7fe63b4",
-    subdomainName: 'ourtutorial',
-    autoRegister: true,
-    promptOptions: {
-        /* These prompt options values configure both the HTTP prompt and the HTTP popup. */
-        /* actionMessage limited to 90 characters */
-        actionMessage: "We'd like to show you notifications for the latest news.",
-        /* acceptButtonText limited to 15 characters */
-        acceptButtonText: "ALLOW",
-        /* cancelButtonText limited to 15 characters */
-        cancelButtonText: "NO THANKS"
-    }
-}]);
-
-function subscribe() {
-    // OneSignal.push(["registerForPushNotifications"]);
-    OneSignal.push(["registerForPushNotifications"]);
-    event.preventDefault();
-}
-
-function unsubscribe(){
-    OneSignal.setSubscription(true);
-}
-
-var OneSignal = OneSignal || [];
-OneSignal.push(function() {
-    /* These examples are all valid */
-    // Occurs when the user's subscription changes to a new value.
-    OneSignal.on('subscriptionChange', function (isSubscribed) {
-        console.log("The user's subscription state is now:", isSubscribed);
-        OneSignal.sendTag("user_id","4444", function(tagsSent) {
-            // Callback called when tags have finished sending
-            console.log("Tags have finished sending!");
-        });
-    });
-    var isPushSupported = OneSignal.isPushNotificationsSupported();
-    if (isPushSupported) {
-        // Push notifications are supported
-        OneSignal.isPushNotificationsEnabled().then(function(isEnabled) {
-            if (isEnabled) {
-                console.log("Push notifications are enabled!");
-            } else {
-                OneSignal.showHttpPrompt();
-                console.log("Push notifications are not enabled yet.");
-            }
-        });
-    } else {
-        console.log("Push notifications are not supported.");
-    }
-});
-</script>
-
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
-<script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "b5807d3e-0518-4cdc-bd66-c21dcd8d37ce",
-      safari_web_id: "web.onesignal.auto.560021c2-877c-448b-9811-f001e7b5ec58",
-      notifyButton: {
-        enable: true,
-      },
-    });
-  });
-</script> -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -160,7 +91,7 @@ OneSignalDeferred.push(function(OneSignal) {
                     },
                     delay: {
                         pageViews: 1,
-                        timeDelay: 20
+                        timeDelay: 5
                     },
                 }]
             }
@@ -186,30 +117,45 @@ OneSignalDeferred.push(function(OneSignal) {
     })
 });
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-63DY10P9S3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-63DY10P9S3');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NMS5S3RF');</script>
+<!-- End Google Tag Manager -->
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMS5S3RF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="page-loading">
         <img src="<?=base_url(); ?>assets/images/loader.gif" alt="" />
     </div>
     <div class="theme-layout" id="scrollup">
-        <div class="responsive-header">
-            <div class="responsive-menubar">
+        <div class="responsive-header" style="background: #ffffff;">
+            <div class="responsive-menubar" style="display: flex; align-items: center; justify-content: space-between;">
                 <div class="res-logo">
                     <a href="<?=base_url(); ?>" title=""><img src="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" alt="" /></a>
                 </div>
                 <div class="menu-resaction">
-                    <div class="res-openmenu">Menu</div>
-                    <div class="res-closemenu">Close</div>
+                    <div class="res-openmenu" style="color: #000;">Menu</div>
+                    <div class="res-closemenu" style="color: #000;">Close</div>
                 </div>
             </div>
-            <div class="responsive-opensec">
-                <div class="btn-extars">
+            <div class="responsive-opensec" style="background: #f67a49; padding: 0;">
+                <div class="btn-extars" style="display: flex; align-items: center; justify-content: space-between; border-color: #fff; padding: 20px 30px;">
                 <?php if(!empty($_SESSION['afrebay']['userId'])){?>
                     <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
                 <?php } else{?>
                     <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
                 <?php } ?>
-                    <ul class="account-btns">
+                    <ul class="account-btns" style="margin: 0;">
                         <?php if(!empty($_SESSION['afrebay']['userId'])){?>
                             <li class="signup-popup">
                                 <a href="<?=base_url(); ?>dashboard"><i class="la la-key"></i> My Account</a>
@@ -227,13 +173,13 @@ OneSignalDeferred.push(function(OneSignal) {
                         <?php } ?>
                     </ul>
                 </div>
-                <form class="res-search">
+                <!-- <form class="res-search">
                     <input type="text" placeholder="Job title, keywords or company name" />
                     <button type="submit"><i class="la la-search"></i></button>
-                </form>
-                <div class="responsivemenu">
+                </form> -->
+                <div class="responsivemenu" style="padding-left: 30px; padding-right: 30px;">
                     <ul>
-                        <li class="menu-item-has-children">
+                        <!-- <li class="menu-item-has-children">
                             <a href="#" title="">Our Services</a>
                             <ul>
                             <?php if(!empty($get_category)){
@@ -250,16 +196,15 @@ OneSignalDeferred.push(function(OneSignal) {
                                 </li>
                             <?php } } ?>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="account-btns">
                             <a href="<?= base_url('ourjobs')?>" title="">Our Jobs</a>
                         </li>
-                        <li class="menu-item-has-children">
-                            <a href="<?= base_url('employer-list')?>" title="">Become a AfreBay Partner</a>
-                            <ul>
-                                <li><a href="#" title="">For Employer</a></li>
-                                <li><a href="<?= base_url('workers-list')?>" title="">For AfreBay Freelancer</a></li>
-                            </ul>
+                        <li class="account-btns">
+                            <a href="<?= base_url('employer-list')?>" title="">Businesses</a>                            
+                        </li>
+                        <li class="account-btns">
+                            <a href="<?= base_url('workers-list')?>" title="">Freelancer</a>                            
                         </li>
                     </ul>
                 </div>

@@ -37,15 +37,17 @@ class Users extends MY_Controller {
         foreach ($GetData as $row)
         {
             if($row->userType == 1) {
-                $btn = ''.anchor(base_url('worker-detail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i></span>');
+                $btn = ''.anchor(base_url('worker-detail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i></span>');
             } else {
-                $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i></span>');
+                $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i></span>');
             }
-            $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-edit mr-1"></i></span>','target=_blank');
-
-            // $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light mr-2"><i class="far fa-eye mr-1"></i>Edit</span>');
-
-            $btn .= ' |  '.'<span data-placement="right" class="btn btn-sm btn-danger mr-2"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;"><i class="fa fa-trash mr-1"></i></span>';
+            if(!empty($row->resume)) {
+                $btn .= '|'.'<a class="btn btn-sm bg-success-light" href="'.base_url().'/uploads/users/resume/'.$row->resume.'" download title="Download Resume"><i class="fa fa-download mr-1"></i></a>';
+                //$btn .= '|'.anchor(base_url('/uploads/users/resume/'.$row->resume),'<span class="btn btn-sm bg-success-light"><i class="fa fa-download mr-1"></i></span>');
+            }
+            $btn .= '|'.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-edit mr-1"></i></span>','target=_blank');
+            // $btn .= ' | '.anchor(base_url('profile/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i>Edit</span>');
+            $btn .= '|'.'<span data-placement="right" class="btn btn-sm btn-danger"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;"><i class="fa fa-trash mr-1"></i></span>';
             if($row->userType==1)
             {
                 $type='Freelancer';

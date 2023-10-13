@@ -1725,8 +1725,8 @@
     }
 
     .Employees_Search_List .Employees_Search_Result .emply-resume-list .emply-resume-thumb img {
-        width: 100px !important;
-        height: 100px !important;
+        width: 80px !important;
+        height: 80px !important;
         border-radius: 50% !important;
         object-fit: cover !important;
     }
@@ -2033,4 +2033,66 @@
     #frame .content .message-input .wrap input { padding: 15px 0 15px 15px !important; }
     .Chat_User #frame .content { width: 100% !important; border-radius: 15px !important; border: 2px solid #f27854c9 !important; box-shadow: none !important; min-width: 100% !important; }
     .Chat_User #frame .content img.chat-start-img { width: 250px !important; height: 250px !important; }
+}
+
+@media screen and (max-width: 425px) and (min-width: 375px) {
+    .emply-resume-list {
+        box-shadow: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        padding: 5px !important;
+    }
+
+    .emply-resume-list .emply-resume-list-block .emply-resume-thumb {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .emply-resume-list .emply-resume-list-block .emply-resume-info h3 a {
+        width: 100%;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .emply-resume-list .emply-resume-list-block .emply-resume-info p {
+        text-align: center !important;
+        font-size: 13px !important;
+        line-height: 20px !important;
+    }
+
+    .emply-resume-list .emply-resume-list-block .shortlists {
+        display: none;
+    }
+
+    .emply-resume-list .emply-resume-list-block .Profile_View_Button a {
+        background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+        color: #fff !important;
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+        border-radius: 50px;
+        padding: 8px 0;
+        font-size: 13px;
+        margin-top: 10px;
+    }
+
+    .Employees_Search_List .emply-resume-sec .emply-resume-list .Profile_View_Button {
+        display: block;
+    }
+
+    .emply-resume-list .emply-resume-list-block {
+        box-shadow: 0 0 10px #dddddd;
+        border-radius: 10px !important;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .emply-resume-list .emply-resume-list-block .emply-resume-info {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

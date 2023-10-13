@@ -168,7 +168,7 @@
                         <div class="row">
                             <?php
                             if(!empty($get_users)){
-                                foreach($get_users as $user){
+                                foreach($get_users as $user) {
                                 if(strlen($user->short_bio)>200) {
                                     $shortbio=substr($user->short_bio,0,200).'...';
                                 } else {
@@ -189,9 +189,6 @@
                                     </div>
                                     <div class="blog-details">
                                         <div class="blog-head">
-                                            <!-- <h3 class="resk">
-                                                <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title=""><?= $user->category_name?></a>
-                                            </h3> -->
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <ul class="gigasjh">
@@ -199,15 +196,7 @@
                                                         <li><?php echo date('m/d/Y', strtotime(@$user->created));?></li>
                                                     </ul>
                                                 </div>
-                                                <!-- <div class="col-sm-6">
-                                                    <ul class="gigasjh">
-                                                        <li>Work Experience</li>
-                                                        <li><?php echo @$user->experience;?></li>
-                                                    </ul>
-                                                </div> -->
                                             </div>
-                                            <!-- <p><?= ucfirst(strip_tags($shortbio))?></p> -->
-                                            <!-- <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p> -->
                                         </div>
                                         <?php 
                                         $user_rating = $this->db->query("SELECT AVG(rt.rating) as rate FROM employer_rating rt WHERE rt.worker_id = '".@$user->userId."'")->result();
@@ -235,7 +224,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if(count($get_users) > 8) { ?>
+                <?php if(count($getTotalworkers) > 8) { ?>
                 <div class="col-lg-12">
                     <div class="browse-all-cat">
                         <a href="<?= base_url('workers-list')?>" title="">View More</a>
@@ -579,32 +568,32 @@ $(window).load(function () {
     }
 });
 
-function showLocation(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    displayLocation(latitude, longitude);
-}
+// function showLocation(position) {
+//     var latitude = position.coords.latitude;
+//     var longitude = position.coords.longitude;
+//     displayLocation(latitude, longitude);
+// }
 
-function displayLocation(latitude, longitude) {
-    var geocoder;
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(latitude, longitude);
-    geocoder.geocode({'latLng': latlng},
-        function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    var add = results[0].formatted_address;
-                    var value = add.split(",");
-                    count = value.length;
-                    country = value[count - 1];
-                    state = value[count - 2];
-                    city = value[count - 3];
-                    $("#paymentLocation").val(city);
-                }
-            }
-        }
-    );
-}
+// function displayLocation(latitude, longitude) {
+//     var geocoder;
+//     geocoder = new google.maps.Geocoder();
+//     var latlng = new google.maps.LatLng(latitude, longitude);
+//     geocoder.geocode({'latLng': latlng},
+//         function (results, status) {
+//             if (status == google.maps.GeocoderStatus.OK) {
+//                 if (results[0]) {
+//                     var add = results[0].formatted_address;
+//                     var value = add.split(",");
+//                     count = value.length;
+//                     country = value[count - 1];
+//                     state = value[count - 2];
+//                     city = value[count - 3];
+//                     $("#paymentLocation").val(city);
+//                 }
+//             }
+//         }
+//     );
+// }
 
 </script>
 <script>

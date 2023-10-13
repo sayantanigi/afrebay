@@ -25256,7 +25256,7 @@ footer.ft .scrollup {
 
    font-size: 22px;
 
-   color: #96a0bd;
+   color: #ffffff;
 
    padding-right: 30px;
 
@@ -34876,7 +34876,7 @@ object-fit: cover;
 
    color: #fff !important;
 
-   font-size: 15px !important;
+   font-size: 12px !important;
 
    border-radius: 30px;
 
@@ -40502,4 +40502,8 @@ border: 0 !important;
    width: 40% !important;
    display: inline-block !important;
    margin-right: 10px;
+}
+
+.Employees_Search_List .emply-resume-sec .emply-resume-list .Profile_View_Button {
+   display: none;
 }

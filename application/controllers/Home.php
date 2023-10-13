@@ -20,11 +20,21 @@ class Home extends MY_Controller {
 		$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
 		$data['get_career'] = $this->Crud_model->GetData('career_tips', '', "status='Active'", '', '', '3');
 		$data['get_company'] = $this->Crud_model->GetData('company_logo', '', "status='Active'", '', '', '');
-		$data['get_users'] = $this->Users_model->get_users();
+		// $settings = $this->db->query("SELECT * FROM setting")->result_array();
+		// if($settings[0]['required_subscription'] == '1') {
+		// 	$data['get_users'] = $this->Users_model->get_users();
+		// 	$data['getTotalworkers'] = $this->db->query("SELECT users.*, employer_subscription.* FROM users JOIN employer_subscription ON employer_subscription.employer_id = users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC limit 8")->result_array();
+		// } else {
+		// 	$data['get_users'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC limit 8")->result();
+		// 	$data['getTotalworkers'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC")->result_array();
+		// }
+		$data['get_users'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' AND gender != '' ORDER BY users.userId DESC limit 8")->result();
+		$data['getTotalworkers'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC")->result_array();
 		$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Home Top'");
 		$data['get_banner_middle'] = $this->Crud_model->get_single('banner', "page_name='Home Middle'");
-		$this->load->view('header');
+		$data['title'] = 'Home';
+		$this->load->view('header', $data);
 		$this->load->view('home', $data);
 		$this->load->view('footer');
 	}
@@ -37,14 +47,16 @@ class Home extends MY_Controller {
 	public function signup() {
 		$data['get_category'] = $this->Crud_model->GetData('category');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Sign Up'");
-		$this->load->view('header');
+		$data['title'] = 'Registration';
+		$this->load->view('header', $data);
 		$this->load->view('register', $data);
 		$this->load->view('footer');
 	}
 
 	public function login_page() {
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Login'");
-		$this->load->view('header');
+		$data['title'] = 'Login';
+		$this->load->view('header', $data);
 		$this->load->view('login', $data);
 		$this->load->view('footer');
 	}
@@ -54,7 +66,8 @@ class Home extends MY_Controller {
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='About Us Top'");
 		$data['get_banner_middle'] = $this->Crud_model->get_single('banner', "page_name='About Us Middle'");
 		$data['get_employer'] = $this->Crud_model->GetData('users', '', "userType='2'", '', '(userId)desc', '4');
-		$this->load->view('header');
+		$data['title'] = 'About Us';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/about_us', $data);
 		$this->load->view('footer');
 	}
@@ -62,7 +75,8 @@ class Home extends MY_Controller {
 	public function contact() {
 		$data['get_data'] = $this->Crud_model->get_single('setting');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Contact Us'");
-		$this->load->view('header');
+		$data['title'] = 'Contact Us';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/contact_us', $data);
 		$this->load->view('footer');
 	}
@@ -119,7 +133,8 @@ class Home extends MY_Controller {
 	public function privacy() {
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='3'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Privacy policy'");
-		$this->load->view('header');
+		$data['title'] = 'Privacy Policy';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/privacy_policy', $data);
 		$this->load->view('footer');
 	}
@@ -127,7 +142,8 @@ class Home extends MY_Controller {
 	public function term_and_conditions() {
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='1'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Term and conditions'");
-		$this->load->view('header');
+		$data['title'] = 'Term and Conditions';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/term_and_conditions', $data);
 		$this->load->view('footer');
 	}
@@ -177,7 +193,8 @@ class Home extends MY_Controller {
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".@$_SESSION['afrebay']['userId']."'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Pricing'");
-		$this->load->view('header');
+		$data['title'] = 'Businesses Plan';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/vendor_pricing', $data);
 		$this->load->view('footer');
 	}
@@ -196,7 +213,8 @@ class Home extends MY_Controller {
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Pricing'");
-		$this->load->view('header');
+		$data['title'] = 'Freelancer Plan';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/freelancer_pricing', $data);
 		$this->load->view('footer');
 	}
@@ -205,7 +223,8 @@ class Home extends MY_Controller {
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['getcountry']=$this->Crud_model->GetData('countries');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Our Jobs'");
-		$this->load->view('header');
+		$data['title'] = 'Our Jobs';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/post_jobslist', $data);
 		$this->load->view('footer');
 	}
@@ -280,7 +299,8 @@ class Home extends MY_Controller {
 	function workers_list() {
 		$data['get_specialist'] = $this->Crud_model->GetData('specialist');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancers'");
-		$this->load->view('header');
+		$data['title'] = 'List of Freelancers';
+		$this->load->view('header',$data);
 		$this->load->view('frontend/workers_list', $data);
 		$this->load->view('footer');
 	}
@@ -341,7 +361,8 @@ class Home extends MY_Controller {
 		$data['user_education'] = $this->Crud_model->GetData('user_education', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
 		$data['user_work'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Frelancer Details'");
-		$this->load->view('header');
+		$data['title'] = 'Freelancer Details';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/worker_profile', $data);
 		$this->load->view('footer');
 	}
@@ -349,7 +370,8 @@ class Home extends MY_Controller {
 	function employer_list() {
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Businesses'");
 		$data['getcategory']=$this->Crud_model->GetData('category');
-		$this->load->view('header');
+		$data['title'] = 'List of Businesses';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/employer_list', $data);
 		$this->load->view('footer');
 	}
