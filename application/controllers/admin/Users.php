@@ -160,11 +160,37 @@ class Users extends MY_Controller {
 
     }
 
-    public function delete()
-    {
-        if(isset($_POST['cid']))
-        {
-            $this->Crud_model->DeleteData('users',"userId='".$_POST['cid']."'");
+    public function delete() {
+        if(isset($_POST['cid'])) {
+            $getUserDetails = $this->db->query("Select userId, userType FROM users WHERE userId = '".$_POST['cid']."'")->result_array();
+            if(@$getUserDetails[0]['userType'] == '1') {
+                $this->Crud_model->DeleteData('chat',"userfrom_id = '".@$getUserDetails[0]['userId']."' OR userto_id = '".@$getUserDetails[0]['userId']."'");
+                $this->Crud_model->DeleteData('user_education',"user_id='".@$getUserDetails[0]['userId']."'");
+                $this->Crud_model->DeleteData('user_workexperience',"user_id='".@$getUserDetails[0]['userId']."'");
+                $checkBid = $this->db->query("SELECT * FROM job_bid WHERE user_id = '".@$getUserDetails[0]['userId']."'")->result_array();
+                if(!empty($checkBid)) {
+                    $this->Crud_model->DeleteData('job_bid',"user_id='".@$getUserDetails[0]['userId']."'");
+                }
+            } else {
+                $this->Crud_model->DeleteData('chat',"userfrom_id = '".@$getUserDetails[0]['userId']."' OR userto_id = '".@$getUserDetails[0]['userId']."'");
+                $postJob = $this->db->query("SELECT id FROM postjob WHERE user_id = '".@$getUserDetails[0]['userId']."'")->result_array();
+                foreach ($postJob as $value) {
+                    $checkBid = $this->db->query("SELECT * FROM job_bid WHERE postjob_id = '".$value['id']."'")->result_array();
+                    if(!empty($checkBid)) {
+                        $this->Crud_model->DeleteData('job_bid',"postjob_id='".$value['id']."'");
+                    }
+                }
+                $this->Crud_model->DeleteData('postjob',"user_id='".@$getUserDetails[0]['userId']."'");
+                $userProduct = $this->db->query("SELECT id FROM user_product WHERE user_id = '".@$getUserDetails[0]['userId']."'")->result_array();
+                foreach ($userProduct as $value) {
+                    $checkProdImg = $this->db->query("SELECT id FROM user_product_image WHERE prod_id = '".$value['id']."'")->result_array();
+                    if(!empty($checkProdImg)) {
+                        $this->Crud_model->DeleteData('user_product_image',"prod_id='".$value['id']."'");
+                    }
+                }
+                $this->Crud_model->DeleteData('user_product',"user_id='".@$getUserDetails[0]['userId']."'");
+            }
+            $this->Crud_model->DeleteData('users',"userId='".@$getUserDetails[0]['userId']."'");
         }
     }
 
