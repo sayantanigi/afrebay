@@ -32,7 +32,8 @@ class Welcome extends CI_Controller {
 		}
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['get_banner']=$this->Crud_model->get_single('banner',"id='2'");
-		$this->load->view('header');
+		$data1['title'] = "Search Result";
+		$this->load->view('header', $data1);
 		$this->load->view('frontend/new_employees_list',$data);
 		$this->load->view('footer');
 	}
@@ -108,11 +109,6 @@ class Welcome extends CI_Controller {
 	}
 
 	function employer_detail($user_id) {
-		/*if(empty($_SESSION['afrebay']['userId'])){
-			$type='admin';
-		} else {
-			$type='user';
-		}*/
 		$userid=base64_decode($user_id);
 		$data['userdata']=$this->Crud_model->get_single('users',"userId='".$userid."'");
 		$data['get_post']=$this->Crud_model->GetData('postjob','',"user_id='".$userid."' AND is_delete = '0'");
@@ -123,11 +119,6 @@ class Welcome extends CI_Controller {
 			'view_count'=>$viewcount,
 		);
 		$this->Crud_model->SaveData('users',$insert_data,"userId='".$userid."'");
-		/*if($type=='admin'){
-			$this->load->view('admin_header',$data);
-		} else {
-			$this->load->view('header');
-		}*/
 		$data['title'] = 'Business Details';
 		$this->load->view('header',$data);
 		$this->load->view('frontend/employer_detail',$data);
@@ -163,12 +154,12 @@ class Welcome extends CI_Controller {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
 		$data['countryName'] = $ipdat->geoplugin_countryName;
-		//$data['getkey_skills']=$this->Crud_model->GetData('specialist',"","status = 'Active'");
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['category']=$this->Crud_model->GetData('category','','');
 		$data['subcategory']=$this->Crud_model->GetData('sub_category','','');
 		$data['get_banner']=$this->Crud_model->get_single('banner',"page_name='Post Jobs'");
-		$this->load->view('header');
+		$data['title'] = 'Post Work';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/post_job',$data);
 		$this->load->view('footer');
 	}
@@ -176,18 +167,11 @@ class Welcome extends CI_Controller {
 	public function update_post_job($id) {
 		$work_id = base64_decode($id);
 		$update_data = $this->Crud_model->get_single('postjob', "id='" . $work_id . "'");
-		//$get_keySkills = $this->Crud_model->GetData('specialist', 'id, specialist_name', "");
-		//$getcategory = $this->Crud_model->GetData('category', 'id, category_name', "");
-		//$getsubcategory = $this->Crud_model->GetData('sub_category', 'id, sub_category_name', "");
-		//$get_country = $this->Crud_model->GetData('countries', 'id, name', "");
-		//$get_state = $this->Crud_model->GetData('states', 'id, name', "");
-		//$get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
 		$data = array(
 			'button' => 'update',
 			'action' => base_url('welcome/edit_post_job'),
 			'post_title' => $update_data->post_title,
 			'description' => $update_data->description,
-			//'duration' => $update_data->duration,
 			'key_skills' => $update_data->required_key_skills,
 			'duration' => $update_data->duration,
 			'charges' => $update_data->charges,
@@ -203,14 +187,14 @@ class Welcome extends CI_Controller {
 			'longitude' => $update_data->longitude,
 			'id' => $work_id,
 		);
-		$this->load->view('header');
+		$data['title'] = 'Update Posted Work';
+		$this->load->view('header', $data);
 		$this->load->view('frontend/post_job', $data);
 		$this->load->view('footer');
 	}
 
 
 	public function edit_post_job() {
-		//echo "<pre>"; print_r($_SESSION); die();
 		$key_skills = $this->input->post('key_skills');
 		for ($i=0; $i < count($key_skills); $i++) {
 			$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
@@ -224,7 +208,6 @@ class Welcome extends CI_Controller {
 		}
 		$id = $_POST['id'];
 		$data=array(
-			//'user_id'=>$_SESSION['afrebay']['userId'],
 			'required_key_skills'=>implode(", ",$this->input->post('key_skills',TRUE)),
 			'category_id'=>$this->input->post('category_id',TRUE),
 			'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
@@ -236,7 +219,6 @@ class Welcome extends CI_Controller {
 			'location'=>$this->input->post('location',TRUE),
 			'latitude'=>$this->input->post('latitude',TRUE),
 			'longitude'=>$this->input->post('longitude',TRUE),
-			//'complete_address'=>$this->input->post('complete_address',TRUE),
 			'country'=>$this->input->post('country-dropdown',TRUE),
 			'state'=>$this->input->post('state-dropdown',TRUE),
 			'city'=>$this->input->post('city-dropdown',TRUE),
@@ -246,12 +228,6 @@ class Welcome extends CI_Controller {
 		$this->Crud_model->SaveData('postjob', $data, "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Post Job Updated Successfully !');
 		redirect(base_url('myjob'));
-		// if(!empty($_SESSION['afrebay_admin'])) {
-		// 	redirect(base_url('admin/post_job'));
-		// } else {
-		// 	redirect(base_url('myjob'));
-		// }
-
 	}
 
 	public function get_subcategory() {
@@ -286,20 +262,25 @@ class Welcome extends CI_Controller {
 			'duration'=>$this->input->post('duration',TRUE),
 			'charges'=>$this->input->post('charges',TRUE),
 			'currency'=>$this->input->post('currency',TRUE),
-			'location'=>$this->input->post('location',TRUE),
-			'latitude'=>$this->input->post('latitude',TRUE),
-			'longitude'=>$this->input->post('longitude',TRUE),
-			//'complete_address'=>$this->input->post('complete_address',TRUE),
+			'location'=>@$this->input->post('location',TRUE),
+			'latitude'=>@$this->input->post('latitude',TRUE),
+			'longitude'=>@$this->input->post('longitude',TRUE),
 			'country'=>$this->input->post('country-dropdown',TRUE),
 			'state'=>$this->input->post('state-dropdown',TRUE),
 			'city'=>$this->input->post('city-dropdown',TRUE),
 			'appli_deadeline'=>$this->input->post('appli_deadeline',TRUE),
 			'created_date'=>date('Y-m-d H:i:s'),
 		);
-		//echo "<pre>"; print_r($data); die;
 		$this->Crud_model->SaveData('postjob',$data);
 		$this->session->set_flashdata('message', 'Post Job Created Successfull !');
 		$insert_id = $this->db->insert_id();
+		$sitemap_date = array(
+			'link'=>'postdetail/'.base64_encode($insert_id),
+			'changefreq' => 'daily',
+			'priority' => '0.51',
+			'lastmod'=>date('Y-m-d H:i:s'),
+		);
+		$this->Crud_model->SaveData('sitemap',$sitemap_date);
 		redirect(base_url("postdetail/".base64_encode($insert_id)));
 	}
 
@@ -311,19 +292,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('user_dashboard/jobinfo',$data);
 		$this->load->view('footer');
 	}
-
-
-	// post job list in filter
-	// public function subcategory_data() {
-	// 	$id =$_POST['id'];
-	// 	$CategoryData = $this->Crud_model->GetData('sub_category',"","category_id ='".$id."'");
-	// 	$html = "";
-	// 	foreach ($CategoryData as $row_data) {
-	// 		$html .= '<p> <input type="checkbox" class="common_selector storage" name="subcategory_id[]"  id="subcategory_'.$row_data->id.'"  value='.$row_data->id.'><label for="subcategory_'.$row_data->id.'">'.ucfirst($row_data->sub_category_name).'</label></p>';
-	// 	}
-	// 	echo $html;
-	// }
-
+	
 	public function subcategory_data() {
 		$id =$_POST['id'];
 		$CategoryData = $this->Crud_model->GetData('sub_category',"","category_id ='".$id."'");

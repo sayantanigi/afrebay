@@ -65,7 +65,7 @@ class Payment extends MY_Controller {
             $nestedData[] = $row->email;
             // $nestedData[] = $row->transaction_id;
             if($row->userType=='1'){
-                $usertype_name='Freelancer';
+                $usertype_name='Talent';
             }
             else{
                 $usertype_name='Business';

@@ -14,7 +14,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>Post Jobs</h3>
+                        <h3>Post Work</h3>
                     </div>
                 </div>
             </div>
@@ -30,9 +30,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     <div class="padding-left">
                         <div class="profile-title" style="text-align: center;">
                             <?php if(empty(@$id)) { ?>
-                            <h3>Post a New Job</h3>
+                            <h3>Post a New Work</h3>
                             <?php } else { ?>
-                            <h3>Update Posted Job</h3>
+                            <h3>Update Posted Work</h3>
                             <?php } ?>
                             <span class="text-success-msg f-20" style="text-align: center;">
                             <?php if($this->session->flashdata('message')) {
@@ -141,12 +141,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             <input type="date" placeholder="Enter Complete Address" name="appli_deadeline" class="form-control datepicker" value="<?= @$appli_deadeline; ?>" required/>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-lg-12">
-                                        <span class="pf-title">Complete Address</span>
-                                        <div class="pf-field">
-                                            <textarea id="complete_address"  name="complete_address" placeholder="Enter Address"></textarea>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -171,12 +165,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <option value="">Select State</option>
                                                 <?php } else { ?>
                                                 <option>Select State</option>
-                                                <!-- <option value="<?= $state; ?>" selected><?php echo $state;?></option> -->
-                                                <?php
-                                                //$get_state = $this->Crud_model->GetData('states', 'id, name', "");
-                                                //foreach($get_state as $key) {?>
-                                                    <!-- <option value="<?= $key->name; ?>" <?php if($key->name == @$state) {echo "selected"; }?>><?php echo $key->name;?></option> -->
-                                                <?php //} ?>
                                             <?php } ?>
                                             </select>
                                             <input type="hidden" id="select_state_dropdown" value="<?php echo @$state; ?>">
@@ -190,50 +178,43 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                     <option value="">Select City</option>
                                                     <?php } else { ?>
                                                     <option>Select City</option>
-                                                    <!-- <option value="<?= $cities; ?>" selected><?php echo $cities;?></option> -->
-                                                    <?php
-                                                    //$get_cities = $this->Crud_model->GetData('cities', 'id, name', "");
-                                                    //foreach($get_cities as $key) {?>
-                                                        <!-- <option value="<?= $key->name; ?>" <?php if($key->name == @$cities) {echo "selected"; }?>><?php echo $key->name;?></option> -->
-                                                    <?php //} ?>
                                                 <?php } ?>
                                             </select>
                                             <input type="hidden" id="select_city_dropdown" value="<?php echo @$cities; ?>">
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="contact-edit">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <span class="pf-title">Find On Map <span style="color:red;">*</span></span>
-                                                <div class="pf-field">
-                                                    <input type="text" placeholder="Collins Street West, Victoria 8007, Australia." name="location" value="<?= @$location; ?>" id="location"  required autocomplete="off"/>
-                                                </div>
+                                <div class="contact-edit">
+                                    <div class="row">
+                                        <!-- <div class="col-lg-6">
+                                            <span class="pf-title">Find On Map <span style="color:red;">*</span></span>
+                                            <div class="pf-field">
+                                                <input type="text" placeholder="Collins Street West, Victoria 8007, Australia." name="location" value="<?= @$location; ?>" id="location"  required autocomplete="off"/>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <span class="pf-title">Latitude</span>
-                                                <div class="pf-field">
-                                                    <input type="text" id="search_lat" name="latitude"  placeholder="41.1589654" value="<?= @$latitude; ?>"/>
-                                                </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <span class="pf-title">Latitude</span>
+                                            <div class="pf-field">
+                                                <input type="text" id="search_lat" name="latitude"  placeholder="41.1589654" value="<?= @$latitude; ?>"/>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <span class="pf-title">Longitude</span>
-                                                <div class="pf-field">
-                                                    <input type="text" id="search_lon" placeholder="21.1589654" name="longitude" value="<?= @$longitude; ?>"/>
-                                                </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <span class="pf-title">Longitude</span>
+                                            <div class="pf-field">
+                                                <input type="text" id="search_lon" placeholder="21.1589654" name="longitude" value="<?= @$longitude; ?>"/>
                                             </div>
-                                            <div class="col-lg-12">
-                                                <button type="button" class="srch-lctn" onclick="return show_location();">Search Location</button>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="button" class="srch-lctn" onclick="return show_location();">Search Location</button>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <span class="pf-title">Maps</span>
+                                            <div class="pf-map" id="map">
                                             </div>
-                                            <div class="col-lg-12">
-                                                <span class="pf-title">Maps</span>
-                                                <div class="pf-map" id="map">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button type="submit">Submit</button>
-                                                <input type="hidden" name="id" value="<?php echo @$id?>">
-                                            </div>
+                                        </div> -->
+                                        <div class="col-lg-12">
+                                            <button type="submit">Submit</button>
+                                            <input type="hidden" name="id" value="<?php echo @$id?>">
                                         </div>
                                     </div>
                                 </div>
@@ -246,12 +227,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     </div>
 </section>
 
-
-<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/taginput.css')?>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js" integrity="sha512-VvWznBcyBJK71YKEKDMpZ0pCVxjNuKwApp4zLF3ul+CiflQi6aIJR+aZCP/qWsoFBA28avL5T5HA+RE+zrGQYg==" crossorigin="anonymous"></script> -->
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script>
@@ -260,7 +236,6 @@ CKEDITOR.replace('description');
 <script>
 $('.key_skills').select2({
     tags: true,
-    //maximumSelectionLength: 10,
     tokenSeparators: [','],
     placeholder: "Select or Type Skills"
 });
@@ -280,13 +255,11 @@ $(document).ready(function() {
             },
             cache: false,
             success: function(result){
-                //console.log(result);
                 $("#state-dropdown").html(result);
                 $('#city-dropdown').html('<option value="">Select State First</option>');
             }
         });
     });
-
     $('#state-dropdown').on('change', function() {
         var state_name = this.value;
         $.ajax({
@@ -301,7 +274,6 @@ $(document).ready(function() {
             }
         });
     });
-
     if($('#select_country_dropdown').val() != '') {
         var country_name = $('#select_country_dropdown').val();
         $.ajax({
@@ -318,7 +290,6 @@ $(document).ready(function() {
             }
         });
     }
-
     if($('#select_state_dropdown').val() != '') {
         var state_name = $('#select_state_dropdown').val();
         $.ajax({

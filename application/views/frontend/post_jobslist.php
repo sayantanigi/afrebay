@@ -1,10 +1,12 @@
 <?php
- if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
-     $banner_img=base_url("uploads/banner/".$get_banner->image);
-            } else{
-       $banner_img=base_url("assets/images/resource/mslider1.jpg");
-        } ?>
-
+if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->image)){
+    $banner_img=base_url("uploads/banner/".$get_banner->image);
+} else{
+    $banner_img=base_url("assets/images/resource/mslider1.jpg");
+} ?>
+<style>
+    .Employees_Search_List .Employees_Search_Result .emply-resume-list .shortlists a.Emp_Comp i {color: #f07759 !important;}
+</style>
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"
@@ -14,7 +16,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>Our Jobs</h3>
+                        <h3>Find Work</h3>
                     </div>
                 </div>
             </div>
@@ -23,7 +25,6 @@
 </section>
 
 <section class="max_height">
-    <!-- <div class="block no-padding Our_Jobs Employees_Search_List"> -->
     <div class="block no-padding Employees_Search_List">
         <div class="container">
             <div class="row no-gape">
@@ -36,10 +37,6 @@
                                         <input type="text" id="title_keyword" name="title_keyword" placeholder="Search Keywords"/>
                                         <i class="la la-search"></i>
                                     </div>
-                                    <!-- <div class="field_w_search">
-                                        <input type="text" name="search_location" id="location" placeholder="All Locations" oninput="getsourceaddress()" value="" />
-                                        <i class="la la-map-marker"></i>
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="widget">
@@ -53,14 +50,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- <div class="widget sub_cat">
-                                <h3 class="sb-title open">Subcategory</h3>
-                                <div class="specialism_widget" >
-                                    <div class="simple-checkbox scrollbar" >
-                                        <div id="subcategory_list"></div>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="widget sub_cat">
                                 <h3 class="sb-title closed">Subcategory</h3>
                                 <div class="specialism_widget">
@@ -126,7 +115,6 @@
 <script>
 $(document).ready(function () {
     filter_data(1);
-
     function filter_data(page) {
         var base_url = $("#base_url").val();
         var displayProduct = 5;
@@ -154,7 +142,6 @@ $(document).ready(function () {
         var action = 'fetch_data';
         var title_keyword = $('#title_keyword').val();
         var category_id = $('#category_id').val();
-        //var subcategory_id = get_filter('storage');
         var subcategory_id = $('#subcategory_id').val();
         var days = $('input:radio[name=days]:checked').val();
         var post_id = $('#post_id').val();
@@ -183,14 +170,12 @@ $(document).ready(function () {
                 search_location: search_location
             },
             success: function (data) {
-                //$('#title_keyword').val(data.keyword);
                 $('#location').val(data.keyword_location);
                 $('#post_list').html(data.postlist);
                 $('#pagination_link').html(data.pagination_link);
             }
         })
     }
-
     function get_filter(class_name) {
         var filter = [];
         $('.' + class_name + ':checked').each(function () {
@@ -198,57 +183,44 @@ $(document).ready(function () {
         });
         return filter;
     }
-
     $(document).on('click', '.pagination li a', function (event) {
         event.preventDefault();
         var page = $(this).data('ci-pagination-page');
         filter_data(page);
     });
-
     $('.common_selector').click(function () {
         filter_data(1);
     });
-
     $('#title_keyword').keyup(function () {
         filter_data(1);
     });
-
     $('#location').on('change', function () {
         filter_data(1);
     });
-
     $('input:radio').click(function () {
         filter_data(1);
     });
-
     $('#category_id').on('change', function () {
         filter_data(1);
     });
-
     $('#subcategory_id').on('change', function () {
         filter_data(1);
     });
-
     $('#country').on('change', function () {
         filter_data(1);
     });
-
     $('#state').on('change', function () {
         filter_data(1);
     });
-
     $('#city').on('change', function () {
         filter_data(1);
     });
 });
 </script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" src="<?= base_url('assets/custom_js/postjob_list.js')?>"></script>
-
 <script>
     function MoreDetailsTxt(id) {
-    //$(".MoreTxt_"+id).toggle();
     $(".MoreDetailsTxt_"+id).toggleClass('MoreDetailsTxtShow');
 }
 </script>

@@ -50,7 +50,7 @@ class Users extends MY_Controller {
             $btn .= '|'.'<span data-placement="right" class="btn btn-sm btn-danger"  onclick="Delete(this,'.$row->userId.')" style="margin-left: 8px;"><i class="fa fa-trash mr-1"></i></span>';
             if($row->userType==1)
             {
-                $type='Freelancer';
+                $type='Talent';
             }
             elseif($row->userType==2){
                 $type='Business';

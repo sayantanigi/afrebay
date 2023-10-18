@@ -4,6 +4,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 } else {
     $banner_img=base_url("assets/images/resource/mslider1.jpg");
 } ?>
+<style>
+.layer.color::before {background-color: #c34e106b !important;}
+</style>
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
@@ -19,7 +22,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </section>
-
 <section>
     <div class="block About_Us">
         <div class="container">
@@ -41,10 +43,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </section>
-
 <section>
     <div class="block About_Us_Testimonial">
-        <!-- <div data-velocity="-.1" style="background: url('<?= base_url('assets/images/resource/parallax2.jpg')?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color light"></div> -->
         <?php if(!empty($get_banner_middle->image) && file_exists('uploads/banner/'.$get_banner_middle->image)){?>
         <div data-velocity="-.1" style="background: url(<?=base_url('uploads/banner/'.$get_banner_middle->image); ?>) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color"></div>
         <?php } else{?>
@@ -54,7 +54,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="heading light">
-                        <h2>Reviews submitted by our vendors</h2>
+                        <h2>Reviews submitted by our businesses</h2>
                         <span>What other people thought about the service provided by Afrebay</span>
                     </div>
                     <div class="reviews-sec" id="reviews-carousel">

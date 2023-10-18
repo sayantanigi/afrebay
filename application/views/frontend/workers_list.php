@@ -11,7 +11,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>List of Freelancers</h3>
+                        <h3>List of Talents</h3>
                     </div>
                 </div>
             </div>
@@ -69,6 +69,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
     </div>
 </section>
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
+<style>
+.jconfirm-content-pane{text-align: center; font-size: 20px;}
+.jconfirm-buttons{margin-right: 140px; display: inline-block;}
+</style>
 <script>
 $(document).ready(function () {
     filter_data(1);
@@ -147,4 +151,10 @@ $(window).load(function(){
         }
     });
 });
+function viewProfile() {
+    $.alert({
+	    title: '',
+	    content: "Please login to view talent profile",
+	});
+}
 </script>

@@ -19,7 +19,8 @@ class Dashboard extends CI_Controller {
 		$data['get_subscribe'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . $_SESSION['afrebay']['userId'] . "'");
 		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='" . $_SESSION['afrebay']['userId'] . "' and userType='1'");
 		$data['get_product'] = $this->Crud_model->GetData('user_product', '', "user_id='".$_SESSION['afrebay']['userId']."' AND status = 1 AND is_delete= 1");
-		$this->load->view('header');
+		$data1['title'] = 'Dashboard';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/dashboard', $data);
 		$this->load->view('footer');
 	}
@@ -29,7 +30,8 @@ class Dashboard extends CI_Controller {
 		$data = array(
 			'userinfo' => $user_info,
 		);
-		$this->load->view('header');
+		$data1['title'] = 'View Profile';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/view_profile', $data);
 		$this->load->view('footer');
 	}
@@ -43,7 +45,8 @@ class Dashboard extends CI_Controller {
 		} else {
 			$userid=$_SESSION['afrebay']['userId'];
 			$data_request='user';
-			$this->load->view('header');
+			$data1['title'] = 'Profile';
+			$this->load->view('header', $data1);
 		}
 		$user_info = $this->Crud_model->get_single('users', "userId='" . $userid . "'");
 		$data = array(
@@ -75,54 +78,6 @@ class Dashboard extends CI_Controller {
 		} else {
 			$image  = $_POST['old_image'];
 		}
-
-		/*if ($_FILES['additional_image']['name'] != '') {
-			$_POST['additional_image'] = rand(0000, 9999) . "_" . $_FILES['additional_image']['name'];
-			$config2['image_library'] = 'gd2';
-			$config2['source_image'] =  $_FILES['additional_image']['tmp_name'];
-			$config2['new_image'] =   getcwd() . '/uploads/users/additional_image/' . $_POST['additional_image'];
-			$config2['upload_path'] =  getcwd() . '/uploads/users/additional_image/';
-			$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
-			$config2['maintain_ratio'] = FALSE;
-			$this->image_lib->initialize($config2);
-			if (!$this->image_lib->resize()) {
-				echo ('<pre>');
-				echo ($this->image_lib->display_errors());
-				exit;
-			} else {
-				$additional_image  = $_POST['additional_image'];
-				@unlink('uploads/users/additional_image/' . $_POST['old_additionalimage']);
-			}
-		} else {
-			if(!empty($_POST['old_additionalimage'])) {
-				$additional_image  = $_POST['old_additionalimage'];
-			} else {
-				$additional_image  = '';
-			}
-		}
-
-		if ($_FILES['video']['error'] == '') {
-			$file_element_name = 'video';
-			$config['upload_path'] = getcwd() . '/uploads/video/';
-			$config['allowed_types'] = '*';
-			$config['encrypt_name'] = TRUE;
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			if (!$this->upload->do_upload($file_element_name)) {
-				$error = $this->upload->display_errors('<p style="color:#AF5655;">', '</p>');
-				$data = array('error' => $error);
-			}
-			$upload_quotation_file = $this->upload->data();
-			$video = $upload_quotation_file['file_name'];
-			@unlink('uploads/video/' . $_POST['old_video']);
-		} else {
-			if(!empty($_POST['old_video'])) {
-				$video = $_POST['old_video'];
-			} else {
-				$video  = '';
-			}
-		}*/
-
 		if ($_FILES['resume']['name'] != '') {
 			$src = $_FILES['resume']['tmp_name'];
 			$filEnc = time();
@@ -140,7 +95,6 @@ class Dashboard extends CI_Controller {
 				$resume  = '';
 			}
 		}
-
 		if(!empty($this->input->post('key_skills'))) {
 			$key_skills = $this->input->post('key_skills');
 			for ($i=0; $i < count($key_skills); $i++) {
@@ -165,11 +119,8 @@ class Dashboard extends CI_Controller {
 			'email' => $_POST['email'],
 			'mobile' => $_POST['mobile'],
 			'gender' => $this->input->post('gender', TRUE),
-			//'experience' => $this->input->post('experience', TRUE),
-			//'qualification' => $this->input->post('qualification', TRUE),
 			'skills' => $skills,
 			'profilePic' => $image,
-			'additional_image' => $additional_image,
 			'zip' => $_POST['zip'],
 			'address' => $_POST['address'],
 			'foundedyear' => $_POST['foundedyear'],
@@ -177,12 +128,9 @@ class Dashboard extends CI_Controller {
 			'latitude' => $_POST['latitude'],
 			'longitude' => $_POST['longitude'],
 			'short_bio' => $_POST['short_bio'],
-			//'video' => $video,
 			'resume' => $resume,
 		);
-		//print_r($data); exit;
 		$this->Crud_model->SaveData('users', $data, "userId='" . $_POST['id'] . "'");
-		// echo $_POST['from_data_request'];die;
 		if($_POST['from_data_request']=='admin'){
 		$this->session->set_flashdata('message', 'Profile Updated Successfull !');
 		redirect(base_url('admin/users'));
@@ -213,26 +161,25 @@ class Dashboard extends CI_Controller {
 		} else {
 			$cond = " WHERE subscription_country = 'Global'";
 		}
-
 		if($_SESSION['afrebay']['userType'] == '1') {
 			$uType = 'Freelancer';
 		} else {
 			$uType = 'Business';
 		}
-
-		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond." AND subscription_user_type = '".$uType."'")->result();
 		$data['current_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
 		$data['expired_plan'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status = '3'");
 		$data['subscription_check'] = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
-		$this->load->view('header');
+		$data1['title'] = 'Subscription';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/subscription', $data);
 		$this->load->view('footer');
 	}
 
 	public function products() {
 		$data['product_list'] = $this->Crud_model->GetData('user_product', '', "user_id='".$_SESSION['afrebay']['userId']."' AND status = 1 and is_delete = 1");
-		$this->load->view('header');
+		$data1['title'] = 'Products';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/product/list', $data);
 		$this->load->view('footer');
 	}
@@ -269,7 +216,6 @@ class Dashboard extends CI_Controller {
 		$data = array(
 			'button' => 'Update',
 			'action' => base_url('user/Dashboard/update_service'),
-			//'action'=>admin_url('Event/create_action'),
 			'service_name' => $get_services->service_name,
 			'category_id' => $get_services->category_id,
 			'subcategory_id' => $get_services->subcategory_id,
@@ -319,8 +265,8 @@ class Dashboard extends CI_Controller {
 
 	public function myjob() {
 		$data['get_postjob'] = $this->Crud_model->GetData('postjob', '', "user_id='".$_SESSION['afrebay']['userId']."' ");
-		//print_r($data); die();
-		$this->load->view('header');
+		$data['title'] = 'My Work Post';
+		$this->load->view('header', $data);
 		$this->load->view('user_dashboard/my_job', $data);
 		$this->load->view('footer');
 	}
@@ -338,18 +284,17 @@ class Dashboard extends CI_Controller {
 		echo '1';
 	}
 
-	////////////////////////////////////////// start job bidding//////////////////
 	function jobbid() {
 		$this->load->model('Post_job_model');
 		if($_SESSION['afrebay']['userType'] == '1'){
-			//$data['get_postjob'] = $this->db->query("SELECT postjob.*, job_bid.*, users.* from job_bid JOIN postjob ON job_bid.postjob_id = postjob.id JOIN users ON job_bid.user_id = users.userId WHERE postjob.user_id ='".$_SESSION['afrebay']['userId']."'")
 			$cond = "job_bid.user_id='" . $_SESSION['afrebay']['userId'] . "'";
+			$data1['title'] = 'My Work Bid';
 		} else {
-			//$data['get_postjob'] = $this->db->query("SELECT postjob.*, job_bid.*, users.* from job_bid JOIN postjob ON job_bid.postjob_id = postjob.id JOIN users ON job_bid.user_id = users.userId WHERE postjob.user_id =")
 			$cond = "postjob.user_id='" . $_SESSION['afrebay']['userId'] . "'";
+			$data1['title'] = 'List of Bids';
 		}
 		$data['get_postjob'] = $this->Post_job_model->postjob_bid($cond);
-		$this->load->view('header');
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/my_jobbid', $data);
 		$this->load->view('footer');
 	}
@@ -360,9 +305,7 @@ class Dashboard extends CI_Controller {
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'bid_amount' => $_POST['bid_amount'],
 			'currency' => $_POST['currency'],
-			//'email' => $_POST['email'],
 			'duration' => $_POST['duration'],
-			//'phone' => $_POST['phone'],
 			'description' => $_POST['description'],
 			'created_date' => date('Y-m-d H:i:s'),
 		);
@@ -377,31 +320,7 @@ class Dashboard extends CI_Controller {
 		}
 
 	}
-
-	/*function changebiddingstatus() {
-		print_r($this->input->post()); die;
-		$get_data = $this->Crud_model->get_single('job_bid', "id='" . $_POST['jobbid_id'] . "'");
-		if ($get_data->bidding_status == 'Pending') {
-			$data1 = array(
-				'bidding_status' => 'Accept',
-			);
-			$this->Crud_model->SaveData('job_bid', $data1, "id='" . $_POST['jobbid_id'] . "'");
-		}
-		$updatepost = array(
-			'is_delete' => 1,
-		);
-		$this->Crud_model->SaveData('postjob', $updatepost, "id='" . $get_data->postjob_id . "'");
-		$binddingstatus = $this->Crud_model->GetData('job_bid', '', "postjob_id='" . $get_data->postjob_id . "' and bidding_status='Pending'");
-		foreach ($binddingstatus as $row) {
-			$data = array(
-				'bidding_status' => 'Reject',
-			);
-			$this->Crud_model->SaveData('job_bid', $data, "id='" . $row->id . "'");
-		}
-		echo "1";
-		exit;
-	}*/
-
+	
 	function changebiddingstatus() {
 		$bidstatus = $this->input->post('bidstatus');
 		$jodBidid = $this->input->post('jodBidid');
@@ -421,10 +340,6 @@ class Dashboard extends CI_Controller {
 				);
 				$this->Crud_model->SaveData('job_bid', $data, "id='" . $row->id . "'");
 			}
-			// $getChatData = $this->db->query("SELECT * FROM chat WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'")->result();
-			// if(!empty($getChatData)) {
-			// 	$updateChatData = $this->db->query("UPDATE chat SET is_delete = '2' WHERE userfrom_id != '".$jobbiduserid."' AND userto_id != '".$jobbiduserid."' AND postjob_id = '".$postJobid."'");
-			// }
 			$updatepost = array(
 				'is_delete' => 1,
 			);
@@ -434,42 +349,24 @@ class Dashboard extends CI_Controller {
 		exit;
 	}
 
-	/////////////////////////////////////////  End job bidding////////////////////
 	function calender() {
 		$this->load->view('header');
 		$this->load->view('user_dashboard/calender');
 		$this->load->view('footer');
 	}
 
-	////////////////////////////////// start chat functionality////////////////
 	function chat() {
 		$data['get_user'] = $this->Crud_model->get_single('users', "userId ='".$_SESSION['afrebay']['userId']."'");
-		//$cond = "job_bid.bidding_status='Accept'";
 		$cond = "job_bid.bidding_status IN ('Short Listed','Selected')";
 		$data['get_jobbid'] = $this->Users_model->get_jobbidding($cond);
-		$this->load->view('header');
+		$data1['title'] = 'Messages';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/chat', $data);
 		$this->load->view('footer');
 	}
 
-	// function showmessage_count() {
-	// 	$userId = $this->input->post('userId');
-	// 	$user_id = $this->input->post('usertoid');
-	// 	$post_id = $this->input->post('postid');
-	// 	$getUserType = $this->db->query("Select * FROM users WHERE userId ='".$user_id."'")->result();
-	// 	$uType = $getUserType[0]->userType;
-	// 	$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE (userfrom_id ='".$usertoid."' AND userto_id ='".$userfromid."') OR (userto_id ='".$usertoid."' AND userfrom_id ='".$userfromid."') AND postjob_id = '".$post_id."' AND status = 0")->result();
-	// 	$data = array(
-	// 		'userfrom_id' => $countMessage[0]->userfrom_id,
-	// 		'userto_id' => $countMessage[0]->userto_id,
-	// 		'count' => $countMessage[0]->msgcount,
-	// 	);
-	// 	echo json_encode($data);
-	// }
-
 	function showmessage_count() {
 		$user_id = $this->input->post('userId');
-		//echo "Select COUNT(id) as msgcount, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'";
 		$getUserType = $this->db->query("Select * FROM users WHERE userId ='".$user_id."'")->result();
 		$uType = $getUserType[0]->userType;
 		$countMessage = $this->db->query("Select COUNT(id) as msgcount, userfrom_id, userto_id FROM chat WHERE userto_id ='".$user_id."' AND status = '0'")->result();
@@ -480,7 +377,6 @@ class Dashboard extends CI_Controller {
 		);
 		echo json_encode($data);
 	}
-
 	function showmessageCountEach() {
 		$userfromid = $this->input->post('userfromid');
 		$usertoid = $this->input->post('usertoid');
@@ -621,7 +517,7 @@ class Dashboard extends CI_Controller {
 			exit;
 		}
 	}
-	///////////////////////////////////// end chat/////////////////////////////////
+
 	function video_call() {
 		$this->load->view('header');
 		$this->load->view('user_dashboard/video_call');
@@ -629,8 +525,6 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function save_event() {
-		// $starttime=$_POST['starthours'].':'.$_POST['startminute'].' '.$_POST['starttype'];
-		// $endtime=$_POST['endhours'].':'.$_POST['endminute'].' '.$_POST['endtype'];
 		$data = array(
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'event_name' => $_POST['event_name'],
@@ -666,7 +560,8 @@ class Dashboard extends CI_Controller {
 	}
 
 	function change_password() {
-		$this->load->view('header');
+		$data1['title'] = 'Change Password';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/change_password');
 		$this->load->view('footer');
 	}
@@ -686,7 +581,6 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
-	////////////////////////////////// start rating /////////////////////////////////////
 	function save_employer_rating() {
 		if (!empty($this->input->post('rating'))) {
 			$data = array(
@@ -704,13 +598,12 @@ class Dashboard extends CI_Controller {
 		}
 		redirect(base_url('worker-detail/' . base64_encode($_POST['user_id'])));
 	}
-	////////////////////////////////// end rating /////////////////////////////////////
 
-	//////////////////////////////// start education ///////////////////////////
 	function education_list()
 	{
 		$data['education_list'] = $this->Crud_model->GetData('user_education', '', "user_id='".$_SESSION['afrebay']['userId']."' order by id DESC");
-		$this->load->view('header');
+		$data1['title'] = 'Education List';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/education/list', $data);
 		$this->load->view('footer');
 	}
@@ -736,7 +629,8 @@ class Dashboard extends CI_Controller {
 			'get_department' => $get_department,
 		);
 
-		$this->load->view('header');
+		$data1['title'] = 'Add Education';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/education/form', $data);
 		$this->load->view('footer');
 	}
@@ -758,8 +652,6 @@ class Dashboard extends CI_Controller {
 		redirect(base_url('education-list'));
 	}
 
-
-
 	public function update_education($id)
 	{
 		$education_id = base64_decode($id);
@@ -770,7 +662,6 @@ class Dashboard extends CI_Controller {
 		$get_college = $this->Crud_model->GetData('user_education', 'id,college_name', "");
 		$get_department = $this->Crud_model->GetData('user_education', 'id,department', "");
 		$data = array(
-
 			'button' => 'update',
 			'action' => base_url('user/Dashboard/edit_education'),
 			'education' => $update_education->education,
@@ -785,11 +676,11 @@ class Dashboard extends CI_Controller {
 			'get_department' => $get_department,
 		);
 
-		$this->load->view('header');
+		$data1['title'] = 'Update Education';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/education/form', $data);
 		$this->load->view('footer');
 	}
-
 
 	public function edit_education()
 	{
@@ -812,17 +703,12 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->DeleteData('user_education', "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Education Deleted successfully !');
 		echo '1';
-		//redirect(base_url('education-list'));
 	}
-
-	//////////////////////////////// end education ///////////////////////////
-
-
-	///////////////// start work experience //////////////////////////
 
 	function workexperience_list() {
 		$data['workexperience_list'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='".$_SESSION['afrebay']['userId']."' order by id DESC");
-		$this->load->view('header');
+		$data1['title'] = 'Work Experience';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/work_experience/list', $data);
 		$this->load->view('footer');
 	}
@@ -837,7 +723,6 @@ class Dashboard extends CI_Controller {
 			'action' => base_url('user/Dashboard/save_workexperience'),
 			'designation' => set_value('designation'),
 			'company_name' => set_value('company_name'),
-			//'duration' => set_value('duration'),
 			'from_date' => set_value('from_date'),
 			'to_date' => set_value('to_date'),
 			'description' => set_value('description'),
@@ -848,7 +733,8 @@ class Dashboard extends CI_Controller {
 
 		);
 
-		$this->load->view('header');
+		$data1['title'] = 'Add Work Experience';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/work_experience/form', $data);
 		$this->load->view('footer');
 	}
@@ -858,7 +744,6 @@ class Dashboard extends CI_Controller {
 			'user_id' => $_SESSION['afrebay']['userId'],
 			'designation' => $this->input->post('designation', TRUE),
 			'company_name' => $this->input->post('company_name', TRUE),
-			//'duration' => $this->input->post('duration', TRUE),
 			'from_date' => $this->input->post('from_date', TRUE),
 			'to_date' => $this->input->post('to_date', TRUE),
 			'description' => $this->input->post('description', TRUE),
@@ -880,7 +765,6 @@ class Dashboard extends CI_Controller {
 			'action' => base_url('user/Dashboard/edit_workexperience'),
 			'designation' => $update_data->designation,
 			'company_name' => $update_data->company_name,
-			//'duration' => $update_data->duration,
 			'from_date' => $update_data->from_date,
 			'to_date' => $update_data->to_date,
 			'description' => $update_data->description,
@@ -890,7 +774,8 @@ class Dashboard extends CI_Controller {
 			'get_duration' => $get_duration,
 
 		);
-		$this->load->view('header');
+		$data1['title'] = 'Update Work Experience';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/work_experience/form', $data);
 		$this->load->view('footer');
 	}
@@ -901,7 +786,6 @@ class Dashboard extends CI_Controller {
 		$data = array(
 			'designation' => $this->input->post('designation', TRUE),
 			'company_name' => $this->input->post('company_name', TRUE),
-			//'duration' => $this->input->post('duration', TRUE),
 			'from_date' => $this->input->post('from_date', TRUE),
 			'to_date' => $this->input->post('to_date', TRUE),
 			'description' => $this->input->post('description', TRUE),
@@ -916,12 +800,8 @@ class Dashboard extends CI_Controller {
 		$this->Crud_model->DeleteData('user_workexperience', "id='" . $id . "'");
 		$this->session->set_flashdata('message', 'Work experience deleted successfully !');
 		echo "1";
-		// redirect(base_url('workexperience-list'));
 	}
 
-	///////////////// end work experience //////////////////////////
-
-	///////////////// User Subscription //////////////////////////
 	function userSubscription(){
 		$paymentDate = date('Y-m-d H:i:s');
 		$n=24;
@@ -946,7 +826,6 @@ class Dashboard extends CI_Controller {
 			'payment_status' => 'paid',
 			'expiry_date' => date("Y-m-d", strtotime('+'.$this->input->post('sub_duration').'days'))
 		);
-		//print_r($data); die();
 		$this->Crud_model->SaveData('employer_subscription', $data);
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
@@ -984,7 +863,6 @@ class Dashboard extends CI_Controller {
 	}
 
 	function checkSubscriptionForUser(){
-		//echo "SELECT * FROM employer_subscription WHERE status = '1'"; echo "<br>";
 		$getAllSubscription = $this->db->query("SELECT * FROM employer_subscription WHERE status = '1'")-> result_array();
 		foreach ($getAllSubscription as $value) {
 			$sub_id = $value['transaction_id'];
@@ -1017,12 +895,8 @@ class Dashboard extends CI_Controller {
 			}
 		}
 	}
-	///////////////// End User Subscription //////////////////////////
-
-	///////////////// User Product //////////////////////////
 
 	function add_product() {
-		//print_r($this->input->post()); die;
 		if(!empty($this->input->post())){
 			$data = array(
 				'user_id' => $_SESSION['afrebay']['userId'],
@@ -1032,6 +906,13 @@ class Dashboard extends CI_Controller {
 			);
 			$this->Crud_model->SaveData('user_product', $data);
 			$insert_id = $this->db->insert_id();
+			$sitemap_date = array(
+				'link'=>'productdetail/'.base64_encode($insert_id),
+				'changefreq' => 'daily',
+				'priority' => '0.51',
+				'lastmod'=>date('Y-m-d H:i:s'),
+			);
+			$this->Crud_model->SaveData('sitemap',$sitemap_date);
 			if(!empty($insert_id)) {
 				if ($_FILES['prod_image']['name'] != '') {
 					$cpt = count($_FILES['prod_image']['name']);
@@ -1044,7 +925,6 @@ class Dashboard extends CI_Controller {
 						$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
 						$config2['maintain_ratio'] = FALSE;
 						$this->image_lib->initialize($config2);
-						//$this->load->library('image_lib', $config2);
 						if (!$this->image_lib->resize()) {
 							echo ('<pre>');
 							echo ($this->image_lib->display_errors());
@@ -1065,8 +945,8 @@ class Dashboard extends CI_Controller {
 			}
 			redirect(base_url('product'));
 		}
-
-		$this->load->view('header');
+		$data1['title'] = 'Add Product';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/product/form', $data);
 		$this->load->view('footer');
 	}
@@ -1081,11 +961,11 @@ class Dashboard extends CI_Controller {
 			'description' => $update_product->prod_description,
 			'id' => $update_product->id,
 		);
-		$this->load->view('header');
+		$data1['title'] = 'Update Product';
+		$this->load->view('header', $data1);
 		$this->load->view('user_dashboard/product/form', $data);
 		$this->load->view('footer');
 	}
-
 
 	public function edit_product() {
 		$id = $_POST['id'];
@@ -1094,7 +974,6 @@ class Dashboard extends CI_Controller {
 			'prod_description' => $this->input->post('prod_description', TRUE),
 		);
 		$updateQuery = $this->Crud_model->SaveData('user_product', $data, "id='".$id."'");
-		//print_r($_FILES['prod_image']['name'][0]); die;
 		if (!empty($_FILES['prod_image']['name'][0])) {
 			$cpt = count($_FILES['prod_image']['name']);
 			for($i=0; $i<$cpt; $i++) {
@@ -1106,7 +985,6 @@ class Dashboard extends CI_Controller {
 				$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
 				$config2['maintain_ratio'] = FALSE;
 				$this->image_lib->initialize($config2);
-				//$this->load->library('image_lib', $config2);
 				if (!$this->image_lib->resize()) {
 					echo ('<pre>');
 					echo ($this->image_lib->display_errors());
@@ -1121,7 +999,6 @@ class Dashboard extends CI_Controller {
 					'created_date' => date("Y-m-d H:i:s"),
 				);
 				$this->Crud_model->SaveData('user_product_image', $data_image);
-				//$this->session->set_flashdata('message', 'Product Created Successfully !');
 			}
 		}
 		$this->session->set_flashdata('message', 'Product Updated Successfully !');
@@ -1154,6 +1031,4 @@ class Dashboard extends CI_Controller {
 		$p_id = $this->input->post('id');
 		$delete_prod = $this->db->query("DELETE FROM user_product_image WHERE id = '$p_id'");
 	}
-
-	///////////////// End User Product //////////////////////////
 }

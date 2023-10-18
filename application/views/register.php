@@ -10,9 +10,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </style>
 <section class="overlape">
     <div class="block no-padding">
-        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"
-            class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
+        <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
         <div class="container fluid">
             <div class="row">
                 <div class="col-lg-12">
@@ -24,7 +22,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </section>
-
 <section class="max_height">
     <div class="block remove-bottom Sign_Up">
         <div class="container">
@@ -35,10 +32,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-12 col-sm-12 SignUp_Left">
                                     <h3>Sign Up</h3>
-                                    <span>Let's create your account! Choose to sign up as either a Freelancer or a Vendor.</span>
+                                    <span>Let's create your account! Choose to sign up as either a Talent or a Business.</span>
                                     <div class="select-user">
-                                        <span class="user-tab active" user_type="1" onclick="get_value(1)">Freelancer</span>
-                                        <span class="user-tab" user_type="2" onclick="get_value(2)">Vendor</span>
+                                        <span class="user-tab active" user_type="1" onclick="get_value(1)">Talent</span>
+                                        <span class="user-tab" user_type="2" onclick="get_value(2)">Business</span>
                                     </div>
                                     <div class="error" id="err_usertype"></div>
                                 </div>
@@ -49,20 +46,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <div id="err-messages">
                                         <h4 style="color: red;">Error</h4>
-                                        <p style="color: red;">Oops, somthing went wrong. Please try again later.</p>
+                                        <p style="color: red;">Oops, something went wrong. Please try again later.</p>
                                     </div>
                                     <form id="signUp_form" action="#" method="post">
                                         <div class="row m-0">
-                                            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <div class="cfield cfield_top">
-                                                    <label for="" class="form-label">Full Name</label>
-                                                    <div class="cfield_Input">
-                                                        <input type="text" placeholder="Full Name" name="username" id="username" onkeypress="only_alphabets(event)" />
-                                                        <i class="la la-user"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="error text-left" id="err_username"></div>
-                                            </div> -->
                                             <div class="col-lg-6 col-md-6 col-sm-6 first_name">
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">First Name <span style="color:red">*</span></label>
@@ -87,7 +74,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Company Name <span style="color:red">*</span></label>
                                                     <div class="cfield_Input">
-                                                        <!-- <input type="text" placeholder="Company Name" name="company_name" id="company_name" onkeypress="only_specialAlphabets(event)" /> -->
                                                         <input type="text" placeholder="Company Name" name="company_name" id="company_name"/>
                                                         <i class="la la-home"></i>
                                                     </div>
@@ -104,16 +90,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 </div>
                                                 <div class="error text-left" id="err_email"></div>
                                             </div>
-                                            <!-- <div class="col-lg-6 col-md-6 col-sm-6 mobile">
-                                                <div class="cfield cfield_top">
-                                                    <label for="" class="form-label">Phone Number</label>
-                                                    <div class="cfield_Input">
-                                                        <input type="text" placeholder="Phone Number" name="mobile" maxlength="10" id="mobile" onkeypress="only_number(event)" />
-                                                        <i class="la la-phone"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="error text-left" id="err_mobile"></div>
-                                            </div> -->
                                             <div class="col-lg-6 col-md-6 col-sm-6 addrss">
                                                 <div class="cfield cfield_top">
                                                     <label for="" class="form-label">Legal Address <span style="color:red;">*</span></label>
@@ -147,39 +123,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                                 <div class="error text-left" id="err_confpassword"></div>
                                             </div>
                                             <div class="col-lg-12 col-md-6 col-sm-6" id="err_check_pass" style="tex-align:center;"></div>
-                                            <!-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="cfield">
-                                                    <label for="" class="form-label">Select Option</label>
-                                                    <div class="cfield_Input">
-                                                        <div class="dropdown-field">
-                                                            <select name="service" class="chosen" id="service" multiple>
-                                                                <option value="">Please Select Specialization</option>
-                                                                <?php if(!empty($get_category)){
-                                                                foreach ($get_category as $key) {?>
-                                                                <option value="<?= $key->id?>"><?= $key->category_name?></option>
-                                                                <?php  } } ?>
-                                                            </select>
-                                                        </div>
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="error text-left" id="err_service"></div>
-                                            </div> -->
                                             <div class="col-lg-12 col-md-12 col-sm-12 SignUp_Btn">
                                                 <input type="hidden" name="user_type" id="user_type">
                                                 <button type="button" class="btn btn-info" id="rSignUp" onclick="return btn_register();">Sign up</button>
-                                                <!-- <button type="button" class="btn btn-info" id="please_wait" onclick="return">Please Wait...</button> -->
-                                                <!-- <img src="<?php echo base_url()?>uploads/loading.gif" id="loader"> -->
                                             </div>
-                                            <!-- <div class="col-lg-12 col-md-12 col-sm-12 d-none">
-                                                <div class="extra-login">
-                                                    <span>OR</span>
-                                                    <div class="login-social">
-                                                        <a class="fb-login" href="#" title=""><i class="fa fa-facebook"></i></a>
-                                                        <a class="tw-login" href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div> -->
                                         </div>
                                     </form>
                                 </div>
@@ -200,25 +147,25 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 $(document).ready(function(){
     $('#user_type').val(1);
 })
-    function get_value(id) {
-        $('#user_type').val(id);
-        if(id == 1){
-            $('.company_name').hide();
-            $('.first_name').show();
-            $('.last_name').show();
-            $('.email').show();
-            $('.pass').show();
-            $('.c_pass').show();
-            $('.addrss').show();
-        } else {
-            $('.company_name').show();
-            $('.first_name').hide();
-            $('.last_name').hide();
-            $('.email').show();
-            $('.pass').show();
-            $('.c_pass').show();
-            $('.addrss').show();
-        }
+function get_value(id) {
+    $('#user_type').val(id);
+    if(id == 1){
+        $('.company_name').hide();
+        $('.first_name').show();
+        $('.last_name').show();
+        $('.email').show();
+        $('.pass').show();
+        $('.c_pass').show();
+        $('.addrss').show();
+    } else {
+        $('.company_name').show();
+        $('.first_name').hide();
+        $('.last_name').hide();
+        $('.email').show();
+        $('.pass').show();
+        $('.c_pass').show();
+        $('.addrss').show();
     }
+}
 </script>
 <script type="text/javascript" src="<?= base_url('assets/custom_js/register.js')?>"></script>

@@ -8,6 +8,8 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php if($this->uri->segment(1) == 'postdetail') { ?>
     <title><?php echo @$post_data->post_title?> - <?php echo @$get_setting->website_name?></title>
+    <?php } else if ($this->uri->segment(1) == 'career-tip') { ?>
+    <title><?php echo $get_career->title?> - <?php echo @$get_setting->website_name?></title>
     <?php } else { ?>
     <title><?php echo $title?> - <?php echo @$get_setting->website_name?></title>
     <?php } ?>
@@ -24,6 +26,8 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <meta name="description" content="<?php echo $prod_details[0]['prod_description']; ?>">
     <?php } else if ($this->uri->segment(1) == 'ourjobs') { ?>
     <meta name="description" content="Your Bridge to career opportunities. Contact us today to start your journey toward a brighter future. Our experts are here to guide you in finding your dream job">
+    <?php } else if ($this->uri->segment(1) == 'career-tip') { $description = explode('.', $get_career->description)?>
+    <meta name="description" content="<?= $description[0]?>">
     <?php } else { ?>
     <meta name="description" content="<?php echo @$description?>">
     <?php } ?>
@@ -51,29 +55,9 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6163c52d38f8310012c86621&product=inline-share-buttons' async='async'></script>
     <style>
     .completeSub {display: none; text-align: center; margin-top: 20px; color: #fa5a1f; font-size: 20px;}
-    #completeSub {
-  position: relative;
-  display: inline-block;
-}
-
-#completeSub #completeSubtext {
-  visibility: hidden;
-      width: max-content;
-    background-color: white;
-    color: #000;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 10px;
-    position: absolute;
-    z-index: 1;
-    top: 50px;
-    font-size: 13px;
-    right: 0;
-}
-
-#completeSub:hover #completeSubtext {
-  visibility: visible;
-}
+    #completeSub {position: relative;display: inline-block;}
+    #completeSub #completeSubtext {visibility: hidden;width: max-content;background-color: white;color: #000;text-align: center;border-radius: 6px;padding: 5px 10px;position: absolute;z-index: 1;top: 50px;font-size: 13px;right: 0;}
+    #completeSub:hover #completeSubtext {visibility: visible;}
 </style>
 <script>
 function completeSub() {
@@ -119,12 +103,8 @@ OneSignalDeferred.push(function(OneSignal) {
     });
     OneSignal.push(function()  {
         OneSignal.Notifications.addEventListener('permissionChange', function (isSubscribed) {
-        //let isSubscribed = await OneSignal.Notifications.permission
-        //console.log("The user's subscription state is now:",isSubscribed);
-        //alert();
         if(!isSubscribed) return;
         OneSignal.push(async function() {
-            //alert();
             let url = "<?php base_url('Home/addSubscription_id')?>";
             let formData = new FormData();
             formData.append("subscription_id", OneSignal.User.PushSubscription.id);
@@ -139,10 +119,10 @@ OneSignalDeferred.push(function(OneSignal) {
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-63DY10P9S3"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-63DY10P9S3');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-63DY10P9S3');
 </script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -171,9 +151,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="responsive-opensec" style="background: #f67a49; padding: 0;">
                 <div class="btn-extars" style="display: flex; align-items: center; justify-content: space-between; border-color: #fff; padding: 20px 30px;">
                 <?php if(!empty($_SESSION['afrebay']['userId'])){?>
-                    <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                    <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                 <?php } else{?>
-                    <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                    <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                 <?php } ?>
                     <ul class="account-btns" style="margin: 0;">
                         <?php if(!empty($_SESSION['afrebay']['userId'])){?>
@@ -193,38 +173,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <?php } ?>
                     </ul>
                 </div>
-                <!-- <form class="res-search">
-                    <input type="text" placeholder="Job title, keywords or company name" />
-                    <button type="submit"><i class="la la-search"></i></button>
-                </form> -->
                 <div class="responsivemenu" style="padding-left: 30px; padding-right: 30px;">
                     <ul>
-                        <!-- <li class="menu-item-has-children">
-                            <a href="#" title="">Our Services</a>
-                            <ul>
-                            <?php if(!empty($get_category)){
-                            foreach ($get_category as $row ) {
-                            $get_subcategory=$this->Crud_model->GetData('sub_category','',"category_id='".$row->id."'"); ?>
-                                <li class="menu-item-has-children">
-                                    <a href="#" title=""><?= ucfirst($row->category_name)?></a>
-                                    <ul>
-                                    <?php if(!empty($get_subcategory)){
-                                    foreach ($get_subcategory as $key) { ?>
-                                        <li><a href="<?= base_url('employees_list/'.base64_encode($key->id))?>"><?= ucfirst($key->sub_category_name)?></a></li>
-                                    <?php } } ?>
-                                    </ul>
-                                </li>
-                            <?php } } ?>
-                            </ul>
-                        </li> -->
                         <li class="account-btns">
-                            <a href="<?= base_url('ourjobs')?>" title="">Our Jobs</a>
+                            <a href="<?= base_url('ourjobs')?>" title="">Find Work</a>
                         </li>
                         <li class="account-btns">
                             <a href="<?= base_url('employer-list')?>" title="">Businesses</a>                            
                         </li>
                         <li class="account-btns">
-                            <a href="<?= base_url('workers-list')?>" title="">Freelancer</a>                            
+                            <a href="<?= base_url('workers-list')?>" title="">Our Talent</a>                            
                         </li>
                     </ul>
                 </div>
@@ -242,39 +200,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                     <nav>
                         <ul>
-                            <!-- <li class="menu-item-has-children">
-                                <a href="#" title="">Our Services</a>
-                                <ul>
-                                <?php if(!empty($get_category)){
-                                foreach ($get_category as $row ) {
-                                $get_subcategory=$this->Crud_model->GetData('sub_category','',"category_id='".$row->id."'"); ?>
-                                    <li class="menu-item-has-children">
-                                        <a href="#" title=""><?= ucfirst($row->category_name)?></a>
-                                        <ul>
-                                            <?php if(!empty($get_subcategory)) {
-                                            foreach ($get_subcategory as $key) { ?>
-                                                <li><a href="<?= base_url('employees_list/'.base64_encode($key->id))?>"><?= ucfirst($key->sub_category_name)?></a></li>
-                                            <?php } } ?>
-                                            </ul>
-                                        </li>
-                                <?php } } ?>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#" title="">Become a AfreBay Partner</a>
-                                <ul>
-                                    <li><a href="<?= base_url('employer-list')?>" title="">Business</a></li>
-                                    <li><a href="<?= base_url('workers-list')?>" title="">Freelancers</a></li>
-                                </ul>
-                            </li> -->
                             <li class="">
                                 <a href="<?= base_url('employer-list')?>" title="">Businesses</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('workers-list')?>" title="">Freelancers</a>
+                                <a href="<?= base_url('workers-list')?>" title="">Our Talent</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('ourjobs')?>" title="">Our Jobs</a>
+                                <a href="<?= base_url('ourjobs')?>" title="">Find Work</a>
                             </li>
                         </ul>
                     </nav>
@@ -289,7 +222,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                     $get_sub_data = $this->db->query("SELECT * FROM employer_subscription WHERE employer_id='".$_SESSION['afrebay']['userId']."' AND (status = '1' OR status = '2')")->result_array();
                                     if(empty($get_sub_data)) 
                                     { ?>
-                                    <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Jobs<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
+                                    <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                     <?php 
                                     } 
                                     else if(!empty($get_sub_data)) 
@@ -297,18 +230,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                         $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                         if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) 
                                         { ?>
-                                            <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Jobs<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
+                                            <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                         <?php 
                                         } 
                                         else 
                                         { ?>
-                                            <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                                            <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                         <?php 
                                         }
                                     } 
                                     else 
                                     { ?>
-                                        <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                                        <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                     <?php 
                                     }
                                 } else 
@@ -316,18 +249,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                     $profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                     if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) 
                                     { ?>
-                                        <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Jobs<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
+                                        <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                     <?php 
                                     } 
                                     else 
                                     { ?>
-                                        <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                                        <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                     <?php 
                                     }
                                 }
                             }
                         } else { ?>
-                        <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+                        <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                         <?php } ?>
 
                         <ul class="account-btns">

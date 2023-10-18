@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') or exit('No direct script access allowed');
 error_reporting(0);
 use PHPMailer\PHPMailer\PHPMailer;
@@ -20,14 +19,6 @@ class Home extends MY_Controller {
 		$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
 		$data['get_career'] = $this->Crud_model->GetData('career_tips', '', "status='Active'", '', '', '3');
 		$data['get_company'] = $this->Crud_model->GetData('company_logo', '', "status='Active'", '', '', '');
-		// $settings = $this->db->query("SELECT * FROM setting")->result_array();
-		// if($settings[0]['required_subscription'] == '1') {
-		// 	$data['get_users'] = $this->Users_model->get_users();
-		// 	$data['getTotalworkers'] = $this->db->query("SELECT users.*, employer_subscription.* FROM users JOIN employer_subscription ON employer_subscription.employer_id = users.userId WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC limit 8")->result_array();
-		// } else {
-		// 	$data['get_users'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC limit 8")->result();
-		// 	$data['getTotalworkers'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC")->result_array();
-		// }
 		$data['get_users'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' AND gender != '' ORDER BY users.userId DESC limit 8")->result();
 		$data['getTotalworkers'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC")->result_array();
 		$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
@@ -97,8 +88,6 @@ class Home extends MY_Controller {
 		$get_setting=$this->Crud_model->get_single('setting');
 		if(!empty($insert_id)) {
 			$subject = $_POST['subject'];
-			//$imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
-			//$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'><tbody> <tr><td align='center'><table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'> <tbody> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'><img src='cid:Logo' style='width: 250px'/></td> </tr> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello Team,</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'> Please find the below contact form details. </td> </tr> </tbody> </table> </td> </tr> <tr> <td align='center'> <table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'> <tbody> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Name : ".$_POST['name'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Email : ".$_POST['email'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>".$_POST['message'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'> Sincerely, </td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>".$_POST['name']."</td> </tr> <tr> <td height='30'></td> </tr> </tbody> </table> </td> </tr> </tbody> </table>";
 			$message = "<div style='width:600px;margin: 0 auto;background: #fff;font-family: 'Poppins', sans-serif; border: 1px solid #e6e6e6;'><div style='padding: 30px 30px 15px 30px;box-sizing: border-box;'><img src='cid:Logo' style='width:100px;float: right;margin-top: 0 auto;'><h3 style='padding-top: 40px;line-height: 20px;font-weight: 100;font-size: 15px;'>Greetings from<span style='font-weight: 900;font-size: 23px;color: #F44C0D;display: block;'>Afrebay</span></h3><p style='font-size: 15px;'>Hello Admin,</p><p style='font-size: 15px;'>Please find the below contact form details.</p><p style='font-size: 15px; padding: 0; margin: 0;'>Name : ".$_POST['name']."</p><p style='font-size: 15px; padding: 0; margin: 0;'>Email : ".$_POST['email']."</p><p style='font-size: 15px; padding: 0; margin: 0;'>Message: ".$_POST['message']."</p><p style='font-size: 15px; padding: 0; margin: 18px 0 0 0;'>Thank you!</p><p style='font-size: 15px; padding: 0; margin: 0; list-style: none;'>Sincerly,</p><p style='font-size: 15px; list-style: none; padding: 0; margin: 0;'><b>".$_POST['name']."</b></p><p style='font-size: 15px; list-style: none; padding: 0; margin: 18px 0 0 0;'>Visit us: <span> $get_setting->address</span></p><p style='font-size: 15px; list-style: none; padding: 0; margin: 0;'>Email us: <span> $get_setting->email</span></p></div><table style='width: 100%;'><tr><td style='height:30px;width:100%; background: red;padding: 10px 0px; font-size:13px; color: #fff; text-align: center;'>Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.</td></tr></table></div>";
 			require 'vendor/autoload.php';
 			$mail = new PHPMailer(true);
@@ -120,12 +109,9 @@ class Home extends MY_Controller {
 				$mail->Username   = "no-reply@goigi.com";
 				$mail->Password   = "wj8jeml3eu0z";
 				$mail->send();
-				// echo 'Message has been sent';
 			} catch (Exception $e) {
-				//$this->session->set_flashdata('message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
 				$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
 			}
-			//$msg = "An email has been sent to your email address containing an activation link. Please click on the link to activate your account. If you do not click the link your account will remain inactive and you will not receive further emails. If you do not receive the email within a few minutes, please check your spam folder.";
 			$this->session->set_flashdata('message', 'Thank you for your message. Our team will connect you soon!');
 			redirect('contact-us');
 		} else {
@@ -147,7 +133,7 @@ class Home extends MY_Controller {
 	public function term_and_conditions() {
 		$data['get_cms'] = $this->Crud_model->get_single('manage_cms', "id='1'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Term and conditions'");
-		$data['title'] = 'Term and Conditions';
+		$data['title'] = 'Terms and Conditions';
 		$data['description'] = 'Discover our recruitment company\'s terms and conditions - Your guide to a successful partnership. Learn about our policies, expectations, and commitments. Join us in shaping the future of your career!';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/term_and_conditions', $data);
@@ -174,8 +160,6 @@ class Home extends MY_Controller {
 		} else {
 			$cond = " WHERE subscription_country = 'Global'";
 		}
-
-		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Pricing'");
@@ -194,8 +178,6 @@ class Home extends MY_Controller {
 		} else {
 			$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Business'";
 		}
-
-		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".@$_SESSION['afrebay']['userId']."'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Pricing'");
@@ -214,12 +196,10 @@ class Home extends MY_Controller {
 		} else {
 			$cond = " WHERE subscription_country = 'Global' AND subscription_user_type = 'Freelancer'";
 		}
-
-		//$data['get_subscription'] = $this->Crud_model->GetData('subscription');
 		$data['get_subscription'] = $this->db->query("SELECT * FROM subscription ".$cond."")->result_array();
 		$data['subcriber_pack'] = $this->Crud_model->GetData('employer_subscription', '', "employer_id='" . @$_SESSION['afrebay']['userId'] . "'");
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Pricing'");
-		$data['title'] = 'Freelancer Plan';
+		$data['title'] = 'Talent Plan';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/freelancer_pricing', $data);
 		$this->load->view('footer');
@@ -229,7 +209,7 @@ class Home extends MY_Controller {
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['getcountry']=$this->Crud_model->GetData('countries');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Our Jobs'");
-		$data['title'] = 'Our Jobs';
+		$data['title'] = 'Find Work';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/post_jobslist', $data);
 		$this->load->view('footer');
@@ -274,7 +254,6 @@ class Home extends MY_Controller {
 	function post_bidding($postid) {
 		$vis_ip = $this->getVisIPAddr(); // Store the IP address
 		$ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $vis_ip));
-		//print_r($_SESSION); die();
 		$data['countryName'] = $ipdat->geoplugin_countryName;
 		if(!empty($_SESSION['afrebay_admin'])){
 			$type='admin';
@@ -285,9 +264,7 @@ class Home extends MY_Controller {
 		}
 		$con = "postjob.id='" . base64_decode($postid) . "'";
 		$data['post_data'] = $this->post_job_model->viewdata($con);
-		//print_r($data['post_data']);die;
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Post Jobs'");
-
 		if($type=='admin'){
 			$this->load->view('header',$data);
 			$data['type']='admin';
@@ -305,7 +282,7 @@ class Home extends MY_Controller {
 	function workers_list() {
 		$data['get_specialist'] = $this->Crud_model->GetData('specialist');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancers'");
-		$data['title'] = 'List of Freelancers';
+		$data['title'] = 'List of Talents';
 		$data['description'] = 'Explore our dedicated team of skilled professionals! Get to know the backbone of our company with our comprehensive workers list. Discover the talent driving our success and innovation.';
 		$this->load->view('header',$data);
 		$this->load->view('frontend/workers_list', $data);
@@ -348,16 +325,14 @@ class Home extends MY_Controller {
 		$this->pagination->initialize($config);
 		$page = $this->uri->segment(3);
 		$start = ($page - 1) * $config['per_page'];
-
 		if(isset($title) || isset($search_location) || isset($specialist) || isset($userType)) {
 			$getdata=$this->Users_model->workers_fetchdata($config["per_page"], $start, $title, $search_location, $specialist, $userType);
 		} else {
 			$getdata=$this->Users_model->workers_fetchdata($config["per_page"], $start, $title, $search_location, $specialist, $userType);
 		}
-
 		$output = array(
-			'pagination_link'  => $this->pagination->create_links(),
-			'product_list'   => $getdata
+			'pagination_link' => $this->pagination->create_links(),
+			'product_list' => $getdata
 		);
 		echo json_encode($output);
 	}
@@ -368,7 +343,7 @@ class Home extends MY_Controller {
 		$data['user_education'] = $this->Crud_model->GetData('user_education', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
 		$data['user_work'] = $this->Crud_model->GetData('user_workexperience', '', "user_id='" . base64_decode($user_id) . "'", '', '(id)desc');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Frelancer Details'");
-		$data['title'] = 'Freelancer Details';
+		$data['title'] = 'Talent Details';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/worker_profile', $data);
 		$this->load->view('footer');
@@ -435,7 +410,7 @@ class Home extends MY_Controller {
 
 	function career_tip($id) {
 		$data['get_career'] = $this->Crud_model->get_single('career_tips', "id='".base64_decode($id)."'");
-		$this->load->view('header');
+		$this->load->view('header', $data);
 		$this->load->view('frontend/career_tip', $data);
 		$this->load->view('footer');
 	}
@@ -455,12 +430,10 @@ class Home extends MY_Controller {
 		$get_setting=$this->Crud_model->get_single('setting');
 		if(!empty($insert_id)) {
 			$subject = 'New Product Inquiry';
-			//$message = $this->load->view('email_template/product_query',$data,TRUE);
 			$message = "<div style='width:600px;margin: 0 auto;background: #fff;font-family: 'Poppins', sans-serif; border: 1px solid #e6e6e6;'><div style='padding: 30px 30px 15px 30px;box-sizing: border-box;'><img src='cid:Logo' style='width:100px;float: right;margin-top: 0 auto;'><h3 style='padding-top: 40px;line-height: 20px;font-weight: 100;font-size: 15px;'>Greetings from<span style='font-weight: 900;font-size: 23px;color: #F44C0D;display: block;'>Afrebay</span></h3><p style='font-size: 15px;'>Hello Admin,</p><p style='font-size: 15px;'>Please find the below details for product related queries.</p><p style='font-size: 15px; padding: 0; margin: 0;'>Product Name: ".$_POST['p_name']."</p><p style='font-size: 15px; padding: 0; margin: 0;'>Customer Name: ".$_POST['name']."</p><p style='font-size: 15px; padding: 0; margin: 0;'>Customer Email: ".$_POST['email']."</p><p style='font-size: 15px; padding: 0; margin: 0;'>Message: ".$_POST['details']."</p><p style='font-size: 15px; padding: 0; margin: 18px 0 0 0;'>Thank you!</p><p style='font-size: 15px; padding: 0; margin: 0; list-style: none;'>Sincerly,</p><p style='font-size: 15px; list-style: none; padding: 0; margin: 0;'><b>Afrebay</b></p><p style='font-size: 15px; list-style: none; padding: 0; margin: 18px 0 0 0;'>Visit us: <span> $get_setting->address</span></p><p style='font-size: 15px; list-style: none; padding: 0; margin: 0;'>Email us: <span> $get_setting->email</span></p></div><table style='width: 100%;'><tr><td style='height:30px;width:100%; background: red;padding: 10px 0px; font-size:13px; color: #fff; text-align: center;'>Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.</td></tr></table></div>";
 			require 'vendor/autoload.php';
 			$mail = new PHPMailer(true);
 			try {
-				//Server settings
 				$mail->CharSet = 'UTF-8';
 				$mail->SetFrom('admin@afrebay.com', 'Afrebay');
 				$mail->AddAddress($_POST['email']);
@@ -468,7 +441,6 @@ class Home extends MY_Controller {
 				$mail->Subject = $subject;
 				$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
 				$mail->Body = $message;
-				//Send email via SMTP
 				$mail->IsSMTP();
 				$mail->SMTPAuth   = true;
 				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -563,7 +535,6 @@ class Home extends MY_Controller {
 	}
 
 	public function paystackCheckout($planCode,$price,$email) {
-		//echo $this->input->get('plan_code');
 		$plan_code = base64_decode($planCode);
 		$price = base64_decode($price);
 		$email = base64_decode($email);
@@ -585,7 +556,6 @@ class Home extends MY_Controller {
 		));
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);    //So that curl_exec returns the contents of the cURL; rather than echoing it
 		$result = curl_exec($ch);    //execute post
-		//echo $result;
 		$initialize_data = json_decode($result);
 		$initialization_url = $initialize_data->data->authorization_url;
 		if($result) {

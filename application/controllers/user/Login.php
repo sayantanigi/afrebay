@@ -54,6 +54,22 @@ class Login extends CI_Controller {
 			}
 
 			$insert_id = $this->db->insert_id();
+			if($_POST['user_type'] == '1') {
+				$sitemap_date = array(
+					'link'=>'worker-detail/'.base64_encode($insert_id),
+					'changefreq' => 'daily',
+					'priority' => '0.80',
+					'lastmod'=>date('Y-m-d H:i:s'),
+				);
+			} else {
+				$sitemap_date = array(
+					'link'=>'employerdetail/'.base64_encode($insert_id),
+					'changefreq' => 'daily',
+					'priority' => '0.64',
+					'lastmod'=>date('Y-m-d H:i:s'),
+				);
+			}
+			$this->Mymodel->insert('sitemap',$sitemap_date);
 			$get_setting=$this->Crud_model->get_single('setting');
 			if(!empty($insert_id)) {
 				//$subject = 'Verify Your Email Address From Afrebay';
@@ -250,7 +266,7 @@ class Login extends CI_Controller {
 	}
 
 	function new_password() {
-	    $data['title']='Forget Password';
+	    $data['title']='New Password';
 		$this->load->view('header',$data);
 		$this->load->view('new_password');
 		$this->load->view('footer');
