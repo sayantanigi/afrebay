@@ -21,32 +21,19 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
                 <h2 class="breadcrumb-title">Profile Settings</h2>
-                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Subscription</li>
-                    </ol>
-                </nav> -->
             </div>
         </div>
     </div>
 </section>
 
 <?php
-// echo "test here code";die;
-// echo $data_request;die;
 if($data_request=='user'){
-
 $this->load->view('sidebar');
 $container='';
-
 }
 else{
     $container='container';
 }
-// print_r($_SESSION['afrebay']);die;
-
-// echo "test here";die;
 ?>
 <div class="col-md-12 col-sm-12 display-table-cell v-align">
     <div class="user-dashboard Admin_Profile form-design <?php echo $container;  ?> ">
@@ -91,7 +78,6 @@ else{
                                     <hr />
                                     <div class="form-group">
                                         <div class="row">
-                                            <?php //if(@$_SESSION['afrebay']['userType']=='2') { ?>
                                             <?php if(@$userinfo->userType=='2') { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
@@ -128,8 +114,6 @@ else{
                                                 </label>
                                                 <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Phone Number" value="<?php echo $userinfo->mobile;?>" onkeypress="only_number(event)" maxlength="10" />
                                             </div>
-
-                                            <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <?php if(@$userinfo->userType=='1') { ?>
                                             <div class="col-lg-6 gender">
                                                 <label for="first_name">
@@ -143,25 +127,6 @@ else{
                                                 <div id="vld_gender" style="color:red; margin-top: 10px;">Please Select Gender.</div>
                                             </div>
                                             <?php } ?>
-                                            <!-- <div class="col-lg-6">
-                                                <label for="first_name">
-                                                    <h4>Work Experience<span style="color:red;">*</span></h4>
-                                                </label>
-                                                <input type="text" class="form-control" name="experience"  value="<?= @$userinfo->experience;?>" placeholder="Enter Experience" />
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label for="first_name">
-                                                    <h4>Highest Qualification<span style="color:red;">*</span></h4>
-                                                </label>
-                                                <input type="text" class="form-control" name="qualification"  value="<?= @$userinfo->qualification;?>" placeholder="Enter qualification" />
-                                            </div> -->
-                                            <!-- <div class="col-lg-6">
-                                                <label for="first_name">
-                                                    <h4>Skills<span style="color:red;">*</span></h4>
-                                                </label>
-                                                <br>
-                                                <input type="text" name="skills"  id="skills" class="form-control" value="<?= @$userinfo->skills?>" />
-                                            </div> -->
                                             <div class="col-lg-6 location">
                                                 <label for="last_name">
                                                     <h4>Legal Address <span style="color:red;">*</span></h4>
@@ -171,7 +136,6 @@ else{
                                                 <input type="hidden" name="latitude" id="search_lat" value="<?= $userinfo->latitude ?>">
                                                 <input type="hidden" name="longitude" id="search_lon" value="<?= $userinfo->longitude ?> ">
                                             </div>
-                                            <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <?php if(@$userinfo->userType=='1') { ?>
                                             <div class="col-lg-12 key-skill">
                                                 <span class="pf-title1">Skill Set</span>
@@ -194,7 +158,6 @@ else{
                                                 </div>
                                             </div>
                                             <?php } ?>
-                                            <?php //if(@$_SESSION['afrebay']['userType']=='1') { ?>
                                             <?php if(@$userinfo->userType=='1') { ?>
                                             <div class="col-lg-6">
                                                 <label for="last_name">
@@ -215,55 +178,13 @@ else{
                                                 <?php } else{?>
                                                 <a href="<?php echo base_url('uploads/users/resume/'.$userinfo->resume); ?>" />
                                                     <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:40px; color:red;"></i>
-                                                    <!-- <span><?php //if(strlen($userinfo->resume)>30){ echo substr($userinfo->resume, 0,30);}else{ echo $userinfo->resume; }?></span> -->
                                                     <span><?php echo $userinfo->resume; ?></span>
                                                 </a>
                                                 <input type="hidden" name="old_resume" value="<?= $userinfo->resume ?>">
                                                 <?php } } else { ?>
                                                 <?php } ?>
                                             </div>
-                                            <!-- <div class="col-lg-6">
-                                                <label for="last_name">
-                                                    <h4>Additional Images</h4>
-                                                </label>
-                                                <input type="file" class="form-control" name="additional_image" />
-                                                <br>
-                                                <?php
-                                                //if(!empty($userinfo->additional_image)){
-                                                    //if(!file_exists('uploads/users/additional_image/'.$userinfo->additional_image)){
-                                                ?>
-                                                <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php //} else { ?>
-                                                <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/users/additional_image/'.$userinfo->additional_image); ?>" style="width:60px;height: 60px;" /></a>
-                                                <input type="hidden" name="old_additionalimage" value="<?= $userinfo->additional_image ?>">
-                                                <?php //} } else { ?>
-                                                <img class="img-circle img-responsive" src="<?php //echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php //} ?>
-                                            </div> -->
-                                            <!-- <div class="col-lg-6">
-                                                <label for="last_name">
-                                                    <h4>Short Video</h4>
-                                                </label>
-                                                <input type="file" class="form-control" name="video" />
-                                                <br>
-                                                <?php
-                                                if(!empty($userinfo->video)){
-                                                    if(!file_exists('uploads/video/'.$userinfo->video)){
-                                                ?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php } else { ?>
-                                                <video width="200" controls autoplay>
-                                                    <source src="<?= base_url('uploads/video/'.$userinfo->video) ?>" style="width:50px;height:50px;" type="video/mp4">
-                                                    <source src="<?= base_url('uploads/video/'.$userinfo->video)?>" style="width:50px;height:50px;" type="video/ogg">
-                                                </video>
-                                                <input type="hidden" name="old_video" value="<?= $userinfo->video ?>">
-                                                <?php } }else{?>
-                                                <img class="img-circle img-responsive" src="<?php echo base_url('uploads/no_image.png')?>" style="width:60px;height: 60px;" />
-                                                <?php } ?>
-                                            </div> -->
                                             <?php } ?>
-
-                                            <?php //if(@$_SESSION['afrebay']['userType']=='2') { ?>
                                             <?php if(@$userinfo->userType=='2') { ?>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
@@ -296,7 +217,6 @@ else{
                                     <div class="form-group">
                                         <div class="col-xs-12 aksek">
                                             <button class="post-job-btn pull-right" type="submit">Save Changes</button>
-                                            <!-- <input type="hidden" name="utype" id="utype" value="<?= @$_SESSION['afrebay']['userType']?>"> -->
                                             <input type="hidden" name="utype" id="utype" value="<?= @$userinfo->userType?>">
                                         </div>
                                     </div>
@@ -316,21 +236,20 @@ else{
 .Admin_Profile .cardak .gender select {margin-bottom: 0px !important;}
 .form-design form .cardak .profile-dsd input  {margin-bottom: 0px !important;}
 .col-lg-6 {margin-bottom: 20px !important;}
-    #vld_shrtBio {display: none;}
-    #vld_firstname {display: none;}
-    #vld_lastname {display: none;}
-    #vld_gender {display: none;}
-    #vld_location {display: none;}
-    #vld_companyname {display: none;}
-    #vld_teamsize {display: none;}
-    .container:before,
-    .container:after
-        { display: none !important; }
-    @media (min-width: 1250px) {
-        .container.Header_Menu_Nav {
-            width: 1250px !important;
-        }
+#vld_shrtBio {display: none;}
+#vld_firstname {display: none;}
+#vld_lastname {display: none;}
+#vld_gender {display: none;}
+#vld_location {display: none;}
+#vld_companyname {display: none;}
+#vld_teamsize {display: none;}
+.container:before,
+.container:after { display: none !important; }
+@media (min-width: 1250px) {
+    .container.Header_Menu_Nav {
+        width: 1250px !important;
     }
+}
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
@@ -339,14 +258,12 @@ else{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script type="text/javascript">
-//CKEDITOR.replace('short_bio');
 $('#skills').tagsinput({
     confirmKeys: [13, 44],
     maxTags: 20,
 });
 $('.key_skills').select2({
     tags: true,
-    //maximumSelectionLength: 10,
     tokenSeparators: [','],
     placeholder: "Select or Type Skills"
 });
@@ -356,10 +273,7 @@ $('#short_bio').keyup(function() {
     current = $('#current'),
     maximum = $('#maximum'),
     theCount = $('#the-count');
-
     current.text(characterCount);
-
-    /*This isn't entirely necessary, just playin around*/
     if (characterCount < 70) {
         current.css('color', '#666');
     }
@@ -422,15 +336,6 @@ $("form").submit( function(e) {
             setTimeout(function(){$("#vld_shrtBio").hide();},5000)
             e.preventDefault();
         }
-        // if($('#key_skills').val() == ''){
-        //     $('#key_skills').focus().attr('placeholder', 'This field is required');
-        //     $('#key_skills').focus().css('border', '1px solid red');
-        //     e.preventDefault();
-        // }
-        // if($('#zip').val() == ''){
-        //     $('#zip').focus().attr('placeholder', 'This field is required');
-        //     e.preventDefault();
-        // }
     } else {
         if($('#companyname').val() == ''){
             $('#companyname').focus().attr('placeholder', 'This field is required');
@@ -461,12 +366,5 @@ $("form").submit( function(e) {
             e.preventDefault();
         }
     }
-    // var messageLength = CKEDITOR.instances['short_bio'].getData().replace(/<[^>]*>/gi, '').length;
-    // if(!messageLength) {
-    //     $('#vld_shrtBio').show();
-    //     CKEDITOR.instances['short_bio'].focus();
-    //     setTimeout(function(){$("#vld_shrtBio").hide();},5000)
-    //     e.preventDefault();
-    // }
 });
 </script>

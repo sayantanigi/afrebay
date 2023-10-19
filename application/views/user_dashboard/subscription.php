@@ -62,21 +62,6 @@
                                                             <td class="heading">Transaction ID: <?php echo $row->transaction_id;?></td>
                                                             <td class="btn-option">
                                                                 <table class="plan-active-table">
-                                                                    <!-- <tr>
-                                                                        <?php
-                                                                        if($row->status == '1') { ?>
-                                                                        <td class="active-plan">Active Plan</td>
-                                                                        <?php } ?>
-                                                                        <td style="width: 8%;"></td>
-                                                                        <?php
-                                                                        if($row->status == '1') { ?>
-                                                                        <td class="cnc-plan" id="cancelSubsription" onclick="cancelSubsription('<?php echo $row->id;?>','<?php echo $row->transaction_id;?>','<?php echo $row->amount?>')">Cancel Subscription</td>
-                                                                        <?php } else if($row->status == '2') { ?>
-                                                                        <td class="cnc-plan" style="font-size: 12px;">You have cancelled your subscription. Your afrebay subscription expires on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
-                                                                        <?php } else { ?>
-                                                                        <td class="cnc-plan">Your Afrebay Subscription Expired on <?php echo date ('d M Y',strtotime($row->expiry_date));?></td>
-                                                                        <?php } ?>
-                                                                    </tr> -->
                                                                     <tr>
                                                                         <?php
                                                                         if($row->status == '1') { ?>
@@ -99,10 +84,6 @@
                                                             </table>
                                                             </td>
                                                         </tr>
-                                                        <!-- <tr>
-                                                            <td class="heading">Subscription Plan Name: <?php echo $row->name_of_card;?></td>
-                                                            <td class="btn-option"><a href="<?php echo $row->invoice_pdf?>" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px; border-radius: 30px; padding: 7px 25px; font-weight: 500; color: orange;">Download invoice</a></td>
-                                                        </tr> -->
                                                         <tr>
                                                             <td colspan="2" class="bid-amount">
                                                             <?php if($row->amount=='0') { ?>
@@ -223,7 +204,6 @@
                     </div>
                     <div class="container-fluid">
                         <div class="row text-center align-items-end">
-                            <!-- Pricing Table-->
                             <?php if(!empty($get_subscription)) {
                             $i=1;
                             foreach ($get_subscription as $value) { ?>
@@ -288,7 +268,6 @@
 </style>
 <div id="add_project" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header login-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
@@ -368,7 +347,6 @@ $(document).ready(function(){
         })
 <?php $i++; } } ?>
 })
-
 function cancelSubsription(id,sub_id,amount){
     var id = id;
     var sub_id = sub_id;

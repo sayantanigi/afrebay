@@ -5,7 +5,6 @@ $email=base64_decode($seg2);
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= base_url("assets/images/resource/mslider1.jpg")?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
                 <div class="col-lg-12">
@@ -54,42 +53,35 @@ $email=base64_decode($seg2);
 
                         </div>
                     </div>
-                    <!-- LOGIN POPUP -->
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
 <script>
 function newpassword() {
     var base_url=$('#base_url').val();
     var password=$("#new_password").val();
     var cpass=$("#confirm_password").val();
     var email=$("#email").val();
-
     if(password=="") {
         $("#err_password").fadeIn().html("Please enter password").css('color','red');
         setTimeout(function(){$("#err_password").html("&nbsp;");},3000);
         $("#new_password").focus();
         return false;
     }
-
     if(password.length<6) {
         $('#err_password').fadeIn().html('please enter at least 6 character').css('color','red');
         setTimeout(function(){$("#err_password").html("&nbsp;");},3000);
         $("#new_password").focus();
         return false;
     }
-
     if(cpass=="") {
         $("#err_confirmpassword").fadeIn().html("Please enter Confirm password").css('color','red');
         setTimeout(function(){$("#err_confirmpassword").html("&nbsp;");},3000);
         $("#confirm_password").focus();
         return false;
     }
-
     if(password!=cpass){
         $('#matchPass2').html('Password does not match').css('color','red');
         return null
@@ -104,7 +96,6 @@ function newpassword() {
             cpass:cpass,
         },
         success:function(result) {
-            //alert(result); return false;
             if(result==1) {
                 location.reload();
             } else {
@@ -113,7 +104,6 @@ function newpassword() {
         }
     });
 }
-
 function checkPass() {
 	var x = document.getElementById("new_password");
   	if (x.type === "password") {
@@ -122,7 +112,6 @@ function checkPass() {
     	x.type = "password";
   	}
 }
-
 function checkConfPass() {
 	var x = document.getElementById("confirm_password");
   	if (x.type === "password") {

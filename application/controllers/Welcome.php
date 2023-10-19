@@ -275,10 +275,10 @@ class Welcome extends CI_Controller {
 		$this->session->set_flashdata('message', 'Post Job Created Successfull !');
 		$insert_id = $this->db->insert_id();
 		$sitemap_date = array(
-			'link'=>'postdetail/'.base64_encode($insert_id),
+			'link'=>'/'.'postdetail/'.base64_encode($insert_id),
 			'changefreq' => 'daily',
 			'priority' => '0.51',
-			'lastmod'=>date('Y-m-d H:i:s'),
+			'lastmod'=> date('c', time()),
 		);
 		$this->Crud_model->SaveData('sitemap',$sitemap_date);
 		redirect(base_url("postdetail/".base64_encode($insert_id)));

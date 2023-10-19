@@ -1,7 +1,6 @@
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= base_url('assets/images/resource/mslider1.jpg') ?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
                 <div class="col-lg-12">
@@ -17,12 +16,6 @@
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
                 <h2 class="breadcrumb-title">Messages</h2>
-                <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
-                </nav> -->
             </div>
         </div>
     </div>
@@ -75,21 +68,14 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="chatList">
-                                                        <?php if (!empty($get_user->firstname)) { ?>
-                                                        <a href="javascript:void(0)" id="showBidList">My Bid List</a>
-                                                        <?php } ?>
-                                                    </div> -->
                                                 </div>
                                                 <div id="search">
-                                                   <!--  <span class="char-sea"><i class="fa fa-search" aria-hidden="true"></i></span> -->
                                                    <input type="text" placeholder="Search by Contacts and Job ID" />
                                                 </div>
                                                 <div id="contacts">
                                                     <ul>
                                                     <?php if (!empty($get_jobbid)) {
                                                     foreach ($get_jobbid as $user) {
-                                                        //if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && $user->bidding_status == 'Accept') {
                                                         if ($user->postjob_id == $user->post_id && $user->user_id == $_SESSION['afrebay']['userId'] && ($user->bidding_status == 'Selected' || $user->bidding_status == 'Short Listed')) {
                                                             $get_user = $this->Crud_model->get_single('users', "userId='" . $user->userid . "'");
                                                             $get_msg = $this->Crud_model->GetData('chat', '', "userto_id='".$user->userid."' and userfrom_id='".$user->user_id."' and postjob_id = '".$user->post_id."'", '', 'id desc', '', '1');
@@ -109,16 +95,8 @@
                                                                     } else {
                                                                         echo ucfirst($get_user->companyname);
                                                                     } ?>
-                                                                    <?php
-                                                                    //$countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0' AND postjob_id = '".$user->post_id."'")->result();
-                                                                    //if($countMessage[0]->msgcount != 0) { ?>
-                                                                    <!-- <span class="notification EachChatv"><?php echo $countMessage[0]->msgcount;?></span> -->
-                                                                    <?php //} ?>
-                                                                    <!-- <span class="notification EachvChat"></span> -->
                                                                     </p>
-
                                                                     <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
-                                                                    <!-- <p class="preview"><?= !empty($get_msg->message) ? $get_msg->message : ''; ?></p> -->
                                                                     <input type="hidden" name="postjob_id" id="postjob_id" value="<?= $user->post_id; ?>">
                                                                 </div>
                                                             </div>
@@ -142,16 +120,8 @@
                                                                     } else {
                                                                         echo ucfirst($get_user->companyname);
                                                                     } ?>
-                                                                    <?php
-                                                                    //$countMessage = $this->db->query("Select COUNT(id) as msgcount FROM chat WHERE userto_id ='".$_SESSION['afrebay']['userId']."' AND status = '0' AND postjob_id = '".$user->post_id."'")->result();
-                                                                    //if($countMessage[0]->msgcount != 0) { ?>
-                                                                    <!-- <span class="notification EachChatf"><?php echo $countMessage[0]->msgcount;?></span> -->
-                                                                    <?php //} ?>
-                                                                    <!-- <span class="notification EachfChat"></span> -->
                                                                     </p>
-
                                                                     <p class="preview" title="<?= $user->post_title; ?>">Job ID : <?= "Job_".sprintf("%03d",$user->post_id); ?></p>
-                                                                    <!-- <p class="preview"><?= !empty($get_msg1->message) ? $get_msg1->message : ''; ?></p> -->
                                                                     <input type="hidden" name="postjob_id" id="postjob_id" value="<?= $user->post_id; ?>">
                                                                 </div>
                                                             </div>
@@ -159,10 +129,6 @@
                                                     <?php } } } ?>
                                                     </ul>
                                                 </div>
-                                                <!-- <div id="bottom-bar">
-                                                    <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-                                                    <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-                                                </div> -->
                                             </div>
                                             <div class="content">
                                                 <img class="chat-start-img" src="assets/images/chat-start-img.png">
@@ -180,7 +146,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--end message list div -->
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +187,6 @@
     .EachvChat{display: none;}
     .EachfChat{display: none;}
 </style>
-<!-- <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css"> -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
 <script>
@@ -266,7 +230,6 @@ $("#status-options ul li").click(function() {
     $("#status-options").removeClass("active");
 });
 function newMessage() {
-    //message = $(".message-input input").val();
     var userfromid = $('#userfromid').val();
     var usertoid = $('#usertoid').val();
     var postid = $('#postid').val();
@@ -298,7 +261,6 @@ function newMessage() {
         }
     });
 }
-
 $("#message").mouseover(function(){
     $('.EachvChat').hide();
     $('.EachfChat').hide();
@@ -307,13 +269,10 @@ $("#message").mouseover(function(){
         getMessageCount();
     }, 5000);
 });
-
 $(document).ready(function(){
     $('.EachvChat').hide();
     $('.EachfChat').hide();
 });
-
-
 function getMessage(){
     var userfromid = $('#userfromid').val();
     var usertoid = $('#usertoid').val();
@@ -324,15 +283,11 @@ function getMessage(){
         data: {userfromid: userfromid, usertoid: usertoid, postid: postid},
         dataType: 'json',
         success: function(result) {
-            //console.log(result);
             $('#message_list').html(result);
-            // $('.message-input').show();
-            // $('#frame').addClass('chat_frame');
             $(".messages").scrollTop(10000000);
         }
     });
 }
-
 function getMessageCount(){
     var userfromid = $('#userfromid').val();
     var usertoid = $('#usertoid').val();
@@ -343,7 +298,6 @@ function getMessageCount(){
         data: {userfromid: userfromid, usertoid: usertoid, postid: postid},
         dataType: 'json',
         success: function(result) {
-            //console.log(result);
             <?php if(@$_SESSION['afrebay']['userType']=='2') { ?>
             if(result.count > 0) {
                 $('.EachChatv').hide();
@@ -366,19 +320,15 @@ function getMessageCount(){
         }
     });
 }
-
 $('.submit').click(function() {
     newMessage();
 });
-
 $(window).on('keydown', function(e) {
     if (e.which == 13) {
         newMessage();
         return false;
     }
 });
-//# sourceURL=pen.js
-
 function getuser(usert_id,post_id) {
     var displayProduct = 3;
     $('#message_list').html(createSkeleton(displayProduct));
@@ -421,12 +371,10 @@ function getuser(usert_id,post_id) {
         }
     });
 }
-
 function openVideoCallWindow(fid) {
 	var callPath = "<?php echo base_url('livevideo/video/');?>"+fid;
 	window.open(callPath, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=250,left=20,width=600,height=450");
 }
-
 $(function () {
     $('#showBidList').mouseover(function() {
         $(".modal").addClass('showBidListContent');
@@ -436,5 +384,4 @@ $(function () {
         $(".modal").removeClass('showBidListContent');
     });
 })
-
 </script>

@@ -2,7 +2,6 @@
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= base_url('assets/images/resource/mslider1.jpg')?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-        <!-- PARALLAX BACKGROUND IMAGE -->
         <div class="container fluid">
             <div class="row">
                 <div class="col-lg-12">
@@ -155,21 +154,6 @@
 </div>
 </section>
 <script type="text/javascript">
-// function change_biddingstatus(jobbid_id) {
-//     var cnf = confirm('Are you sure to change the status?');
-//     if(cnf==true) {
-//         $.ajax({
-//             type:"POST",
-//             url:'<?= base_url('user/dashboard/changebiddingstatus')?>',
-//             data:{jobbid_id:jobbid_id},
-//             success:function(returndata) {
-//                 if(returndata==1){
-//                     location.reload();
-//                 }
-//             }
-//         });
-//     }
-// }
 $(document).ready(function(){
     <?php if(!empty($get_postjob)) {
     $i=1;
@@ -185,7 +169,6 @@ $(document).ready(function(){
         $('#exampleModal_<?php echo $value->id?>').css("opacity", "0");
         $('#exampleModal_<?php echo $value->id?>').css("display", "none");
     })
-
     $('#change_biddingstatus_<?php echo $value->id?>').change(function() {
 		var bidstatus = $('#change_biddingstatus_<?php echo $value->id?>').val();
 		var jodBidid = $('#jodBidid_<?php echo $value->id?>').val();

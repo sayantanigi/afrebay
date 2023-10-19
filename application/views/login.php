@@ -38,7 +38,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <div class="col-lg-4 col-md-12 col-sm-12 SignIn_Left">
                                     <h3>Login</h3>
                                     <span>Get started by signing in using your existing accounts.</span>
-
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 SignIn_Right">
                                     <div id="register-messages" class="text-invalid f-20">
@@ -81,7 +80,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 SignIn_Remember">
                                                 <p class="remember-label"><input type="checkbox" name="cb" id="cb1" /><label for="cb1">Remember me</label></p>
-                                                <!-- <a id="ForgotPassModal" title="">Forgot Password?</a> -->
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 SignIn_Remember">
                                                 <a href="<?= base_url('forgot-password')?>" title="">Forgot Password?</a>
@@ -104,13 +102,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             </div>
                         </div>
                     </div>
-                    <!-- LOGIN POPUP -->
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 <div class="Forgot_Modal_Viwe MapShow" id="ForgotModalView">
     <div class="Forgot_Module">
         <span class="ForgotModal_Close_Icon" id="ForgotModalClose"><i class="fa fa-times" aria-hidden="true"></i></span>
@@ -143,7 +139,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" async="" src="<?php echo base_url();?>assets/js/Map_Modal.js"></script>
 <script>
@@ -181,7 +176,6 @@ function forgotPass() {
 
     })
 }
-
 function checkPass() {
     var x = document.getElementById("login_pass");
     if (x.type === "password") {

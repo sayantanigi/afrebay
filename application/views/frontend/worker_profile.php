@@ -13,7 +13,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>Freelancer Details</h3>
+                        <h3>Talent Details</h3>
                     </div>
                 </div>
             </div>
@@ -47,14 +47,6 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     <p><i class="la la-map-marker"></i><?= @$user_detail->address?></p>
                                 </div>
                             </div>
-
-                            <!-- <div class="col-lg-4 col-md-4 col-sm-12 Worker_Head_Social">
-                                <div class="Worker_Head_Social_Data">
-                                    <div class="download-cv">
-                                        <a class="btn btn-info" href="<?= base_url('uploads/users/resume/'.@$user_detail->resume)?>" title="" download>Download CV <i class="la la-download"></i></a>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <!-- </div> -->
@@ -68,7 +60,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                         <div class="row">
                             <div class="col-lg-8 column">
                                 <div class="cand-details" id="about">
-                                    <h2>About This Freelancer</h2>
+                                    <h2>About This Talent</h2>
                                     <p>
                                         <?= @$user_detail->short_bio;?>
                                     </p>

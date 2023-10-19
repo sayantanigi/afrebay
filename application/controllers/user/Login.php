@@ -14,21 +14,10 @@ class Login extends CI_Controller {
 	}
 
 	public function reg() {
-	 	/*$validate=$this->Crud_model->get_single('users',"mobile='".$_POST['mobile']."'");
-	    if(!empty($validate)) {
-			$data=array('result'=>0,'data'=>'phone');
-		} else {
-			$validate=$this->Crud_model->get_single('users',"email='".$_POST['email']."'");
-			if(!empty($validate)) {
-				$data=array('result'=>0,'data'=>'email');
-			}
-		}*/
-
 		$validate=$this->Crud_model->get_single('users',"email='".$_POST['email']."'");
 		if(!empty($validate)) {
 			$data=array('result'=>0,'data'=>'email');
 		}
-
 		if(empty($validate)) {
 			$data=array(
 				'userType' =>$_POST['user_type'],
@@ -45,45 +34,40 @@ class Login extends CI_Controller {
 				'created'=>date('Y-m-d H:i:s'),
 				'status'=>0
 			);
-
 			$result = $this->Mymodel->insert('users',$data);
 			if($_POST['first_name']) {
 					$fullname = $_POST['first_name']." ".$_POST['last_name'];
 			} else {
 				$fullname = $_POST['company_name'];
 			}
-
 			$insert_id = $this->db->insert_id();
 			if($_POST['user_type'] == '1') {
 				$sitemap_date = array(
-					'link'=>'worker-detail/'.base64_encode($insert_id),
+					'link'=>'\/worker-detail/'.base64_encode($insert_id),
 					'changefreq' => 'daily',
 					'priority' => '0.80',
-					'lastmod'=>date('Y-m-d H:i:s'),
+					'lastmod'=> date('c', time()),
 				);
 			} else {
 				$sitemap_date = array(
-					'link'=>'employerdetail/'.base64_encode($insert_id),
+					'link'=>'\/employerdetail/'.base64_encode($insert_id),
 					'changefreq' => 'daily',
 					'priority' => '0.64',
-					'lastmod'=>date('Y-m-d H:i:s'),
+					'lastmod'=> date('c', time()),
 				);
 			}
 			$this->Mymodel->insert('sitemap',$sitemap_date);
 			$get_setting=$this->Crud_model->get_single('setting');
 			if(!empty($insert_id)) {
-				//$subject = 'Verify Your Email Address From Afrebay';
 				$data=array(
 					'activationURL' => base_url() . "email-verification/" . urlencode(base64_encode($insert_id)),
 					'imagePath' => base_url().'uploads/logo/'.$get_setting->flogo,
 					'fullname' => $fullname,
 				);
-				//$message = $this->load->view('email_template/signup',$data,TRUE);
 				$message = "<body><div style='width:600px;margin: 0 auto;background: #fff; border: 1px solid #e6e6e6;'><div style='padding: 30px 30px 15px 30px;box-sizing: border-box;'><img src='cid:Logo' style='width:100px;float: right;margin-top: 0 auto;'><h3 style='padding-top:40px; line-height: 30px;'>Greetings from<span style='font-weight: 900;font-size: 35px;color: #F44C0D; display: block;'>Afrebay</span></h3><p style='font-size:24px;'>Hello $fullname,</p><p style='font-size:24px;'>Thank you for registration on Afrebay.</p><p style='font-size:24px;'>Please click the button below to verify your email address.</p><p style='text-align: center;'><a href='".base_url() . "email-verification/" . urlencode(base64_encode($insert_id))."' style='height: 50px; width: 300px; background: rgb(253,179,2); background: linear-gradient(0deg, rgba(253,179,2,1) 0%, rgba(244,77,9,1) 100%); text-align: center; font-size: 18px; color: #fff; border-radius: 12px; display: inline-block; line-height: 50px; text-decoration: none; text-transform: uppercase; font-weight: 600;'>ACTIVATE</a></p><p style='font-size:20px;'>Thank you!</p><p style='font-size:20px;list-style: none;'>Sincerly</p><p style='list-style: none;'><b>Afrebay</b></p><p style='list-style:none;'><b>Visit us:</b> <span>$get_setting->address</span></p><p style='list-style:none'><b>Email us:</b> <span>$get_setting->email</span></p></div><table style='width: 100%;'><tr><td style='height:30px;width:100%; background: red;padding: 10px 0px; font-size:13px; color: #fff; text-align: center;'>Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.</td></tr></table></div></body>";
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
-					//Server settings
 					$mail->CharSet = 'UTF-8';
 					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
 					$mail->AddAddress($_POST['email']);
@@ -91,7 +75,6 @@ class Login extends CI_Controller {
 					$mail->Subject = 'Verify Your Email Address From Afrebay';
 					$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
 					$mail->Body = $message;
-					//Send email via SMTP
 					$mail->IsSMTP();
 					$mail->SMTPAuth   = true;
 					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -110,7 +93,6 @@ class Login extends CI_Controller {
 		}
 		echo json_encode($data); exit;
     }
-
     public function emailVerification($otp=null) {
 		if(empty($otp)) {
 			$this->session->set_flashdata('message', 'You have not permission to access this page!');
@@ -133,12 +115,10 @@ class Login extends CI_Controller {
                 redirect(base_url('login'), 'refresh');
             }
         } else {
-            //$this->session->set_flashdata('message', 'Sorry! Activation link is expired!');
             $this->session->set_flashdata('message', 'Your Email Address is already verified. Please login.');
             redirect(base_url('login'), 'refresh');
         }
     }
-
 	public function validate_user($pId = null) {
 		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -152,7 +132,6 @@ class Login extends CI_Controller {
 			if($this->Mymodel->check_record($email, $password)) {
 				$this->session->set_flashdata('message', 'Logged in successfully !');
 				$get_setting=$this->Crud_model->get_single('setting');
-				//echo "<pre>"; print_r($get_setting); die;
 				if($get_setting->required_subscription == '1') {
 					if($_SESSION['afrebay']['userType'] == '1') {
 						$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
@@ -207,13 +186,11 @@ class Login extends CI_Controller {
 			}
 		}
 	}
-
 	public function logout() {
 	    unset($_SESSION['afrebay']);
 			$this->session->set_flashdata('message', 'You have logged out.');
 			redirect('login');
 	}
-
     function forgot_password() {
 		$data['title'] = 'Forgot Password';
    	   	$this->load->view('header', $data);
@@ -229,12 +206,10 @@ class Login extends CI_Controller {
 					'email'=>$get_email->email
 				);
 				$get_setting=$this->Crud_model->get_single('setting');
-				//$htmlContent = $this->load->view('email_template/forgot_password',$data,TRUE);
 				$htmlContent = "<div style='width:600px; margin: 0 auto;background: #fff;border: 1px solid #e6e6e6;'><div style='padding: 30px 30px 15px 30px;box-sizing: border-box;'><img src='cid:Logo' style='width:100px;float: right;margin-top: 0 auto;'><h3 style='padding-top:40px; line-height: 30px;'>Greetings from<span style='font-weight: 900;font-size: 35px;color: #F44C0D; display: block;'>Afrebay</span></h3><p style='font-size:24px;'>Hello User,</p><p style='font-size:24px;'>Trouble signing in? Resetting your password is easy.</p><p style='font-size:24px;'>Just press the button below and follow the instructions.</p><p style='text-align: center;'><a href='".base_url('new-password/'.base64_encode($get_email->email))."' style='height: 50px; width: 300px; background: rgb(253,179,2); background: linear-gradient(0deg, rgba(253,179,2,1) 0%, rgba(244,77,9,1) 100%); text-align: center; font-size: 18px; color: #fff; border-radius: 12px; display: inline-block; line-height: 50px; text-decoration: none; text-transform: uppercase; font-weight: 600;'>CLICK HERE TO RESET</a></p><p style='font-size:20px;'>Thank you!</p><p style='font-size:20px;list-style: none;'>Sincerly</p><p style='list-style: none;'><b>Afrebay</b></p><p style='list-style:none;'><b>Visit us:</b> <span>$get_setting->address</span></p><p style='list-style:none'><b>Email us:</b> <span>$get_setting->email</span></p></div><table style='width: 100%;'><tr><td style='height:30px;width:100%; background: red;padding: 10px 0px; font-size:13px; color: #fff; text-align: center;'>Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.</td></tr></table></div>";
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
-					//Server settings
 					$mail->CharSet = 'UTF-8';
 					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
 					$mail->AddAddress($_POST['email']);
@@ -242,7 +217,6 @@ class Login extends CI_Controller {
 					$mail->Subject = "Forgot Password Confirmation message from AFREBAY";
 					$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
 					$mail->Body = $htmlContent;
-					//Send email via SMTP
 					$mail->IsSMTP();
 					$mail->SMTPAuth   = true;
 					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -251,10 +225,8 @@ class Login extends CI_Controller {
 					$mail->Username   = "no-reply@goigi.com";
 					$mail->Password   = "wj8jeml3eu0z";
 					$mail->send();
-					//echo $msg = '1';
 					$this->session->set_flashdata('message', 'Please check your inbox. We have sent you an email to reset your password.');
 				} catch (Exception $e) {
-					//echo $msg = '2';
 					$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
 				}
          	} else {

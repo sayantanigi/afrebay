@@ -1,7 +1,6 @@
  <section class="overlape">
                 <div class="block no-padding">
                     <div data-velocity="-.1" style="background: url(assets/images/resource/mslider1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible no-parallax"></div>
-                    <!-- PARALLAX BACKGROUND IMAGE -->
                     <div class="container fluid">
                         <div class="row">
                             <div class="col-lg-12">
@@ -16,17 +15,10 @@
                     <div class="row align-items-center">
                         <div class="col-md-12 col-12">
                             <h2 class="breadcrumb-title">My Account</h2>
-                            <!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">My Account</li>
-                                </ol>
-                            </nav> -->
                         </div>
                     </div>
                 </div>
             </section>
-
             <?php $this->load->view('sidebar');?>
                         <div class="col-md-10 col-sm-11 display-table-cell v-align">
                             <div class="user-dashboard">
@@ -101,7 +93,6 @@
                 </div>
                 <div id="add_project" class="modal fade" role="dialog">
                     <div class="modal-dialog">
-                        <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header login-header">
                                 <button type="button" class="close" data-dismiss="modal">×</button>

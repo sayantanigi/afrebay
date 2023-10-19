@@ -907,10 +907,10 @@ class Dashboard extends CI_Controller {
 			$this->Crud_model->SaveData('user_product', $data);
 			$insert_id = $this->db->insert_id();
 			$sitemap_date = array(
-				'link'=>'productdetail/'.base64_encode($insert_id),
+				'link'=>'/'.'productdetail/'.base64_encode($insert_id),
 				'changefreq' => 'daily',
 				'priority' => '0.51',
-				'lastmod'=>date('Y-m-d H:i:s'),
+				'lastmod'=> date('c', time()),
 			);
 			$this->Crud_model->SaveData('sitemap',$sitemap_date);
 			if(!empty($insert_id)) {

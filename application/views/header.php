@@ -9,10 +9,15 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <?php if($this->uri->segment(1) == 'postdetail') { ?>
     <title><?php echo @$post_data->post_title?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'career-tip') { ?>
-    <title><?php echo $get_career->title?> - <?php echo @$get_setting->website_name?></title>
+    <title><?php echo @$get_career->title?> - <?php echo @$get_setting->website_name?></title>
+    <?php } else if ($this->uri->segment(1) == 'employerdetail') { ?>
+    <title><?php echo @$userdata->companyname?> - <?php echo @$get_setting->website_name?></title>
+    <?php } else if ($this->uri->segment(1) == 'worker-detail') { ?>
+    <title><?php echo @$user_detail->firstname.' '.$user_detail->lastname?> - <?php echo @$get_setting->website_name?></title>
     <?php } else { ?>
-    <title><?php echo $title?> - <?php echo @$get_setting->website_name?></title>
+    <title><?php echo @$title?> - <?php echo @$get_setting->website_name?></title>
     <?php } ?>
+
     <?php if($this->uri->segment(1) == 'employerdetail') { ?>
     <meta name="description" content="<?php echo @$userdata->short_bio?>">
     <?php } else if($this->uri->segment(1) == 'worker-detail') { ?>
@@ -47,12 +52,14 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <script src="<?=base_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<?=base_url(); ?>assets/rating_css.css" />
     <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-    <meta property="og:title" content="Join the best company in the world!" />
-    <meta property="og:url" content="http://www.sharethis.com" />
-    <meta property="og:image" content="http://sharethis.com/images/logo.jpg" />
-    <meta property="og:description" content="ShareThis is its people. It's imperative that we hire smart,innovative people who can work intelligently as we continue to disrupt the very category we created. Come join us!" />
-    <meta property="og:site_name" content="ShareThis" />
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6163c52d38f8310012c86621&product=inline-share-buttons' async='async'></script>
+    <?php if(empty($this->uri->segment(1))) { ?>
+    <meta property="og:title" content="><?php echo @$title?>" />
+    <meta property="og:url" content="<?php echo base_url();?>" />
+    <meta property="og:image" content="<?=base_url(); ?>uploads/logo/<?= $get_setting->logo?>" />
+    <meta property="og:description" content="<?php echo @$description?>" />
+    <meta property="og:site_name" content="<?php echo @$get_setting->website_name?>" />
+    <?php } ?>
+    <link rel="canonical" href="https://www.afrebay.com/">
     <style>
     .completeSub {display: none; text-align: center; margin-top: 20px; color: #fa5a1f; font-size: 20px;}
     #completeSub {position: relative;display: inline-block;}
