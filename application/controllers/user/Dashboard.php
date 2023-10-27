@@ -897,6 +897,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	function add_product() {
+		//print_r($_FILES['prod_image']['name'][0]); die();
 		if(!empty($this->input->post())){
 			$data = array(
 				'user_id' => $_SESSION['afrebay']['userId'],
@@ -914,7 +915,7 @@ class Dashboard extends CI_Controller {
 			);
 			$this->Crud_model->SaveData('sitemap',$sitemap_date);
 			if(!empty($insert_id)) {
-				if ($_FILES['prod_image']['name'] != '') {
+				if (!empty($_FILES['prod_image']['name'][0])) {
 					$cpt = count($_FILES['prod_image']['name']);
 					for($i=0; $i<$cpt; $i++) {
 						$_POST['prod_image'] = rand(0000, 9999) . "_" . $_FILES['prod_image']['name'][$i];

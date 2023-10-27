@@ -11,7 +11,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-header">
-                        <h3>List of Talents</h3>
+                        <h3>Explore Talent</h3>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 <style>
 .jconfirm-content-pane{text-align: center; font-size: 20px;}
-.jconfirm-buttons{margin-right: 140px; display: inline-block;}
+/* .jconfirm-buttons{margin-right: 140px; display: inline-block;} */
+.jconfirm .jconfirm-box .jconfirm-buttons button.btn-blue {background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
+    color: #fff !important; text-shadow: none; width: 200px; font-size: 14px !important; letter-spacing: 0px; padding: 10px 0 !important; width: 160px; border-radius: 20px; margin-right: 48px !important;}
+.jconfirm .jconfirm-box .jconfirm-buttons button.btn-default {border-radius: 20px !important;}
 </style>
 <script>
 $(document).ready(function () {
@@ -152,9 +155,21 @@ $(window).load(function(){
     });
 });
 function viewProfile() {
-    $.alert({
-	    title: '',
-	    content: "Please login to view talent profile",
-	});
+    $.confirm({
+        title: '',
+        content: "Please login to view talent profile",
+        buttons: {
+            somethingElse: {
+                text: 'Go to Login Page',
+                btnClass: 'btn-blue',
+                keys: ['enter', 'shift'],
+                action: function() {
+                    window.location.replace("<?php echo base_url('/login')?>");
+                }
+            },
+            back: function () {
+            },
+        }
+    });
 }
 </script>

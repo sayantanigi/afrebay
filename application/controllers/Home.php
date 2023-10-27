@@ -209,7 +209,7 @@ class Home extends MY_Controller {
 		$data['getcategory']=$this->Crud_model->GetData('category');
 		$data['getcountry']=$this->Crud_model->GetData('countries');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Our Jobs'");
-		$data['title'] = 'Find Work';
+		$data['title'] = 'Explore Job Openings';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/post_jobslist', $data);
 		$this->load->view('footer');
@@ -282,7 +282,7 @@ class Home extends MY_Controller {
 	function workers_list() {
 		$data['get_specialist'] = $this->Crud_model->GetData('specialist');
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Freelancers'");
-		$data['title'] = 'List of Talents';
+		$data['title'] = 'Explore Talent';
 		$data['description'] = 'Explore our dedicated team of skilled professionals! Get to know the backbone of our company with our comprehensive workers list. Discover the talent driving our success and innovation.';
 		$this->load->view('header',$data);
 		$this->load->view('frontend/workers_list', $data);
@@ -352,7 +352,7 @@ class Home extends MY_Controller {
 	function employer_list() {
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Businesses'");
 		$data['getcategory']=$this->Crud_model->GetData('category');
-		$data['title'] = 'List of Businesses';
+		$data['title'] = 'Explore Businesses';
 		$data['description'] = 'Discover the Top Employers at Afrebay – Where Exceptional Talent Thrives! Explore our talented team, job opportunities, and learn why we\'re the ideal place for your career.';
 		$this->load->view('header', $data);
 		$this->load->view('frontend/employer_list', $data);

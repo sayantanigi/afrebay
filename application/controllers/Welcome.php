@@ -98,12 +98,12 @@ class Welcome extends CI_Controller {
 
 		$output = array(
 			'pagination_link'  => $this->pagination->create_links(),
-			'postlist'   =>$getdata,
-			'keyword'   =>$this->input->post('search_title'),
-			'country'   => $this->input->post('country'),
-			'state'   => $this->input->post('state'),
-			'city'   => $this->input->post('city'),
-			'keyword_location'   =>$this->input->post('search_location'),
+			'postlist' =>$getdata,
+			'keyword' =>$this->input->post('search_title'),
+			'country' => $this->input->post('country'),
+			'state' => $this->input->post('state'),
+			'city' => $this->input->post('city'),
+			'keyword_location' =>$this->input->post('search_location'),
 		);
 		echo json_encode($output);
 	}
@@ -241,36 +241,60 @@ class Welcome extends CI_Controller {
 	}
 
 	public function save_postjob() {
-		$key_skills = $this->input->post('key_skills');
-		for ($i=0; $i < count($key_skills); $i++) {
-			$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".$key_skills[$i]."'")->result();
-			if(empty($get_specialist)) {
-				$insrt = array(
-					'specialist_name'=>ucfirst($key_skills[$i]),
-					'created_date'=>date('Y-m-d H:i:s'),
-				);
-				$this->db->insert('specialist',$insrt);
+		if(!empty($this->input->post('key_skills'))) {
+			@$key_skills = @$this->input->post('key_skills');
+			for ($i=0; $i < count(@$key_skills); $i++) {
+				$get_specialist = $this->db->query("SELECT * FROM specialist WHERE specialist_name = '".@$key_skills[$i]."'")->result();
+				if(empty($get_specialist)) {
+					$insrt = array(
+						'specialist_name'=>ucfirst($key_skills[$i]),
+						'created_date'=>date('Y-m-d H:i:s'),
+					);
+					$this->db->insert('specialist',$insrt);
+				}
 			}
+			$data=array(
+				'user_id'=>$_SESSION['afrebay']['userId'],
+				'required_key_skills'=>implode(", ",@$this->input->post('key_skills',TRUE)),
+				'category_id'=>$this->input->post('category_id',TRUE),
+				'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
+				'post_title'=>$this->input->post('post_title',TRUE),
+				'description'=>$this->input->post('description',TRUE),
+				'duration'=>$this->input->post('duration',TRUE),
+				'charges'=>$this->input->post('charges',TRUE),
+				'currency'=>$this->input->post('currency',TRUE),
+				'location'=>@$this->input->post('location',TRUE),
+				'latitude'=>@$this->input->post('latitude',TRUE),
+				'longitude'=>@$this->input->post('longitude',TRUE),
+				'country'=>$this->input->post('country-dropdown',TRUE),
+				'state'=>$this->input->post('state-dropdown',TRUE),
+				'city'=>$this->input->post('city-dropdown',TRUE),
+				'appli_deadeline'=>$this->input->post('appli_deadeline',TRUE),
+				'created_date'=>date('Y-m-d H:i:s'),
+			);
+		} else {
+			$data=array(
+				'user_id'=>$_SESSION['afrebay']['userId'],
+				'required_key_skills'=>'',
+				'category_id'=>$this->input->post('category_id',TRUE),
+				'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
+				'post_title'=>$this->input->post('post_title',TRUE),
+				'description'=>$this->input->post('description',TRUE),
+				'duration'=>$this->input->post('duration',TRUE),
+				'charges'=>$this->input->post('charges',TRUE),
+				'currency'=>$this->input->post('currency',TRUE),
+				'location'=>@$this->input->post('location',TRUE),
+				'latitude'=>@$this->input->post('latitude',TRUE),
+				'longitude'=>@$this->input->post('longitude',TRUE),
+				'country'=>$this->input->post('country-dropdown',TRUE),
+				'state'=>$this->input->post('state-dropdown',TRUE),
+				'city'=>$this->input->post('city-dropdown',TRUE),
+				'appli_deadeline'=>$this->input->post('appli_deadeline',TRUE),
+				'created_date'=>date('Y-m-d H:i:s'),
+			);
 		}
-		$data=array(
-			'user_id'=>$_SESSION['afrebay']['userId'],
-			'required_key_skills'=>implode(", ",$this->input->post('key_skills',TRUE)),
-			'category_id'=>$this->input->post('category_id',TRUE),
-			'subcategory_id'=>$this->input->post('subcategory_id',TRUE),
-			'post_title'=>$this->input->post('post_title',TRUE),
-			'description'=>$this->input->post('description',TRUE),
-			'duration'=>$this->input->post('duration',TRUE),
-			'charges'=>$this->input->post('charges',TRUE),
-			'currency'=>$this->input->post('currency',TRUE),
-			'location'=>@$this->input->post('location',TRUE),
-			'latitude'=>@$this->input->post('latitude',TRUE),
-			'longitude'=>@$this->input->post('longitude',TRUE),
-			'country'=>$this->input->post('country-dropdown',TRUE),
-			'state'=>$this->input->post('state-dropdown',TRUE),
-			'city'=>$this->input->post('city-dropdown',TRUE),
-			'appli_deadeline'=>$this->input->post('appli_deadeline',TRUE),
-			'created_date'=>date('Y-m-d H:i:s'),
-		);
+		
+		
 		$this->Crud_model->SaveData('postjob',$data);
 		$this->session->set_flashdata('message', 'Post Job Created Successfull !');
 		$insert_id = $this->db->insert_id();

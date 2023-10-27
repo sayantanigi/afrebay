@@ -29,15 +29,16 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         <h3 class="footer-title">Quick Links</h3>
                         <div class="link_widgets">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <a href="<?= base_url('employer-list')?>" title="Businesses">Businesses</a>
-                                    <a href="<?= base_url('workers-list')?>" title="Freelancers">Talents</a>
+                                <div class="col-lg-12">
+                                    <a href="<?= base_url('employer-list')?>" title="Explore Businesses">Explore Businesses</a>
+                                    <a href="<?= base_url('workers-list')?>" title="Explore Talent">Explore Talent</a>
+                                    <a href="<?= base_url('ourjobs')?>" title="Explore Job Openings">Explore Job Openings</a>
                                     <?php if($get_setting->required_subscription == '1') { ?>
-                                    <a href="<?= base_url('vendor_pricing')?>" title="">Businesses Pricing</a>
-                                    <a href="<?= base_url('freelancer_pricing')?>" title="">Talents Pricing</a>
+                                    <a href="<?= base_url('vendor_pricing')?>" title="Businesses Pricing">Businesses Pricing</a>
+                                    <a href="<?= base_url('freelancer_pricing')?>" title="Talents Pricing">Talents Pricing</a>
                                     <?php } else { ?>
-                                    <a href="<?= base_url('register')?>" title="">Business Sign up</a>
-                                    <a href="<?= base_url('register')?>" title="">Talent Sign up</a>
+                                    <a href="<?= base_url('register')?>" title="Business Sign up">Business Sign up</a>
+                                    <a href="<?= base_url('register')?>" title="Talent Sign up">Talent Sign up</a>
                                     <?php } ?>
                                 </div>
                             </div>
