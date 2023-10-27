@@ -29,7 +29,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 ">
     <?php } else if ($this->uri->segment(1) == 'productdetail') { ?>
     <meta name="description" content="<?php echo $prod_details[0]['prod_description']; ?>">
-    <?php } else if ($this->uri->segment(1) == 'ourjobs') { ?>
+    <?php } else if ($this->uri->segment(1) == 'findwork') { ?>
     <meta name="description" content="Your Bridge to career opportunities. Contact us today to start your journey toward a brighter future. Our experts are here to guide you in finding your dream job">
     <?php } else if ($this->uri->segment(1) == 'career-tip') { $description = explode('.', $get_career->description)?>
     <meta name="description" content="<?= $description[0]?>">
@@ -169,7 +169,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
                                     <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                 <?php } else { ?>
-                                    <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
+                                    <a href="<?= base_url('postwork')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                 <?php } } else { ?>
                                 <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                             <?php 
@@ -180,7 +180,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                             <?php 
                             } else { ?>
-                                <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
+                                <a href="<?= base_url('postwork')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                             <?php } } }
                 } else { ?>
                 <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
@@ -195,7 +195,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             </li>
                         <?php } else {?>
                             <li class="signup-popup">
-                                <a href="<?=base_url(); ?>/register" title=""><i class="la la-key"></i> Sign Up</a>
+                                <a href="<?=base_url(); ?>/signup" title=""><i class="la la-key"></i> Sign Up</a>
                             </li>
                             <li class="signin-popup">
                                 <a href="<?= base_url('login')?>" title=""><i class="la la-external-link-square"></i> Login</a>
@@ -206,13 +206,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="responsivemenu" style="padding-left: 30px; padding-right: 30px;">
                     <ul>
                         <li class="account-btns">
-                            <a href="<?= base_url('ourjobs')?>" title="">Find Work</a>
+                            <a href="<?= base_url('findwork')?>" title="">Find Work</a>
                         </li>
                         <li class="account-btns">
-                            <a href="<?= base_url('employer-list')?>" title="">Businesses</a>                            
+                            <a href="<?= base_url('businesses')?>" title="">Businesses</a>                            
                         </li>
                         <li class="account-btns">
-                            <a href="<?= base_url('workers-list')?>" title="">Talent</a>                            
+                            <a href="<?= base_url('talent')?>" title="">Talent</a>                            
                         </li>
                     </ul>
                 </div>
@@ -231,13 +231,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     <nav>
                         <ul>
                             <li class="">
-                                <a href="<?= base_url('employer-list')?>" title="">Businesses</a>
+                                <a href="<?= base_url('businesses')?>" title="">Businesses</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('workers-list')?>" title="">Talent</a>
+                                <a href="<?= base_url('talent')?>" title="">Talent</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('ourjobs')?>" title="">Find Work</a>
+                                <a href="<?= base_url('findwork')?>" title="">Find Work</a>
                             </li>
                         </ul>
                     </nav>
@@ -254,7 +254,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                         if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
                                             <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                         <?php } else { ?>
-                                            <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
+                                            <a href="<?= base_url('postwork')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                         <?php } } else { ?>
                                         <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                     <?php 
@@ -265,7 +265,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                         <a href="javascript:void(0)" title="" class="post-job-btn" id="completeSub"><i class="la la-plus"></i>Post Work<span id="completeSubtext">Please activate a subscription package and complete your profile to proceed with the post job activities.</span></a>
                                     <?php 
                                     } else { ?>
-                                        <a href="<?= base_url('postjob')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
+                                        <a href="<?= base_url('postwork')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                     <?php } } }
                         } else { ?>
                         <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
@@ -336,9 +336,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                             <?php
                                             $uid = $_SESSION['afrebay']['userType'];
                                             if(@$_SESSION['afrebay']['userType']=='1') { ?>
-                                            <a href="<?php echo base_url("worker-detail/".base64_encode($_SESSION['afrebay']['userId']))?>" title="">View Profile</a>
+                                            <a href="<?php echo base_url("talentdetail/".base64_encode($_SESSION['afrebay']['userId']))?>" title="">View Profile</a>
                                             <?php } else if(@$_SESSION['afrebay']['userType']=='2') { ?>
-                                            <a href="<?php echo base_url("employerdetail/".base64_encode($_SESSION['afrebay']['userId']))?>" title="">View Profile</a>
+                                            <a href="<?php echo base_url("businessdetail/".base64_encode($_SESSION['afrebay']['userId']))?>" title="">View Profile</a>
                                             <?php } ?>
                                         </li>
                                         <li>
@@ -349,7 +349,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 </li>
                             <?php } else { ?>
                                 <li class="">
-                                    <a href="<?=base_url(); ?>register"><i class="la la-key"></i> Sign Up</a>
+                                    <a href="<?=base_url(); ?>signup"><i class="la la-key"></i> Sign Up</a>
                                 </li>
                                 <li class="">
                                     <a href="<?=base_url(); ?>login"><i class="la la-external-link-square"></i> Login</a>

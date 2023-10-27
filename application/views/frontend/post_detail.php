@@ -67,7 +67,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                 <ul>
                                     <li>
                                         <span>Job Title </span>
-                                        <a href="<?= base_url('postdetail/' . base64_encode($post_data->id)) ?>" style="text-transform: uppercase;">
+                                        <a href="<?= base_url('workdetail/' . base64_encode($post_data->id)) ?>" style="text-transform: uppercase;">
                                         <?php if (!empty($post_data->post_title)) {
                                             echo $post_data->post_title;
                                         } ?>
@@ -116,7 +116,7 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                     <?php } ?>
                                 </ul>
                                 <?php $postedBy = $this->db->query("SELECT * FROM users WHERE userId = '" . $post_data->user_id . "'")->result_array(); ?>
-                                <a class="btn btn-info" href="<?= base_url('employerdetail/' . base64_encode($post_data->user_id)) ?>">
+                                <a class="btn btn-info" href="<?= base_url('businessdetail/' . base64_encode($post_data->user_id)) ?>">
                                     <?php
                                     if ($postedBy[0]['userType'] == 1) {
                                         echo $postedBy[0]['firstname'] . ' ' . $postedBy[0]['lastname'];

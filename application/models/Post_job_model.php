@@ -141,7 +141,7 @@ class Post_job_model extends My_Model {
                     $desc= $row['description'];
                 }
 
-                $output .= '<div class="emply-resume-list"><div class="emply-resume-info"><h3><a href="#" title="">'.$row["post_title"].'</a></h3><span>'.$row['category_name'].'</span><span>'.$row['sub_category_name'].' </span><p><i class="la la-map-marker"></i>'. $row['location'].'</p><p>'.$desc.'</p></div><div class="shortlists" style="width:50px;"><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">Bid Now <i class="la la-plus"></i></a></div></div>';
+                $output .= '<div class="emply-resume-list"><div class="emply-resume-info"><h3><a href="#" title="">'.$row["post_title"].'</a></h3><span>'.$row['category_name'].'</span><span>'.$row['sub_category_name'].' </span><p><i class="la la-map-marker"></i>'. $row['location'].'</p><p>'.$desc.'</p></div><div class="shortlists" style="width:50px;"><a href="'.base_url('workdetail/'.base64_encode($row['id'])).'" title="">Bid Now <i class="la la-plus"></i></a></div></div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
@@ -253,12 +253,12 @@ class Post_job_model extends My_Model {
                 }
 
                 if($_SESSION['afrebay']['userType'] == '2') {
-                    $bidBtn = '<div class="shortlists"><a href="'.base_url('employerdetail/'.base64_encode($get_users->userId)).'" class="Emp_Comp"><i class="fa fa-briefcase" aria-hidden="true"></i>'.$name.'</a></div>';
+                    $bidBtn = '<div class="shortlists"><a href="'.base_url('businessdetail/'.base64_encode($get_users->userId)).'" class="Emp_Comp"><i class="fa fa-briefcase" aria-hidden="true"></i>'.$name.'</a></div>';
                 } else {
-                    $bidBtn = '<div class="shortlists"><a href="'.base_url('employerdetail/'.base64_encode($get_users->userId)).'" class="Emp_Comp"><i class="fa fa-briefcase" aria-hidden="true"></i>'.$name.'</a><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">Bid Now <i class="la la-plus"></i></a></div>';
+                    $bidBtn = '<div class="shortlists"><a href="'.base_url('talentdetail/'.base64_encode($get_users->userId)).'" class="Emp_Comp"><i class="fa fa-briefcase" aria-hidden="true"></i>'.$name.'</a><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">Bid Now <i class="la la-plus"></i></a></div>';
                 }
 
-                $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb">'.$profile_pic.'</div><div class="emply-resume-info"><h3><a href="'.base_url('postdetail/'.base64_encode($row['id'])).'" title="">'.$row['post_title'].'</a></h3><span>'.$get_category->category_name.'</span><span>'.$get_subcategory->sub_category_name.' </span><p><i class="la la-map-marker"></i>'.$row["city"].', '.$row["state"].', '.$row["country"].'</p><div class="Employee-Details"><div class="MoreDetailsTxt_'.$row['id'].'">'.$row['description'].'</div><a class="btn btn-info More" onclick="MoreDetailsTxt('.$row['id'].')">View Details</a></div></div>'.$bidBtn.'</div> ';
+                $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb">'.$profile_pic.'</div><div class="emply-resume-info"><h3><a href="'.base_url('workdetail/'.base64_encode($row['id'])).'" title="">'.$row['post_title'].'</a></h3><span>'.$get_category->category_name.'</span><span>'.$get_subcategory->sub_category_name.' </span><p><i class="la la-map-marker"></i>'.$row["city"].', '.$row["state"].', '.$row["country"].'</p><div class="Employee-Details"><div class="MoreDetailsTxt_'.$row['id'].'">'.$row['description'].'</div><a class="btn btn-info More" onclick="MoreDetailsTxt('.$row['id'].')">View Details</a></div></div>'.$bidBtn.'</div> ';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';

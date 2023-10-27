@@ -30,15 +30,15 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         <div class="link_widgets">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a href="<?= base_url('employer-list')?>" title="Explore Businesses">Explore Businesses</a>
-                                    <a href="<?= base_url('workers-list')?>" title="Explore Talent">Explore Talent</a>
-                                    <a href="<?= base_url('ourjobs')?>" title="Explore Job Openings">Explore Job Openings</a>
+                                    <a href="<?= base_url('businesses')?>" title="Explore Businesses">Explore Businesses</a>
+                                    <a href="<?= base_url('talent')?>" title="Explore Talent">Explore Talent</a>
+                                    <a href="<?= base_url('findwork')?>" title="Explore Job Openings">Explore Job Openings</a>
                                     <?php if($get_setting->required_subscription == '1') { ?>
-                                    <a href="<?= base_url('vendor_pricing')?>" title="Businesses Pricing">Businesses Pricing</a>
-                                    <a href="<?= base_url('freelancer_pricing')?>" title="Talents Pricing">Talents Pricing</a>
+                                    <a href="<?= base_url('businesses_pricing')?>" title="Businesses Pricing">Businesses Pricing</a>
+                                    <a href="<?= base_url('talents_pricing')?>" title="Talents Pricing">Talents Pricing</a>
                                     <?php } else { ?>
-                                    <a href="<?= base_url('register')?>" title="Business Sign up">Business Sign up</a>
-                                    <a href="<?= base_url('register')?>" title="Talent Sign up">Talent Sign up</a>
+                                    <a href="<?= base_url('signup')?>" title="Business Sign up">Business Sign up</a>
+                                    <a href="<?= base_url('signup')?>" title="Talent Sign up">Talent Sign up</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
 <input type="hidden" name="base_url" id="base_url" value="<?= base_url()?>">
 <style>
 <?php $seg2 = $this->uri->segment(1);
-    if($seg2 == 'register') { ?>
+    if($seg2 == 'signup') { ?>
         .scrollup {display: none !important;}
     <?php } elseif ($seg2 != 'login') { ?>
         .scrollup {display: none !important;}

@@ -17,7 +17,7 @@
                             <div class="job-search">
                                 <h3>The Easiest Way to Get Your New Job</h3>
                                 <span>Find Jobs, Employment & Career Opportunities</span>
-                                <form method="post" action="<?= base_url('search-job')?>">
+                                <form method="post" action="<?= base_url('search-work')?>">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="job-field">
@@ -91,7 +91,7 @@
                             <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array(); ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="my-blog"
-                                    onclick="location.href='<?= base_url('postdetail/'.base64_encode($row->id))?>';">
+                                    onclick="location.href='<?= base_url('workdetail/'.base64_encode($row->id))?>';">
                                     <div class="blog-details">
                                         <div class="Blog-Emp-Details">
                                             <div class="Blog-Emp-Img">
@@ -128,7 +128,7 @@
                 <?php if(count($get_post) > 6) { ?>
                 <div class="col-lg-12">
                     <div class="browse-all-cat">
-                        <a href="<?= base_url('ourjobs')?>" title="">View More</a>
+                        <a href="<?= base_url('findwork')?>" title="">View More</a>
                     </div>
                 </div>
                 <?php } ?>
@@ -196,7 +196,7 @@
                                         </div>
                                         <?php if(!empty($_SESSION['afrebay']['userId'])) {?>
                                         <h3 class="nkash">
-                                            <a type="button" class="btn" href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
+                                            <a type="button" class="btn" href="<?= base_url('talentdetail/'.base64_encode(@$user->userId))?>" title="">
                                                 <?php if(!empty($user->firstname)){ echo $user->firstname.' '.$user->lastname; } else{ echo ucfirst($user->username);}?>
                                             </a>
                                         </h3>
@@ -217,7 +217,7 @@
                 <?php if(count($getTotalworkers) > 8) { ?>
                 <div class="col-lg-12">
                     <div class="browse-all-cat">
-                        <a href="<?= base_url('workers-list')?>" title="">View More</a>
+                        <a href="<?= base_url('talent')?>" title="">View More</a>
                     </div>
                 </div>
                 <?php } ?>
@@ -284,7 +284,7 @@
                         <h3>Make a Difference with Your Online Resume!</h3>
                         <span>Get access to the latest jobs and projects globally!!</span>
                         <?php if(empty($_SESSION['afrebay']['userId'])){?>
-                        <a href="<?= base_url('register')?>" title="">Create an Account</a>
+                        <a href="<?= base_url('signup')?>" title="">Create an Account</a>
                         <?php } ?>
                     </div>
                 </div>
@@ -364,7 +364,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php } }?>
+                            <?php } } ?>
                         </div>
                     </div>
                 </div>
