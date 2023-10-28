@@ -161,7 +161,7 @@
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-thumbak">
-                                        <a href="<?= base_url('worker-detail/'.base64_encode(@$user->userId))?>" title="">
+                                        <a href="<?= base_url('talentdetail/'.base64_encode(@$user->userId))?>" title="">
                                             <?php if(!empty($user->profilePic)&& file_exists('uploads/users/'.$user->profilePic)){?>
                                             <img src="<?=base_url('uploads/users/'.$user->profilePic); ?>" alt="" style="height: 300px;" />
                                             <?php } else{?>
@@ -248,7 +248,7 @@
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="p-category">
                                     <a href="javascript:void(0)" title="">
-                                        <img src="<?php echo base_url()?>/uploads/services/<?php echo $item->icon?>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px;">
+                                        <img src="<?php echo base_url()?>uploads/services/<?php echo $item->icon?>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px;">
                                         <?php if(!empty($get_category->category_name)) { ?>
                                         <span><?= ucfirst($get_category->category_name)?></span>
                                         <?php } else { ?>

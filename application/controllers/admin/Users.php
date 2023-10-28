@@ -37,9 +37,9 @@ class Users extends MY_Controller {
         foreach ($GetData as $row)
         {
             if($row->userType == 1) {
-                $btn = ''.anchor(base_url('worker-detail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i></span>');
+                $btn = ''.anchor(base_url('talentdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i></span>');
             } else {
-                $btn = ''.anchor(base_url('employerdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i></span>');
+                $btn = ''.anchor(base_url('businessdetail/'.base64_encode($row->userId)),'<span class="btn btn-sm bg-success-light"><i class="far fa-eye mr-1"></i></span>');
             }
             if(!empty($row->resume)) {
                 $btn .= '|'.'<a class="btn btn-sm bg-success-light" href="'.base_url().'/uploads/users/resume/'.$row->resume.'" download title="Download Resume"><i class="fa fa-download mr-1"></i></a>';

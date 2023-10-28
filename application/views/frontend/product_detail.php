@@ -37,7 +37,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                             if(!empty($pro_img_list)) {
                                 foreach($pro_img_list as $img_val) { ?>
                             <div class="imgSlides">
-                                <img src="<?php echo base_url()?>/uploads/products/<?php echo $img_val['prod_image']?>" style="width:100%">
+                                <img src="<?php echo base_url()?>uploads/products/<?php echo $img_val['prod_image']?>" style="width:100%">
                             </div>
                             <?php } } ?>
                             <a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -48,7 +48,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 $i = 1;
                                 foreach($pro_img_list as $img_val1) { ?>
                                 <div class="column">
-                                    <img class="demo cursor" src="<?php echo base_url()?>/uploads/products/<?php echo $img_val1['prod_image']?>" style="width:100%" onclick="currentSlide(<?php echo $i?>)">
+                                    <img class="demo cursor" src="<?php echo base_url()?>uploads/products/<?php echo $img_val1['prod_image']?>" style="width:100%" onclick="currentSlide(<?php echo $i?>)">
                                 </div>
                             <?php $i++; } }?>
                             </div>

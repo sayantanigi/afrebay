@@ -596,7 +596,7 @@ class Dashboard extends CI_Controller {
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
 		}
-		redirect(base_url('worker-detail/' . base64_encode($_POST['user_id'])));
+		redirect(base_url('talentdetail/' . base64_encode($_POST['user_id'])));
 	}
 
 	function education_list()

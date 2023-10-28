@@ -61,7 +61,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     <?php if(!empty($get_employer)) {
                         foreach($get_employer as $user) { ?>
                         <div class="col-lg-6">
-                            <a href="<?= base_url('employerdetail/'.base64_encode($user->userId))?>">
+                            <a href="<?= base_url('businessdetail/'.base64_encode($user->userId))?>">
                                 <div class="reviews">
                                     <?php if(!empty($user->profilePic) && file_exists('uploads/users/'.$user->profilePic)) { ?>
                                     <img src="<?= base_url('uploads/users/'.$user->profilePic)?>" alt="" />

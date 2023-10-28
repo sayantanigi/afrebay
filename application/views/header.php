@@ -6,23 +6,23 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <?php if($this->uri->segment(1) == 'postdetail') { ?>
+    <?php if($this->uri->segment(1) == 'workdetail') { ?>
     <title><?php echo @$post_data->post_title?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'career-tip') { ?>
     <title><?php echo @$get_career->title?> - <?php echo @$get_setting->website_name?></title>
-    <?php } else if ($this->uri->segment(1) == 'employerdetail') { ?>
+    <?php } else if ($this->uri->segment(1) == 'businessdetail') { ?>
     <title><?php echo @$userdata->companyname?> - <?php echo @$get_setting->website_name?></title>
-    <?php } else if ($this->uri->segment(1) == 'worker-detail') { ?>
+    <?php } else if ($this->uri->segment(1) == 'talentdetail') { ?>
     <title><?php echo @$user_detail->firstname.' '.$user_detail->lastname?> - <?php echo @$get_setting->website_name?></title>
     <?php } else { ?>
     <title><?php echo @$title?> - <?php echo @$get_setting->website_name?></title>
     <?php } ?>
 
-    <?php if($this->uri->segment(1) == 'employerdetail') { ?>
+    <?php if($this->uri->segment(1) == 'businessdetail') { ?>
     <meta name="description" content="<?php echo @$userdata->short_bio?>">
-    <?php } else if($this->uri->segment(1) == 'worker-detail') { ?>
+    <?php } else if($this->uri->segment(1) == 'talentdetail') { ?>
     <meta name="description" content="<?php echo @$user_detail->short_bio?>">
-    <?php } else if($this->uri->segment(1) == 'postdetail') { ?>
+    <?php } else if($this->uri->segment(1) == 'workdetail') { ?>
     <meta name="description" content="<?php echo @$post_data->description?>">
     <?php } else if($this->uri->segment(1) == 'about-us') { ?>
     <meta name="description" content="Afrebay embarked on its transformative journey in 2013 with an unwavering commitment to bridging the gap in the African and American workforce and trade economies. Rooted in the belief that collaboration knows no boundaries, we've tirelessly worked to create a platform that fosters connections, empowers entrepreneurs and businesses, and opens doors to a world of possibilities.
@@ -195,7 +195,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             </li>
                         <?php } else {?>
                             <li class="signup-popup">
-                                <a href="<?=base_url(); ?>/signup" title=""><i class="la la-key"></i> Sign Up</a>
+                                <a href="<?=base_url(); ?>signup" title=""><i class="la la-key"></i> Sign Up</a>
                             </li>
                             <li class="signin-popup">
                                 <a href="<?= base_url('login')?>" title=""><i class="la la-external-link-square"></i> Login</a>

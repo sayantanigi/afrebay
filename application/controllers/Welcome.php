@@ -299,7 +299,7 @@ class Welcome extends CI_Controller {
 		$this->session->set_flashdata('message', 'Post Job Created Successfull !');
 		$insert_id = $this->db->insert_id();
 		$sitemap_date = array(
-			'link'=>'/'.'postdetail/'.base64_encode($insert_id),
+			'link'=>'/'.'workdetail/'.base64_encode($insert_id),
 			'changefreq' => 'daily',
 			'priority' => '0.51',
 			'lastmod'=> date('c', time()),

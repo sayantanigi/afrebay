@@ -43,14 +43,14 @@ class Login extends CI_Controller {
 			$insert_id = $this->db->insert_id();
 			if($_POST['user_type'] == '1') {
 				$sitemap_date = array(
-					'link'=>'\/worker-detail/'.base64_encode($insert_id),
+					'link'=>'/'.'talentdetail/'.base64_encode($insert_id),
 					'changefreq' => 'daily',
 					'priority' => '0.80',
 					'lastmod'=> date('c', time()),
 				);
 			} else {
 				$sitemap_date = array(
-					'link'=>'\/employerdetail/'.base64_encode($insert_id),
+					'link'=>'/'.'businessdetail/'.base64_encode($insert_id),
 					'changefreq' => 'daily',
 					'priority' => '0.64',
 					'lastmod'=> date('c', time()),

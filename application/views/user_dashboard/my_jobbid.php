@@ -98,7 +98,7 @@
                                                 <?php } else { ?>
                                                 <img src="<?php echo base_url()?>uploads/users/user.png" alt="" style="width: 60px; height: 60px; object-fit: cover;">
                                                 <?php } ?>
-                                                <a href="<?php echo base_url()?>worker-detail/<?php echo base64_encode($key->userid)?>" target="_blank"><p><?=$key->fullname; ?></p></a>
+                                                <a href="<?php echo base_url()?>talentdetail/<?php echo base64_encode($key->userid)?>" target="_blank"><p><?=$key->fullname; ?></p></a>
                                             </td>
                                         </tr>
                                         <tr>
