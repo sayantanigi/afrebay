@@ -356,11 +356,9 @@
                                         </div>
                                     </div>
                                     <div class="blog-details">
-                                        <h3><a href="<?= base_url('career-tip/'.base64_encode($career->id))?>"
-                                                title=""><?= ucfirst($career->title)?></a></h3>
+                                        <h3><a href="<?= base_url('career-tip/'.$career->slug)?>" title=""><?= ucfirst($career->title)?></a></h3>
                                         <div><?= ucfirst($desc)?></div>
-                                        <a href="<?= base_url('career-tip/'.base64_encode($career->id))?>"
-                                            title=""><span>Read More</span></a>
+                                        <a href="<?= base_url('career-tip/'.$career->slug)?>" title=""><span>Read More</span></a>
                                     </div>
                                 </div>
                             </div>

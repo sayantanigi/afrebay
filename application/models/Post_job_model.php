@@ -262,7 +262,7 @@ class Post_job_model extends My_Model {
                 <div class="emply-resume-thumb">'.$profile_pic.'</div>
                 <div class="emply-resume-info">
                 <h3>
-                <a href="'.base_url('talentdetail/'.base64_encode($row['id'])).'" title="">'.$row['post_title'].'</a>
+                <a href="'.base_url('workdetail/'.base64_encode($row['id'])).'" title="">'.$row['post_title'].'</a>
                 </h3>
                 <span>'.$get_category->category_name.'</span>
                 <span>'.$get_subcategory->sub_category_name.' </span>

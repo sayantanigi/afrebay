@@ -408,8 +408,8 @@ class Home extends MY_Controller {
 		echo json_encode($output);
 	}
 
-	function career_tip($id) {
-		$data['get_career'] = $this->Crud_model->get_single('career_tips', "id='".base64_decode($id)."'");
+	function career_tip($slug) {
+		$data['get_career'] = $this->Crud_model->get_single('career_tips', "slug='".$slug."'");
 		$this->load->view('header', $data);
 		$this->load->view('frontend/career_tip', $data);
 		$this->load->view('footer');

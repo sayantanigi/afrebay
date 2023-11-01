@@ -36,10 +36,11 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                                     <?php if($get_setting->required_subscription == '1') { ?>
                                     <a href="<?= base_url('businesses_pricing')?>" title="Businesses Pricing">Businesses Pricing</a>
                                     <a href="<?= base_url('talents_pricing')?>" title="Talents Pricing">Talents Pricing</a>
-                                    <?php } else { ?>
+                                    <?php } else { 
+                                    if(empty($_SESSION['afrebay']['userId'])) { ?>
                                     <a href="<?= base_url('signup')?>" title="Business Sign up">Business Sign up</a>
                                     <a href="<?= base_url('signup')?>" title="Talent Sign up">Talent Sign up</a>
-                                    <?php } ?>
+                                    <?php } } ?>
                                 </div>
                             </div>
                         </div>
@@ -212,6 +213,12 @@ function receiveVideoCallWindow(fid) {
     var callPath = "<?php echo base_url('livevideo/video/');?>" + fid;
     window.open(callPath, "_blank",
         "toolbar=yes,scrollbars=yes,resizable=yes,top=250,left=20,width=600,height=450");
+}
+function loginAlert() {
+    $.alert({
+	    title: '',
+	    content: "Already Logged In. Please logout for new registration",
+	});
 }
 </script>
 </body>

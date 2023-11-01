@@ -76,11 +76,8 @@ class Career_tips extends MY_Controller {
 
 		echo json_encode($output);
 	}
-	public function create_action()
-	{
-
-		if(isset($_FILES['image']['name']))
-		{
+	public function create_action() {
+		if(isset($_FILES['image']['name'])) {
 			$_POST['image']= rand(0000,9999)."_".$_FILES['image']['name'];
 			$config2['image_library'] = 'gd2';
 			$config2['source_image'] =  $_FILES['image']['tmp_name'];
@@ -88,32 +85,46 @@ class Career_tips extends MY_Controller {
 			$config2['upload_path'] =  getcwd().'/uploads/career/';
 			$config2['allowed_types'] = 'JPG|PNG|JPEG|jpg|png|jpeg';
 			$config2['maintain_ratio'] = FALSE;
-
 			$this->image_lib->initialize($config2);
-
-			if(!$this->image_lib->resize())
-			{
+			if(!$this->image_lib->resize()) {
 				echo('<pre>');
 				echo ($this->image_lib->display_errors());
 				exit;
-			}
-			else{
+			} else {
 				$image  = $_POST['image'];
 			}
-		}
-
-		else{
+		} else {
 			$image  = "";
 		}
+		$search  = array('!', '@', '#', '$', '%', '^','&', '*', '(', ')', '-', '+', '=', '|', '~', '`', ',', '.', ';', ':', '"', '{', '}' ,"'",'?',',','>', 'A','A','A','A','A','A','AE','C','E','E','E','E','I','I','I','I','D','N','O','O','O','O','O','O','U','U','U','U','Y','s','a','a','a','a','a','a','ae','c','e','e','e','e','i','i','i','i','n','o','o','o','o','o','o','u','u','u','u','y','y','A','a','A','a','A','a','C','c','C','c','C','c','C','c','D','d','D','d','E','e','E','e','E','e','E','e','E','e','G','g','G','g','G','g','G','g','H','h','H','h','I','i','I','i','I','i','I','i','I','i','IJ','ij','J','j','K','k','L','l','L','l','L','l','L','l','l','l','N','n','N','n','N','n','n','O','o','O','o','O','o','OE','oe','R','r','R','r','R','r','S','s','S','s','S','s','S','s','T','t','T','t','T','t','U','u','U','u','U','u','U','u','U','u','U','u','W','w','Y','y','Y','Z','z','Z','z','Z','z','s','f','O','o','U','u','A','a','I','i','O','o','U','u','U','u','U','u','U','u','U','u','A','a','AE','ae','O','o','/');
+		$replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' ', 'A','A','A','A','A','A','AE','C','E','E','E','E','I','I','I','I','D','N','O','O','O','O','O','O','U','U','U','U','Y','s','a','a','a','a','a','a','ae','c','e','e','e','e','i','i','i','i','n','o','o','o','o','o','o','u','u','u','u','y','y','A','a','A','a','A','a','C','c','C','c','C','c','C','c','D','d','D','d','E','e','E','e','E','e','E','e','E','e','G','g','G','g','G','g','G','g','H','h','H','h','I','i','I','i','I','i','I','i','I','i','IJ','ij','J','j','K','k','L','l','L','l','L','l','L','l','l','l','N','n','N','n','N','n','n','O','o','O','o','O','o','OE','oe','R','r','R','r','R','r','S','s','S','s','S','s','S','s','T','t','T','t','T','t','U','u','U','u','U','u','U','u','U','u','U','u','W','w','Y','y','Y','Z','z','Z','z','Z','z','s','f','O','o','U','u','A','a','I','i','O','o','U','u','U','u','U','u','U','u','U','u','A','a','AE','ae','O','o','-');  	
+		$page_title = substr(trim(strtolower($_POST['title'])),0,150);
+		$len=strlen($page_title);
+		$resource_slug=str_replace($search, $replace, $page_title);
+		$resource_slug=str_replace(' ','-',$resource_slug);
+		for($i=0;$i<=$len;$i++) {
+			$resource_slug=str_replace('--','-',$resource_slug);
+			$resource_slug=strtolower($resource_slug);
+		}
+		//$resource_slug_check=$this->common_model->get_data_array(PAGES,array('page_slug'=>$resource_slug));
+		$resource_slug=urlencode($resource_slug);
+		//$insert_array['page_slug']=$resource_slug;
 
 		$data=array(
 			'title'=>$_POST['title'],
+			'slug'=>$resource_slug,
 			'description'=>$_POST['description'],
 			'image'=>$image,
 			'created_date'=>date('Y-m-d H:i:s'),
 		);
-
 		$this->db->insert('career_tips',$data);
+		$sitemap_date = array(
+			'link'=>'/'.'career-tip/'.$resource_slug,
+			'changefreq' => 'daily',
+			'priority' => '0.80',
+			'lastmod'=> date('c', time()),
+		);
+		$this->db->insert('sitemap',$sitemap_date);
 		$this->session->set_flashdata('message', 'Career tips created successfully');
 		echo "1"; exit;
 

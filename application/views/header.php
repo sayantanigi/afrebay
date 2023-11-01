@@ -183,7 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <a href="<?= base_url('postwork')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                             <?php } } }
                 } else { ?>
-                <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
+                <!-- <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a> -->
                 <?php } ?>
                     <ul class="account-btns" style="margin: 0;">
                         <?php if(!empty($_SESSION['afrebay']['userId'])){?>
@@ -268,7 +268,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                         <a href="<?= base_url('postwork')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
                                     <?php } } }
                         } else { ?>
-                        <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a>
+                        <!-- <a href="<?= base_url('login')?>" title="" class="post-job-btn"><i class="la la-plus"></i>Post Work</a> -->
                         <?php } ?>
 
                         <ul class="account-btns">
