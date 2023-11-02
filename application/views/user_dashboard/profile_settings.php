@@ -27,11 +27,10 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 </section>
 
 <?php
-if($data_request=='user'){
-$this->load->view('sidebar');
-$container='';
-}
-else{
+if($data_request=='user') {
+    $this->load->view('sidebar');
+    $container='';
+} else {
     $container='container';
 }
 ?>
@@ -205,10 +204,10 @@ else{
                                                 <label for="last_name">
                                                     <h4>Short Bio <span style="color:red;">*</span></h4>
                                                 </label>
-                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" maxlength="500"><?= @$userinfo->short_bio ?></textarea>
+                                                <textarea class="form-control" name="short_bio" id="short_bio" placeholder="Short Bio" maxlength="1000"><?= @$userinfo->short_bio ?></textarea>
                                                 <div id="the-count">
                                                     <span id="current">0</span>
-                                                    <span id="maximum">/ 500</span>
+                                                    <span id="maximum">/ 1000</span>
                                                 </div>
                                                 <div id="vld_shrtBio" style="color:red; margin-top: 10px;">Please enter short bio.</div>
                                             </div>
@@ -274,23 +273,23 @@ $('#short_bio').keyup(function() {
     maximum = $('#maximum'),
     theCount = $('#the-count');
     current.text(characterCount);
-    if (characterCount < 70) {
+    if (characterCount < 500) {
         current.css('color', '#666');
     }
-    if (characterCount > 70 && characterCount < 90) {
+    if (characterCount > 500 && characterCount < 650) {
         current.css('color', '#6d5555');
     }
-    if (characterCount > 90 && characterCount < 100) {
+    if (characterCount > 650 && characterCount < 750) {
         current.css('color', '#793535');
     }
-    if (characterCount > 100 && characterCount < 120) {
+    if (characterCount > 750 && characterCount < 850) {
         current.css('color', '#841c1c');
     }
-    if (characterCount > 120 && characterCount < 139) {
+    if (characterCount > 850 && characterCount < 999) {
         current.css('color', '#8f0001');
     }
 
-    if (characterCount >= 140) {
+    if (characterCount >= 740) {
         maximum.css('color', '#8f0001');
         current.css('color', '#8f0001');
         theCount.css('font-weight','bold');

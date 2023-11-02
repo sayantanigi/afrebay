@@ -68,7 +68,7 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         <div class="link_widgets">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a href="#"><?= $get_setting->address?></a>
+                                    <a href="#" class="address_cstm"><?= $get_setting->address?></a>
                                     <a href="#"><?= $get_setting->phone ?></a>
                                     <a href="#"><?= $get_setting->email ?></a>
                                 </div>
@@ -100,6 +100,8 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     <?php } elseif ($seg2 != 'login') { ?>
         .scrollup {display: none !important;}
     <?php } ?>
+.address_cstm {margin: 0px !important;}
+.address_cstm p {color: #fff; font-family: Open Sans; font-size: 13px; line-height: normal; margin-bottom: 12px;}
 </style>
 <?php
 if(!empty($_SESSION['afrebay']['userId'])){

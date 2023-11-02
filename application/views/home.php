@@ -342,7 +342,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="my-blog">
                                     <div class="blog-thumb">
-                                        <a href="<?= base_url('career-tip/'.base64_encode($career->id))?>" title="">
+                                        <a href="<?= base_url('career-tips/'.$career->slug)?>" title="">
                                             <?php if(!empty($career->image)&& file_exists('uploads/career/'.$career->image)){?>
                                             <img src="<?=base_url('uploads/career/'.$career->image); ?>" alt="" />
                                             <?php } else{?>
@@ -356,9 +356,9 @@
                                         </div>
                                     </div>
                                     <div class="blog-details">
-                                        <h3><a href="<?= base_url('career-tip/'.$career->slug)?>" title=""><?= ucfirst($career->title)?></a></h3>
+                                        <h3><a href="<?= base_url('career-tips/'.$career->slug)?>" title=""><?= ucfirst($career->title)?></a></h3>
                                         <div><?= ucfirst($desc)?></div>
-                                        <a href="<?= base_url('career-tip/'.$career->slug)?>" title=""><span>Read More</span></a>
+                                        <a href="<?= base_url('career-tips/'.$career->slug)?>" title=""><span>Read More</span></a>
                                     </div>
                                 </div>
                             </div>

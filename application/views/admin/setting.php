@@ -57,7 +57,7 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label>Address</label>
-															<textarea placeholder="Address" name="address" class="form-control" style="resize:none;" rows="4" cols="4" required><?php if(!empty($row->address)) { echo $row->address;} ?></textarea>
+															<textarea placeholder="Address" name="address" id="address" class="form-control" style="resize:none;" rows="4" cols="4" required><?php if(!empty($row->address)) { echo $row->address;} ?></textarea>
 														</div>
 													</div>
 													<div class="col-md-12">
@@ -193,3 +193,7 @@ input:checked + .slider:before {-webkit-transform: translateX(26px); -ms-transfo
 .slider.round {border-radius: 34px;}
 .slider.round:before {border-radius: 50%;}
 </style>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+	CKEDITOR.replace('address');
+</script>

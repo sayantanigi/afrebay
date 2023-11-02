@@ -8,12 +8,14 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php if($this->uri->segment(1) == 'workdetail') { ?>
     <title><?php echo @$post_data->post_title?> - <?php echo @$get_setting->website_name?></title>
-    <?php } else if ($this->uri->segment(1) == 'career-tip') { ?>
+    <?php } else if ($this->uri->segment(1) == 'career-tips') { ?>
     <title><?php echo @$get_career->title?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'businessdetail') { ?>
     <title><?php echo @$userdata->companyname?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'talentdetail') { ?>
     <title><?php echo @$user_detail->firstname.' '.$user_detail->lastname?> - <?php echo @$get_setting->website_name?></title>
+    <?php } else if ($this->uri->segment(1) == 'productdetail') { ?>
+    <title><?php echo @$prod_details[0]['prod_name']; ?> - <?php echo @$get_setting->website_name?></title>
     <?php } else { ?>
     <title><?php echo @$title?> - <?php echo @$get_setting->website_name?></title>
     <?php } ?>
@@ -31,7 +33,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <meta name="description" content="<?php echo $prod_details[0]['prod_description']; ?>">
     <?php } else if ($this->uri->segment(1) == 'findwork') { ?>
     <meta name="description" content="Your Bridge to career opportunities. Contact us today to start your journey toward a brighter future. Our experts are here to guide you in finding your dream job">
-    <?php } else if ($this->uri->segment(1) == 'career-tip') { $description = explode('.', $get_career->description)?>
+    <?php } else if ($this->uri->segment(1) == 'career-tips') { $description = explode('.', $get_career->description)?>
     <meta name="description" content="<?= $description[0]?>">
     <?php } else { ?>
     <meta name="description" content="<?php echo @$description?>">
