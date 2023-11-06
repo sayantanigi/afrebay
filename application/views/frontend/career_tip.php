@@ -41,3 +41,6 @@
         </div>
     </div>
 </section>
+<style>
+    .blog-single {float: left;width: 85%;display: inline-block;margin-left: 75px;}
+</style>

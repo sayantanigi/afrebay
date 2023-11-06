@@ -9,7 +9,7 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     <?php if($this->uri->segment(1) == 'workdetail') { ?>
     <title><?php echo @$post_data->post_title?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'career-tips') { ?>
-    <title><?php echo @$get_career->title?> - <?php echo @$get_setting->website_name?></title>
+    <title><?php if(!empty(@$get_career->title)) { echo @$get_career->title; } else { echo @$title; }?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'businessdetail') { ?>
     <title><?php echo @$userdata->companyname?> - <?php echo @$get_setting->website_name?></title>
     <?php } else if ($this->uri->segment(1) == 'talentdetail') { ?>

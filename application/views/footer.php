@@ -54,8 +54,9 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                                 <div class="col-lg-12">
                                     <a href="<?= base_url('about-us')?>" title="About us">About Us</a>
                                     <a href="<?= base_url('contact-us')?>" title="Contact us">Contact Us</a>
-                                    <a href="<?= base_url('privacy-policy')?>" title="privacy policy">Privacy Policy</a>
-                                    <a href="<?= base_url('term-and-conditions')?>" title="Term & condition">Terms &
+                                    <a href="<?= base_url('career-tips')?>" title="Blog">Blog</a>
+                                    <a href="<?= base_url('privacy-policy')?>" title="Privacy Policy">Privacy Policy</a>
+                                    <a href="<?= base_url('term-and-conditions')?>" title="Term & Condition">Terms &
                                         Conditions </a>
                                 </div>
                             </div>
@@ -79,8 +80,8 @@ if(!empty($_SESSION['afrebay']['userId'])) {
                         <a href="<?php echo $get_setting->fb_link; ?>" title="" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="<?php echo $get_setting->tw_link; ?>" title="" target="_blank"><i class="fa fa-twitter"></i></a>
                         <a href="<?php echo $get_setting->lnkd_link; ?>" title="" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        <a href="<?php echo $get_setting->ptrs_link?>" title="" target="_blank"><i class="fa fa-pinterest"></i></a>
-                        <a href="<?php echo $get_setting->baha_link?>" title="" target="_blank"><i class="fa fa-behance"></i></a>
+                        <!-- <a href="<?php echo $get_setting->ptrs_link?>" title="" target="_blank"><i class="fa fa-pinterest"></i></a>
+                        <a href="<?php echo $get_setting->baha_link?>" title="" target="_blank"><i class="fa fa-behance"></i></a> -->
                     </div>
                 </div>
             </div>

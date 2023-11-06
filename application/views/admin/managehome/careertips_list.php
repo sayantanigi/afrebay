@@ -1,6 +1,5 @@
 <div class="page-wrapper">
     <div class="content container-fluid">
-
         <div class="page-header">
             <div class="row">
                 <div class="col">
@@ -28,12 +27,13 @@
                                     <th>#</th>
                                     <th>Image</th>
                                     <th>Title</th>
+                                    <th>URL</th>
                                     <th>Description</th>
+                                    <th>Date</th>
                                     <th>Manage</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                             </tbody>
                         </table>
                     </div>
@@ -67,33 +67,37 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>Page Slug <span style="color:red;">*</span> <span id="slug_err"></span></label>
+                                        <input class="form-control" type="text" name="slug" id="slug" placeholder="Enter Slug">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>Image <span style="color:red;">*</span> <span id="image_err"></span></label>
                                         <input class="form-control" type="file" name="image" id="image">
                                     </div>
                                 </div>
-
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Date <span style="color:red;">*</span> <span id="date_err"></span></label>
+                                        <input class="form-control" type="date" name="tipsdate" id="tipsdate" placeholder="Enter Slug">
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Description <span style="color:red;">*</span> <span id="description_err"></span></label>
                                         <textarea class="form-control" name="description" id="description"></textarea>
                                     </div>
                                 </div>
-
-
                             </div>   <!-- end row -->
-
-
-
                             <div class="mt-4">
                                 <button class="btn btn-primary" type="button" onclick="return create_career();">Submit</button>
                                 <a href="#" class="btn btn-link" data-dismiss="modal">Cancel</a>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -121,11 +125,22 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>Page Slug <span style="color:red;">*</span> <span id="edit_slug_err"></span></label>
+                                        <input class="form-control" type="text" name="slug" id="edit_slug" placeholder="Enter Slug">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>image <span style="color:red;">*</span> <span id="edit_image_err"></span></label>
                                         <input class="form-control" type="file" name="image" id="edit_image">
                                     </div>
-
                                     <div id="show_img"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Date <span style="color:red;">*</span> <span id="edit_date_err"></span></label>
+                                        <input class="form-control" type="date" name="tipsdate" id="edit_tipsdate" placeholder="Enter Slug">
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -133,11 +148,7 @@
                                         <textarea class="form-control" name="description1" id="edit_description"></textarea>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                             <input type="hidden" name="id" id="id">
                             <input type="hidden" name="old_image" id="old_image">
                             <div class="mt-4">
@@ -145,11 +156,9 @@
                                 <a href="#" class="btn btn-link" data-dismiss="modal">Cancel</a>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -175,13 +184,10 @@
     </div>
 </div>
 <!--  end view modal -->
-
-
 <script>
 var url = '<?= admin_url('manage_home/Career_tips/ajax_manage_page')?>';
 var actioncolumn=4;
 </script>
-
 <script type="text/javascript" src="<?= base_url('dist/assets/custom_js/career.js')?>"></script>
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <script>
@@ -203,6 +209,23 @@ $(window).scroll(function(){
         table_header.removeClass('sticky_thead1');
     }
 });
+
+$(document).ready(function(){
+    $('#slug').keypress(validateNumber);
+    $('#edit_slug').keypress(validateNumber);
+});
+
+function validateNumber(event) {
+    var key = window.event ? event.keyCode : event.which;
+    console.log(key);
+    if (event.keyCode === 8 || event.keyCode === 46 || event.keyCode === 58) {
+        return true;
+    } else if ( key === 48 || key === 57 || key === 63 || key === 62 || key === 46 || key === 60 || key === 44 || key === 59 || key === 58 || key === 39 || key === 34) {
+        return false;
+    } else {
+        return true;
+    }
+};
 
 $('#refreshForm').click(function(){
     $('#categorySearch').trigger("reset");

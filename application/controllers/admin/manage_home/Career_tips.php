@@ -62,7 +62,9 @@ class Career_tips extends MY_Controller {
 			$nestedData[] = $no;
 			$nestedData[] = $img;
 			$nestedData[] = ucwords($row->title);
+			$nestedData[] = $row->slug;
 			$nestedData[] = $desc;
+			$nestedData[] = $row->tipsdate;
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
 		}
@@ -96,7 +98,7 @@ class Career_tips extends MY_Controller {
 		} else {
 			$image  = "";
 		}
-		$search  = array('!', '@', '#', '$', '%', '^','&', '*', '(', ')', '-', '+', '=', '|', '~', '`', ',', '.', ';', ':', '"', '{', '}' ,"'",'?',',','>', 'A','A','A','A','A','A','AE','C','E','E','E','E','I','I','I','I','D','N','O','O','O','O','O','O','U','U','U','U','Y','s','a','a','a','a','a','a','ae','c','e','e','e','e','i','i','i','i','n','o','o','o','o','o','o','u','u','u','u','y','y','A','a','A','a','A','a','C','c','C','c','C','c','C','c','D','d','D','d','E','e','E','e','E','e','E','e','E','e','G','g','G','g','G','g','G','g','H','h','H','h','I','i','I','i','I','i','I','i','I','i','IJ','ij','J','j','K','k','L','l','L','l','L','l','L','l','l','l','N','n','N','n','N','n','n','O','o','O','o','O','o','OE','oe','R','r','R','r','R','r','S','s','S','s','S','s','S','s','T','t','T','t','T','t','U','u','U','u','U','u','U','u','U','u','U','u','W','w','Y','y','Y','Z','z','Z','z','Z','z','s','f','O','o','U','u','A','a','I','i','O','o','U','u','U','u','U','u','U','u','U','u','A','a','AE','ae','O','o','/');
+		/*$search  = array('!', '@', '#', '$', '%', '^','&', '*', '(', ')', '-', '+', '=', '|', '~', '`', ',', '.', ';', ':', '"', '{', '}' ,"'",'?',',','>', 'A','A','A','A','A','A','AE','C','E','E','E','E','I','I','I','I','D','N','O','O','O','O','O','O','U','U','U','U','Y','s','a','a','a','a','a','a','ae','c','e','e','e','e','i','i','i','i','n','o','o','o','o','o','o','u','u','u','u','y','y','A','a','A','a','A','a','C','c','C','c','C','c','C','c','D','d','D','d','E','e','E','e','E','e','E','e','E','e','G','g','G','g','G','g','G','g','H','h','H','h','I','i','I','i','I','i','I','i','I','i','IJ','ij','J','j','K','k','L','l','L','l','L','l','L','l','l','l','N','n','N','n','N','n','n','O','o','O','o','O','o','OE','oe','R','r','R','r','R','r','S','s','S','s','S','s','S','s','T','t','T','t','T','t','U','u','U','u','U','u','U','u','U','u','U','u','W','w','Y','y','Y','Z','z','Z','z','Z','z','s','f','O','o','U','u','A','a','I','i','O','o','U','u','U','u','U','u','U','u','U','u','A','a','AE','ae','O','o','/');
 		$replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' ', 'A','A','A','A','A','A','AE','C','E','E','E','E','I','I','I','I','D','N','O','O','O','O','O','O','U','U','U','U','Y','s','a','a','a','a','a','a','ae','c','e','e','e','e','i','i','i','i','n','o','o','o','o','o','o','u','u','u','u','y','y','A','a','A','a','A','a','C','c','C','c','C','c','C','c','D','d','D','d','E','e','E','e','E','e','E','e','E','e','G','g','G','g','G','g','G','g','H','h','H','h','I','i','I','i','I','i','I','i','I','i','IJ','ij','J','j','K','k','L','l','L','l','L','l','L','l','l','l','N','n','N','n','N','n','n','O','o','O','o','O','o','OE','oe','R','r','R','r','R','r','S','s','S','s','S','s','S','s','T','t','T','t','T','t','U','u','U','u','U','u','U','u','U','u','U','u','W','w','Y','y','Y','Z','z','Z','z','Z','z','s','f','O','o','U','u','A','a','I','i','O','o','U','u','U','u','U','u','U','u','U','u','A','a','AE','ae','O','o','-');  	
 		$page_title = substr(trim(strtolower($_POST['title'])),0,150);
 		$len=strlen($page_title);
@@ -105,21 +107,23 @@ class Career_tips extends MY_Controller {
 		for($i=0;$i<=$len;$i++) {
 			$resource_slug=str_replace('--','-',$resource_slug);
 			$resource_slug=strtolower($resource_slug);
-		}
+		}*/
 		//$resource_slug_check=$this->common_model->get_data_array(PAGES,array('page_slug'=>$resource_slug));
-		$resource_slug=urlencode($resource_slug);
+		//$resource_slug=urlencode($resource_slug);
 		//$insert_array['page_slug']=$resource_slug;
 
 		$data=array(
 			'title'=>$_POST['title'],
-			'slug'=>$resource_slug,
+			'slug'=>$_POST['slug'],
 			'description'=>$_POST['description'],
+			'tipsdate'=>$_POST['tipsdate'],
 			'image'=>$image,
 			'created_date'=>date('Y-m-d H:i:s'),
 		);
+		//print_r($data); die;
 		$this->db->insert('career_tips',$data);
 		$sitemap_date = array(
-			'link'=>'/'.'career-tip/'.$resource_slug,
+			'link'=>'/'.'career-tip/'.$_POST['slug'],
 			'changefreq' => 'daily',
 			'priority' => '0.80',
 			'lastmod'=> date('c', time()),
@@ -154,9 +158,11 @@ class Career_tips extends MY_Controller {
 		$data=array(
 			'id'=>$get_data->id,
 			'title'=>$get_data->title,
+			'slug'=>$get_data->slug,
 			'image'=>$img,
 			'old_image'=>$get_data->image,
 			'description'=>$get_data->description,
+			'tipsdate'=>$get_data->tipsdate,
 		);
 
 		echo json_encode($data);exit;
@@ -194,7 +200,9 @@ class Career_tips extends MY_Controller {
 
 		$data = array(
 			'title'=> $_POST['title'],
+			'slug'=> $_POST['slug'],
 			'description'=> $_POST['description'],
+			'tipsdate'=>$_POST['tipsdate'],
 			'image'=>$image,
 
 		);

@@ -18,10 +18,12 @@ class Home extends MY_Controller {
 		$data['countries']=$this->Crud_model->GetData('countries',"","");
 		$data['get_freelancerspost'] = $this->Crud_model->GetData('postjob', '', "is_delete='0'", '', '', '8');
 		$data['get_career'] = $this->Crud_model->GetData('career_tips', '', "status='Active'", '', '', '3');
+		$data['getTotalcareer'] = $this->db->query("SELECT * FROM career_tips WHERE status = 'Active' ORDER BY id DESC")->result_array();
 		$data['get_company'] = $this->Crud_model->GetData('company_logo', '', "status='Active'", '', '', '');
 		$data['get_users'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' AND gender != '' ORDER BY users.userId DESC limit 8")->result();
 		$data['getTotalworkers'] = $this->db->query("SELECT users.* FROM users WHERE users.userType = '1' AND users.status = '1' AND users.email_verified = '1' ORDER BY users.userId DESC")->result_array();
-		$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
+		//$data['get_ourservice'] = $this->Crud_model->GetData('our_service', '', "status='Active'", '', '', '');
+		$data['get_ourservice'] = $this->db->query("SELECT our_service.*, category_name FROM our_service LEFT JOIN category ON category.id = our_service.category_id WHERE category.category_name != '' ORDER BY our_service.id DESC")->result_array();
 		$data['get_banner'] = $this->Crud_model->get_single('banner', "page_name='Home Top'");
 		$data['get_banner_middle'] = $this->Crud_model->get_single('banner', "page_name='Home Middle'");
 		$data['title'] = 'Find Jobs, Employment & Career Opportunities in USA';
@@ -406,6 +408,14 @@ class Home extends MY_Controller {
 			'employer_list'   => $getdata
 		);
 		echo json_encode($output);
+	}
+
+	function career_tipsList() {
+		$data['getcareer'] = $this->Crud_model->GetData('career_tips', '', "status= 'Active'", '', '(id)desc');
+		$data['title'] = "Career Tips";
+		$this->load->view('header', $data);
+		$this->load->view('frontend/careertipsList.php', $data);
+		$this->load->view('footer');
 	}
 
 	function career_tip($slug) {

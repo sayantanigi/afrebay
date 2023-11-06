@@ -54,7 +54,7 @@ class Our_services extends MY_Controller {
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;
-			$nestedData[] = ucwords($row->category_name);
+			$nestedData[] = ucwords(@$row->category_name);
 			$nestedData[] = $img;
 			$nestedData[] = strip_tags($desc);
 			$nestedData[] = $btn;

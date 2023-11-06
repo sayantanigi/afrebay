@@ -20,7 +20,7 @@ class Our_service_model extends CI_Model
 		$this->db->select('our_service.*,category_name');
         $this->db->from('our_service');
         $this->db->join('category',"category.id=our_service.category_id",'left');
-
+        $this->db->where('category.category_name != ',"");
 		$i = 0;
         $new_str = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['search']['value']);
         if($new_str) // if datatable send POST for search
@@ -55,6 +55,7 @@ class Our_service_model extends CI_Model
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
+        //print_r($this->db->last_query()); die();
         return $query->result();
     }
 

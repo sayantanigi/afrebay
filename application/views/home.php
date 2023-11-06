@@ -238,19 +238,19 @@
                         <div class="row no-gape">
                             <?php if(!empty($get_ourservice)){
                                 foreach($get_ourservice as $item){
-                                    $get_category=$this->Crud_model->get_single('category',"id='".$item->category_id."'");
-                                    if(strlen($item->description)>100) {
-                                        $description=substr($item->description,0,100).'...';
+                                    //$get_category=$this->Crud_model->get_single('category',"id='".$item->category_id."'");
+                                    if(strlen($item['description'])>100) {
+                                        $description=substr($item['description'],0,100).'...';
                                     } else {
-                                        $description=$item->description;
+                                        $description=$item['description'];
                                     }
                                 ?>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="p-category">
                                     <a href="javascript:void(0)" title="">
-                                        <img src="<?php echo base_url()?>uploads/services/<?php echo $item->icon?>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px;">
-                                        <?php if(!empty($get_category->category_name)) { ?>
-                                        <span><?= ucfirst($get_category->category_name)?></span>
+                                        <img src="<?php echo base_url()?>uploads/services/<?php echo $item['icon']?>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px;">
+                                        <?php if(!empty($item['category_name'])) { ?>
+                                        <span><?= ucfirst($item['category_name'])?></span>
                                         <?php } else { ?>
                                         <span></span>
                                         <?php } ?>
@@ -351,7 +351,7 @@
                                         </a>
                                         <div class="blog-metas">
                                             <a href="javascript:void(0)"
-                                                title=""><?= date('M d,Y',strtotime($career->update_date))?></a>
+                                                title=""><?= date('M d,Y',strtotime($career->tipsdate))?></a>
                                             <a href="javascript:void(0)" title="">0 Comments</a>
                                         </div>
                                     </div>
@@ -366,6 +366,13 @@
                         </div>
                     </div>
                 </div>
+                <?php if(count($getTotalcareer) > 3) { ?>
+                <div class="col-lg-12">
+                    <div class="browse-all-cat">
+                        <a href="<?= base_url('career-tips')?>" title="">View More</a>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
