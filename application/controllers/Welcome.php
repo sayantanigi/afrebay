@@ -305,7 +305,7 @@ class Welcome extends CI_Controller {
 			'lastmod'=> date('c', time()),
 		);
 		$this->Crud_model->SaveData('sitemap',$sitemap_date);
-		redirect(base_url("postdetail/".base64_encode($insert_id)));
+		redirect(base_url("workdetail/".base64_encode($insert_id)));
 	}
 
 	function post_jobinfo($id) {

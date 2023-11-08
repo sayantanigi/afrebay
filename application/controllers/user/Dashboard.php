@@ -313,10 +313,10 @@ class Dashboard extends CI_Controller {
 		$insert_id = $this->db->insert_id();
 		if(!empty($insert_id)) {
 			$this->session->set_flashdata('message', 'Bid Submitted Successfully! You will be notified once the Business has approved your bid');
-			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
+			redirect(base_url("workdetail/".base64_encode($_POST['postjob_id'])), "refresh");
 		} else {
 			$this->session->set_flashdata('message', 'Something went wrong. Please try again later.');
-			redirect(base_url("postdetail/".base64_encode($_POST['postjob_id'])), "refresh");
+			redirect(base_url("workdetail/".base64_encode($_POST['postjob_id'])), "refresh");
 		}
 
 	}

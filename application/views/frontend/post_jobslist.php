@@ -6,6 +6,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 } ?>
 <style>
     .Employees_Search_List .Employees_Search_Result .emply-resume-list .shortlists a.Emp_Comp i {color: #f07759 !important;}
+    @media screen and (max-width: 425px) and (min-width: 375px) {
+        .emply-resume-list {
+            box-shadow: 0 0 10px #dddddd !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            padding: 5px !important;
+        }
+    }
 </style>
 <section class="overlape">
     <div class="block no-padding">

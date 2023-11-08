@@ -123,7 +123,7 @@ class Career_tips extends MY_Controller {
 		//print_r($data); die;
 		$this->db->insert('career_tips',$data);
 		$sitemap_date = array(
-			'link'=>'/'.'career-tip/'.$_POST['slug'],
+			'link'=>'/'.'career-tips/'.$_POST['slug'],
 			'changefreq' => 'daily',
 			'priority' => '0.80',
 			'lastmod'=> date('c', time()),

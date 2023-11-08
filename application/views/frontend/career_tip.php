@@ -42,5 +42,12 @@
     </div>
 </section>
 <style>
-    .blog-single {float: left;width: 85%;display: inline-block;margin-left: 75px;}
+.blog-single {float: left;width: 85%;display: inline-block;margin-left: 75px;}
+@media only screen and (max-width: 768px) {
+    .blog-single {
+        padding: 0 20px 0 20px !important;
+        margin-left: 0px !important;
+        width: 100% !important;
+    }
+}
 </style>

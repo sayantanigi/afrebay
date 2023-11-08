@@ -7,6 +7,16 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 @$subcategory_id=$this->uri->segment(2);
 @$postid=base64_decode($subcategory_id);
 ?>
+<style>
+    @media screen and (max-width: 425px) and (min-width: 375px) {
+        .emply-resume-list {
+            box-shadow: 0 0 10px #dddddd !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            padding: 5px !important;
+        }
+    }
+</style>
 <section class="overlape">
     <div class="block no-padding">
         <div data-velocity="-.1" style="background: url('<?= $banner_img ?>') repeat scroll 50% 422.28px transparent;"

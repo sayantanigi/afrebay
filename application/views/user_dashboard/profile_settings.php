@@ -137,7 +137,7 @@ if($data_request=='user') {
                                             </div>
                                             <?php if(@$userinfo->userType=='1') { ?>
                                             <div class="col-lg-12 key-skill">
-                                                <span class="pf-title1">Skill Set</span>
+                                                <span class="pf-title1">Specializations</span>
                                                 <div class="pf-field">
                                                     <select class="form-control key_skills" multiple="multiple" name="key_skills[]" id="key_skills" style="width: 100%;">
                                                     <?php
@@ -264,7 +264,7 @@ $('#skills').tagsinput({
 $('.key_skills').select2({
     tags: true,
     tokenSeparators: [','],
-    placeholder: "Select or Type Skills"
+    placeholder: "Select or Type Specialization"
 });
 
 $('#short_bio').keyup(function() {

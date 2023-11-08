@@ -43,7 +43,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 <div class="specialism_widget">
                                     <div class="dropdown-field">
                                         <select id="example" class="example" name="specialist" multiple>
-                                            <option value="">Choose Skills</option>
+                                            <option value="">Choose Specializations</option>
                                             <?php if(!empty($get_specialist)){
                                             foreach ($get_specialist as $key) {?>
                                             <option value="<?= $key->specialist_name?>"><?= $key->specialist_name?></option>
@@ -75,6 +75,14 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 .jconfirm .jconfirm-box .jconfirm-buttons button.btn-blue {background: linear-gradient(180deg, rgba(249, 80, 30, 1) 0%, rgba(252, 119, 33, 1) 100%) !important;
     color: #fff !important; text-shadow: none; width: 200px; font-size: 14px !important; letter-spacing: 0px; padding: 10px 0 !important; width: 160px; border-radius: 20px; margin-right: 48px !important;}
 .jconfirm .jconfirm-box .jconfirm-buttons button.btn-default {border-radius: 20px !important;}
+@media screen and (max-width: 425px) and (min-width: 375px) {
+    .emply-resume-list {
+        box-shadow: 0 0 10px #dddddd !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        padding: 5px !important;
+    }
+}
 </style>
 <script>
 $(document).ready(function () {

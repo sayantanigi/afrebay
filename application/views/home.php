@@ -232,22 +232,23 @@
                 <div class="col-lg-12">
                     <div class="heading">
                         <h2>Our Services</h2>
-                        <span>The marketplace for the most eligible talent and business. <br> Find the latest jobs in the industry globally.</span>
+                        <span>Looking for a reliable and outstanding business process outsourcing partner? 
+Look no further. With Afrebay services, you no longer have to worry about employing the best talent for your business. Our focus is to ensure you get professional expertise needed to make your business grow. We understand that recruitment and selection processes can be quite a hurdle, let us help you simplify this with our top-notch services. </span>
                     </div>
                     <div class="cat-sec">
                         <div class="row no-gape">
                             <?php if(!empty($get_ourservice)){
-                                foreach($get_ourservice as $item){
-                                    //$get_category=$this->Crud_model->get_single('category',"id='".$item->category_id."'");
-                                    if(strlen($item['description'])>100) {
-                                        $description=substr($item['description'],0,100).'...';
-                                    } else {
-                                        $description=$item['description'];
-                                    }
-                                ?>
-                            <div class="col-lg-3 col-md-6 col-sm-12">
+                            foreach($get_ourservice as $item){
+                                //$get_category=$this->Crud_model->get_single('category',"id='".$item->category_id."'");
+                                if(strlen($item['description'])>100) {
+                                    $description=substr($item['description'],0,100).'...';
+                                } else {
+                                    $description=$item['description'];
+                                }
+                            ?>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="p-category">
-                                    <a href="javascript:void(0)" title="">
+                                    <a href="<?php echo base_url('contact-us')?>" title="">
                                         <img src="<?php echo base_url()?>uploads/services/<?php echo $item['icon']?>" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px;">
                                         <?php if(!empty($item['category_name'])) { ?>
                                         <span><?= ucfirst($item['category_name'])?></span>
@@ -272,10 +273,12 @@
 </section>
 <section>
     <div class="block double-gap-top double-gap-bottom">
-        <?php if(!empty($get_banner_middle->image) && file_exists('uploads/banner/'.$get_banner_middle->image)){?>
-        <div data-velocity="-.1" style="background: url(<?=base_url('uploads/banner/'.$get_banner_middle->image); ?>) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color"></div>
+        <?php if(!empty($get_banner_middle->image) && file_exists('uploads/banner/'.$get_banner_middle->image)) { 
+            $image = base_url('uploads/banner/'.$get_banner_middle->image);
+        ?>
+        <div data-velocity="-.1" style="background: url('<?php echo $image?>') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color"></div>
         <?php } else{?>
-        <div data-velocity="-.1" style="background: url(<?=base_url(); ?>assets/images/resource/parallax1.jpg) repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color"></div>
+        <div data-velocity="-.1" style="background: url('<?=base_url(); ?>assets/images/resource/parallax1.jpg') repeat scroll 50% 422.28px transparent;" class="parallax scrolly-invisible layer color"></div>
         <?php } ?>
         <div class="container">
             <div class="row">

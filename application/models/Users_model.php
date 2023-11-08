@@ -165,7 +165,7 @@ class Users_model extends My_Model {
                 } else {
                     $desc= $row['short_bio'];
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3> <span>'.$row['category_name'].'</span> <p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.strip_tags($desc).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('talentdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list col-12"> <div class="emply-resume-info"> <h3><a href="javascript:void(0)" title="">'.$name.'</a></h3> <span>'.$row['category_name'].'</span> <p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.strip_tags($desc).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('talentdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
             }
         } else {
             $output .= ' <div class="emply-resume-list">
@@ -281,7 +281,7 @@ class Users_model extends My_Model {
                 } else {
                     $profile_pic= '<img src="'.base_url('uploads/users/user.png').'" alt="" />';
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="#" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Posts : '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('businessdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
+                $output .= '<div class="emply-resume-list col-12"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="javascript:void(0)" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Posts : '.count($get_post).'</p> </div> <div class="shortlists" style="width:50px;"> <a href="'.base_url('businessdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a> </div> </div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
@@ -329,7 +329,7 @@ class Users_model extends My_Model {
                 } else {
                     $viewProfileLink = '<div class="shortlists" style="width:50px;"><a href="javascript:void(0)" title="" onclick= "viewProfile()">View Profile<i class="la la-plus"></i></a></div>';
                 }
-                $output .= '<div class="emply-resume-list"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="javascript:void(0)" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Bids : '.count($get_post).'</p> </div>'.$viewProfileLink.'</div>';
+                $output .= '<div class="emply-resume-list col-12"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="javascript:void(0)" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Bids : '.count($get_post).'</p> </div>'.$viewProfileLink.'</div>';
             }
         } else {
             $output .= '<div class="emply-resume-list"><div class="emply-resume-thumb"><h2>No Data Found</h2></div></div>';
