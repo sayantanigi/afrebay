@@ -23,6 +23,7 @@ class Post_job extends MY_Controller {
 
 	function ajax_manage_page() {
 		$GetData = $this->Post_job_model->get_datatables();
+		//print_r($GetData); die();
         if(empty($_POST['start'])) {
     		$no=0;
        	} else {
@@ -50,18 +51,20 @@ class Post_job extends MY_Controller {
                 <label for="rating_\''.$row->id.'\'" class="checktoggle">checkbox</label>
                 </div>';
             }
-			$btn = ''.anchor(base_url('postdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2" title="View"><i class="far fa-eye mr-1"></i></span>');
+			$btn = ''.anchor(base_url('workdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2" title="View"><i class="far fa-eye mr-1"></i></span>');
 			$btn .= ''.anchor(base_url('admin/update-postjob/'.base64_encode($row->id)),'<span class="btn btn-sm bg-success-light mr-2" title="Edit"><i class="far fa-edit mr-1"></i></span>');
-			// $btn .= ''.anchor(base_url('admin/deletepostdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-danger-light mr-2" title="Delete" onclick="return confirm(\'Are you sure you want to delete this item?\');"><i class="fa fa-trash mr-1"></i></span>');
+			// $btn .= ''.anchor(base_url('admin/deleteworkdetail/'.base64_encode($row->id)),'<span class="btn btn-sm bg-danger-light mr-2" title="Delete" onclick="return confirm(\'Are you sure you want to delete this item?\');"><i class="fa fa-trash mr-1"></i></span>');
 			$btn .= '<span class="btn btn-sm bg-danger-light mr-2" title="Delete" onclick="deleteJobpost('.$row->id.');"><i class="fa fa-trash mr-1"></i></span>';
-
+			$userDetails = $this->db->query("SELECT * FROM users WHERE userId = '".$row->user_id."'")->result_array();
 			$no++;
 			$nestedData = array();
 			$nestedData[] = $no;
+			$nestedData[] = ucwords($userDetails[0]['companyname']);
 			$nestedData[] = ucwords($string);
 			$nestedData[] = ucwords($row->category_name);
 			$nestedData[] = $row->duration;
 			$nestedData[] = "USD"." ".$row->charges;
+			$nestedData[] = date('d-m-Y', strtotime($row->created_date));
 			$nestedData[] = $status."<input type='hidden' id='status".$row->id."' value='".$row->status."' />";
 			$nestedData[] = $btn;
 			$data[] = $nestedData;
@@ -193,7 +196,7 @@ class Post_job extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
-	function deletepostdetail() {
+	function deleteworkdetail() {
 	 	$con = $this->input->post('jobid');
 	 	$query = $this->db->query("DELETE FROM postjob WHERE id = ".$con."");
 	 	if($query) {

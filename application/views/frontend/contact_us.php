@@ -27,7 +27,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12 column">
                     <div class="contact-form">
-                        <h3>Keep In Touch</h3>
+                        <h3>Submit an Inquiry</h3>
                         <span class="text-success-msg f-20">
                         <?php if($this->session->flashdata('message')) {
                             echo $this->session->flashdata('message');
@@ -70,8 +70,9 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                 <div class="col-lg-6 col-md-12 col-sm-12 column">
                     <div class="block remove-bottom">
                         <div class="Map_back"></div>
-                        <?php $gmap = str_replace(",", "", str_replace(" ", "+", $get_data->address))?>
-                        <iframe src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=<?php echo $gmap?>&z=14&output=embed" width="100%" height="420" style="border: 0;" allowfullscreen="" loading="lazy"></iframe>
+                        <?php //$gmap = str_replace(",", "", str_replace(" ", "+", $get_data->address))?>
+                        <!-- <iframe src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=<?php //echo $gmap?>&z=14&output=embed" width="100%" height="420" style="border: 0;" allowfullscreen="" loading="lazy"></iframe> -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.961951311653!2d-117.32663952445924!3d33.9163788248925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dca57b71114637%3A0xe5e8e2effe7e3d29!2s231%20E%20Alessandro%20Blvd%20a%20438%2C%20Riverside%2C%20CA%2092508%2C%20USA!5e0!3m2!1sen!2sin!4v1699515659530!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 column">
