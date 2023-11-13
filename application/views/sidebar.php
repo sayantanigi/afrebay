@@ -49,39 +49,39 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 if(!empty($get_sub_data)) {
                                 $profile_check = $this->db->query("SELECT * FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                 if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['short_bio'])) { ?>
-                                <li <?php if($seg1=='education-list') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='education-list' || $seg1 =='add-education' || $seg1 =='update-education') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Education</span>
                                     </a>
                                 </li>
-                                <li <?php if($seg1=='workexperience-list') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='workexperience-list' || $seg1 =='add-workexperience' || $seg1 =='update-workexperience') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-id-card" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Work Experience</span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
-                                <li <?php if($seg1=='education-list') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='education-list' || $seg1 =='add-education' || $seg1 =='update-education') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('education-list')?>"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Education</span>
                                     </a>
                                 </li>
-                                <li <?php if($seg1=='workexperience-list') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='workexperience-list' || $seg1 =='add-workexperience' || $seg1 =='update-workexperience') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('workexperience-list')?>"><i class="fa fa-id-card" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Work Experience</span>
                                     </a>
                                 </li>
                                 <?php } } else { ?>
-                                <li <?php if($seg1=='education-list') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='education-list' || $seg1 =='add-education' || $seg1 =='update-education') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Education</span>
                                     </a>
                                 </li>
-                                <li <?php if($seg1=='workexperience-list') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='workexperience-list' || $seg1 =='add-workexperience' || $seg1 =='update-workexperience') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-id-card" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Work Experience</span>
@@ -93,26 +93,26 @@ $get_setting=$this->Crud_model->get_single('setting');
                             if(@$_SESSION['afrebay']['userType']=='1') {
                             $profile_check = $this->db->query("SELECT * FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                             if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['short_bio'])) { ?>
-                            <li <?php if($seg1=='education-list') { ?>class="active" <?php } ?>>
+                            <li <?php if($seg1=='education-list' || $seg1 =='add-education' || $seg1 =='update-education') { ?>class="active" <?php } ?>>
                                 <span class="cover"></span>
                                 <a href="javascript:void(0)" onclick="completeSub1()"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Education</span>
                                 </a>
                             </li>
-                            <li <?php if($seg1=='workexperience-list') { ?>class="active" <?php } ?>>
+                            <li <?php if($seg1=='workexperience-list' || $seg1 =='add-workexperience' || $seg1 =='update-workexperience') { ?>class="active" <?php } ?>>
                                 <span class="cover"></span>
                                 <a href="javascript:void(0)" onclick="completeSub1()"><i class="fa fa-id-card" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Work Experience</span>
                                 </a>
                             </li>
                             <?php } else { ?>
-                            <li <?php if($seg1=='education-list') { ?>class="active" <?php } ?>>
+                            <li <?php if($seg1=='education-list' || $seg1 =='add-education' || $seg1 =='update-education') { ?>class="active" <?php } ?>>
                                 <span class="cover"></span>
                                 <a href="<?= base_url('education-list')?>"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Education</span>
                                 </a>
                             </li>
-                            <li <?php if($seg1=='workexperience-list') { ?>class="active" <?php } ?>>
+                            <li <?php if($seg1=='workexperience-list' || $seg1 =='add-workexperience' || $seg1 =='update-workexperience') { ?>class="active" <?php } ?>>
                                 <span class="cover"></span>
                                 <a href="<?= base_url('workexperience-list')?>"><i class="fa fa-id-card" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Work Experience</span>
@@ -130,7 +130,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-briefcase" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Post</span>
+                                        <span class="hidden-xs hidden-sm">My Jobs</span>
                                     </a>
                                 </li>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?> class="d-none">
@@ -143,7 +143,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('myjob')?>"><i class="fa fa-briefcase" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Post</span>
+                                        <span class="hidden-xs hidden-sm">My Jobs</span>
                                     </a>
                                 </li>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?> class="d-none">
@@ -156,7 +156,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-briefcase" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Post</span>
+                                        <span class="hidden-xs hidden-sm">My Jobs</span>
                                     </a>
                                 </li>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?> class="d-none">
@@ -173,21 +173,21 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Bid</span>
+                                        <span class="hidden-xs hidden-sm">My Work Bids</span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('jobbid')?>"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Bid</span>
+                                        <span class="hidden-xs hidden-sm">My Work Bids</span>
                                     </a>
                                 </li>
                                 <?php } } else { ?>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Bid</span>
+                                        <span class="hidden-xs hidden-sm">My Work Bids</span>
                                     </a>
                                 </li>
                                 <?php } } 
@@ -198,7 +198,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub1()"><i class="fa fa-briefcase" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Post</span>
+                                        <span class="hidden-xs hidden-sm">My Jobs</span>
                                     </a>
                                 </li>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?> class="d-none">
@@ -211,7 +211,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='myjob') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('myjob')?>"><i class="fa fa-briefcase" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Post</span>
+                                        <span class="hidden-xs hidden-sm">My Jobs</span>
                                     </a>
                                 </li>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?> class="d-none">
@@ -226,14 +226,14 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub1()"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Bid</span>
+                                        <span class="hidden-xs hidden-sm">My Work Bids</span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
                                 <li <?php if($seg1=='jobbid') { ?> class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('jobbid')?>"><i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span class="hidden-xs hidden-sm">My Work Bid</span>
+                                        <span class="hidden-xs hidden-sm">My Work Bids</span>
                                     </a>
                                 </li>
                                 <?php } 
@@ -401,21 +401,21 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 if(!empty($get_sub_data)) {
                                 $profile_check = $this->db->query("SELECT * FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                 if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
-                                <li <?php if($seg1=='product'){?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='product' || $seg1=='add-product' || $seg1=='update-product'){?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tags" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Products</span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
-                                <li <?php if($seg1=='product') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='product' || $seg1=='add-product' || $seg1=='update-product') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('product')?>"><i class="fa fa-tags" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Products</span>
                                     </a>
                                 </li>
                                 <?php } } else { ?>
-                                <li <?php if($seg1=='product') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='product' || $seg1=='add-product' || $seg1=='update-product') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub()"><i class="fa fa-tags" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Products</span>
@@ -429,14 +429,14 @@ $get_setting=$this->Crud_model->get_single('setting');
                             if(@$_SESSION['afrebay']['userType']=='2') { 
                                 $profile_check = $this->db->query("SELECT * FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
                                 if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) { ?>
-                                <li <?php if($seg1=='product'){?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='product' || $seg1=='add-product' || $seg1=='update-product'){?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="javascript:void(0)" onclick="completeSub1()"><i class="fa fa-tags" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Products</span>
                                     </a>
                                 </li>
                                 <?php } else { ?>
-                                <li <?php if($seg1=='product') { ?>class="active" <?php } ?>>
+                                <li <?php if($seg1=='product' || $seg1=='add-product' || $seg1=='update-product') { ?>class="active" <?php } ?>>
                                     <span class="cover"></span>
                                     <a href="<?= base_url('product')?>"><i class="fa fa-tags" aria-hidden="true"></i>
                                         <span class="hidden-xs hidden-sm">Products</span>

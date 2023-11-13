@@ -265,7 +265,7 @@ class Dashboard extends CI_Controller {
 
 	public function myjob() {
 		$data['get_postjob'] = $this->Crud_model->GetData('postjob', '', "user_id='".$_SESSION['afrebay']['userId']."' ");
-		$data['title'] = 'My Work Post';
+		$data['title'] = 'My Jobs';
 		$this->load->view('header', $data);
 		$this->load->view('user_dashboard/my_job', $data);
 		$this->load->view('footer');
@@ -288,7 +288,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('Post_job_model');
 		if($_SESSION['afrebay']['userType'] == '1'){
 			$cond = "job_bid.user_id='" . $_SESSION['afrebay']['userId'] . "'";
-			$data1['title'] = 'My Work Bid';
+			$data1['title'] = 'My Work Bids';
 		} else {
 			$cond = "postjob.user_id='" . $_SESSION['afrebay']['userId'] . "'";
 			$data1['title'] = 'List of Bids';

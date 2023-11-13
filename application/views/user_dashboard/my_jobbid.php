@@ -16,7 +16,7 @@
         <div class="row align-items-center">
             <div class="col-md-12 col-12">
                 <?php if($_SESSION['afrebay']['userType'] == '1') { ?>
-                <h2 class="breadcrumb-title">My Work Bid</h2>
+                <h2 class="breadcrumb-title">My Work Bids</h2>
                 <?php } else { ?>
                 <h2 class="breadcrumb-title">List of Bids</h2>
                 <?php } ?>

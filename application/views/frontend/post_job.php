@@ -30,7 +30,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                     <div class="padding-left">
                         <div class="profile-title" style="text-align: center;">
                             <?php if(empty(@$id)) { ?>
-                            <h3>Post a New Work</h3>
+                            <h3>Post a New Job</h3>
                             <?php } else { ?>
                             <h3>Update Posted Work</h3>
                             <?php } ?>
@@ -119,7 +119,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <span class="pf-title">Sub Categories <span style="color:red;">*</span></span>
+                                        <span class="pf-title">Subcategories <!--<span style="color:red;">*</span>--></span>
                                         <div class="pf-field">
                                             <select data-placeholder="Please Select " class="form-control" name="subcategory_id" value="" id="subcategory_id" required>
                                                 <?php if(empty($id)) { ?>
@@ -233,9 +233,12 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
 <script>
 CKEDITOR.replace('description');
 </script>
+<style>
+    .key_skills {margin-bottom: 0px !important;}
+</style>
 <script>
 $('.key_skills').select2({
-    tags: true,
+    //tags: true,
     tokenSeparators: [','],
     placeholder: "Select or Type Skills"
 });

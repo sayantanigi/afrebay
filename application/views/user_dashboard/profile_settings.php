@@ -262,7 +262,7 @@ $('#skills').tagsinput({
     maxTags: 20,
 });
 $('.key_skills').select2({
-    tags: true,
+    //tags: true,
     tokenSeparators: [','],
     placeholder: "Select or Type Specialization"
 });

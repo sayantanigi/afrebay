@@ -67,6 +67,8 @@ $get_category=$this->Crud_model->GetData('category','',"status='Active'");
     #completeSub {position: relative;display: inline-block;}
     #completeSub #completeSubtext {visibility: hidden;width: max-content;background-color: white;color: #000;text-align: center;border-radius: 6px;padding: 5px 10px;position: absolute;z-index: 1;top: 50px;font-size: 13px;right: 0;}
     #completeSub:hover #completeSubtext {visibility: visible;}
+    .User_Dashboard_Menu .Profile_dashboard_btn{width: 235px !important;}
+    #frame #sidepanel #profile .wrap p {font-size: 14px !important;}
 </style>
 <script>
 function completeSub() {
