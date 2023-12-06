@@ -340,26 +340,26 @@ class Home extends MY_Controller {
 				$imagePath = base_url().'uploads/logo/'.$get_setting->flogo;
 				$message = "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'><tbody> <tr><td align='center'><table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-top:2px solid #232323'> <tbody> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'><img src='" . $imagePath . "' style='width: 250px'/></td> </tr> <tr> <td height='35'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Hello Team,</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Lato, sans-serif; font-size:16px; color:#444; line-height:24px; font-weight: 400;'> Please find the below contact form details. </td> </tr> </tbody> </table> </td> </tr> <tr> <td align='center'> <table class='col-600' width='600' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; border-bottom:2px solid #232323'> <tbody> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Name : ".$formdata['name'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>Email : ".$formdata['email'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:5px 10px;font-family: Raleway, sans-serif; font-size:16px; font-weight: bold; color:#2a3a4b;'>".$formdata['message'].",</td> </tr> <tr> <td height='10'></td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'> Sincerely, </td> </tr> <tr> <td align='left' style='padding:0 10px;font-family: Lato, sans-serif; font-size:14px; color:#232323; line-height:24px; font-weight: 700;'>".$formdata['name']."</td> </tr> <tr> <td height='30'></td> </tr> </tbody> </table> </td> </tr> </tbody> </table>";
 				require 'vendor/autoload.php';
-				$mail = new PHPMailer(true);
-				$mail->CharSet = 'UTF-8';
-				$mail->SetFrom($formdata['email']);
-				$mail->AddAddress('admin@afrebay.com', 'Afrebay');
-				$mail->IsHTML(true);
-				$mail->Subject = $subject;
-				$mail->Body = $message;
-				$mail->IsSMTP();
-				$mail->SMTPAuth   = true;
-				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-				$mail->Host       = "smtp.gmail.com";
-				$mail->Port       = 587; //587 465
-				$mail->Username   = "no-reply@goigi.com";
-				$mail->Password   = "wj8jeml3eu0z";
-				$mail->send();
-				if(!$mail->send()) {
-					$response = array('status'=> 'error', 'result'=>'Your message could not be sent. Please, try again later.');
-				} else {
-					$response = array('status'=> 'success', 'result'=>'The email message was sent.');
-				}
+				// $mail = new PHPMailer(true);
+				// $mail->CharSet = 'UTF-8';
+				// $mail->SetFrom($formdata['email']);
+				// $mail->AddAddress('admin@afrebay.com', 'Afrebay');
+				// $mail->IsHTML(true);
+				// $mail->Subject = $subject;
+				// $mail->Body = $message;
+				// $mail->IsSMTP();
+				// $mail->SMTPAuth   = true;
+				// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+				// $mail->Host       = "smtp.gmail.com";
+				// $mail->Port       = 587; //587 465
+				// $mail->Username   = "no-reply@goigi.com";
+				// $mail->Password   = "wj8jeml3eu0z";
+				// $mail->send();
+				// if(!$mail->send()) {
+				$response = array('status'=> 'error', 'result'=>'Your message could not be sent. Please, try again later.');
+				// } else {
+				// 	$response = array('status'=> 'success', 'result'=>'The email message was sent.');
+				// }
 			}
 		} catch (\Exception $e) {
 			$response = array('status'=> 'error', 'result'=> $e->getMessage());

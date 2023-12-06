@@ -193,7 +193,8 @@ if($data_request=='user') {
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="first_name">
-                                                    <h4>TAX ID <span style="color:red;">*</span></h4>
+                                                    <!-- <h4>TAX ID <span style="color:red;">*</span></h4> -->
+                                                    <h4>TAX ID</h4>
                                                 </label>
                                                 <input type="text" class="form-control" name="teamsize" id="teamsize" placeholder="TAX ID" value="<?php echo $userinfo->teamsize;?>" />
                                                 <div id="vld_teamsize" style="color:red; margin-top: 10px;">Please enter TAX ID.</div>
@@ -350,13 +351,13 @@ $("form").submit( function(e) {
             setTimeout(function(){$("#vld_location").hide();},5000)
             e.preventDefault();
         }
-        if($('#teamsize').val() == ''){
+        /*if($('#teamsize').val() == ''){
             $('#teamsize').focus().attr('placeholder', 'This field is required');
             $('#vld_teamsize').show();
             $('#teamsize').focus().css('border', '1px solid red');
             setTimeout(function(){$("#vld_teamsize").hide();},5000)
             e.preventDefault();
-        }
+        }*/
         if($('#short_bio').val() == ''){
             $('#short_bio').focus().attr('placeholder', 'This field is required');
             $('#vld_shrtBio').show();

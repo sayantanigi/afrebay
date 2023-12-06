@@ -94,23 +94,21 @@ class Home extends MY_Controller {
 			require 'vendor/autoload.php';
 			$mail = new PHPMailer(true);
 			try {
-				//Server settings
-				$mail->CharSet = 'UTF-8';
-				$mail->SetFrom($_POST['email']);
-				$mail->AddAddress('admin@afrebay.com', 'Afrebay');
-				$mail->IsHTML(true);
-				$mail->Subject = $subject;
-				$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-				$mail->Body = $message;
-				//Send email via SMTP
-				$mail->IsSMTP();
-				$mail->SMTPAuth   = true;
-				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-				$mail->Host       = "smtp.gmail.com";
-				$mail->Port       = 587; //587 465
-				$mail->Username   = "no-reply@goigi.com";
-				$mail->Password   = "wj8jeml3eu0z";
-				$mail->send();
+				// $mail->CharSet = 'UTF-8';
+				// $mail->SetFrom($_POST['email']);
+				// $mail->AddAddress('admin@afrebay.com', 'Afrebay');
+				// $mail->IsHTML(true);
+				// $mail->Subject = $subject;
+				// $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+				// $mail->Body = $message;
+				// $mail->IsSMTP();
+				// $mail->SMTPAuth   = true;
+				// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+				// $mail->Host       = "smtp.gmail.com";
+				// $mail->Port       = 587; //587 465
+				// $mail->Username   = "no-reply@goigi.com";
+				// $mail->Password   = "wj8jeml3eu0z";
+				// $mail->send();
 			} catch (Exception $e) {
 				$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
 			}
@@ -444,21 +442,21 @@ class Home extends MY_Controller {
 			require 'vendor/autoload.php';
 			$mail = new PHPMailer(true);
 			try {
-				$mail->CharSet = 'UTF-8';
-				$mail->SetFrom('admin@afrebay.com', 'Afrebay');
-				$mail->AddAddress($_POST['email']);
-				$mail->IsHTML(true);
-				$mail->Subject = $subject;
-				$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-				$mail->Body = $message;
-				$mail->IsSMTP();
-				$mail->SMTPAuth   = true;
-				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-				$mail->Host       = "smtp.gmail.com";
-				$mail->Port       = 587; //587 465
-				$mail->Username   = "no-reply@goigi.com";
-				$mail->Password   = "wj8jeml3eu0z";
-				$mail->send();
+				// $mail->CharSet = 'UTF-8';
+				// $mail->SetFrom('admin@afrebay.com', 'Afrebay');
+				// $mail->AddAddress($_POST['email']);
+				// $mail->IsHTML(true);
+				// $mail->Subject = $subject;
+				// $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+				// $mail->Body = $message;
+				// $mail->IsSMTP();
+				// $mail->SMTPAuth   = true;
+				// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+				// $mail->Host       = "smtp.gmail.com";
+				// $mail->Port       = 587; //587 465
+				// $mail->Username   = "no-reply@goigi.com";
+				// $mail->Password   = "wj8jeml3eu0z";
+				// $mail->send();
 			} catch (Exception $e) {
 				$this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");
 			}

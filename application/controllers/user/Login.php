@@ -68,21 +68,21 @@ class Login extends CI_Controller {
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
-					$mail->CharSet = 'UTF-8';
-					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
-					$mail->AddAddress($_POST['email']);
-					$mail->IsHTML(true);
-					$mail->Subject = 'Verify Your Email Address From Afrebay';
-					$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-					$mail->Body = $message;
-					$mail->IsSMTP();
-					$mail->SMTPAuth   = true;
-					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-					$mail->Host       = "smtp.gmail.com";
-					$mail->Port       = 587; //587 465
-					$mail->Username   = "no-reply@goigi.com";
-					$mail->Password   = "wj8jeml3eu0z";
-					$mail->send();
+					// $mail->CharSet = 'UTF-8';
+					// $mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+					// $mail->AddAddress($_POST['email']);
+					// $mail->IsHTML(true);
+					// $mail->Subject = 'Verify Your Email Address From Afrebay';
+					// $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+					// $mail->Body = $message;
+					// $mail->IsSMTP();
+					// $mail->SMTPAuth   = true;
+					// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					// $mail->Host       = "smtp.gmail.com";
+					// $mail->Port       = 587; //587 465
+					// $mail->Username   = "no-reply@goigi.com";
+					// $mail->Password   = "wj8jeml3eu0z";
+					// $mail->send();
 				} catch (Exception $e) {
 					echo $e->getMessage(); //Boring error messages from anything else!
 				}
@@ -210,21 +210,21 @@ class Login extends CI_Controller {
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
-					$mail->CharSet = 'UTF-8';
-					$mail->SetFrom('no-reply@goigi.com', 'Afrebay');
-					$mail->AddAddress($_POST['email']);
-					$mail->IsHTML(true);
-					$mail->Subject = "Forgot Password Confirmation message from AFREBAY";
-					$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-					$mail->Body = $htmlContent;
-					$mail->IsSMTP();
-					$mail->SMTPAuth   = true;
-					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-					$mail->Host       = "smtp.gmail.com";
-					$mail->Port       = 587; //587 465
-					$mail->Username   = "no-reply@goigi.com";
-					$mail->Password   = "wj8jeml3eu0z";
-					$mail->send();
+					// $mail->CharSet = 'UTF-8';
+					// $mail->SetFrom('no-reply@goigi.com', 'Afrebay');
+					// $mail->AddAddress($_POST['email']);
+					// $mail->IsHTML(true);
+					// $mail->Subject = "Forgot Password Confirmation message from AFREBAY";
+					// $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+					// $mail->Body = $htmlContent;
+					// $mail->IsSMTP();
+					// $mail->SMTPAuth   = true;
+					// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					// $mail->Host       = "smtp.gmail.com";
+					// $mail->Port       = 587; //587 465
+					// $mail->Username   = "no-reply@goigi.com";
+					// $mail->Password   = "wj8jeml3eu0z";
+					// $mail->send();
 					$this->session->set_flashdata('message', 'Please check your inbox. We have sent you an email to reset your password.');
 				} catch (Exception $e) {
 					$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');
