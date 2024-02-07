@@ -65,8 +65,8 @@
                                                 <input type="text" class="form-control" name="college_name" placeholder="Enter College/School/University Name"  value="<?= $college_name; ?>" required list="college_name" autocomplete="off"/>
                                             </div>
                                             <div class="col-lg-6">
-                                                <label for="first_name"><h4>Department <span style="color: red">*</span></h4></label>
-                                                <input type="text" class="form-control" name="department" placeholder="Enter Department"  value="<?= @$department; ?>" required list="department" autocomplete="off"/>
+                                                <label for="first_name"><h4>Major/Concentration </h4></label>
+                                                <input type="text" class="form-control" name="department" placeholder="Major/Concentration"  value="<?= @$department; ?>" list="department" autocomplete="off"/>
                                                 </div>
                                                 <div class="col-lg-12"><br>
                                                     <label for="first_name"><h4>Description </h4></label>

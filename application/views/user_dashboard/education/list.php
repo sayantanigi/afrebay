@@ -51,7 +51,11 @@
 							<td class="table-modific-td">
 						 		<table class="custom-table">
 								  	<tr>
-								  		<td class="heading"><?= ucfirst($row->education); ?> <div>in</div> <?= $row->department; ?></td>
+								  		<td class="heading">
+											<?= ucfirst($row->education); ?> 
+											<?php if(!empty($row->department)) { ?>
+											<div>in</div> <?= $row->department; ?></td>
+											<?php } ?>
 								  		<td class="heading"><?= $row->college_name; ?></td>
 									  	<td class="btn-option">
 									   		<a href="<?= base_url('update-education/'.base64_encode($row->id));?>"><i class="fa fa-edit" aria-hidden="true"></i></a>

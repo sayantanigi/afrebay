@@ -71,7 +71,12 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <div class="edu-history">
                                             <i class="la la-graduation-cap"></i>
                                             <div class="edu-hisinfo">
-                                                <h3><?= ucfirst($edu->education)?> in <?= $edu->department?> depertment</h3>
+                                                <h3>
+                                                    <?= ucfirst($edu->education)?> 
+                                                    <?php if(!empty($edu->department)) { ?>
+                                                    in <?= $edu->department?> depertment
+                                                    <?php } ?>
+                                                </h3>
                                                 <i><?= $edu->passing_of_year?></i>
                                                 <span><?= $edu->college_name?></span>
                                                 <p><?= $edu->description?></p>
@@ -86,7 +91,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             <i></i>
                                             <div class="edu-hisinfo">
                                                 <h3><?= ucfirst($row->designation)?><span><?= $row->company_name ?></span></h3>
+                                                <?php if($row->to_date != '0000-00-00') { ?>
                                                 <i><?= date('d-m-Y',strtotime($row->from_date)).' to '.date('d-m-Y',strtotime($row->to_date))?></i>
+                                                <?php } else { ?>
+                                                <i>Currently working since <?= date('d-m-Y',strtotime($row->from_date))?></i>
+                                                <?php } ?>
                                                 <p><?= $row->description?></p>
                                             </div>
                                         </div>

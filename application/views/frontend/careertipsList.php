@@ -69,3 +69,11 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
         </div>
     </div>
 </section>
+<style>
+@media only screen and (max-width: 767px) {
+    .col-lg-4 {
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+    }
+}
+</style>

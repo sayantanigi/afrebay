@@ -49,5 +49,9 @@
         margin-left: 0px !important;
         width: 100% !important;
     }
+    .col-lg-4 {
+        padding-left: 60px !important;
+        padding-right: 60px !important;
+    }
 }
 </style>

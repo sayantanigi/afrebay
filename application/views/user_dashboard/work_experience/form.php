@@ -66,7 +66,7 @@
                                                 <div id="errGFromdate">'From Date' cannot be greater than 'To Date'</div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <label for="first_name"><h4>To Date <span style="color: red">*</span></h4></label>
+                                                <label for="first_name"><h4>To Date </h4></label>
                                                 <!-- <input type="date" class="form-control" name="to_date" id="to_date" placeholder="To Date" value="<?= $to_date; ?>" required onkeydown="return false" /> -->
                                                 <input type="date" class="form-control" name="to_date" id="to_date" placeholder="To Date" value="<?= $to_date; ?>"/>
                                                 <div id="errTodate">Please enter a valid date</div>
@@ -143,13 +143,13 @@ $('#description').keyup(function() {
 
 $(document).ready(function(){
     $('#work_submit').click(function(){
-        if($('#from_date').val() > $('#to_date').val()) {
+        /*if($('#from_date').val() > $('#to_date').val()) {
             $('#errGFromdate').show();
             setTimeout(function(){
                 $('#errGFromdate').hide();
             }, 2000);
             return false;
-        } else {
+        } else {*/
             var fromdate = $('#from_date').val().split("-");
             fromday = fromdate[2];
             frommonth = fromdate[1];
@@ -177,7 +177,7 @@ $(document).ready(function(){
                 }, 2000);
                 return false;
             }
-        }
+        //}
     })
 })
 

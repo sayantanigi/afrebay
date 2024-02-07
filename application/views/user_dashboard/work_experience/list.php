@@ -59,7 +59,11 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <?php if($row->to_date != '0000-00-00') { ?>
                                         <td colspan="2" class="year"><?= date('d-m-Y',strtotime($row->from_date)); ?> to <?= date('d-m-Y',strtotime($row->to_date)); ?></td>
+                                        <?php } else {?>
+                                        <td colspan="2" class="year">Currently Working from <?= date('d-m-Y',strtotime($row->from_date)); ?></td>
+                                        <?php } ?>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="desc"><?= $row->description; ?></td>
