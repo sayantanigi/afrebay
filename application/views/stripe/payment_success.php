@@ -94,22 +94,22 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 $message = "<body><div style='width:600px;margin: 0 auto;background: #fff;font-family: 'Poppins', sans-serif; border: 1px solid #e6e6e6;'><div style='padding: 30px 30px 15px 30px;box-sizing: border-box;'><img src='cid:Logo' style='width:100px;float: right;margin-top: 0 auto;'><h3 style='padding-top:40px; line-height: 30px;'>Greetings from<span style='font-weight: 900;font-size: 35px;color: #F44C0D; display: block;'>Afrebay</span></h3><p style='font-size:24px;'>Dear ".ucwords($fullName).",</p><p style='font-size:24px;'>Congratulations! Your purchase on <strong style='font-weight:bold;'>Afrebay</strong> was successful.</p><p style='font-size:24px;'>Please click on the below link to view purchase invoice.</p><p style='text-align: center;'><a href=".$invoice['hosted_invoice_url']." style='height: 50px; width: 300px; background: rgb(253,179,2); background: linear-gradient(0deg, rgba(253,179,2,1) 0%, rgba(244,77,9,1) 100%); text-align: center; font-size: 18px; color: #fff; border-radius: 12px; display: inline-block; line-height: 50px; text-decoration: none; text-transform: uppercase; font-weight: 600;'>Click Here</a></p><p style='font-size:20px;'>Thank you!</p><p style='font-size:20px;list-style: none;'>Sincerly</p><p style='list-style: none;'><b>Afrebay</b></p><p style='list-style:none;'><b>Visit us:</b> <span>@$get_setting->address</span></p><p style='list-style:none'><b>Email us:</b> <span>@$get_setting->email</span></p></div><table style='width: 100%;'><tr><td style='height:30px;width:100%; background: red;padding: 10px 0px; font-size:13px; color: #fff; text-align: center;'>Copyright &copy; <?=date('Y')?> Afrebay. All rights reserved.</td></tr></table></div></body>";
                                 $mail = new PHPMailer(true);
                                 try {
-                                    // $mail->CharSet = 'UTF-8';
-                                    // $mail->SetFrom('admin@afrebay.com', 'Afrebay');
-                                    // $mail->AddAddress($userDetails[0]['email']);
-                                    // $mail->IsHTML(true);
-                                    // $mail->Subject = $subject;
-                                    // $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-                                    // $mail->Body = $message;
-                                    // $mail->IsSMTP();
-                                    // $mail->SMTPAuth   = true;
-                                    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                                    // $mail->Host       = "smtp.gmail.com";
-                                    // $mail->Port       = 587; //587 465
-                                    // $mail->Username   = "no-reply@goigi.com";
-                                    // $mail->Password   = "wj8jeml3eu0z";
-                                    // $mail->send();
-                                    // echo 'Message has been sent';
+                                    $mail->CharSet = 'UTF-8';
+                                    $mail->SetFrom('admin@afrebay.com', 'Afrebay');
+                                    $mail->AddAddress($userDetails[0]['email']);
+                                    $mail->IsHTML(true);
+                                    $mail->Subject = $subject;
+                                    $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+                                    $mail->Body = $message;
+                                    $mail->IsSMTP();
+                                    $mail->SMTPAuth   = true;
+                                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                    $mail->Host       = "ssl://email-smtp.us-east-2.amazonaws.com";
+                                    $mail->Port       = 465; //587 465
+                                    $mail->Username   = "AKIAUHXKJQRN4ME7FYH6";
+                                    $mail->Password   = "BM7Dgo35HIKrXpCw98gIAUSuonRmxjvpqvS8ZqRGYmY4";
+                                    $mail->send();
+                                    echo 'Message has been sent';
                                 } catch (Exception $e) {
                                     //$this->session->set_flashdata('error_message', "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
                                     $this->session->set_flashdata('message', "Your message could not be sent. Please, try again later.");

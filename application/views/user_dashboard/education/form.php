@@ -50,13 +50,10 @@
                                                 <select class="form-control" name="education" required>
                                                     <option value="">Select Degree</option>
                                                     <option value="Professional Certificate" <?php if($education == "Professional Certificate") { echo "selected"; }?>>Professional Certificate</option>
-                                                    <option value="Undergraduate Degrees" <?php if($education == "Undergraduate Degrees") { echo "selected"; }?>>Undergraduate Degrees</option>
-                                                    <option value="Transfer Degree" <?php if($education == "Transfer Degree") { echo "selected"; }?>>Transfer Degree</option>
-                                                    <option value="Associate Degree" <?php if($education == "Associate Degree") { echo "selected"; }?>>Associate Degree</option>
-                                                    <option value="Bachelor Degree" <?php if($education == "Bachelor Degree") { echo "selected"; }?>>Bachelor Degree</option>
-                                                    <option value="Graduate Degrees" <?php if($education == "Graduate Degrees") { echo "selected"; }?>>Graduate Degrees</option>
-                                                    <option value="Master Degree" <?php if($education == "Master Degree") { echo "selected"; }?>>Master Degree</option>
-                                                    <option value="Doctoral Degrees" <?php if($education == "Doctoral Degrees") { echo "selected"; }?>>Doctoral Degrees</option>
+                                                    <option value="Associates Degree" <?php if($education == "Associates Degree") { echo "selected"; }?>>Associates Degree</option>
+                                                    <option value="Bachelor's Degree" <?php if($education == "Bachelor's Degree") { echo "selected"; }?>>Bachelor's Degree</option>
+                                                    <option value="Master's Degree" <?php if($education == "Master's Degree") { echo "selected"; }?>>Master's Degree</option>
+                                                    <option value="Doctoral Degree" <?php if($education == "Doctoral Degree") { echo "selected"; }?>>Doctoral Degree</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-6">

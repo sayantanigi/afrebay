@@ -68,21 +68,21 @@ class Login extends CI_Controller {
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
-					// $mail->CharSet = 'UTF-8';
-					// $mail->SetFrom('no-reply@goigi.com', 'Afrebay');
-					// $mail->AddAddress($_POST['email']);
-					// $mail->IsHTML(true);
-					// $mail->Subject = 'Verify Your Email Address From Afrebay';
-					// $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-					// $mail->Body = $message;
-					// $mail->IsSMTP();
-					// $mail->SMTPAuth   = true;
-					// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-					// $mail->Host       = "smtp.gmail.com";
-					// $mail->Port       = 587; //587 465
-					// $mail->Username   = "no-reply@goigi.com";
-					// $mail->Password   = "wj8jeml3eu0z";
-					// $mail->send();
+					$mail->CharSet = 'UTF-8';
+					$mail->SetFrom('admin@afrebay.com', 'Afrebay');
+					$mail->AddAddress($_POST['email']);
+					$mail->IsHTML(true);
+					$mail->Subject = 'Verify Your Email Address From Afrebay';
+					$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+					$mail->Body = $message;
+					$mail->IsSMTP();
+					$mail->SMTPAuth   = true;
+					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					$mail->Host       = "ssl://email-smtp.us-east-2.amazonaws.com";
+					$mail->Port       = 465; //587 465
+					$mail->Username   = "AKIAUHXKJQRN4ME7FYH6";
+					$mail->Password   = "BM7Dgo35HIKrXpCw98gIAUSuonRmxjvpqvS8ZqRGYmY4";
+					$mail->send();
 				} catch (Exception $e) {
 					echo $e->getMessage(); //Boring error messages from anything else!
 				}
@@ -131,55 +131,58 @@ class Login extends CI_Controller {
 			$password = $this->input->post("password");
 			if($this->Mymodel->check_record($email, $password)) {
 				$this->session->set_flashdata('message', 'Logged in successfully !');
-				$get_setting=$this->Crud_model->get_single('setting');
-				if($get_setting->required_subscription == '1') {
-					if($_SESSION['afrebay']['userType'] == '1') {
-						$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
-						if(empty($check_sub)) {
-							redirect('subscription');
+				if(empty($_SESSION['url'])) {
+					$get_setting=$this->Crud_model->get_single('setting');
+					if($get_setting->required_subscription == '1') {
+						if($_SESSION['afrebay']['userType'] == '1') {
+							$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
+							if(empty($check_sub)) {
+								redirect('subscription');
+							} else {
+								$profile_check = $this->db->query("SELECT `firstname`, `lastname`, `email`, `gender`, `address`, `zip`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+								if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['zip']) || empty($profile_check[0]['short_bio'])) {
+									redirect('profile');
+								} else {
+									redirect('jobbid');
+								}
+							}
+						} else if ($_SESSION['afrebay']['userType'] == '2') {
+							$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
+							if(empty($check_sub)) {
+								redirect('subscription');
+							} else {
+								$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
+								if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {
+									redirect('profile');
+								} else {
+									redirect('dashboard');
+								}
+							}
 						} else {
+								redirect('login');
+						}
+					} else {
+						if($_SESSION['afrebay']['userType'] == '1') {
 							$profile_check = $this->db->query("SELECT `firstname`, `lastname`, `email`, `gender`, `address`, `zip`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
 							if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['zip']) || empty($profile_check[0]['short_bio'])) {
 								redirect('profile');
 							} else {
 								redirect('jobbid');
 							}
-						}
-					} else if ($_SESSION['afrebay']['userType'] == '2') {
-						$check_sub = $this->Crud_model->GetData('employer_subscription', '', "employer_id='".$_SESSION['afrebay']['userId']."' AND status IN (1,2)");
-						if(empty($check_sub)) {
-							redirect('subscription');
-						} else {
+						} else if ($_SESSION['afrebay']['userType'] == '2') {
 							$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
 							if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {
 								redirect('profile');
 							} else {
 								redirect('dashboard');
 							}
+						} else {
+								redirect('login');
 						}
-					} else {
-							redirect('login');
 					}
 				} else {
-					if($_SESSION['afrebay']['userType'] == '1') {
-						$profile_check = $this->db->query("SELECT `firstname`, `lastname`, `email`, `gender`, `address`, `zip`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-						if(empty($profile_check[0]['firstname']) || empty($profile_check[0]['lastname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['gender']) || empty($profile_check[0]['address']) || empty($profile_check[0]['zip']) || empty($profile_check[0]['short_bio'])) {
-							redirect('profile');
-						} else {
-							redirect('jobbid');
-						}
-					} else if ($_SESSION['afrebay']['userType'] == '2') {
-						$profile_check = $this->db->query("SELECT `profilePic`, `companyname`, `email`, `mobile`,`address`, `foundedyear`, `teamsize`, `short_bio` FROM `users` WHERE userId = '".@$_SESSION['afrebay']['userId']."'")->result_array();
-						if(empty($profile_check[0]['companyname']) || empty($profile_check[0]['email']) || empty($profile_check[0]['address']) || empty($profile_check[0]['teamsize'])  || empty($profile_check[0]['short_bio'])) {
-							redirect('profile');
-						} else {
-							redirect('dashboard');
-						}
-					} else {
-							redirect('login');
-					}
+					redirect($_SESSION['url']);
 				}
-				
 			} else {
 				$this->session->set_flashdata('message', 'Invalid Email Address or Password !');
 				redirect('login');
@@ -210,21 +213,21 @@ class Login extends CI_Controller {
 				require 'vendor/autoload.php';
 				$mail = new PHPMailer(true);
 				try {
-					// $mail->CharSet = 'UTF-8';
-					// $mail->SetFrom('no-reply@goigi.com', 'Afrebay');
-					// $mail->AddAddress($_POST['email']);
-					// $mail->IsHTML(true);
-					// $mail->Subject = "Forgot Password Confirmation message from AFREBAY";
-					// $mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
-					// $mail->Body = $htmlContent;
-					// $mail->IsSMTP();
-					// $mail->SMTPAuth   = true;
-					// $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-					// $mail->Host       = "smtp.gmail.com";
-					// $mail->Port       = 587; //587 465
-					// $mail->Username   = "no-reply@goigi.com";
-					// $mail->Password   = "wj8jeml3eu0z";
-					// $mail->send();
+					$mail->CharSet = 'UTF-8';
+					$mail->SetFrom('info@afrebay.com', 'Afrebay');
+					$mail->AddAddress($_POST['email']);
+					$mail->IsHTML(true);
+					$mail->Subject = "Forgot Password Confirmation message from AFREBAY";
+					$mail->AddEmbeddedImage('uploads/logo/'.$get_setting->flogo, 'Logo');
+					$mail->Body = $htmlContent;
+					$mail->IsSMTP();
+					$mail->SMTPAuth   = true;
+					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+					$mail->Host       = "ssl://email-smtp.us-east-2.amazonaws.com";
+					$mail->Port       = 465; //587 465
+					$mail->Username   = "AKIAUHXKJQRN4ME7FYH6";
+					$mail->Password   = "BM7Dgo35HIKrXpCw98gIAUSuonRmxjvpqvS8ZqRGYmY4";
+					$mail->send();
 					$this->session->set_flashdata('message', 'Please check your inbox. We have sent you an email to reset your password.');
 				} catch (Exception $e) {
 					$this->session->set_flashdata('message', 'Something went wrong. Please try again later!');

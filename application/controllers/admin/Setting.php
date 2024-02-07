@@ -85,23 +85,23 @@ class Setting extends MY_Controller {
         }
         
         $data = array(
-			'website_name' => ucwords(htmlspecialchars($this->input->post('website_name'))),
-          	'phone' => htmlspecialchars($this->input->post('phone')),
-          	'email' => htmlspecialchars($this->input->post('email')),
-          	'copyright' => htmlspecialchars($this->input->post('copyright')),
-          	'address' => htmlspecialchars($this->input->post('address')),
-            'fabout' => htmlspecialchars($this->input->post('fabout')),
-          	//'fax' => htmlspecialchars($this->input->post('fax')),
-          	'alternate_email' => htmlspecialchars($this->input->post('alternate_email')),
-			'fb_link' => htmlspecialchars($this->input->post('fb_link')),
-			'tw_link' => htmlspecialchars($this->input->post('tw_link')),
-			'lnkd_link' => htmlspecialchars($this->input->post('lnkd_link')),
-			//'ptrs_link' => htmlspecialchars($this->input->post('ptrs_link')),
-			//'baha_link' => htmlspecialchars($this->input->post('baha_link')),
+			'website_name' => ucwords($this->input->post('website_name')),
+          	'phone' => $this->input->post('phone'),
+          	'email' => $this->input->post('email'),
+          	'copyright' => $this->input->post('copyright'),
+          	'address' => $this->input->post('address'),
+            'fabout' => $this->input->post('fabout'),
+          	//'fax' => $this->input->post('fax'),
+          	'alternate_email' => $this->input->post('alternate_email'),
+			'fb_link' => $this->input->post('fb_link'),
+			'tw_link' => $this->input->post('tw_link'),
+			'lnkd_link' => $this->input->post('lnkd_link'),
+			//'ptrs_link' => $this->input->post('ptrs_link'),
+			//'baha_link' => $this->input->post('baha_link'),
           	'logo' => $logo,
 			'flogo' => $flogo,
           	'favicon' => $favicon,
-            'required_subscription' => htmlspecialchars($this->input->post('required_subscription')),
+            'required_subscription' => $this->input->post('required_subscription'),
       	);
         //print_r($data); die;
     	$id=$this->input->post('id');

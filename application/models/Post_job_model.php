@@ -150,8 +150,8 @@ class Post_job_model extends My_Model {
     }
 
     // pagination subcategory start
-    function make_query($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city) {
-        if(isset($title) || isset($location) || isset($days) || isset($category_id)|| isset($subcategory_id) || isset($search_title) || isset($search_location) || isset($country) || isset($state) || isset($city)) {
+    function make_query($title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$search_title,$search_location,$country,$state,$city) {
+        if(isset($title) || isset($location) || isset($days) || isset($category_id)|| isset($subcategory_id)|| isset($duration)|| isset($pay_type)|| isset($charges) || isset($search_title) || isset($search_location) || isset($country) || isset($state) || isset($city)) {
             $query = "SELECT * FROM postjob WHERE is_delete = '0'";
             if(isset($title) && !empty($title)) {
                 $query .= " AND post_title like '%".$title."%'";
@@ -168,6 +168,18 @@ class Post_job_model extends My_Model {
 
             if(isset($subcategory_id) && !empty($subcategory_id)) {
                 $query .= "AND subcategory_id='".$subcategory_id."'";
+            }
+
+            if(isset($duration) && !empty($duration)) {
+                $query .= "AND duration='".$duration."'";
+            }
+
+            if(isset($pay_type) && !empty($pay_type)) {
+                $query .= "AND pay_type='".$pay_type."'";
+            }
+
+            if(isset($charges) && !empty($charges)) {
+                $query .= "AND charges='".$charges."'";
             }
 
             // if(isset($subcategory_id) && !empty($subcategory_id)) {
@@ -216,15 +228,15 @@ class Post_job_model extends My_Model {
         //print_r($this->db->last_query()); exit;
     }
 
-    function subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city) {
-        $query = $this->make_query($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city);
+    function subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$search_title,$search_location,$country,$state,$city) {
+        $query = $this->make_query($title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$search_title,$search_location,$country,$state,$city);
         $data = $this->db->query($query);
         return $data->num_rows();
     }
 
-    function subcategory_fetchdata($limit, $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location,$country,$state,$city) {
-        if(isset($title) || isset($location) || isset($days) || isset($category_id)|| isset($subcategory_id)|| isset($search_title)|| isset($search_location)|| isset($country)|| isset($state)|| isset($city)){
-            $query = $this->make_query($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city);
+    function subcategory_fetchdata($limit, $start, $title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$post_id,$search_title,$search_location,$country,$state,$city) {
+        if(isset($title) || isset($location) || isset($days) || isset($category_id)|| isset($subcategory_id)|| isset($duration)|| isset($pay_type)|| isset($charges)|| isset($search_title)|| isset($search_location)|| isset($country)|| isset($state)|| isset($city)){
+            $query = $this->make_query($title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$search_title,$search_location,$country,$state,$city);
             $query .= ' ORDER BY id DESC';
             $query .= ' LIMIT '.$start.', ' . $limit;
             $data = $this->db->query($query);

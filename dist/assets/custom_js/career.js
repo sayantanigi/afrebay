@@ -1,7 +1,9 @@
 function create_career() {
 	var admin_url=$('#admin_url').val();
 	var title=$('#title').val();
+	var slug=$('#slug').val();
 	var image=$('#image').val();
+	var tipsdate=$('#tipsdate').val();
 	var description=CKEDITOR.instances['description'].getData();
 	if(title=="") {
 		$("#title_err").fadeIn().html("Required").css("color","red");
@@ -10,10 +12,24 @@ function create_career() {
 		return false;
 	}
 
+	if(slug=="") {
+		$("#slug_err").fadeIn().html("Required").css("color","red");
+		setTimeout(function(){$("#slug_err").fadeOut("&nbsp;");},2000)
+		$("#slug").focus();
+		return false;
+	}
+
 	if(image=="") {
 		$("#image_err").fadeIn().html("Required").css("color","red");
 		setTimeout(function(){$("#image_err").fadeOut("&nbsp;");},2000)
 		$("#image").focus();
+		return false;
+	}
+
+	if(image=="") {
+		$("#tipsdate_err").fadeIn().html("Required").css("color","red");
+		setTimeout(function(){$("#tipsdate_err").fadeOut("&nbsp;");},2000)
+		$("#tipsdate").focus();
 		return false;
 	}
 
@@ -28,6 +44,8 @@ function create_career() {
 	var image=$('#image')[0].files[0];
 	form_data.append('image',image);
 	form_data.append('title',title);
+	form_data.append('slug',slug);
+	form_data.append('tipsdate',tipsdate);
 	form_data.append('description',description);
 	$.ajax({
 		type:"post",
@@ -37,10 +55,8 @@ function create_career() {
 		processData:false,
 		async:false,
 		data:form_data,
-		success:function(returndata)
-		{
-			if(returndata==1)
-			{
+		success:function(returndata) {
+			if(returndata==1) {
 				var title=$('#title').val('');
 				var image=$('#image').val('');
 				location.reload();
@@ -59,10 +75,13 @@ function getValue(id) {
 			id:id,
 		},
 		success:function(returndata) {
+			console.log(returndata);
 			var obj=$.parseJSON(returndata);
 			$("#edit_title").val(obj.title);
+			$("#edit_slug").val(obj.slug);
 			$("#id").val(obj.id);
 			$("#show_img").html(obj.image);
+			$("#edit_tipsdate").val(obj.tipsdate);
 			$("#old_image").val(obj.old_image);
 			CKEDITOR.instances.edit_description.setData(obj.description);
 		}
@@ -72,7 +91,9 @@ function getValue(id) {
 function update_career() {
 	var admin_url = $("#admin_url").val();
 	var title=$("#edit_title").val().trim();
+	var slug=$("#edit_slug").val().trim();
 	var id=$("#id").val();
+	var tipsdate=$("#edit_tipsdate").val();
 	var old_image=$("#old_image").val();
 	var description=CKEDITOR.instances['edit_description'].getData();
 
@@ -80,6 +101,20 @@ function update_career() {
 		$("#edit_title_err").fadeIn().html("required").css('color','red');
 		setTimeout(function(){$("#edit_title_err").html("&nbsp;");},3000);
 		$("#edit_title").focus();
+		return false;
+	}
+
+	if(slug=="") {
+		$("#edit_slug_err").fadeIn().html("required").css('color','red');
+		setTimeout(function(){$("#edit_slug_err").html("&nbsp;");},3000);
+		$("#edit_slug").focus();
+		return false;
+	}
+
+	if(tipsdate=="") {
+		$("#edit_tipsdate_err").fadeIn().html("required").css('color','red');
+		setTimeout(function(){$("#edit_tipsdate_err").html("&nbsp;");},3000);
+		$("#edit_tipsdate").focus();
 		return false;
 	}
 
@@ -94,6 +129,8 @@ function update_career() {
 	var image=$('#edit_image')[0].files[0];
 	form_data.append('image',image);
 	form_data.append('title',title);
+	form_data.append('tipsdate',tipsdate);
+	form_data.append('slug',slug);
 	form_data.append('description',description);
 	form_data.append('old_image',old_image);
 	form_data.append('id',id);

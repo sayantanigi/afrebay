@@ -327,7 +327,8 @@ class Users_model extends My_Model {
                 if(!empty($_SESSION["afrebay"]["userId"])) {
                     $viewProfileLink = '<div class="shortlists" style="width:50px;"><a href="'.base_url('talentdetail/'.base64_encode($row['userId'])).'" title="">View Profile<i class="la la-plus"></i></a></div>';
                 } else {
-                    $viewProfileLink = '<div class="shortlists" style="width:50px;"><a href="javascript:void(0)" title="" onclick= "viewProfile()">View Profile<i class="la la-plus"></i></a></div>';
+                    $_SESSION['url'] = base_url('talentdetail/'.base64_encode($row['userId']));
+                    $viewProfileLink = '<div class="shortlists" style="width:50px;"><input type="hidden" value="'.$_SESSION['url'].'"><a href="javascript:void(0)" title="" onclick="viewProfile()">View Profile<i class="la la-plus"></i></a></div>';
                 }
                 $output .= '<div class="emply-resume-list col-12"> <div class="emply-resume-thumb">'.$profile_pic.'</div> <div class="emply-resume-info"> <h3><a href="javascript:void(0)" title="">'.$name.'</a></h3><p><i class="la la-map-marker"></i>'. $row['address'].'</p> <p>'.$desc.'</p> <p>Job Bids : '.count($get_post).'</p> </div>'.$viewProfileLink.'</div>';
             }

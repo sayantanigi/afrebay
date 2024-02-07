@@ -86,13 +86,45 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <!-- <div class="col-lg-6">
                                         <span class="pf-title">Approximate Duration</span>
                                         <div class="pf-field">
                                             <input type="text" placeholder="Enter Duration" name="duration" class="form-control " value="<?= @$duration; ?>"/>
                                         </div>
+                                    </div> -->
+                                    <div class="col-lg-4">
+                                        <span class="pf-title">Job Type</span>
+                                        <div class="pf-field">
+                                            <select data-placeholder="Please Select Option" class="form-control" name="duration" required>
+                                                <option value="">Select Option</option>
+                                                <option value="Full-Time" <?php if($duration == "Full-Time") {echo "selected";}?>>Full-Time</option>
+                                                <option value="Part-Time" <?php if($duration == "Part-Time") {echo "selected";}?>>Part-Time</option>
+                                                <option value="Internship" <?php if($duration == "Internship") {echo "selected";}?>>Internship</option>
+                                                <option value="Recurring Project" <?php if($duration == "Recurring Project") {echo "selected";}?>>Recurring Project</option>
+                                                <option value="Contract" <?php if($duration == "Contract") {echo "selected";}?>>Contract</option>
+                                                <option value="Temporary" <?php if($duration == "Temporary") {echo "selected";}?>>Temporary</option>
+                                                <option value="Freelance" <?php if($duration == "Freelance") {echo "selected";}?>>Freelance</option>
+                                                <option value="Seasonal" <?php if($duration == "Seasonal") {echo "selected";}?>>Seasonal</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
+                                        <span class="pf-title">Pay Type</span>
+                                        <div class="pf-field">
+                                            <select data-placeholder="Please Select Option" class="form-control" name="pay_type" required>
+                                                <option value="">Select Option</option>
+                                                <option value="Hourly Rate" <?php if($pay_type == "Hourly Rate") {echo "selected";}?>>Hourly Rate</option>
+                                                <option value="Salary" <?php if($pay_type == "Salary") {echo "selected";}?>>Salary</option>
+                                                <option value="Project-Based Fee" <?php if($pay_type == "Project-Based Fee") {echo "selected";}?>>Project-Based Fee</option>
+                                                <option value="Stipend" <?php if($pay_type == "Stipend") {echo "selected";}?>>Stipend</option>
+                                                <option value="Commission" <?php if($pay_type == "Commission") {echo "selected";}?>>Commission</option>
+                                                <option value="Piece Rate" <?php if($pay_type == "Piece Rate") {echo "selected";}?>>Piece Rate</option>
+                                                <option value="Per Diem" <?php if($pay_type == "Per Diem") {echo "selected";}?>>Per Diem</option>
+                                                <option value="Seasonal" <?php if($pay_type == "Seasonal") {echo "selected";}?>>Seasonal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-4">
                                         <span class="pf-title">Approximate Remuneration ($)</span>
                                         <div style="width: 75px;">
                                         <?php if($countryName == 'Nigeria') { ?>
@@ -103,6 +135,33 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         </div>
                                         <div class="pf-field" style=" float: left; width: 85%; margin-left: 10px; ">
                                             <input type="text" placeholder="Enter Charges" name="charges" class="form-control " value="<?= @$charges; ?>"/>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-lg-4">
+                                        <span class="pf-title">Estimated Pay</span>
+                                        <div style="width: 75px; float: left;">
+                                        <?php if($countryName == 'Nigeria') { 
+                                        $sym = '₦'; ?>
+                                            <input type="text" class="form-control f1" name="currency" id="currency" value="NGN (₦)" readonly style=" padding: 15px; ">
+                                        <?php } else { 
+                                        $sym = '$'; ?>
+                                            <input type="text" class="form-control f1" name="currency" id="currency" value="USD ($)" readonly style=" padding: 15px; ">
+                                        <?php } ?>
+                                        </div>
+                                        <div class="pf-field" style="width: 79%;">
+                                            <select data-placeholder="Please Select Category" class="form-control" name="charges" required style=" float: left; width: 100%; margin-left: 10px;">
+                                                <option value="">Select Option</option>
+                                                <option value="Less than <?= $sym?>100" <?php if($charges == 'Less than'.$sym.'100') {echo "selected";}?>>Less than <?= $sym?>100</option>
+                                                <option value="<?= $sym?>100 - <?= $sym?>500" <?php if($charges == $sym.'100 - '.$sym.'500') {echo "selected";}?>><?= $sym?>100 - <?= $sym?>500</option>
+                                                <option value="<?= $sym?>500 - <?= $sym?>1K" <?php if($charges == $sym.'500 - '.$sym.'1K') {echo "selected";}?>><?= $sym?>500 - <?= $sym?>1K</option>
+                                                <option value="<?= $sym?>1K - <?= $sym?>5K" <?php if($charges == $sym.'1K - '.$sym.'5K') {echo "selected";}?>><?= $sym?>1K - <?= $sym?>5K</option>
+                                                <option value="<?= $sym?>5K - <?= $sym?>10k" <?php if($charges == $sym.'5K - '.$sym.'10k') {echo "selected";}?>><?= $sym?>5K - <?= $sym?>10k</option>
+                                                <option value="<?= $sym?>10k - <?= $sym?>50k" <?php if($charges == $sym.'10k - '.$sym.'50k') {echo "selected";}?>><?= $sym?>10k - <?= $sym?>50k</option>
+                                                <option value="<?= $sym?>50k - <?= $sym?>85k" <?php if($charges == $sym.'50k - '.$sym.'85k') {echo "selected";}?>><?= $sym?>50k - <?= $sym?>85k</option>
+                                                <option value="<?= $sym?>100,000+" <?php if($charges == $sym.'100,000+') {echo "selected";}?>><?= $sym?>100,000+</option>
+                                                <option value="<?= $sym?>200,000+" <?php if($charges == $sym.'200,000+') {echo "selected";}?>><?= $sym?>200,000+</option>
+                                                <option value="<?= $sym?>400,000+" <?php if($charges == $sym.'400,000+') {echo "selected";}?>><?= $sym?>400,000+</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

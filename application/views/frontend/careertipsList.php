@@ -56,7 +56,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <div class="blog-details">
                                         <h3><a href="<?= base_url('career-tips/'.$career->slug)?>" title=""><?= ucfirst($career->title)?></a></h3>
-                                        <div><?= ucfirst($desc)?></div>
+                                        <div><?= ucfirst(strip_tags($desc))?></div>
                                         <a href="<?= base_url('career-tips/'.$career->slug)?>" title=""><span>Read More</span></a>
                                     </div>
                                 </div>

@@ -186,6 +186,9 @@
     .notificationf1 {left: 270px !important; top: 6px; font-size: 15px !important; width: 20px !important; height: 20px !important;}
     .EachvChat{display: none;}
     .EachfChat{display: none;}
+    #frame #sidepanel #profile .wrap p {
+        font-size: 11px !important;
+    }
 </style>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script src="https://use.typekit.net/hoy3lrg.js"></script>

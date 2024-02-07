@@ -80,7 +80,7 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                         <?php } }?>
                                     </div>
                                     <div class="edu-history-sec" id="experience">
-                                        <h2>Work & Experience</h2>
+                                        <h2>Work Experience</h2>
                                         <?php if(!empty($user_work)){ foreach($user_work as $row){?>
                                         <div class="edu-history style2">
                                             <i></i>
@@ -94,7 +94,8 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                     </div>
                                     <?php if(!empty($user_detail->skills)) { ?>
                                     <div class="progress-sec" id="skills">
-                                        <h2>Professional Skill Set</h2>
+                                        <!-- <h2>Professional Skill Set</h2> -->
+                                        <h2>Specializations</h2>
                                         <div class="progress-sec" style="text-transform: uppercase;">
                                             <span><?= @$user_detail->skills ?></span>
                                         </div>

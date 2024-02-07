@@ -407,7 +407,7 @@ class Dashboard extends CI_Controller {
 		} else {
 			$userpic = '<img src="' . base_url('uploads/users/user.png') . '" alt="" />';
 		}
-		$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.$user_id.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
+		$html_data = '<div class="contact-profile">' . $userpic . '<p>' . ucfirst($name) . '</p><div class="social-media"><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="openVideoCallWindow('.@$userdId.');"><i class="fa fa-video-camera" aria-hidden="true"></i></a><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div><div class="messages"><ul>';
 		if (!empty($get_data)) {
 			foreach ($get_data as $key) {
 				if (@$key->profilePic && file_exists('uploads/users/' . @$key->profilePic) && $key->postjob_id == $_POST['post_id']) {
@@ -444,7 +444,7 @@ class Dashboard extends CI_Controller {
 		$user_id = $this->input->post('usertoid');
 		$post_id = $this->input->post('postid');
 		$get_data = $this->Users_model->getCurrentChat($userfrom_id, $user_id, $post_id);
-		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$usert_id."' AND userto_id ='".$userdId."') OR (userto_id ='".$usert_id."' AND userfrom_id ='".$userdId."')");
+		$updatastatus = $this->db->query("UPDATE chat SET status = '1' WHERE (userfrom_id ='".$userfrom_id."' AND userto_id ='".$user_id."') OR (userto_id ='".$user_id."' AND userfrom_id ='".$userfrom_id."')");
 		$get_chatuser = $this->Crud_model->get_single('users', "userId='" . $user_id . "'");
 		if (!empty($get_chatuser->firstname)) {
 			$name = $get_chatuser->firstname . ' ' . $get_chatuser->lastname;

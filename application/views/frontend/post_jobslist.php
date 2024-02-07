@@ -66,6 +66,61 @@ if(!empty($get_banner->image) && file_exists('uploads/banner/'.$get_banner->imag
                                 </div>
                             </div>
                             <div class="widget">
+                                <h3 class="sb-title closed">Job Type</h3>
+                                <div class="specialism_widget">
+                                    <select data-placeholder="Please Select Option" class="form-control" name="duration" id="duration" onchange="filter_job();">
+                                        <option value="">Select Option</option>
+                                        <option value="Full-Time">Full-Time</option>
+                                        <option value="Part-Time">Part-Time</option>
+                                        <option value="Internship">Internship</option>
+                                        <option value="Recurring Project">Recurring Project</option>
+                                        <option value="Contract">Contract</option>
+                                        <option value="Temporary">Temporary</option>
+                                        <option value="Freelance">Freelance</option>
+                                        <option value="Seasonal">Seasonal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget">
+                                <h3 class="sb-title closed">Pay Type</h3>
+                                <div class="specialism_widget">
+                                    <select data-placeholder="Please Select Option" class="form-control" name="pay_type" id="pay_type" onchange="filter_job();">
+                                        <option value="">Select Option</option>
+                                        <option value="Hourly Rate">Hourly Rate</option>
+                                        <option value="Salary">Salary</option>
+                                        <option value="Project-Based Fee">Project-Based Fee</option>
+                                        <option value="Stipend">Stipend</option>
+                                        <option value="Commission">Commission</option>
+                                        <option value="Piece Rate">Piece Rate</option>
+                                        <option value="Per Diem">Per Diem</option>
+                                        <option value="Seasonal">Seasonal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget">
+                                <h3 class="sb-title closed">Estimated Pay</h3>
+                                <div class="specialism_widget">
+                                    <?php if($countryName == 'Nigeria') { 
+                                    $sym = '₦'; ?>
+                                    <?php } else { 
+                                    $sym = '$'; ?>
+                                    <?php } ?>
+                                    <select data-placeholder="Please Select Category" class="form-control" name="charges" id="charges" onchange="filter_job();">
+                                        <option value="">Select Category</option>
+                                        <option value="Less than <?= $sym?>100">Less than <?= $sym?>100</option>
+                                        <option value="<?= $sym?>100 - <?= $sym?>500"><?= $sym?>100 - <?= $sym?>500</option>
+                                        <option value="<?= $sym?>500 - <?= $sym?>1K"><?= $sym?>500 - <?= $sym?>1K</option>
+                                        <option value="<?= $sym?>1K - <?= $sym?>5K"><?= $sym?>1K - <?= $sym?>5K</option>
+                                        <option value="<?= $sym?>5K - <?= $sym?>10k"><?= $sym?>5K - <?= $sym?>10k</option>
+                                        <option value="<?= $sym?>10k - <?= $sym?>50k"><?= $sym?>10k - <?= $sym?>50k</option>
+                                        <option value="<?= $sym?>50k - <?= $sym?>85k"><?= $sym?>50k - <?= $sym?>85k</option>
+                                        <option value="<?= $sym?>100,000+"><?= $sym?>100,000+</option>
+                                        <option value="<?= $sym?>200,000+"><?= $sym?>200,000+</option>
+                                        <option value="<?= $sym?>400,000+"><?= $sym?>400,000+</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="widget">
                                 <h3 class="sb-title closed">Country</h3>
                                 <div class="specialism_widget">
                                     <select class="chosen_country" name="country" id="country" onchange="getState(this.value);filter_job();" style="color: #888; font-size: 13px;">
@@ -151,6 +206,9 @@ $(document).ready(function () {
         var title_keyword = $('#title_keyword').val();
         var category_id = $('#category_id').val();
         var subcategory_id = $('#subcategory_id').val();
+        var duration = $('#duration').val();
+        var pay_type = $('#pay_type').val();
+        var charges = $('#charges').val();
         var days = $('input:radio[name=days]:checked').val();
         var post_id = $('#post_id').val();
         var location = $('#location').val();
@@ -169,6 +227,9 @@ $(document).ready(function () {
                 category_id: category_id,
                 post_id: post_id,
                 subcategory_id: subcategory_id,
+                duration: duration,
+                pay_type: pay_type,
+                charges: charges,
                 days: days,
                 location: location,
                 country: country,
@@ -212,6 +273,15 @@ $(document).ready(function () {
         filter_data(1);
     });
     $('#subcategory_id').on('change', function () {
+        filter_data(1);
+    });
+    $('#duration').on('change', function () {
+        filter_data(1);
+    });
+    $('#pay_type').on('change', function () {
+        filter_data(1);
+    });
+    $('#charges').on('change', function () {
         filter_data(1);
     });
     $('#country').on('change', function () {

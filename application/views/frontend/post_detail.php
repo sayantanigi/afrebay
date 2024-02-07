@@ -105,7 +105,8 @@ if (!empty($get_banner->image) && file_exists('uploads/banner/' . $get_banner->i
                                     </div>
                                     <div class="Bid-Data">
                                         <?php if (!empty($post_data->charges)) { ?>
-                                        <li><span>Charges </span><?php echo $post_data->charges." ".$post_data->currency ?></li>
+                                        <!-- <li><span>Charges </span><?php echo $post_data->charges." ".$post_data->currency ?></li> -->
+                                        <li><span>Charges </span><?php echo $post_data->charges; ?></li>
                                         <?php } ?>
                                         <?php if (!empty($post_data->duration)) { ?>
                                         <li><span>Duration </span><?php echo $post_data->duration; ?></li>

@@ -45,14 +45,17 @@ class Welcome extends CI_Controller {
 		$post_id = $this->input->post('post_id');
 		$days = $this->input->post('days');
 		$subcategory_id = $this->input->post('subcategory_id');
+		$duration = $this->input->post('duration');
+		$pay_type = $this->input->post('pay_type');
+		$charges = $this->input->post('charges');
 		$location = $this->input->post('location');
 		$country = $this->input->post('country');
 		$state = $this->input->post('state');
 		$city = $this->input->post('city');
 		$search_title = $this->input->post('search_title');
 		$search_location = $this->input->post('search_location');
-		if(isset($category_id) && !empty($category_id) || isset($title) && !empty($title) || isset($days) && !empty($days)||isset($subcategory_id) && !empty($subcategory_id)|| isset($location) && !empty($location) || isset($search_title) && !empty($search_title) || isset($search_location) && !empty($search_location) || isset($country) && !empty($country) || isset($state) && !empty($state) || isset($city) && !empty($city)) {
-			$total_count=$this->post_job_model->subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$search_title,$search_location,$country,$state,$city);
+		if(isset($category_id) && !empty($category_id) || isset($title) && !empty($title) || isset($days) && !empty($days)||isset($subcategory_id) && !empty($subcategory_id)|| isset($duration) && !empty($duration) || isset($pay_type) && !empty($pay_type) || isset($charges) && !empty($charges)|| isset($location) && !empty($location) || isset($search_title) && !empty($search_title) || isset($search_location) && !empty($search_location) || isset($country) && !empty($country) || isset($state) && !empty($state) || isset($city) && !empty($city)) {
+			$total_count=$this->post_job_model->subcategory_getcount($title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$search_title,$search_location,$country,$state,$city);
 		} else {
 			$get_product=$this->Crud_model->GetData('postjob','',"subcategory_id='".$post_id."' and is_delete='0' AND status = 'Active'");
 			$total_count=count($get_product);
@@ -90,10 +93,10 @@ class Welcome extends CI_Controller {
 			$start = '0';
 		}
 
-		if(isset($category_id) || isset($title)|| isset($days)||isset($subcategory_id)|| isset($location)|| isset($search_title)|| isset($search_location)|| isset($country)|| isset($state)|| isset($city)) {
-			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location,$country,$state,$city);
+		if(isset($category_id) || isset($title)|| isset($days)||isset($subcategory_id)||isset($duration)||isset($pay_type)||isset($charges)|| isset($location)|| isset($search_title)|| isset($search_location)|| isset($country)|| isset($state)|| isset($city)) {
+			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$post_id,$search_title,$search_location,$country,$state,$city);
 		} else {
-			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$post_id,$search_title,$search_location,$country,$state,$city);
+			$getdata=$this->post_job_model->subcategory_fetchdata($config["per_page"], $start, $title, $location,$days,$category_id,$subcategory_id,$duration,$pay_type,$charges,$post_id,$search_title,$search_location,$country,$state,$city);
 		}
 
 		$output = array(
@@ -174,6 +177,8 @@ class Welcome extends CI_Controller {
 			'description' => $update_data->description,
 			'key_skills' => $update_data->required_key_skills,
 			'duration' => $update_data->duration,
+			'duration' => $update_data->duration,
+			'pay_type' => $update_data->pay_type,
 			'charges' => $update_data->charges,
 			'currency' => $update_data->currency,
 			'category' => $update_data->category_id,
@@ -214,6 +219,7 @@ class Welcome extends CI_Controller {
 			'post_title'=>$this->input->post('post_title',TRUE),
 			'description'=>$this->input->post('description',TRUE),
 			'duration'=>$this->input->post('duration',TRUE),
+			'pay_type'=>$this->input->post('pay_type',TRUE),
 			'charges'=>$this->input->post('charges',TRUE),
 			'currency'=>$this->input->post('currency',TRUE),
 			'location'=>$this->input->post('location',TRUE),
@@ -261,6 +267,7 @@ class Welcome extends CI_Controller {
 				'post_title'=>$this->input->post('post_title',TRUE),
 				'description'=>$this->input->post('description',TRUE),
 				'duration'=>$this->input->post('duration',TRUE),
+				'pay_type'=>$this->input->post('pay_type',TRUE),
 				'charges'=>$this->input->post('charges',TRUE),
 				'currency'=>$this->input->post('currency',TRUE),
 				'location'=>@$this->input->post('location',TRUE),
@@ -281,6 +288,7 @@ class Welcome extends CI_Controller {
 				'post_title'=>$this->input->post('post_title',TRUE),
 				'description'=>$this->input->post('description',TRUE),
 				'duration'=>$this->input->post('duration',TRUE),
+				'pay_type'=>$this->input->post('pay_type',TRUE),
 				'charges'=>$this->input->post('charges',TRUE),
 				'currency'=>$this->input->post('currency',TRUE),
 				'location'=>@$this->input->post('location',TRUE),
