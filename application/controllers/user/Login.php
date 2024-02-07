@@ -191,6 +191,7 @@ class Login extends CI_Controller {
 	}
 	public function logout() {
 	    unset($_SESSION['afrebay']);
+		unset($_SESSION['url']);
 			$this->session->set_flashdata('message', 'You have logged out.');
 			redirect('login');
 	}
