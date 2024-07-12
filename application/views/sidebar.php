@@ -22,6 +22,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                             </a>
                         </li>
                         <?php } ?>
+
                         <li <?php if($seg1=='profile') { ?> class="active" <?php } ?>>
                             <span class="cover"></span>
                             <?php 
@@ -42,6 +43,7 @@ $get_setting=$this->Crud_model->get_single('setting');
                                 </a>
                             <?php } ?>
                         </li>
+
                         <?php 
                         if($get_setting->required_subscription == '1') {
                             if(@$_SESSION['afrebay']['userType']=='1') {

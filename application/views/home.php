@@ -90,15 +90,14 @@
                             } ?>
                             <?php $get_user = $this->db-> query("SELECT * FROM users WHERE userId = '$row->user_id'")->result_array(); ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="my-blog"
-                                    onclick="location.href='<?= base_url('workdetail/'.base64_encode($row->id))?>';">
+                                <div class="my-blog" onclick="location.href='<?= base_url('workdetail/'.base64_encode($row->id))?>';">
                                     <div class="blog-details">
                                         <div class="Blog-Emp-Details">
                                             <div class="Blog-Emp-Img">
                                                 <?php if (!empty($get_user[0]['profilePic'])) { ?>
                                                 <img src="<?php echo base_url('uploads/users/'.$get_user[0]['profilePic']);?>">
                                                 <?php } else {?>
-                                                <img src="<?php echo base_url('uploads/users/user.png');?>">
+                                                <img src="<?php echo base_url('uploads/no_pimage.png');?>">
                                                 <?php } ?>
                                             </div>
                                             <div class="Blog-Emp-Data">
