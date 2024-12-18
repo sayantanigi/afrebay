@@ -89,7 +89,8 @@ if(!empty($_SESSION['afrebay']['userId'])) {
     </div>
     </div>
     <div class="bottom-line">
-        <span>Copyright © <?php echo date('Y')?> Afrebay. All rights reserved.</span>
+        <div style="color: #fff;text-align: left;width: 48%;display: inline-block;float: left;margin-left: 60px;">Copyright © <?php echo date('Y')?> Afrebay. All rights reserved.</div>
+        <div style="color: #fff;text-align: right;width: 38%;display: inline-block;">Designed & Developed By <a href="http://www.goigi.com/" class="igi-link" target="_blank" style="color: #08cbfe;">GOIGI.COM</a></div>
         <a href="#scrollup" class="scrollup" title=""><i class="la la-arrow-up"></i></a>
     </div>
 </footer>

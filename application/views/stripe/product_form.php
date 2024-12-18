@@ -36,3 +36,7 @@ $session = \Stripe\Checkout\Session::retrieve($checkout_session['id']);
     });
 </script>
 </body>
+
+
+
+add product name, subtotal, tax, Total after trial, Total due today, trial days, on stripe checkout php
